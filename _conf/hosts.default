@@ -1,0 +1,3 @@
+"127.0.0.1[\s]+janitor-demo.local" 127.0.0.1	janitor-demo.local
+"fe80::1%lo0[\s]+janitor-demo.local" fe80::1%lo0	janitor-demo.local
+"::1[\s]+janitor-demo.local" ::1	janitor-demo.local

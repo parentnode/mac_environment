@@ -1,0 +1,6 @@
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+
+export PS1="\[$(tput bold)\]\[$(tput setaf 4)\]\[$(tput setaf 5)\]\u@\h \[$(tput setaf 2)\]\W\[$(tput setaf 4)\]\\$ \[$(tput sgr0)\]"
+export CLICOLOR=1
+export LSCOLORS=Exfxcxdxbxegedabagacad
+
