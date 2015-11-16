@@ -266,7 +266,7 @@ function checkFileContent($file, $default) {
 				}
 
 				// add correct line to line updates
-				$updated_lines[] = preg_replace("#TOOLPATH#", getAbsolutePath(__FILE__), $d_line_value)."\n";
+				$updated_lines[] = preg_replace("/\#TOOLPATH\#/", getAbsolutePath(dirname(__FILE__)), $d_line_value)."\n";
 
 			}
 		}

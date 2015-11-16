@@ -139,6 +139,9 @@ output("\nCopying configuration");
 copyFile("_conf/httpd.conf", "/opt/local/apache2/conf/httpd.conf", "sudo");
 copyFile("_conf/httpd-vhosts.conf", "/opt/local/apache2/conf/extra/httpd-vhosts.conf", "sudo");
 
+// copy apache log rotation conf
+copyFile("_conf/newsyslog-apache.conf", "/etc/newsyslog.d/apache.conf", "sudo");
+
 // copy php.ini
 copyFile("_conf/php.ini", "/opt/local/etc/php55/php.ini", "sudo");
 
