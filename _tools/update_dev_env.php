@@ -149,8 +149,8 @@ copyFile("_conf/php_ini_native.ini", "/etc/php.ini", "sudo");
 
 
 // copy wkhtmltox static executables
-copyFile("_conf/static_wkhtmltoimage", "/usr/bin/static_wkhtmltoimage", "sudo");
-copyFile("_conf/static_wkhtmltopdf", "/usr/bin/static_wkhtmltopdf", "sudo");
+copyFile("_conf/static_wkhtmltoimage", "/usr/local/bin/static_wkhtmltoimage", "sudo");
+copyFile("_conf/static_wkhtmltopdf", "/usr/local/bin/static_wkhtmltopdf", "sudo");
 
 
 
