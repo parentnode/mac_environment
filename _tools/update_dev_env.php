@@ -62,6 +62,7 @@ if(!$is_ok_php) {
 				command("sudo port uninstall php".$matches[$i]."-curl");
 				command("sudo port uninstall php".$matches[$i]."-zip");
 				command("sudo port uninstall php".$matches[$i]."-imagick");
+				command("sudo port uninstall php".$matches[$i]."-memcached");
 
 				command("sudo port uninstall php".$matches[$i]);
 			}
@@ -84,8 +85,10 @@ if(!$is_ok_php) {
 	command("sudo port install php55-curl");
 	command("sudo port install php55-zip");
 	command("sudo port install php55-imagick");
+	command("sudo port install php55-memcached");
 
 }
+
 
 
 // output("Checking for AWStats");
@@ -104,9 +107,17 @@ if(!$is_ok_imagick) {
 	command("sudo port install php55-imagick");
 }
 
+// check for imagick
+output("Checking for PHP memcached");
+$is_ok_memcached = isInstalled("[ -f /opt/local/lib/php55/extensions/no-debug-non-zts-20121212/memcached.so ] && echo 'exists' || echo 'Not found'", array("exists"), false);
+output($is_ok_memcached ? "PHP memcached is OK" : "PHP memcached not found - installing now");
+if(!$is_ok_memcached) {
+	command("sudo port install php55-memcached");
+}
+
 
 // is software available
-if(!$is_ok_xcode || !$is_ok_macports || !$is_ok_ffmpeg || !$is_ok_php || !$is_ok_imagick) {
+if(!$is_ok_xcode || !$is_ok_macports || !$is_ok_ffmpeg || !$is_ok_php || !$is_ok_imagick || !$is_ok_memcached) {
 	goodbye("Update your software as specified above");
 }
 
