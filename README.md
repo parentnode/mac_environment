@@ -11,4 +11,4 @@ Visit http://think.dk or http://parentnode.dk for more information.
 os_x_environment is licensed as follows:
 
 ##Source code:
-https://github.com/parentnode/os_x_environment/blob/master/LICENSE-CPAL.md
+https://github.com/parentnode/os_x_environment/blob/master/MIT-LICENSE.md
