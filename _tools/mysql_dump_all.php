@@ -9,10 +9,12 @@ $host = "localhost";
 $user = "root";
 $pass = ask("Database root password", false, true);
 
+$dumpname = (isset($argv[1]) && $argv[1]) ? $argv[1] : (date("Ymd_His_")."allusertables");
+
 // connect to DB
-$mysqli = new mysqli("p:".$host, $user, $pass);
+$mysqli = @new mysqli("p:".$host, $user, $pass);
 if($mysqli->connect_errno) {
-    echo "Failed to connect to MySQL: " . $mysqli->connect_error;
+    goodbye("Failed to connect to MySQL: " . $mysqli->connect_error);
 }
 $mysqli->set_charset("utf8");
 
@@ -44,8 +46,9 @@ if($result_count) {
 
 if($user_databases) {
 
-	command("sudo /opt/local/lib/mysql56/bin/mysqldump -uroot -p --databases ".implode($user_databases, " ")." > ".date("Ymd_His_")."allusertables.sql");
+	command("sudo /opt/local/lib/mysql56/bin/mysqldump -uroot -p$pass --databases ".implode($user_databases, " ")." > ".$dumpname.".sql | sed -e '$!d'", true);
 
+	output("MySQL dumped into: " . $dumpname . ".sql");
 }
 
 

@@ -14,12 +14,20 @@ function enableSuperCow() {
 *
 * @param String $command Command to execure
 */
-function command($command) {
+function command($command, $no_echo = false, $suppress = true) {
 
-	output($command);
+	if($no_echo == false) {
+		output($command);
+	}
 //	output(escapeshellcmd($command));
 
-	$cmd_output = shell_exec($command." 2>&1");
+	if($suppress) {
+		$cmd_output = shell_exec($command." 2>&1");
+	}
+	else {
+		$cmd_output = liveExecuteCommand($command);
+	}
+
 
 //	$cmd_output = shell_exec(escapeshellcmd($command)." 2>&1");
 	output($cmd_output);
@@ -222,6 +230,50 @@ function copyFile($source, $destination, $sudo = "") {
 	command(($sudo ? "$sudo " : "") . "cp '$source' '$destination'");
 }
 
+function copyFolder($source, $destination, $sudo = "") {
+
+	// $source = preg_replace("/\~/", $_SERVER['HOME'], $source);
+	// $destination = preg_replace("/\~/", $_SERVER['HOME'], $destination);
+
+	$source = getAbsolutePath($source);
+	if(file_exists($source)) {
+		$destination = getAbsolutePath($destination);
+
+		$path = "/";
+		$path_fragments = explode("/", $destination);
+		foreach($path_fragments as $fragment) {
+			$path = $path."/".$fragment;
+			if(!file_exists("$path")) {
+				mkdir("$path");
+			}
+		}
+
+		command(($sudo ? "$sudo " : "") . "cp -R '$source' '$destination'");
+		
+	}
+	else {
+		output($source . " not found!");
+	}
+
+}
+
+/**
+* Check if file exists
+*
+* @param String $source Source to copy
+* @param String $destination Destination to copy to
+*/
+function moveFile($source, $destination, $sudo = "") {
+
+	// $source = preg_replace("/\~/", $_SERVER['HOME'], $source);
+	// $destination = preg_replace("/\~/", $_SERVER['HOME'], $destination);
+
+	$source = getAbsolutePath($source);
+	$destination = getAbsolutePath($destination);
+
+	command(($sudo ? "$sudo " : "") . "mv '$source' '$destination'");
+}
+
 /**
 * Check if default file content exists - to update .bash_profile
 * Connot update hosts due to permissions - don't have an easy solution yet
@@ -315,4 +367,34 @@ function getAbsolutePath($path) {
 	
 }
 
+
+// pass command output on realtime
+function liveExecuteCommand($cmd) {
+
+	while (@ ob_end_flush()); // end all output buffers if any
+
+	$proc = popen("$cmd 2>&1", 'r');
+
+	$live_output = "";
+	$complete_output = "";
+
+	while (!feof($proc)) {
+		$live_output = fread($proc, 4096);
+		$complete_output = $complete_output . $live_output;
+		echo "$live_output";
+		@ flush();
+	}
+
+	pclose($proc);
+
+	// get exit status
+	preg_match('/[0-9]+$/', $complete_output, $matches);
+
+	// return exit status and intended output
+	return $complete_output;
+	// return array (
+	// 	'exit_status'  => $matches[0],
+	// 	'output'       => str_replace("Exit status : " . $matches[0], '', $complete_output)
+	// );
+}
 ?>
