@@ -79,6 +79,7 @@ command("sudo port install php55-mbstring");
 command("sudo port install php55-curl");
 command("sudo port install php55-zip");
 command("sudo port install php55-imagick");
+command("sudo port install php55-memcached");
 
 command("sudo port install git");
 
@@ -152,6 +153,10 @@ copyFile("_conf/apache.conf", "/srv/sites/apache/apache.conf");
 copyFile("_conf/php_ini_native.ini", "/etc/php.ini", "sudo");
 
 
+// copy wkhtmltox static executables
+copyFile("_conf/static_wkhtmltoimage", "/usr/local/bin/static_wkhtmltoimage", "sudo");
+copyFile("_conf/static_wkhtmltopdf", "/usr/local/bin/static_wkhtmltopdf", "sudo");
+
 
 output("\nConfiguration copied");
 
@@ -161,13 +166,24 @@ output("\nConfiguration copied");
 checkFileContent("~/.bash_profile", "_conf/bash_profile.default");
 
 
+// Add local domains to /etc/hosts
+command("sudo chmod 777 /etc/hosts");
+checkFileContent("/etc/hosts", "_conf/hosts.default");
+command("sudo chmod 644 /etc/hosts");
+
+
 // Set root password
 command("sudo /opt/local/share/mysql56/support-files/mysql.server start");
 $answer = ask("MySQL root password");
 command("sudo /opt/local/lib/mysql56/bin/mysqladmin -u root password '".$answer."'");
 
 
-output("\n\n ---- \n\nSetup is completed");
+// restart apache
+command("sudo /opt/local/apache2/bin/apachectl restart");
+
+
+// DONE
+output("\n\nSetup is completed - please restart your terminal");
 
 
 // TODO: Cannot set root password until computer has been restarted - Maybe there is another way to make it possible?
