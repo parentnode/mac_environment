@@ -83,6 +83,9 @@ command("sudo port install php55-memcached");
 
 command("sudo port install git");
 
+// make sure Memcached starts automatically
+command("sudo launchctl load -w /Library/LaunchDaemons/org.macports.memcached.plist");
+
 
 // Mysql preparations
 command("sudo chown -R mysql:mysql /opt/local/var/db/mysql56");
