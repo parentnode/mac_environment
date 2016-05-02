@@ -128,8 +128,7 @@ output("\nSettings Updated");
 
 // clone demo site
 output("\nClone demo site");
-command("git clone https://github.com/parentnode/janitor-demo_parentnode_dk.git /srv/sites/parentnode/janitor-demo_parentnode_dk");
-
+command("git clone --recursively https://github.com/parentnode/demo_parentnode_dk.git /srv/sites/parentnode/demo_parentnode_dk");
 
 
 // copy configuration
