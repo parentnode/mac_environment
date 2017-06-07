@@ -7,11 +7,11 @@ enableSuperCow();
 
 // check software requirements
 output("Checking for Xcode");
-$is_ok_xcode = isInstalled("xcodebuild -version", array("Xcode 4", "Xcode 5", "Xcode 6", "Xcode 7"));
+$is_ok_xcode = isInstalled("xcodebuild -version", array("Xcode 4", "Xcode 5", "Xcode 6", "Xcode 7", "Xcode 8"));
 output($is_ok_xcode ? "Xcode is OK" : "Xcode check failed - update or install Xcode from AppStore");
 
 output("Checking for Xcode command line tools");
-$is_ok_xcode_cl = isInstalled("pkgutil --pkg-info=com.apple.pkg.CLTools_Executables", array("version: 6", "version: 7"));
+$is_ok_xcode_cl = isInstalled("pkgutil --pkg-info=com.apple.pkg.CLTools_Executables", array("version: 6", "version: 7",, "version: 8"));
 output($is_ok_xcode_cl ? "Xcode command line tools are OK" : "Xcode command line tools check failed - installing now");
 if(!$is_ok_xcode_cl) {
 	command("xcode-select --install");
@@ -70,7 +70,7 @@ command("sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer/")
 // update macports
 command("sudo port selfupdate");
 
-command("sudo port install mysql56-server");
+command("sudo port install mariadb-server");
 command("sudo port install php55 +apache2 +mysql56-server +pear php55-apache2handler");
 
 command("sudo port install php55-mysql");

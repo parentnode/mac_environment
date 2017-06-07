@@ -9,14 +9,14 @@ enableSuperCow();
 
 // check software requirements
 output("Checking for Xcode");
-$is_ok_xcode = isInstalled("xcodebuild -version", array("Xcode 4", "Xcode 5", "Xcode 6", "Xcode 7"));
+$is_ok_xcode = isInstalled("xcodebuild -version", array("Xcode 4", "Xcode 5", "Xcode 6", "Xcode 7", "Xcode 8"));
 output($is_ok_xcode ? "Xcode is OK \n -----\n" : "Xcode check failed - update or install Xcode from AppStore");
 
 
 output("Checking for Xcode command line tools");
 
 //$is_ok_xcode_cl = isInstalled("gcc --version", array("Apple LLVM version"));
-$is_ok_xcode_cl = isInstalled("pkgutil --pkg-info=com.apple.pkg.CLTools_Executables", array("version: 6", "version: 7"));
+$is_ok_xcode_cl = isInstalled("pkgutil --pkg-info=com.apple.pkg.CLTools_Executables", array("version: 6", "version: 7", "version: 8"));
 output($is_ok_xcode_cl ? "Xcode command line tools are OK \n -----\n" : "Xcode command line tools check failed - installing now");
 if(!$is_ok_xcode_cl) {
 	command("xcode-select --install");
@@ -34,11 +34,15 @@ output($is_ok_macports ? "Macports is OK \n -----\n" : "Macports check failed - 
 
 // check ffmpeg availability
 output("Checking for ffmpeg");
-$is_ok_ffmpeg = isInstalled("ffmpeg -version", array("ffmpeg version 2.7", "ffmpeg version 2.8"));
+$is_ok_ffmpeg = isInstalled("ffmpeg -version", array("ffmpeg version 2", "ffmpeg version 3"));
 output($is_ok_ffmpeg ? "ffmpeg is OK \n -----\n" : "ffmpeg not found - installing now");
 if(!$is_ok_ffmpeg) {
 	command("sudo port install ffmpeg +nonfree");
 }
+
+
+//apache24-devel
+
 
 // check php version
 output("Checking for php");

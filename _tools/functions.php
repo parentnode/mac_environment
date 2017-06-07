@@ -227,7 +227,24 @@ function copyFile($source, $destination, $sudo = "") {
 	$source = getAbsolutePath($source);
 	$destination = getAbsolutePath($destination);
 
-	command(($sudo ? "$sudo " : "") . "cp '$source' '$destination'");
+	if(file_exists($source) && is_file($source)) {
+
+		$basedir = dirname($destination);
+
+		$path = "/";
+		$path_fragments = explode("/", $basedir);
+		foreach($path_fragments as $fragment) {
+			$path = $path."/".$fragment;
+			if(!file_exists("$path")) {
+				mkdir("$path");
+			}
+		}
+
+		command(($sudo ? "$sudo " : "") . "cp '$source' '$destination'");
+	}
+	else {
+		copyFolder($source, $destination, $sudo);
+	}
 }
 
 function copyFolder($source, $destination, $sudo = "") {
