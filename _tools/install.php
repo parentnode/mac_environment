@@ -2,6 +2,8 @@
 <?php
 include("functions.php");
 
+$username = get_current_user();
+
 // start by requesting sudo power
 enableSuperCow();
 
@@ -54,12 +56,6 @@ command("sudo ln -s ~/Sites /srv/sites");
 
 checkPath("~/Sites/apache");
 
-// mysql paths
-checkPath("/opt/local/var/run/mysql56", "sudo");
-checkPath("/opt/local/var/db/mysql56", "sudo");
-checkPath("/opt/local/etc/mysql56", "sudo");
-checkPath("/opt/local/share/mysql56", "sudo");
-
 
 // continue with setup
 output("\nInstalling software");
@@ -71,20 +67,35 @@ command("sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer/")
 command("sudo port selfupdate");
 
 command("sudo port install mariadb-server");
-command("sudo port install php55 +apache2 +mysql56-server +pear php55-apache2handler");
+command("sudo port install php72 +apache2 +mariadb-server +pear php72-apache2handler");
 
-command("sudo port install php55-mysql");
-command("sudo port install php55-openssl");
-command("sudo port install php55-mbstring");
-command("sudo port install php55-curl");
-command("sudo port install php55-zip");
-command("sudo port install php55-imagick");
-command("sudo port install php55-memcached");
+command("sudo port install php72-mysql");
+command("sudo port install php72-openssl");
+command("sudo port install php72-mbstring");
+command("sudo port install php72-curl");
+command("sudo port install php27-zip");
+command("sudo port install php72-imagick");
+command("sudo port install php72-memcached");
 
 command("sudo port install git");
 
 // make sure Memcached starts automatically
 command("sudo launchctl load -w /Library/LaunchDaemons/org.macports.memcached.plist");
+
+// autostart apache on boot
+command("sudo port load apache2");
+
+// test placeholder replacing
+copyFile("_conf/httpd.conf", "/opt/local/apache2/conf/httpd.conf", "sudo");
+replaceInFile("/opt/local/apache2/conf/httpd.conf", "###USERNAME###", $username);
+exit();
+
+
+// mysql paths
+checkPath("/opt/local/var/run/mysql56", "sudo");
+checkPath("/opt/local/var/db/mysql56", "sudo");
+checkPath("/opt/local/etc/mysql56", "sudo");
+checkPath("/opt/local/share/mysql56", "sudo");
 
 
 // Mysql preparations
@@ -93,8 +104,6 @@ command("sudo chown -R mysql:mysql /opt/local/var/run/mysql56");
 command("sudo chown -R mysql:mysql /opt/local/etc/mysql56");
 command("sudo chown -R mysql:mysql /opt/local/share/mysql56");
 
-// autostart apache on boot
-command("sudo port load apache2");
 
 
 // copy my.cnf for MySQL (to override macports settings)

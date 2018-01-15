@@ -2,6 +2,11 @@
 <?php
 include("functions.php");
 
+
+// To decrypt backup
+// openssl enc -aes-256-cbc -k $password -in $backup_time.tar.gz -out $backup_time.tar.gz.aes
+// openssl enc -aes-256-cbc -d -k $password -in $backup_time.tar.gz.aes -out $backup_time.tar.gz
+
 // start by requesting sudo power
 //enableSuperCow();
 

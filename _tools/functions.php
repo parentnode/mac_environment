@@ -35,7 +35,7 @@ function command($command, $no_echo = false, $suppress = true) {
 }
 
 /**
-* Check is program is installed
+* Check if program is installed
 *
 * @param String $command Command to attempt
 * @param Array $valid_responses Valid responses from system
@@ -355,6 +355,29 @@ function checkFileContent($file, $default) {
 
 }
 
+function replaceInFile($file, $placeholder, $value) {
+	
+	output("\nUpdating ".basename($file));
+
+	// $file = preg_replace("/\~/", $_SERVER['HOME'], $file);
+	// $default = preg_replace("/\~/", $_SERVER['HOME'], $default);
+
+	$file = getAbsolutePath($file);
+	$source_lines = file($file);
+
+	foreach($source_lines as $i => $line) {
+		if(preg_match("/".$placeholder."/", $line)) {
+			$source_lines[$i] = preg_replace("/".$placeholder."/", $value);
+		}
+	}
+
+	// write file back out
+	$fp = fopen($file, "w+");
+	foreach($source_lines as $line) {
+		fwrite($fp, $line);
+	}
+
+}
 
 function getAbsolutePath($path) {
 
