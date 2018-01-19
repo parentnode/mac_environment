@@ -22,6 +22,7 @@ function folderIterator($path){
 					print "\e[0;31m$output\e[0;34m\n";
 				}
 				else {
+					// check for unpushed commits
 					$output = shell_exec("cd $path/$file\ngit status");
 					if(preg_match("/branch is ahead[^$]+by ([\d]+) commit/", $output, $match)) {
 						print "\e[0;31m".$match[1]." unpushed commits\e[0;34m\n\n";
@@ -30,7 +31,6 @@ function folderIterator($path){
 						print "No uncomitted files\n\n";
 					}
 				}
-//				print "Repos: " . ($output ? "\e[0;31m$path/$file\n$output\n\e[0;34m" : "$path/$file\nNo uncomitted files\n\n");
 			}
 			else {
 				if($file == "clients" || $file == "e-types" || $file == "parentnode" || $file == "kaestel") {
