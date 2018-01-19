@@ -2,12 +2,14 @@
 <?php
 include("functions.php");
 
+
 // get current username
 $username = getCurrentUser();
 
-
 // start by requesting sudo power
 enableSuperCow();
+
+print get_current_user();
 
 // check software requirements
 output("Checking Xcode version");
@@ -99,8 +101,7 @@ command("sudo launchctl load -w /Library/LaunchDaemons/org.macports.memcached.pl
 command("sudo port load apache2");
 
 // test placeholder replacing
-copyFile("_conf/httpd.conf", "/opt/local/etc/apache2/httpd.conf", "sudo");
-replaceInFile("/opt/local/etc/apache2/httpd.conf", "###USERNAME###", $username);
+command("sudo chown $username:staff ~/Sites");
 
 
 // mysql paths
@@ -199,8 +200,12 @@ output("\nCopying configuration");
 
 // copy base configuration
 copyFile("_conf/httpd.conf", "/opt/local/etc/apache2/httpd.conf", "sudo");
+// set file permissions before trying to update 
+command("sudo chmod 777 /opt/local/etc/apache2/httpd.conf");
 // update username in file to make apache run as current user (required to access vhosts in dropbox)
 replaceInFile("/opt/local/etc/apache2/httpd.conf", "###USERNAME###", $username);
+// restore file permissions after update 
+command("sudo chmod 644 /opt/local/etc/apache2/httpd.conf");
 
 // copy virtual hosts base configuration
 copyFile("_conf/httpd-vhosts.conf", "/opt/local/etc/apache2/extra/httpd-vhosts.conf", "sudo");

@@ -357,8 +357,25 @@ function checkFileContent($file, $default) {
 				}
 
 				// add correct line to line updates
-				$updated_lines[] = preg_replace("/\#TOOLPATH\#/", getAbsolutePath(dirname(__FILE__)), $d_line_value)."\n";
+				$updated_lines[] = $d_line_value."\n";
 
+			}
+			// delete command if it is set to no value
+			else {
+			
+				preg_match("/^\"([^\"]+)\"[ ]?$/", $d_line, $d_parts);
+				if(count($d_parts) == 2) {
+					$d_line_match = $d_parts[1];
+					
+					foreach($source_lines as $line_no => $s_line) {
+
+						// remove existing line if match exists
+						if(preg_match("/".$d_line_match."/", $s_line)) {
+							$source_lines[$line_no] = "";
+						}
+
+					}
+				}
 			}
 		}
 	}
