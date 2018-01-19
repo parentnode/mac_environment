@@ -25,7 +25,7 @@ function folderIterator($path){
 					// check for unpushed commits
 					$output = shell_exec("cd $path/$file\ngit status");
 					if(preg_match("/branch is ahead[^$]+by ([\d]+) commit/", $output, $match)) {
-						print "\e[0;31m".$match[1]." unpushed commits\e[0;34m\n\n";
+						print "\e[0;31m".$match[1]." unpushed commit(s)\e[0;34m\n\n";
 					}
 					else {
 						print "No uncomitted files\n\n";
