@@ -148,36 +148,36 @@ if(!isset($backup_device_files[$backup_device]) || !isset($backup_device_files[$
 		// tar.gz backup folder
 		command("cd ~/ && tar -zxvf '$backup_file_name.tar.gz'", true, true);
 
+		$backup_folder = getAbsolutePath("~/$backup_file_name");
+		if($backup_folder) {
+
+			command("rm -R '".getAbsolutePath("~/$backup_file_name.tar.gz")."'", true, true);
+			command("rm -R '".getAbsolutePath("~/$backup_file_name.tar.gz.aes")."'", true, true);
 
 
-		command("rm -R '~/$backup_file_name.tar.gz'", true, true);
-//		command("rm -R '$backup_root/$backup_device/$backup_name.tar.gz'");
+			// only restore basic settings and fonts - no projects
 
+			copyFile("~/$backup_file_name/dot_bash_profile", "~/.bash_profile");
+			copyFile("~/$backup_file_name/dot_gitconfig", "~/.gitconfig");
+			copyFile("~/$backup_file_name/dot_gitignore_global", "~/.gitignore_global");
+			copyFile("~/$backup_file_name/dot_tm_properties", "~/.tm_properties");
+			copyFolder("~/$backup_file_name/dot_ssh/", "~/.ssh");
 
-		// only restore basic settings - no projects
+			copyFolder("~/$backup_file_name/Library/Fonts/", "~/Library/Fonts");
 
-		copyFile("~/$backup_file_name/dot_bash_profile", "~/.bash_profile");
-		copyFile("~/$backup_file_name/dot_gitconfig", "~/.gitconfig");
-		copyFile("~/$backup_file_name/dot_gitignore_global", "~/.gitignore_global");
-		copyFile("~/$backup_file_name/dot_tm_properties", "~/.tm_properties");
-		copyFolder("~/$backup_file_name/dot_ssh/", "~/.ssh");
+			copyFile("~/$backup_file_name/Library/Application Support/Sequel Pro/Data/Favorites.plist", "~/Library/Application Support/Sequel Pro/Data/Favorites.plist");
+			copyFile("~/$backup_file_name/Library/Application Support/TextMate/Global.tmProperties", "~/Library/Application Support/TextMate/Global.tmProperties");
+			copyFolder("~/$backup_file_name/Library/Application Support/TextMate/Bundles/", "~/Library/Application Support/TextMate/Bundles");
 
-		// delete temp folder
-//		command("rm -R $backup_name");
+			command("chmod -R 777 '".$backup_folder."'", true, true);
+			// delete backup folder
+			command("rm -R '".$backup_folder."'", true, true);
 
-		//command("rm -R '$backup_root/$backup_device/$backup_name'");
+		}
+		else {
+			goodbye("Selection is not a valid backup.");
+		}
 
-		copyFolder("~/$backup_file_name/Library/Fonts/", "~/Library/Fonts");
-
-		copyFile("~/$backup_file_name/Library/Application Support/Sequel Pro/Data/Favorites.plist", "~/Library/Application Support/Sequel Pro/Data/Favorites.plist");
-		copyFile("~/$backup_file_name/Library/Application Support/TextMate/Global.tmProperties", "~/Library/Application Support/TextMate/Global.tmProperties");
-		copyFolder("~/$backup_file_name/Library/Application Support/TextMate/Bundles/", "~/Library/Application Support/TextMate/Bundles");
-
-		// make temp folder is deletable (keychain will have some restrictions otherwise)
-		command("chmod -R 777 '~/$backup_file_name'", true, true);
-		// delete backup folder
-		command("rm -R '~/$backup_file_name'", true, true);
-		
 	}
 	else {
 		goodbye("Selection is not a valid backup.");
