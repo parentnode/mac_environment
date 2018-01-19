@@ -10,7 +10,7 @@ parentnode.dk is a Copenhagen based open source project and part of think.dk, a 
 Visit http://think.dk or http://parentnode.dk for more information.
 
 # Licenses:
-os_x_environment is licensed as follows:
+mac_environment is licensed as follows:
 
 ##Source code:
 https://github.com/parentnode/mac_environment/blob/master/MIT-LICENSE.md

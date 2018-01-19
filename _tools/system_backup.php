@@ -1,7 +1,7 @@
 #!/usr/bin/php
 <?php
 include("functions.php");
-include("classes/system/filesystem.class.php");
+include("/srv/sites/parentnode/janitor/src/classes/system/filesystem.class.php");
 
 $FS = new FileSystem();
 
@@ -63,7 +63,15 @@ output("Created Macports list\n");
 
 
 // MySQL
-command("php ".dirname(realpath($_SERVER["PHP_SELF"]))."/mysql_dump_all.php mysqldump", true, false);
+//$output = shell_exec("php ".dirname(realpath($_SERVER["PHP_SELF"]))."/mysql_dump_all.php mysqldump 2>&1");
+$output = command("php ".dirname(realpath($_SERVER["PHP_SELF"]))."/mysql_dump_all.php mysqldump", true);
+if(preg_match("/Failed/", $output)) {
+	goodbye("Failed to connect to MySQL");
+}
+else {
+	output("MySQL data dumped");
+	
+}
 moveFile("~/mysqldump.sql", $backup_name."/mysqldump.sql");
 
 // config files
@@ -87,9 +95,15 @@ copyFolder("~/Library/Fonts/", $backup_name."/Library/Fonts/");
 
 // Use sync for firefox instead
 //copyFolder("~/Library/Application Support/Firefox/", $backup_name."/Library/Application Support/Firefox");
+
+// Sequel Pro
 copyFolder("~/Library/Application Support/Sequel Pro/", $backup_name."/Library/Application Support/Sequel Pro/");
+// SourceTree
 copyFolder("~/Library/Application Support/SourceTree/", $backup_name."/Library/Application Support/SourceTree/");
-copyFolder("~/Library/Application Support/TextMate/", $backup_name."/Library/Application Support/TextMate/");
+// Textmake
+copyFile("~/Library/Application Support/TextMate/Global.tmProperties", $backup_name."/Library/Application Support/TextMate/Global.tmProperties");
+copyFolder("~/Library/Application Support/TextMate/Bundles", $backup_name."/Library/Application Support/TextMate/Bundles");
+copyFolder("~/Library/Application Support/TextMate/Session", $backup_name."/Library/Application Support/TextMate/Session");
 
 
 // run git status 
@@ -150,7 +164,7 @@ foreach($git_status_lines as $line) {
 
 $password = false;
 // try to get db password from local config file
-$password_file = "~/.os_x_environment_backup";
+$password_file = "~/.mac_environment_backup";
 if(file_exists(getAbsolutePath($password_file))) {
 
 
@@ -166,7 +180,7 @@ if(file_exists(getAbsolutePath($password_file))) {
 
 if($password == false) {
 	$password = ask("Encryption password is not stored. Please enter it now", false, true);
-	$store_password = ask("Save password in ~/.os_x_environment_backup (Y/n)", ["Y", "n"]);
+	$store_password = ask("Save password in ~/.mac_environment_backup (Y/n)", ["Y", "n"]);
 
 	if($store_password == "Y") {
 		$fp = fopen(getAbsolutePath($password_file), "a");
@@ -180,19 +194,18 @@ if($password == false) {
 
 
 // tar.gz backup folder
-command("cd $backup_root && tar -zcvf $backup_time.tar.gz $backup_time", true, false);
+command("cd '$backup_root' && tar -zcvf $backup_time.tar.gz $backup_time", true, true);
 
 // encrypt it
 //print "openssl aes-128-cbc -k $password < $backup_time.tar.gz > $backup_time.tar.gz.aes";
-command("cd $backup_root && openssl enc -aes-256-cbc -k $password -in $backup_time.tar.gz -out $backup_time.tar.gz.aes");
-
+command("cd '$backup_root' && openssl enc -aes-256-cbc -k $password -in $backup_time.tar.gz -out $backup_time.tar.gz.aes", true, true);
 
 // make temp folder deletable (keychain will have some restrictions otherwise)
-command("chmod -R 777 $backup_name");
+command("chmod -R 777 '$backup_name'");
 // delete temp folder
-command("rm -R $backup_name");
+command("rm -R '$backup_name'");
 // delete gz-tarball
-command("rm -R $backup_name.tar.gz");
+command("rm -R '$backup_name.tar.gz'");
 
 // get all backups to see if cleanup is required
 $backups = scandir($backup_root);
@@ -212,7 +225,7 @@ if(count($backups) > 10) {
 		if($i >= 10) {
 
 			// delete $backup_root/$backup\n;
-			command("rm -R $backup_root/$backup");
+			command("rm -R '$backup_root/$backup'");
 		}
 		$i++;
 	}
@@ -222,10 +235,10 @@ else {
 }
 
 // Add cronjob every wednesday at noon
-//0 12 * * 3 php /srv/sites/parentnode/os_x_environment/_tools/system_backup.php 
+//0 12 * * 3 php /srv/sites/parentnode/mac_environment/_tools/system_backup.php 
 
 // for testing - runs every 17 min past the hour
-//17 * * * * php /srv/sites/parentnode/os_x_environment/_tools/system_backup.php 
+//17 * * * * php /srv/sites/parentnode/mac_environment/_tools/system_backup.php 
 
 
 

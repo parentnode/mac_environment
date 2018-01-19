@@ -22,217 +22,174 @@ output("Restoring from backup");
 $backup_time = date("Ymd_His");
 
 if(file_exists(getAbsolutePath("~/Dropbox/backup"))) {
-	$backup_name = getAbsolutePath("~/Dropbox/backup/");
+	$backup_root = getAbsolutePath("~/Dropbox/backup");
 }
 else if(file_exists(getAbsolutePath("~/Dropbox (Personal)/backup"))) {
-	$backup_name = getAbsolutePath("~/Dropbox (Personal)/backup/");
+	$backup_root = getAbsolutePath("~/Dropbox (Personal)/backup");
 }
 else if(file_exists(getAbsolutePath("~/Google Drive/backup"))) {
-	$backup_name = getAbsolutePath("~/Google Drive/backup/");
+	$backup_root = getAbsolutePath("~/Google Drive/backup");
 }
 else {
 	goodbye("Could not find Dropbox or Google Drive for backup. You should create a folder named 'backup' to enable backup.");
 }
 
-if(!file_exists($backup_name)) {
-	mkdir($backup_name);
+
+output("Backup location:" . $backup_root."\n");
+
+$backup_devices = [];
+
+// Index available backups
+$backups_files = $FS->files($backup_root, ["allow_extensions" => "aes"]);
+foreach($backups_files as $backup) {
+	$backup_fragments = explode("/", str_replace($backup_root."/", "", $backup));
+
+	// seems like a valid backup
+	if(count($backup_fragments) > 1) {
+		$backup_device_files[$backup_fragments[0]][] = $backup_fragments[1];
+
+		// separate list of backups
+		if(array_search($backup_fragments[0], $backup_devices) === false) {
+			$backup_devices[] = $backup_fragments[0];
+		}
+	}
 }
 
-$backup_root = dirname($backup_name);
+
+output("Backups available from these devices:\n");
+
+// loop through backup devices
+foreach($backup_devices as $i => $backup_device) {
+
+	$device_index = ($i+1);
+	output($device_index." :" .$backup_device);
+
+	$valid_options[] = $device_index;
+
+}
+// ask user to select device
+$selected_device = ask("\nSelect device", $valid_options);
 
 
-output("Backup location:" . $backup_name."\n");
+// clear valid options
+$valid_options = [];
 
+if(count($backup_devices) < $selected_device) {
+	goodbye("Unknown device");
+}
+else {
 
-// Applications list
-$backups = $FS->files($backup_root);
-print_r($backups);
-exit();
+	$backup_device = $backup_devices[$selected_device-1];
+	output("\nBackups available from ".$backup_device.":\n");
 
-//foreach($backup_devices = $backup_device)
+	foreach($backup_device_files[$backup_device] as $i => $backup) {
+		$backup_index = ($i+1);
+		preg_match("/(\d\d\d\d)(\d\d)(\d\d)_(\d\d)(\d\d)(\d\d)/", $backup, $ts);
+		output($backup_index.": ".($backup_index < 10 ? " " : "").$ts[1]. "/".$ts[2]. "/".$ts[3]. " ". $ts[4].":".$ts[5]. " (".$backup.")".($i == 0 ? " - LATEST" : ""));
 
-
-// Applications list
-$root_applications = scandir("/Applications");
-array_unshift($root_applications, "Root apps:");
-$home_applications = scandir(getAbsolutePath("~/Applications"));
-array_unshift($home_applications, "Home apps:");
-file_put_contents($backup_name."/Applications.txt", implode("\n", array_merge($root_applications, $home_applications)));
-output("Created applications list\n");
-
-// Macports list
-$port_output = shell_exec("port installed requested"." 2>&1");
-file_put_contents($backup_name."/Macports.txt", $port_output);
-output("Created Macports list\n");
-
-
-
-// MySQL
-command("php ".dirname(realpath($_SERVER["PHP_SELF"]))."/mysql_dump_all.php mysqldump", true, false);
-moveFile("~/mysqldump.sql", $backup_name."/mysqldump.sql");
-
-// config files
-copyFile("~/.bash_profile", $backup_name."/dot_bash_profile");
-copyFile("~/.gitconfig", $backup_name."/dot_gitconfig");
-copyFile("~/.gitignore_global", $backup_name."/dot_gitignore_global");
-copyFile("~/.tm_properties", $backup_name."/dot_tm_properties");
-copyFile("/etc/hosts", $backup_name."/hosts");
-
-
-copyFolder("~/.ssh/", $backup_name."/dot_ssh");
-
-
-copyFolder("~/Sites/apache/", $backup_name."/Sites/apache/");
-copyFolder("~/Desktop/", $backup_name."/Desktop/");
-copyFolder("~/Pictures/", $backup_name."/Pictures/");
-copyFolder("~/Documents/", $backup_name."/Documents/");
-copyFolder("~/Library/Keychains/", $backup_name."/Library/Keychains/");
-copyFolder("~/Library/Preferences/", $backup_name."/Library/Preferences/");
-copyFolder("~/Library/Fonts/", $backup_name."/Library/Fonts/");
-
-// Use sync for firefox instead
-//copyFolder("~/Library/Application Support/Firefox/", $backup_name."/Library/Application Support/Firefox");
-copyFolder("~/Library/Application Support/Sequel Pro/", $backup_name."/Library/Application Support/Sequel Pro/");
-copyFolder("~/Library/Application Support/SourceTree/", $backup_name."/Library/Application Support/SourceTree/");
-copyFolder("~/Library/Application Support/TextMate/", $backup_name."/Library/Application Support/TextMate/");
-
-
-// run git status 
-
-
-// TODO
-// - copy any file which has not been comitted
-// - push any repos with un-pushed commits
-$git_status_output = shell_exec("php ".dirname(realpath($_SERVER["PHP_SELF"]))."/git_status.php"." 2>&1");
-$git_status_lines = explode("\n", $git_status_output);
-$repos_path = false;
-
-foreach($git_status_lines as $line) {
-
-	// new repos
-	if(preg_match("/^Repos: ([^$]+)/", $line, $match)) {
-
-		$repos_path = $match[1];
-		// $output = shell_exec("cd ".$repos_path." && git push 2>&1");
-		// print "re-output:" . $output . "\n\n";
+		$valid_options[] = $backup_index;
 
 	}
-	else if(!trim($line)) {
-		$repos_path = false;
-	}
-	else if($repos_path && !preg_match("/^No uncomitted files/", $line)) {
-		$file_status = explode(" ", trim($line));
 
-//		print "copying:" . $repos_path."/".$file_status[1].",".$backup_name."/Sites/".str_replace(getAbsolutePath("~/Sites/"), "", $repos_path)."/".$file_status[1]."\n";
-		// cannot backup deleted file
+	// ask user to select backup
+	$selected_backup = ask("\nSelect backup", $valid_options);
+}
 
-		if($file_status[0] !== "D") {
-			copyFile($repos_path."/".$file_status[1], $backup_name."/Sites/".str_replace(getAbsolutePath("~/Sites/"), "", $repos_path)."/".$file_status[1]);
-		}
-		// make dummy entry for deleted file
-		else {
 
-			$file = $backup_name."/Sites/".str_replace(getAbsolutePath("~/Sites/"), "", $repos_path)."/".$file_status[1]."-DELETED";
-			$basedir = dirname($file);
+if(!isset($backup_device_files[$backup_device]) || !isset($backup_device_files[$selected_device][$selected_backup-1])) {
+	
+	$backup = $backup_device_files[$backup_device][$selected_backup-1];
+//	$backup_file = $backup_root."/".$backup_device."/".$backup;
 
-			$path = "/";
-			$path_fragments = explode("/", $basedir);
-			foreach($path_fragments as $fragment) {
-				$path = $path."/".$fragment;
-				if(!file_exists("$path")) {
-					mkdir("$path");
+	if(file_exists($backup_root."/".$backup_device."/".$backup) && preg_match("/\.tar\.gz\.aes$/", $backup)) {
+
+		$backup_file_name = preg_replace("/\.tar\.gz\.aes$/", "", $backup);
+		
+		output("\nRestoring from:" .$backup_device."/".$backup);
+
+
+		$password = false;
+		// try to get db password from local config file
+		$password_file = "~/.mac_environment_backup";
+		if(file_exists(getAbsolutePath($password_file))) {
+
+
+			$config = @file(getAbsolutePath($password_file));
+			foreach($config as $line) {
+				$values = explode(":", $line);
+				if($values[0] == "encryption") {
+					$password = trim($values[1]);
 				}
 			}
 
-			touch($file);
 		}
 
+		if($password == false) {
+			$password = ask("Encryption password is not stored. Please enter it now", false, true);
+			$store_password = ask("Save password in ~/.mac_environment_backup (Y/n)", ["Y", "n"]);
+
+			if($store_password == "Y") {
+				$fp = fopen(getAbsolutePath($password_file), "a");
+				fwrite($fp, "encryption:".$password."\n");
+				fclose($fp);
+			}
+
+		}
+
+		$backup_folder = "";
+
+		// copy backup file to user home dir (unpacking and deleting fast in Dropbox makes it freak out)
+		copyFile("$backup_root/$backup_device/$backup_file_name.tar.gz.aes", "~/");
+
+		// encrypt it
+		//print "openssl aes-128-cbc -k $password < $backup_time.tar.gz > $backup_time.tar.gz.aes";
+		command("cd ~/ && openssl enc -aes-256-cbc -d -k $password -in '$backup_file_name.tar.gz.aes' -out '$backup_file_name.tar.gz'", true, true);
+
+		// tar.gz backup folder
+		command("cd ~/ && tar -zxvf '$backup_file_name.tar.gz'", true, true);
+
+
+
+		command("rm -R '~/$backup_file_name.tar.gz'", true, true);
+//		command("rm -R '$backup_root/$backup_device/$backup_name.tar.gz'");
+
+
+		// only restore basic settings - no projects
+
+		copyFile("~/$backup_file_name/dot_bash_profile", "~/.bash_profile");
+		copyFile("~/$backup_file_name/dot_gitconfig", "~/.gitconfig");
+		copyFile("~/$backup_file_name/dot_gitignore_global", "~/.gitignore_global");
+		copyFile("~/$backup_file_name/dot_tm_properties", "~/.tm_properties");
+		copyFolder("~/$backup_file_name/dot_ssh/", "~/.ssh");
+
+		// delete temp folder
+//		command("rm -R $backup_name");
+
+		//command("rm -R '$backup_root/$backup_device/$backup_name'");
+
+		copyFolder("~/$backup_file_name/Library/Fonts/", "~/Library/Fonts");
+
+		copyFile("~/$backup_file_name/Library/Application Support/Sequel Pro/Data/Favorites.plist", "~/Library/Application Support/Sequel Pro/Data/Favorites.plist");
+		copyFile("~/$backup_file_name/Library/Application Support/TextMate/Global.tmProperties", "~/Library/Application Support/TextMate/Global.tmProperties");
+		copyFolder("~/$backup_file_name/Library/Application Support/TextMate/Bundles/", "~/Library/Application Support/TextMate/Bundles");
+
+		// make temp folder is deletable (keychain will have some restrictions otherwise)
+		command("chmod -R 777 '~/$backup_file_name'", true, true);
+		// delete backup folder
+		command("rm -R '~/$backup_file_name'", true, true);
+		
 	}
+	else {
+		goodbye("Selection is not a valid backup.");
+	}
+
 	
-
-}
-
-
-$password = false;
-// try to get db password from local config file
-$password_file = "~/.os_x_environment_backup";
-if(file_exists(getAbsolutePath($password_file))) {
-
-
-	$config = @file(getAbsolutePath($password_file));
-	foreach($config as $line) {
-		$values = explode(":", $line);
-		if($values[0] == "encryption") {
-			$password = trim($values[1]);
-		}
-	}
-
-}
-
-if($password == false) {
-	$password = ask("Encryption password is not stored. Please enter it now", false, true);
-	$store_password = ask("Save password in ~/.os_x_environment_backup (Y/n)", ["Y", "n"]);
-
-	if($store_password == "Y") {
-		$fp = fopen(getAbsolutePath($password_file), "a");
-		fwrite($fp, "encryption:".$password."\n");
-		fclose($fp);
-	}
-
-}
-
-
-
-
-// tar.gz backup folder
-command("cd $backup_root && tar -zcvf $backup_time.tar.gz $backup_time", true, false);
-
-// encrypt it
-//print "openssl aes-128-cbc -k $password < $backup_time.tar.gz > $backup_time.tar.gz.aes";
-command("cd $backup_root && openssl enc -aes-256-cbc -k $password -in $backup_time.tar.gz -out $backup_time.tar.gz.aes");
-
-
-// make temp folder deletable (keychain will have some restrictions otherwise)
-command("chmod -R 777 $backup_name");
-// delete temp folder
-command("rm -R $backup_name");
-// delete gz-tarball
-command("rm -R $backup_name.tar.gz");
-
-// get all backups to see if cleanup is required
-$backups = scandir($backup_root);
-$backup_index = [];
-if(count($backups) > 10) {
-	foreach($backups as $backup) {
-		if(!preg_match("/^\./", $backup)) {
-			$backup_index[preg_replace("/\.[^$]+/", "", $backup)] = $backup;
-		}
-	}
-
-	krsort($backup_index);
-
-	// Removing old backups
-	$i = 0;
-	foreach($backup_index as $backup) {
-		if($i >= 10) {
-
-			// delete $backup_root/$backup\n;
-			command("rm -R $backup_root/$backup");
-		}
-		$i++;
-	}
 }
 else {
-	print "less than 10 backups";
+	goodbye("Unknown backup");
 }
 
-// Add cronjob every wednesday at noon
-//0 12 * * 3 php /srv/sites/parentnode/os_x_environment/_tools/system_backup.php 
-
-// for testing - runs every 17 min past the hour
-//17 * * * * php /srv/sites/parentnode/os_x_environment/_tools/system_backup.php 
-
-
+goodbye("\nRestoring from $backup_device/$backup is done.");
 
 
 ?>

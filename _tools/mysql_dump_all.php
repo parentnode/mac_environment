@@ -8,7 +8,7 @@ $password = false;
 $store_password = false;
 
 // try to get db password from local config file
-$password_file = "~/.os_x_environment_backup";
+$password_file = "~/.mac_environment_backup";
 if(file_exists(getAbsolutePath($password_file))) {
 
 
@@ -22,11 +22,11 @@ if(file_exists(getAbsolutePath($password_file))) {
 
 }
 
-$host = "localhost";
+$host = "127.0.0.1";
 $user = "root";
 if($password == false) {
 	$password = ask("Database root password is not stored. Please enter it now", false, true);
-	$store_password = ask("Save password in ~/.os_x_environment_backup (Y/n)", ["Y", "n"]);
+	$store_password = ask("Save password in ~/.mac_environment_backup (Y/n)", ["Y", "n"]);
 
 	if($store_password == "Y") {
 		$fp = fopen(getAbsolutePath($password_file), "a");
@@ -44,6 +44,7 @@ $mysqli = @new mysqli("p:".$host, $user, $password);
 if($mysqli->connect_errno) {
     goodbye("Failed to connect to MySQL: " . $mysqli->connect_error);
 }
+
 $mysqli->set_charset("utf8");
 
 // get all databases

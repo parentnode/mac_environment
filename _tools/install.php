@@ -255,10 +255,7 @@ command("sudo /opt/local/share/mariadb/support-files/mysql.server start");
 
 // Set root password
 // see if there is some hint at the database already being installed
-//$db_response = command("/opt/local/lib/mariadb/bin/mysql -u root mysql -pc0nte9do -e 'SHOW TABLES'");
 $db_response = command("/opt/local/lib/mariadb/bin/mysql -u root mysql -e 'SHOW TABLES'", true);
-//$db_response = shell_exec("/opt/local/lib/mariadb/bin/mysql -u root mysql -e 'SHOW TABLES' 2>&1");
-
 // 1044, 1045 - ACCESS DENIED - seems like password is set
 // If not ACCESS DENIED, ask to set root password
 if(!preg_match("/^ERROR (1044|1045)/", $db_response)) {
