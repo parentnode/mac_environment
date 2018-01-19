@@ -13,7 +13,8 @@ function folderIterator($path){
 	$handle = opendir($path);
 	while($file = readdir($handle)){
 		if($file != "." && $file != ".." && is_dir("$path/$file")) {
-			if(is_dir("$path/$file/.git") && (basename($path) == "clients" || basename($path) == "e-types" || basename($path) == "kaestel" || basename($path) == "parentnode")) {
+			if(is_dir("$path/$file/.git")) {
+//			if(is_dir("$path/$file/.git") && (preg_match("/clients|/", basename($path) == "" || basename($path) == "e-types" || basename($path) == "kaestel" || basename($path) == "parentnode")) {
 				// get simple status
 				print "Repos: $path/$file\n";
 
@@ -33,9 +34,9 @@ function folderIterator($path){
 				}
 			}
 			else {
-				if($file == "clients" || $file == "e-types" || $file == "parentnode" || $file == "kaestel") {
+//				if($file == "clients" || $file == "e-types" || $file == "parentnode" || $file == "kaestel") {
 					folderIterator("$path/$file");
-				}
+//				}
 			}
 		}
 	}
