@@ -1,50 +1,55 @@
 #!/usr/bin/php
 <?php
 include("functions.php");
-include("classes/system/filesystem.class.php");
+include("/srv/sites/parentnode/janitor/src/classes/system/filesystem.class.php");
 
 $FS = new FileSystem();
 
 // encrypt backup
-// openssl enc -aes-256-cbc -d -k $password -in $backup_time.tar.gz.aes -out $backup_time.tar.gz
+// openssl enc -aes-256-cbc -k $password -in $backup_time.tar.gz -out $backup_time.tar.gz.aes
 
 // To decrypt backup
-// openssl enc -aes-256-cbc -k $password -in $backup_time.tar.gz -out $backup_time.tar.gz.aes
+// openssl enc -aes-256-cbc -d -k $password -in $backup_time.tar.gz.aes -out $backup_time.tar.gz
 
 // start by requesting sudo power
 //enableSuperCow();
 
 
-
 // make quick backup to Dropbox or Google Drive
 
-output("Creating quick backup");
+output("Restoring from backup");
 
 $backup_time = date("Ymd_His");
-$backup_device = preg_replace("/\.[a-zA-Z]+$/", "", gethostname());
 
 if(file_exists(getAbsolutePath("~/Dropbox/backup"))) {
-	$backup_name = getAbsolutePath("~/Dropbox/backup/").$backup_device."/".$backup_time;
+	$backup_name = getAbsolutePath("~/Dropbox/backup/");
 }
 else if(file_exists(getAbsolutePath("~/Dropbox (Personal)/backup"))) {
-	$backup_name = getAbsolutePath("~/Dropbox (Personal)/backup/").$backup_device."/".$backup_time;
+	$backup_name = getAbsolutePath("~/Dropbox (Personal)/backup/");
 }
 else if(file_exists(getAbsolutePath("~/Google Drive/backup"))) {
-	$backup_name = getAbsolutePath("~/Google Drive/backup/").$backup_device."/".$backup_time;
+	$backup_name = getAbsolutePath("~/Google Drive/backup/");
 }
 else {
 	goodbye("Could not find Dropbox or Google Drive for backup. You should create a folder named 'backup' to enable backup.");
 }
 
 if(!file_exists($backup_name)) {
-	$FS->makeDirRecursively($backup_name);
+	mkdir($backup_name);
 }
 
 $backup_root = dirname($backup_name);
 
 
-output("Backup location:$backup_name\n");
+output("Backup location:" . $backup_name."\n");
 
+
+// Applications list
+$backups = $FS->files($backup_root);
+print_r($backups);
+exit();
+
+//foreach($backup_devices = $backup_device)
 
 
 // Applications list

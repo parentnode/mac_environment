@@ -1,14 +1,15 @@
-# DO NOT C/P FROM THIS FILE - Run update_dev_env instead
+# DO NOT C/P FROM THIS FILE - Run install/update instead
 # FORMAT OF THIS FILE: "alias to check for" correct alias
 
 
 # Development environment tools
-"alias update_dev_env" alias update_dev_env="php #TOOLPATH#/update.php"
+#"alias update_dev_env" alias update_dev_env="php #TOOLPATH#/update.php"
 
 
 # Apache and mysql shortcuts
-"alias apache" alias apache="sudo /opt/local/apache2/bin/apachectl"
-"alias mysql" alias mysql="sudo /opt/local/share/mysql56/support-files/mysql.server"
+"alias apache" alias apache="sudo /opt/local/sbin/apachectl"
+"alias mysql" alias mysql="sudo /opt/local/lib/mariadb/bin/mysql"
+"alias mysqld" alias mysqld="sudo /opt/local/share/mariadb/support-files/mysql.server"
 "alias mysql_dump_all" alias mysql_dump_all="php #TOOLPATH#/mysql_dump_all.php"
 "alias mysql_grant" alias mysql_grant="php #TOOLPATH#/mysql_grant.php"
 
@@ -23,9 +24,11 @@
 "alias zipitm" alias zipitm="zip -r zip . -x \*.svn* \*.git* \*.DS* \*js/lib/* \*css/lib/*"
 
 
-# github tools
+# git tools 
+"alias git_status" alias git_status="php #TOOLPATH#/git_status.php"
+
+# git dropbox/github tools - NEEDS TO BE UPDATED
 #"alias git_new_dropbox" alias git_new_dropbox="php #TOOLPATH#/git_new_dropbox.php"
 #"alias git_dropbox2github" alias git_dropbox2github="php #TOOLPATH#/git_dropbox2github.php"
 #"alias git_github2dropbox" alias git_github2dropbox="php #TOOLPATH#/git_github2dropbox.php"
-#"alias git_status" alias git_status="php #TOOLPATH#/git_status.php"
 

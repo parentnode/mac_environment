@@ -74,7 +74,7 @@ if($result_count) {
 
 if($user_databases) {
 
-	$com = "/opt/local/lib/mysql56/bin/mysqldump -uroot".($password ? " -p$password" : "")." --databases ".implode($user_databases, " ")." > ~/".$dumpname.".sql | sed -e '$!d'";
+	$com = "/opt/local/lib/mariadb/bin/mysqldump -uroot".($password ? " -p$password" : "")." --databases ".implode($user_databases, " ")." > ~/".$dumpname.".sql | sed -e '$!d'";
 	command($com, true);
 
 	output("MySQL dumped into: " . $dumpname . ".sql");

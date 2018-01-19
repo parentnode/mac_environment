@@ -10,6 +10,24 @@ function enableSuperCow() {
 }
 
 /**
+* Get the username of current user by looking at the folder name of the current user directory
+* because the current script will typically run as root (sudo)
+*/
+function getCurrentUser() {
+	
+	$path = getAbsolutePath("~/");
+	$fragments = explode("/", $path);
+	if(count($fragments) == 4) {
+		$username = $fragments[2];
+	}
+	else {
+		$username = trim(shell_exec('whoami'));
+	}
+
+	return $username;
+}
+
+/**
 * Execute command
 *
 * @param String $command Command to execure
@@ -30,8 +48,12 @@ function command($command, $no_echo = false, $suppress = true) {
 
 
 //	$cmd_output = shell_exec(escapeshellcmd($command)." 2>&1");
-	output($cmd_output);
+	if($no_echo == false) {
+		output($cmd_output);
+	}
 
+	// return output in case we need to evaluate it
+	return $cmd_output;
 }
 
 /**
@@ -367,7 +389,7 @@ function replaceInFile($file, $placeholder, $value) {
 
 	foreach($source_lines as $i => $line) {
 		if(preg_match("/".$placeholder."/", $line)) {
-			$source_lines[$i] = preg_replace("/".$placeholder."/", $value);
+			$source_lines[$i] = preg_replace("/".$placeholder."/", $value, $line);
 		}
 	}
 
