@@ -14,8 +14,23 @@ function folderIterator($path){
 	while($file = readdir($handle)){
 		if($file != "." && $file != ".." && is_dir("$path/$file")) {
 			if(is_dir("$path/$file/.git") && (basename($path) == "clients" || basename($path) == "e-types" || basename($path) == "kaestel" || basename($path) == "parentnode")) {
+				// get simple status
+				print "Repos: $path/$file\n";
+
 				$output = shell_exec("cd $path/$file\ngit status -s");
-				print "Repos: " . ($output ? "\e[0;31m$path/$file\n$output\n\e[0;34m" : "$path/$file\nNo uncomitted files\n\n");
+				if($output) {
+					print "\e[0;31m$output\e[0;34m\n";
+				}
+				else {
+					$output = shell_exec("cd $path/$file\ngit status");
+					if(preg_match("/branch is ahead[^$]+by ([\d]+) commit/", $output, $match)) {
+						print "\e[0;31m".$match[1]." unpushed commits\e[0;34m\n\n";
+					}
+					else {
+						print "No uncomitted files\n\n";
+					}
+				}
+//				print "Repos: " . ($output ? "\e[0;31m$path/$file\n$output\n\e[0;34m" : "$path/$file\nNo uncomitted files\n\n");
 			}
 			else {
 				if($file == "clients" || $file == "e-types" || $file == "parentnode" || $file == "kaestel") {
