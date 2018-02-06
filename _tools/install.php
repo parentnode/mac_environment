@@ -174,6 +174,10 @@ if(!command("git config --global --get push.default", true)) {
 if(!command("git config --global --get credential.helper", true)) {
 	command("git config --global credential.helper osxkeychain");
 }
+if(!command("git config --global --get core.autocrlf", true)) {
+	command("git config --global core.autocrlf input");
+}
+
 
 // set permissions
 command("sudo chown $username:staff ~/.gitconfig");
