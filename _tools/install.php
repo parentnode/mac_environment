@@ -68,6 +68,7 @@ if(!file_exists("/srv/sites")) {
 	command("sudo ln -s ~/Sites /srv/sites");
 }
 checkPath("~/Sites/apache");
+checkPath("~/Sites/apache/logs");
 
 
 // continue with setup

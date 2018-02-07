@@ -235,10 +235,10 @@ else {
 }
 
 // Add cronjob every wednesday at noon
-//0 12 * * 3 php /srv/sites/parentnode/mac_environment/_tools/system_backup.php 
+//0 12 * * 3 php /srv/tools/_tools/system_backup.php 
 
 // for testing - runs every 17 min past the hour
-//17 * * * * php /srv/sites/parentnode/mac_environment/_tools/system_backup.php 
+//17 * * * * php /srv/tools/_tools/system_backup.php 
 
 
 
