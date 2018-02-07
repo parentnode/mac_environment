@@ -172,8 +172,8 @@ function checkPath($path, $sudo = "") {
 //					output("$current_folder - path exists");
 				}
 				else {
-					$answer = ask("\nCreate missing path: $current_folder (yes/no)", array("(yes|no)"));
-					if($answer == "yes") {
+					// $answer = ask("\nCreate missing path: $current_folder (yes/no)", array("(yes|no)"));
+					// if($answer == "yes") {
 						command(($sudo ? "$sudo " : "") . "mkdir $current_folder");
 						
 						if(file_exists($current_folder)) {
@@ -182,10 +182,10 @@ function checkPath($path, $sudo = "") {
 						else {
 							goodbye("Failed to create folder - please check it manually and try again");
 						}
-					}
-					else {
-						goodbye("Dev environment needs folder to be completed");
-					}
+					// }
+					// else {
+					// 	goodbye("Dev environment needs folder to be completed");
+					// }
 				}
 			}
 			
