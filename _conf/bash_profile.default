@@ -7,6 +7,7 @@
 #"alias update_dev_env" alias update_dev_env="php /srv/tools/_tools/update.php"
 
 # Apache and mysql shortcuts
+"alias sites" alias sites="cd /srv/sites"
 "alias apache" alias apache="sudo /opt/local/sbin/apachectl"
 "alias mysql" alias mysql="sudo /opt/local/lib/mariadb/bin/mysql"
 "alias mysqld" alias mysqld="sudo /opt/local/share/mariadb/support-files/mysql.server"
