@@ -79,7 +79,7 @@ command("sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer/")
 
 // update macports
 // TODO: enable again when done testing
-//command("sudo port selfupdate");
+command("sudo port selfupdate");
 
 command("sudo port install mariadb-server");
 command("sudo port install php72 +apache2 +mariadb-server +pear php72-apache2handler");
