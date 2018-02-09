@@ -272,7 +272,7 @@ $db_response = command("/opt/local/lib/mariadb/bin/mysql -u root mysql -e 'SHOW 
 if(!preg_match("/^ERROR (1044|1045)/", $db_response)) {
 
 	$answer = ask("Enter new root password for MariaDB (8-30 chars)", array("(.){8,30}"), true);
-//	command("sudo /opt/local/lib/mariadb/bin/mysqladmin -u root password '".$answer."'");
+	command("sudo /opt/local/lib/mariadb/bin/mysqladmin -u root password '".$answer."'");
 }
 
 
