@@ -119,7 +119,7 @@ function ask($question, $valid_answers = false, $no_echo = false) {
 
 		if(!$answer_is_valid){
 			output("Invalid response! Try again!");
-			$cmd_input = ask($question, $valid_answers);
+			$cmd_input = ask($question, $valid_answers, $no_echo);
 		}
 	}
 	return $cmd_input;
