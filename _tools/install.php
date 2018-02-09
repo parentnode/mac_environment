@@ -154,10 +154,11 @@ output("\nSoftware installed");
 // update settings
 output("\nUpdating GIT settings");
 
-if(!command("git config --global --get core.editor", true)) {
-	$answer = ask("GIT text editor  (mate/subl/coda etc.)", array("[a-zA-Z0-9]+"));
-	command("git config --global core.editor \"".$answer." -w\"");
-}
+// Confusing for end users (and too hard to explain)
+// if(!command("git config --global --get core.editor", true)) {
+// 	$answer = ask("GIT text editor  (mate/subl/coda etc.)", array("[a-zA-Z0-9]+"));
+// 	command("git config --global core.editor \"".$answer." -w\"");
+// }
 
 if(!command("git config --global --get user.name", true)) {
 	$answer = ask("GIT username", array("[a-zA-Z0-9\-\_]+"));
