@@ -81,7 +81,23 @@ command("sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer/")
 // TODO: enable again when done testing
 command("sudo port selfupdate");
 
-command("sudo port install mariadb-server");
+
+// Move to mariaDB 10.2
+if(file_exists("/opt/local/var/run/mariadb") && file_exists("/opt/local/lib/mariadb") && file_exists("/opt/local/share/mariadb/support-files/mysql.server")) {
+	command("sudo /opt/local/share/mariadb/support-files/mysql.server stop");
+	
+	command("sudo port uninstall mariadb-server");
+	command("sudo port uninstall mariadb");
+	command("sudo rm -R /opt/local/var/run/mariadb");
+	command("sudo rm -R /opt/local/etc/mariadb");
+	command("sudo rm -R /opt/local/share/mariadb");
+
+	// move databases
+	command("sudo mv /opt/local/var/db/mariadb /opt/local/var/db/mariadb-10.2");
+}
+
+
+command("sudo port install mariadb-10.2-server");
 command("sudo port install php72 +apache2 +mariadb-server +pear php72-apache2handler");
 
 command("sudo port install php72-mysql");
@@ -106,35 +122,35 @@ command("sudo chown $username:staff ~/Sites");
 
 
 // mysql paths
-checkPath("/opt/local/var/run/mariadb", "sudo");
-checkPath("/opt/local/var/db/mariadb", "sudo");
-checkPath("/opt/local/etc/mariadb", "sudo");
-checkPath("/opt/local/share/mariadb", "sudo");
+checkPath("/opt/local/var/run/mariadb-10.2", "sudo");
+checkPath("/opt/local/var/db/mariadb-10.2", "sudo");
+checkPath("/opt/local/etc/mariadb-10.2", "sudo");
+checkPath("/opt/local/share/mariadb-10.2", "sudo");
 
 
 // Mysql preparations
-command("sudo chown -R mysql:mysql /opt/local/var/db/mariadb");
-command("sudo chown -R mysql:mysql /opt/local/var/run/mariadb");
-command("sudo chown -R mysql:mysql /opt/local/etc/mariadb");
-command("sudo chown -R mysql:mysql /opt/local/share/mariadb");
+command("sudo chown -R mysql:mysql /opt/local/var/db/mariadb-10.2");
+command("sudo chown -R mysql:mysql /opt/local/var/run/mariadb-10.2");
+command("sudo chown -R mysql:mysql /opt/local/etc/mariadb-10.2");
+command("sudo chown -R mysql:mysql /opt/local/share/mariadb-10.2");
 
 
 
 // copy my.cnf for MySQL (to override macports settings)
-copyFile("_conf/my.cnf", "/opt/local/etc/mariadb/my.cnf", "sudo");
+copyFile("_conf/my.cnf", "/opt/local/etc/mariadb-10.2/my.cnf", "sudo");
 
 
 // see if there is some hint at the database already being installed
-$db_response = command("/opt/local/lib/mariadb/bin/mysql -u root mysql -e 'SHOW TABLES'", true);
-//$db_response = shell_exec("/opt/local/lib/mariadb/bin/mysql -u root mysql -e 'SHOW TABLES' 2>&1");
+$db_response = command("/opt/local/lib/mariadb-10.2/bin/mysql -u root mysql -e 'SHOW TABLES'", true);
+
 
 // 1049 - UNKNOWN DATABASE - seems like it's not set up yet
 // 2002 - NOT RUNNING - seems like it's first run
 if(preg_match("/^ERROR (1049|2002)/", $db_response)) {
 
 	output("Installing database");
-	command("sudo -u _mysql /opt/local/lib/mariadb/bin/mysql_install_db");
-	command("sudo port load mariadb-server");
+	command("sudo -u _mysql /opt/local/lib/mariadb-10.2/bin/mysql_install_db");
+	command("sudo port load mariadb-10.2-server");
 }
 else {
 	output("Database already installed - skipping");
@@ -262,17 +278,17 @@ command("sudo chmod 644 /etc/hosts");
 
 
 // start database
-command("sudo /opt/local/share/mariadb/support-files/mysql.server start");
+command("sudo /opt/local/share/mariadb-10.2/support-files/mysql.server start");
 
 // Set root password
 // see if there is some hint at the database already being installed
-$db_response = command("/opt/local/lib/mariadb/bin/mysql -u root mysql -e 'SHOW TABLES'", true);
+$db_response = command("/opt/local/lib/mariadb-10.2/bin/mysql -u root mysql -e 'SHOW TABLES'", true);
 // 1044, 1045 - ACCESS DENIED - seems like password is set
 // If not ACCESS DENIED, ask to set root password
 if(!preg_match("/^ERROR (1044|1045)/", $db_response)) {
 
 	$answer = ask("Enter new root password for MariaDB (8-30 chars)", array("(.){8,30}"), true);
-	command("sudo /opt/local/lib/mariadb/bin/mysqladmin -u root password '".$answer."'", true);
+	command("sudo /opt/local/lib/mariadb-10.2/bin/mysqladmin -u root password '".$answer."'", true);
 }
 
 
