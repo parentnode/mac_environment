@@ -13,8 +13,13 @@ $db_janitor_pass = false;
 
 // find local config file
 if(file_exists("src/config/connect_db.php")) {
+	$connection_info = file_get_contents("src/config/connect_db.php");	
+}
+else if(file_exists("theme/config/connect_db.php")) {
+	$connection_info = file_get_contents("theme/config/connect_db.php");	
+}
 
-	$connection_info = file_get_contents("src/config/connect_db.php");
+if($connection_info) {
 
 	preg_match("/\"SITE_DB\", \"([a-zA-Z0-9\.\-\_]+)\"/", $connection_info, $matches);
 	if($matches) {
