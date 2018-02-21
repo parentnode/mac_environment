@@ -78,19 +78,28 @@ output("\nInstalling software");
 command("sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer/");
 
 // update macports
-// TODO: enable again when done testing
 command("sudo port selfupdate");
 
+// enable getting PID of application really easy
+command("sudo port install pidof");
 
-// Move to mariaDB 10.2
+
+// Remove old mariaDB
 if(file_exists("/opt/local/var/run/mariadb") && file_exists("/opt/local/lib/mariadb") && file_exists("/opt/local/share/mariadb/support-files/mysql.server")) {
 	command("sudo /opt/local/share/mariadb/support-files/mysql.server stop");
 	
 	command("sudo port uninstall mariadb-server");
 	command("sudo port uninstall mariadb");
+
+	// quit any running instance of mysqld
+	$pid = command("pidof mysqld");
+	if($pid) {
+		command("sudo kill -9 $pid");
+	}
+	
+	// remove old support folders
 	command("sudo rm -R /opt/local/var/run/mariadb");
 	command("sudo rm -R /opt/local/etc/mariadb");
-	command("sudo rm -R /opt/local/share/mariadb");
 
 	// move databases
 	command("sudo mv /opt/local/var/db/mariadb /opt/local/var/db/mariadb-10.2");
@@ -98,6 +107,7 @@ if(file_exists("/opt/local/var/run/mariadb") && file_exists("/opt/local/lib/mari
 
 
 command("sudo port install mariadb-10.2-server");
+// TODO: on next clean run - test without +apache2 +mariadeb-server
 command("sudo port install php72 +apache2 +mariadb-server +pear php72-apache2handler");
 
 command("sudo port install php72-mysql");
