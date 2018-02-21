@@ -146,7 +146,8 @@ $db_response = command("/opt/local/lib/mariadb-10.2/bin/mysql -u root mysql -e '
 
 // 1049 - UNKNOWN DATABASE - seems like it's not set up yet
 // 2002 - NOT RUNNING - seems like it's first run
-if(preg_match("/^ERROR (1049|2002)/", $db_response)) {
+// 1044, 1045 - ACCESS DENIED - seems like password is set
+if(preg_match("/^ERROR (1049|2002|1044|1045)/", $db_response)) {
 
 	output("Installing database");
 	command("sudo -u _mysql /opt/local/lib/mariadb-10.2/bin/mysql_install_db");
