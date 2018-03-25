@@ -13,6 +13,7 @@
 "alias mysqld" alias mysqld="sudo /opt/local/share/mariadb-10.2/support-files/mysql.server"
 "alias mysql_dump_all" alias mysql_dump_all="php /srv/tools/_tools/mysql_dump_all.php"
 "alias mysql_grant" alias mysql_grant="php /srv/tools/_tools/mysql_grant.php"
+"alias enable_site" alias enable_site="/srv/tools/_tools/enable_site.sh"
 
 
 # Cleanup shortcuts
