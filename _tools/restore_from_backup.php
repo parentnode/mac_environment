@@ -169,6 +169,8 @@ if(!isset($backup_device_files[$backup_device]) || !isset($backup_device_files[$
 			copyFile("~/$backup_file_name/Library/Application Support/TextMate/Global.tmProperties", "~/Library/Application Support/TextMate/Global.tmProperties");
 			copyFolder("~/$backup_file_name/Library/Application Support/TextMate/Bundles/", "~/Library/Application Support/TextMate/Bundles");
 
+			copyFolder("~/$backup_file_name/Library/Group Containers/G69SCX94XU.duck", "~/Library/Group Containers/G69SCX94XU.duck");
+
 			command("chmod -R 777 '".$backup_folder."'", true, true);
 			// delete backup folder
 			command("rm -R '".$backup_folder."'", true, true);

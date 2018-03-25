@@ -104,6 +104,8 @@ copyFolder("~/Library/Application Support/SourceTree/", $backup_name."/Library/A
 copyFile("~/Library/Application Support/TextMate/Global.tmProperties", $backup_name."/Library/Application Support/TextMate/Global.tmProperties");
 copyFolder("~/Library/Application Support/TextMate/Bundles", $backup_name."/Library/Application Support/TextMate/Bundles");
 copyFolder("~/Library/Application Support/TextMate/Session", $backup_name."/Library/Application Support/TextMate/Session");
+// Cyberduck
+copyFile("~/Library/Group Containers/G69SCX94XU.duck", $backup_name."/Library/Group Containers/G69SCX94XU.duck");
 
 
 // run git status 
