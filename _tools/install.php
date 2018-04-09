@@ -84,26 +84,30 @@ command("sudo port selfupdate");
 command("sudo port install pidof");
 
 
-// Remove old mariaDB
-if(file_exists("/opt/local/var/run/mariadb") && file_exists("/opt/local/lib/mariadb") && file_exists("/opt/local/share/mariadb/support-files/mysql.server")) {
-	command("sudo /opt/local/share/mariadb/support-files/mysql.server stop");
-	
-	command("sudo port uninstall mariadb-server");
-	command("sudo port uninstall mariadb");
+// TODO: INCLUDE upgrade script, which checks for versions and uninstall all old stuff 
+// and ensure system is ready for install without conflicts
 
-	// quit any running instance of mysqld
-	$pid = command("pidof mysqld");
-	if($pid) {
-		command("sudo kill -9 $pid");
-	}
-	
-	// remove old support folders
-	command("sudo rm -R /opt/local/var/run/mariadb");
-	command("sudo rm -R /opt/local/etc/mariadb");
 
-	// move databases
-	command("sudo mv /opt/local/var/db/mariadb /opt/local/var/db/mariadb-10.2");
-}
+// Remove old mariaDB - MOVE TO UPGRADE SCRIPT
+// if(file_exists("/opt/local/var/run/mariadb") && file_exists("/opt/local/lib/mariadb") && file_exists("/opt/local/share/mariadb/support-files/mysql.server")) {
+// 	command("sudo /opt/local/share/mariadb/support-files/mysql.server stop");
+//
+// 	command("sudo port uninstall mariadb-server");
+// 	command("sudo port uninstall mariadb");
+//
+// 	// quit any running instance of mysqld
+// 	$pid = command("pidof mysqld");
+// 	if($pid) {
+// 		command("sudo kill -9 $pid");
+// 	}
+//
+// 	// remove old support folders
+// 	command("sudo rm -R /opt/local/var/run/mariadb");
+// 	command("sudo rm -R /opt/local/etc/mariadb");
+//
+// 	// move databases
+// 	command("sudo mv /opt/local/var/db/mariadb /opt/local/var/db/mariadb-10.2");
+// }
 
 
 command("sudo port install mariadb-10.2-server");
