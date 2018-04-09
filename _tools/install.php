@@ -118,7 +118,10 @@ command("sudo port install php72-zip");
 command("sudo port install php72-imagick");
 command("sudo port install php72-memcached");
 
+command("sudo port select --set php php72");
+
 command("sudo port install git");
+command("sudo port install wget");
 
 
 // make sure Memcached starts automatically
