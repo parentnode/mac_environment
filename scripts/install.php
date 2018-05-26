@@ -43,17 +43,17 @@ if(!$is_ok_macports) {
 output("\nChecking paths");
 
 // check if configuration files are available
-checkFile("_conf/httpd.conf", "Required file is missing from your configuration source");
-checkFile("_conf/httpd-vhosts.conf", "Required file is missing from your configuration source");
-checkFile("_conf/php.ini", "Required file is missing from your configuration source");
-checkFile("_conf/my.cnf", "Required file is missing from your configuration source");
-checkFile("_conf/apache.conf", "Required file is missing from your configuration source");
+checkFile("conf/httpd.conf", "Required file is missing from your configuration source");
+checkFile("conf/httpd-vhosts.conf", "Required file is missing from your configuration source");
+checkFile("conf/php.ini", "Required file is missing from your configuration source");
+checkFile("conf/my.cnf", "Required file is missing from your configuration source");
+checkFile("conf/apache.conf", "Required file is missing from your configuration source");
 
 
 
 // TODO: create .bash_profile if it does not exist
 // Has not been tested
-checkFileOrCreate("~/.bash_profile", "_conf/bash_profile.start");
+checkFileOrCreate("~/.bash_profile", "conf/bash_profile.start");
 
 
 
@@ -159,7 +159,7 @@ command("sudo chown -R mysql:mysql /opt/local/share/mariadb-10.2");
 
 
 // copy my.cnf for MySQL (to override macports settings)
-copyFile("_conf/my.cnf", "/opt/local/etc/mariadb-10.2/my.cnf", "sudo");
+copyFile("conf/my.cnf", "/opt/local/etc/mariadb-10.2/my.cnf", "sudo");
 
 
 // see if there is some hint at the database already being installed
@@ -241,7 +241,7 @@ else {
 output("\nCopying configuration");
 
 // copy base configuration
-copyFile("_conf/httpd.conf", "/opt/local/etc/apache2/httpd.conf", "sudo");
+copyFile("conf/httpd.conf", "/opt/local/etc/apache2/httpd.conf", "sudo");
 // set file permissions before trying to update 
 command("sudo chmod 777 /opt/local/etc/apache2/httpd.conf");
 // update username in file to make apache run as current user (required to access vhosts in dropbox)
@@ -250,33 +250,32 @@ replaceInFile("/opt/local/etc/apache2/httpd.conf", "###USERNAME###", $username);
 command("sudo chmod 644 /opt/local/etc/apache2/httpd.conf");
 
 // copy virtual hosts base configuration
-copyFile("_conf/httpd-vhosts.conf", "/opt/local/etc/apache2/extra/httpd-vhosts.conf", "sudo");
+copyFile("conf/httpd-vhosts.conf", "/opt/local/etc/apache2/extra/httpd-vhosts.conf", "sudo");
 
 // copy base ssl configuration
-copyFile("_conf/httpd-ssl.conf", "/opt/local/etc/apache2/extra/httpd-ssl.conf", "sudo");
+copyFile("conf/httpd-ssl.conf", "/opt/local/etc/apache2/extra/httpd-ssl.conf", "sudo");
 
 
 // create accessible base conf
 if(!file_exists("/srv/sites/apache/apache.conf")) {
-	copyFile("_conf/apache.conf", "/srv/sites/apache/apache.conf");
+	copyFile("conf/apache.conf", "/srv/sites/apache/apache.conf");
 	// set permissions
 	command("sudo chown -R $username:staff ~/Sites/apache");
 }
 
 
 // copy apache log rotation conf
-copyFile("_conf/newsyslog-apache.conf", "/etc/newsyslog.d/apache.conf", "sudo");
+copyFile("conf/newsyslog-apache.conf", "/etc/newsyslog.d/apache.conf", "sudo");
 
 // copy php.ini
-copyFile("_conf/php.ini", "/opt/local/etc/php72/php.ini", "sudo");
+copyFile("conf/php.ini", "/opt/local/etc/php72/php.ini", "sudo");
 
 // copy php.ini.default for native configuration
-copyFile("_conf/php_ini_native.ini", "/etc/php.ini", "sudo");
+copyFile("conf/php_ini_native.ini", "/etc/php.ini", "sudo");
 
 
-// copy wkhtmltox static executables
-copyFile("_conf/static_wkhtmltoimage", "/usr/local/bin/static_wkhtmltoimage", "sudo");
-copyFile("_conf/static_wkhtmltopdf", "/usr/local/bin/static_wkhtmltopdf", "sudo");
+// copy wkhtmltopdf static executable
+copyFile("conf/static_wkhtmltopdf", "/usr/local/bin/static_wkhtmltopdf", "sudo");
 
 
 output("\nConfiguration copied");
@@ -284,7 +283,7 @@ output("\nConfiguration copied");
 
 
 // Add alias' to .bash_profile
-checkFileContent("~/.bash_profile", "_conf/bash_profile.default");
+checkFileContent("~/.bash_profile", "conf/bash_profile.default");
 // set correct owner for .bash_profile
 command("sudo chown $username:staff ~/.bash_profile");
 
@@ -293,7 +292,7 @@ command("sudo chown $username:staff ~/.bash_profile");
 
 // Add local domains to /etc/hosts
 command("sudo chmod 777 /etc/hosts");
-checkFileContent("/etc/hosts", "_conf/hosts.default");
+checkFileContent("/etc/hosts", "conf/hosts.default");
 command("sudo chmod 644 /etc/hosts");
 
 
