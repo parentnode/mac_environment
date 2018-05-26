@@ -274,10 +274,6 @@ copyFile("conf/php.ini", "/opt/local/etc/php72/php.ini", "sudo");
 copyFile("conf/php_ini_native.ini", "/etc/php.ini", "sudo");
 
 
-// copy wkhtmltopdf static executable
-copyFile("conf/static_wkhtmltopdf", "/usr/local/bin/static_wkhtmltopdf", "sudo");
-
-
 output("\nConfiguration copied");
 
 
