@@ -215,7 +215,7 @@ function checkFile($path, $message) {
 }
 
 /**
-* Check file exists, or create it from _conf version
+* Check file exists, or create it from conf version
 *
 * TODO: has not been tested
 */
@@ -441,7 +441,7 @@ function getAbsolutePath($path) {
 	}
 	// relative path
 	else {
-		return preg_replace("/_tools\/".basename(__FILE__)."/", "", __FILE__).$path;
+		return preg_replace("/scripts\/".basename(__FILE__)."/", "", __FILE__).$path;
 	}
 	
 }
