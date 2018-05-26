@@ -112,21 +112,22 @@ command("sudo port install pidof");
 
 command("sudo port install mariadb-10.2-server");
 // TODO: on next clean run - test without +mariadeb-server
-command("sudo port install php72 +apache2 +mariadb-server +pear php72-apache2handler");
+command("sudo port -N install php72 +apache2 +mariadb-server +pear php72-apache2handler");
 
-command("sudo port install php72-mysql");
-command("sudo port install php72-openssl");
-command("sudo port install php72-mbstring");
-command("sudo port install php72-curl");
-command("sudo port install php72-zip");
-command("sudo port install php72-imagick");
+command("sudo port -N install php72-mysql");
+command("sudo port -N install php72-openssl");
+command("sudo port -N install php72-mbstring");
+command("sudo port -N install php72-curl");
+command("sudo port -N install php72-zip");
+command("sudo port -N install php72-imagick");
 //command("sudo port install php72-memcached");
-command("sudo port install php72-redis");
+command("sudo port -N install php72-redis");
 
 command("sudo port select --set php php72");
 
-command("sudo port install git");
-command("sudo port install wget");
+command("sudo port -N install redis");
+command("sudo port -N install git");
+command("sudo port -N install wget");
 
 
 // make sure Memcached starts automatically
@@ -185,7 +186,7 @@ else {
 
 
 // install ffmpeg
-command("sudo port install ffmpeg +nonfree");
+command("sudo port -N install ffmpeg +nonfree");
 
 output("\nSoftware installed");
 
