@@ -59,7 +59,7 @@ if [ -e "$PWD/apache/httpd-vhosts.conf" ] ; then
 			echo "Adding $parentnode_project_path/apache/httpd-vhosts.conf to apache.conf"
 
 			# Include project cont in apache.conf
-			echo "Include \"$parentnode_project_path/apache/httpd-vhosts.conf\"" >> "$apache_file_path"
+			echo "\nInclude \"$parentnode_project_path/apache/httpd-vhosts.conf\"" >> "$apache_file_path"
 
 		# project already exists in apache.conf
 		else

@@ -111,7 +111,7 @@ command("sudo port install pidof");
 
 
 command("sudo port install mariadb-10.2-server");
-// TODO: on next clean run - test without +apache2 +mariadeb-server
+// TODO: on next clean run - test without +mariadeb-server
 command("sudo port install php72 +apache2 +mariadb-server +pear php72-apache2handler");
 
 command("sudo port install php72-mysql");
@@ -120,7 +120,8 @@ command("sudo port install php72-mbstring");
 command("sudo port install php72-curl");
 command("sudo port install php72-zip");
 command("sudo port install php72-imagick");
-command("sudo port install php72-memcached");
+//command("sudo port install php72-memcached");
+command("sudo port install php72-redis");
 
 command("sudo port select --set php php72");
 
@@ -129,7 +130,10 @@ command("sudo port install wget");
 
 
 // make sure Memcached starts automatically
-command("sudo launchctl load -w /Library/LaunchDaemons/org.macports.memcached.plist");
+// command("sudo launchctl load -w /Library/LaunchDaemons/org.macports.memcached.plist");
+
+// make sure Redis starts automatically
+command("sudo port load redis");
 
 // autostart apache on boot
 command("sudo port load apache2");
