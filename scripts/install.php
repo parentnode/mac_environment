@@ -110,7 +110,7 @@ command("sudo port install pidof");
 // }
 
 
-command("sudo port install mariadb-10.2-server");
+command("sudo port -N install mariadb-10.2-server");
 // TODO: on next clean run - test without +mariadeb-server
 command("sudo port -N install php72 +apache2 +mariadb-server +pear php72-apache2handler");
 
