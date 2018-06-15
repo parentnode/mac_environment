@@ -123,7 +123,7 @@ if [ -e "$PWD/apache/httpd-vhosts.conf" ] ; then
 
 		# Restart apache after modification
 		echo ""
-		echo "Restating Apache"
+		echo "Restarting Apache"
 		if [ -e "/opt/local/sbin/apachectl" ]; then
 			sudo /opt/local/sbin/apachectl restart
 		elif [ -e "/opt/local/apache2/apachectl" ]; then
