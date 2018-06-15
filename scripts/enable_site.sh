@@ -72,7 +72,7 @@ if [ -e "$PWD/apache/httpd-vhosts.conf" ] ; then
 		# Updating hosts
 
 		# Check hosts configuration
-		hosts_entry_exists=$(grep -E "$server_name" "$host_file_path" || echo "")
+		hosts_entry_exists=$(grep -E "[\t ]$server_name" "$host_file_path" || echo "")
 
 		if [ -z "$hosts_entry_exists" ]; then
 
