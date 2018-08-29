@@ -100,7 +100,7 @@ if [ -e "$PWD/apache/httpd-vhosts.conf" ] ; then
 		for line in $server_name; do 
 
 			# Check hosts configuration
-			hosts_entry_exists=$(grep -E "$line" "$host_file_path" || echo "")
+			hosts_entry_exists=$(grep -E "[\t ]$line" "$host_file_path" || echo "")
 
 			if [ -z "$hosts_entry_exists" ]; then
 
