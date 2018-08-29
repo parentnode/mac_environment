@@ -120,6 +120,8 @@ command("sudo port -N install php72-mbstring");
 command("sudo port -N install php72-curl");
 command("sudo port -N install php72-zip");
 command("sudo port -N install php72-imagick");
+command("sudo port -N install php72-igbinary");
+
 //command("sudo port install php72-memcached");
 command("sudo port -N install php72-redis");
 
