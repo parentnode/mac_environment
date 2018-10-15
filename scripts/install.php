@@ -225,20 +225,6 @@ command("sudo chown $username:staff ~/.gitconfig");
 output("\nSettings Updated");
 
 
-// dont clone demo project if it already exists
-if(!file_exists("/srv/sites/parentnode/demo_parentnode_dk")) {
-	// clone demo site
-	output("\nClone demo site");
-	command("git clone --recurse-submodules https://github.com/parentnode/demo_parentnode_dk.git /srv/sites/parentnode/demo_parentnode_dk");
-
-	// set permissions
-	command("sudo chown -R $username:staff /srv/sites/parentnode");
-}
-else {
-	output("Demo project already exists - skipping");
-}
-
-
 // copy configuration
 output("\nCopying configuration");
 
