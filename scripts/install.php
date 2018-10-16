@@ -290,8 +290,29 @@ $db_response = command("/opt/local/lib/mariadb-10.2/bin/mysql -u root mysql -e '
 // If not ACCESS DENIED, ask to set root password
 if(!preg_match("/^ERROR (1044|1045)/", $db_response)) {
 
-	$answer = ask("Enter new root password for MariaDB (8-30 chars)", array("(.){8,30}"), true);
-	command("sudo /opt/local/lib/mariadb-10.2/bin/mysqladmin -u root password '".$answer."'", true);
+	while(true)
+	{
+		output("");
+		$answer = ask("Enter new root password for MariaDB (8-30 chars)", array("(.){8,30}"), true);
+		$answer2 = ask("Verify new root password for MariaDB (8-30 chars)", array("(.){8,30}"), true);
+		output("");
+		if($answer != $answer2)
+		{
+			output("");
+			output("Password need to match");
+			output("");
+		}
+		else
+		{
+			output("");
+			output("Password match");
+			output("");
+			//command("sudo /opt/local/lib/mariadb-10.2/bin/mysqladmin -u root password '".$answer."'", true);
+			output("Password set");
+			break;
+		}
+	}
+	
 }
 
 
