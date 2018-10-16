@@ -13,7 +13,7 @@ print get_current_user();
 
 // check software requirements
 output("Checking Xcode version");
-$is_ok_xcode = isInstalled("xcodebuild -version", array("Xcode 4", "Xcode 5", "Xcode 6", "Xcode 7", "Xcode 8", "Xcode 9"));
+$is_ok_xcode = isInstalled("xcodebuild -version", array("Xcode 4", "Xcode 5", "Xcode 6", "Xcode 7", "Xcode 8", "Xcode 9", "Xcode 10"));
 output($is_ok_xcode ? "Xcode is OK" : "Xcode check failed - update or install Xcode from AppStore");
 if(!$is_ok_xcode) {
 	goodbye("Run the setup command again when the command line tools are installed");
@@ -21,7 +21,7 @@ if(!$is_ok_xcode) {
 
 
 output("Checking Xcode command line tools version");
-$is_ok_xcode_cl = isInstalled("pkgutil --pkg-info=com.apple.pkg.CLTools_Executables", array("version: 6", "version: 7", "version: 8", "version: 9"));
+$is_ok_xcode_cl = isInstalled("pkgutil --pkg-info=com.apple.pkg.CLTools_Executables", array("version: 6", "version: 7", "version: 8", "version: 9". "Version: 10"));
 output($is_ok_xcode_cl ? "Xcode command line tools are OK" : "Xcode command line tools check failed - installing now");
 if(!$is_ok_xcode_cl) {
 	command("xcode-select --install");
