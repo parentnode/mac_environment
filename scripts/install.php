@@ -21,7 +21,7 @@ if(!$is_ok_xcode) {
 
 
 output("Checking Xcode command line tools version");
-$is_ok_xcode_cl = isInstalled("pkgutil --pkg-info=com.apple.pkg.CLTools_Executables", array("version: 6", "version: 7", "version: 8", "version: 9", "Version: 10"));
+$is_ok_xcode_cl = isInstalled("pkgutil --pkg-info=com.apple.pkg.CLTools_Executables", array("version: 6", "version: 7", "version: 8", "version: 9", "version: 10"));
 output($is_ok_xcode_cl ? "Xcode command line tools are OK" : "Xcode command line tools check failed - installing now");
 if(!$is_ok_xcode_cl) {
 	command("xcode-select --install");
