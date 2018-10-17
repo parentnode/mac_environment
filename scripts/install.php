@@ -78,7 +78,7 @@ output("\nInstalling software");
 command("sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer/");
 
 // update macports
-//command("sudo port selfupdate");
+command("sudo port selfupdate");
 
 // enable getting PID of application really easy
 command("sudo port install pidof");
