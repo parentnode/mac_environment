@@ -308,7 +308,7 @@ if(!preg_match("/^ERROR (1044|1045)/", $db_response)) {
 			output("");
 			output("Password match");
 			output("");
-			//command("sudo /opt/local/lib/mariadb-10.2/bin/mysqladmin -u root password '".$answer."'", true);
+			command("sudo /opt/local/lib/mariadb-10.2/bin/mysqladmin -u root password '".$answer."'", true);
 			output("Password set");
 			break;
 		}
