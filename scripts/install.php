@@ -281,7 +281,7 @@ command("sudo chmod 644 /etc/hosts");
 
 
 // start database
-command("sudo /opt/local/share/mariadb-10.2/support-files/mysql.server start | echo \"Starting MariaDB1\"");
+//command("sudo /opt/local/share/mariadb-10.2/support-files/mysql.server start | echo \"Starting MariaDB\"");
 
 // Set root password
 // see if there is some hint at the database already being installed
