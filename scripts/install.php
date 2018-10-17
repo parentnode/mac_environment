@@ -78,7 +78,7 @@ output("\nInstalling software");
 command("sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer/");
 
 // update macports
-command("sudo port selfupdate");
+//command("sudo port selfupdate");
 
 // enable getting PID of application really easy
 command("sudo port install pidof");
@@ -281,7 +281,7 @@ command("sudo chmod 644 /etc/hosts");
 
 
 // start database
-command("sudo /opt/local/share/mariadb-10.2/support-files/mysql.server start",true);
+command("sudo /opt/local/share/mariadb-10.2/support-files/mysql.server start | print \" Starting MariaDB\" ");
 
 // Set root password
 // see if there is some hint at the database already being installed
