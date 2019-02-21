@@ -39,8 +39,7 @@ testContent "$test_macports" "Macports"
 guiText "Test of read" "Comment"
 read -p "Do something: " something
 echo $something
-cd /Users/$install_user/Desktop
-mkdir test
+mkdir -p /Users/$install_user/Desktop/test
 
 
 
