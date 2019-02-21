@@ -131,7 +131,7 @@ function isInstalled(){
 	then
 		echo "$3 installed"
 	else 
-		if [ -n "$3" ];
+		if [ "$check" < "$3" ];
 		then 
 			echo "Your $3 are a lower version than recommended please install with AppStore"
 		fi
