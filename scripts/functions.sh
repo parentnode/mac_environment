@@ -116,7 +116,7 @@ export -f guiText
 function getCurrentUser() {
 	
 	if [ "$SUDO_USER" = "root" ];then
-		echo $(logname) 
+		"$SUDO_USER" = "$(logname)" 
 	else
 		echo $SUDO_USER
 	fi
