@@ -127,13 +127,14 @@ function isInstalled(){
 	if [ "$2" = "Xcode" ];then
 		check=$($1 | grep "$2" | cut -d \. -f1)
 	fi
-	
+
 	if [ "$check" = "$3" ];
 	then
 		echo "$3 installed"
-		
+	else
+		echo "$3 not installed try installing xcode through AppStore"
+		echo "Then try again"
 	fi
-
 
 }
 export -f isInstalled
