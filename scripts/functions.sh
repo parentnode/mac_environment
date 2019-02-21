@@ -114,8 +114,8 @@ export -f guiText
 # Force user to input sudo password
 function enableSuperCow() {
 
-	$cmd_output=$("sudo ls 2>&1")
-	echo "I am (g)root"
+	cmd_output=$(sudo ls 2>&1)
+	echo "I am (g)root $cmd_output"
 }
 export -f enableSuperCow
 
