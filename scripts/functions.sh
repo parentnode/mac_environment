@@ -127,7 +127,7 @@ function isInstalled(){
 	if [ "$2" = "Xcode" ] || [ "$2" = "version: " ];then
 		check=$($1 | grep "$2" | cut -d \. -f1)
 	fi
-	if [ "$check" = "$2" + "$3" ];
+	if [ "$check" = $("$2" + "$3") ];
 	then
 		echo "$2+$3 installed"
 	else 
