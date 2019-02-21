@@ -29,6 +29,8 @@ do
 done
 guiText "Checking for Macports" "Comment"
 isInstalled "port version" "Version:" "Version: 2"
+
+guiText "Test of read" "Comment"
 read -p "Do something: " something
 echo $something
 
