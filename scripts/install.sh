@@ -12,6 +12,7 @@ echo ""
 source /srv/tools/scripts/functions.sh
 
 install_user=$(getCurrentUser)
+enableSuperCow
 
 guiText "Installing system for $install_user" "Comment"
 
