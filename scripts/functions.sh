@@ -124,7 +124,7 @@ function getCurrentUser() {
 export -f getCurrentUser
 
 function isInstalled(){
-	if [ "$2" = "Xcode" ];then
+	if [ "$2" = "Xcode" ] || [ "$2" = "version:" ];then
 		check=$($1 | grep "$2" | cut -d \. -f1)
 	fi
 	if test "$check" = "$3" ;
