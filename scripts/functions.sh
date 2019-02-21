@@ -131,3 +131,13 @@ function isInstalled(){
 	fi
 }
 export -f isInstalled
+
+function testContent(){
+	if [ -z "$1" ];
+	then
+    	echo "Not Installed"
+	else
+    	echo "$1"
+	fi
+} 
+export -f testContent
