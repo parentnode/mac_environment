@@ -18,13 +18,9 @@ xcode_array=("Xcode 4" "Xcode 5" "Xcode 6" "Xcode 7" "Xcode 8" "Xcode 9" "Xcode 
 guiText "Checking for xcode" "Comment"
 for item in "${xcode_array[@]}"
 do
-    xcode=$(isInstalled "xcodebuild -version" "Xcode" "$item")
-    export xcode
+    isInstalled "xcodebuild -version" "Xcode" "$item"
 done
-if [ "$xcode" = "Installed" ];
-then 
-    echo "Install with AppStore"
-fi
+
 guiText "Checking Xcode command line tools version" "Comment"
 xcode_array_cl=("version: 6" "version: 7" "version: 8" "version: 9" "version: 10")
 for item in "${xcode_array_cl[@]}"
