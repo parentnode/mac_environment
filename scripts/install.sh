@@ -20,7 +20,7 @@ for item in "${xcode_array[@]}"
 do
     xcode=$(isInstalled "xcodebuild -version" "Xcode" "$item")
 done
-if [ "$xcode" = "Not Installed" ];
+if [ "$xcode" = "Installed" ];
 then 
     echo "Install with AppStore"
 fi
