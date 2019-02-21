@@ -8,7 +8,7 @@ echo "You will see 'Install complete' message once it's done"
 echo ""
 echo ""
 
-
+#
 source /srv/tools/scripts/functions.sh
 
 install_user=$(getCurrentUser)
