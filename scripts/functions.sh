@@ -132,6 +132,10 @@ function isInstalled(){
 		echo "$3 installed"
 	else 
 		echo "#"
+		if [ -z "$3" ];
+		then 
+			echo "$2 are not installed use AppStore to install $2"
+		fi
 	fi
 	
 }
