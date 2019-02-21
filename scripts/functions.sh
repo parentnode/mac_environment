@@ -129,7 +129,7 @@ function isInstalled(){
 	fi
 	if test "$check" != "$3" ;
 	then
-		echo "$3 installed" || "$3 not installed" 
+		echo "$3 installed" || echo "$3 not installed" 
 	fi
 	
 }
