@@ -135,9 +135,9 @@ export -f isInstalled
 function testContent(){
 	if [ -z "$1" ];
 	then
-    	guiText "Not Installed install $2 with AppStore"
+    	guiText "Not Installed install $2 with AppStore" "Comment"
 	else
-    	echo "$1"
+    	guiText "$1" "Comment"
 	fi
 } 
 export -f testContent
