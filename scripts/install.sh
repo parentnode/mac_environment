@@ -10,8 +10,7 @@ echo ""
 
 #
 source /srv/tools/scripts/functions.sh
-super_cow=$(sudo ls >/dev/null)
-export super_cow
+sudo ls 2>&1
 install_user=$(getCurrentUser)
 
 guiText "Installing system for $install_user" "Comment"
@@ -40,8 +39,7 @@ testContent "$test_macports" "Macports"
 guiText "Test of read" "Comment"
 read -p "Do something: " something
 echo $something
-$super_cow
-mkdir -p /Users/davidjessen/Desktop/test
+mkdir -p /Users/$install_user/Desktop/test
 
 
 
