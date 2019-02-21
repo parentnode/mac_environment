@@ -38,7 +38,7 @@ if [ -z "$test_xcode_cl" ];
 then 
     echo "Not Installed"
 else
-    echo "$test_code_cl"
+    echo "$test_xcode_cl"
 fi
 guiText "Checking for Macports" "Comment"
 isInstalled "port version" "Version:" "Version: 2"
