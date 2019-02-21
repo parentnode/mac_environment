@@ -129,7 +129,7 @@ function isInstalled(){
 	fi
 	if test "$check" = "$2+$3" ;
 	then
-		echo "$3 installed"
+		echo "$2+$3 installed"
 	else 
 		if [ -z "$3" ] || [ "$3" < "$check" ];
 		then 
