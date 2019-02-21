@@ -109,3 +109,25 @@ guiText(){
 	esac
 }
 export -f guiText
+
+
+# Force user to input sudo password
+function enableSuperCow() {
+
+	$cmd_output = sudo ls 2>&1
+
+}
+export -f enableSuperCow
+
+# Get the username of current user by looking at the folder name of the current user directory
+# because the current script will typically run as root (sudo)
+
+function getCurrentUser() {
+	
+	if [ "$SUDO_USER" = "root" ];then
+		echo $(logname) 
+	else
+		echo $SUDO_USER
+	fi
+}
+export -f getCurrentUser

@@ -8,13 +8,14 @@ echo "You will see 'Install complete' message once it's done"
 echo ""
 echo ""
 
-install_user=$SUDO_USER
 
 source /srv/tools/scripts/functions.sh
 
+install_user=getCurrentUser
+
 guiText "Installing system for $install_user" "Comment"
 
-read -p "Do something" something
+read -p "Do something: " something
 echo $something
 
 
