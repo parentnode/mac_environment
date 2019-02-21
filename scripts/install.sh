@@ -26,7 +26,8 @@ for item in "${xcode_array_cl[@]}"
 do
     isInstalled "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "version:" "$item"
 done
-
+guiText "Checking for Macports" "Comment"
+isInstalled "port version" "Version:" "Version: 2"
 read -p "Do something: " something
 echo $something
 
