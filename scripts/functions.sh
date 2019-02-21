@@ -124,7 +124,7 @@ function getCurrentUser() {
 export -f getCurrentUser
 
 function isInstalled(){
-	echo "are $1 installed?"
+	echo "are $3 installed?"
 	check=$($1 | grep ^"$2" | cut -d" " -f2)
 	if [ "$check" = "$3" ];
 	then
