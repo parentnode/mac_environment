@@ -118,7 +118,7 @@ function getCurrentUser() {
 	if [ "$SUDO_USER" = "root" ];then
 		echo "$(logname)" 
 	else
-		echo $SUDO_USER
+		echo $USER
 	fi
 }
 export -f getCurrentUser
