@@ -131,7 +131,7 @@ function isInstalled(){
 	then
 		echo "$3 installed"
 	else 
-		echo ""
+		echo "#"
 	fi
 	
 }
