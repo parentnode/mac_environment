@@ -110,15 +110,6 @@ guiText(){
 }
 export -f guiText
 
-
-# Force user to input sudo password
-function enableSuperCow() {
-
-	cmd_output=$(sudo ls 2>&1)
-	echo "I am (g)root $cmd_output"
-}
-export -f enableSuperCow
-
 # Get the username of current user by looking at the folder name of the current user directory
 # because the current script will typically run as root (sudo)
 
@@ -131,3 +122,14 @@ function getCurrentUser() {
 	fi
 }
 export -f getCurrentUser
+
+function isInstalled(){
+	check=$($1 | grep ^"$2" | cut -d ' ' -f2)
+	if [ "$check" = "$3" ];
+	then
+		echo "Good show guvnor\'"
+	fi
+
+
+}
+export -f isInstalled
