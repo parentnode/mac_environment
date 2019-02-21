@@ -24,6 +24,8 @@ done
 if [ -z "$test_xcode" ];
 then 
     echo "Not Installed"
+else 
+    echo "$test_xcode"
 fi
 xcode_array_cl=("version: 6" "version: 7" "version: 8" "version: 9" "version: 10")
 guiText "Checking Xcode command line tools version" "Comment"
@@ -35,6 +37,8 @@ done
 if [ -z "$test_xcode_cl" ];
 then 
     echo "Not Installed"
+else
+    echo "$test_code_cl"
 fi
 guiText "Checking for Macports" "Comment"
 isInstalled "port version" "Version:" "Version: 2"
