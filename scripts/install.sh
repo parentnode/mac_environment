@@ -19,6 +19,7 @@ guiText "Checking for xcode" "Comment"
 for item in "${xcode_array[@]}"
 do
     xcode=$(isInstalled "xcodebuild -version" "Xcode" "$item")
+    export xcode
 done
 if [ "$xcode" = "Installed" ];
 then 
