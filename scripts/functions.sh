@@ -131,6 +131,6 @@ function isInstalled(){
 	else
 		status="$3 Not installed"
 	fi
-	echo "$3 are $status"
+	echo "$status"
 }
 export -f isInstalled
