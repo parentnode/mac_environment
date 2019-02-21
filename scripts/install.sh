@@ -10,7 +10,7 @@ echo ""
 
 #
 source /srv/tools/scripts/functions.sh
-super_cow=$("sudo ls >/dev/null")
+super_cow=$(sudo ls >/dev/null)
 export super_cow
 install_user=$(getCurrentUser)
 
