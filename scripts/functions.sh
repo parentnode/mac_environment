@@ -130,9 +130,6 @@ function isInstalled(){
 	if test "$check" = "$3" ;
 	then
 		echo "$3 installed"
-	else 
-		echo "$3 not installed try installing xcode through AppStore"
-		echo "Then try again"
 	fi
 	
 }

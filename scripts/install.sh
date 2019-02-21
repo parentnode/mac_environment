@@ -24,7 +24,7 @@ guiText "Checking Xcode command line tools version" "Comment"
 xcode_array_cl=("version: 6" "version: 7" "version: 8" "version: 9" "version: 10")
 for item in "${xcode_array_cl[@]}"
 do
-    isInstalled "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "version" "$item"
+    isInstalled "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "version:" "$item"
 done
 
 read -p "Do something: " something
