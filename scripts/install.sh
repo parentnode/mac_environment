@@ -16,7 +16,7 @@ install_user=$(getCurrentUser)
 guiText "Installing system for $install_user" "Comment"
 array=("Xcode 4" "Xcode 5" "Xcode 6" "Xcode 7" "Xcode 8" "Xcode 9" "Xcode 10")
 guiText "Checking for xcode" "Comment"
-for item in "${array[*]}"
+for "item" in "${array[*]}"
 do
     isInstalled "xcodebuild -version" "Xcode" "$item"
 done
