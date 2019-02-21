@@ -11,7 +11,7 @@ echo ""
 
 source /srv/tools/scripts/functions.sh
 
-install_user=getCurrentUser
+install_user=$(getCurrentUser)
 
 guiText "Installing system for $install_user" "Comment"
 
