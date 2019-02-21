@@ -132,9 +132,7 @@ function isInstalled(){
 		echo "$3 installed"
 	else 
 		echo "#"
-		test_check_num=$(echo "$check" | cut -d " " -f2 )
-		test_array_num=$(echo "$3" | cut -d " " -f2)
-		if [ "$test_array_num" < "$test_check_num" ] || [ "$test_check_num" < "$test_array_num" ];
+		if [ -z "$3" ];
 		then 
 			echo "the $2: $3 are not installed use AppStore to install $2"
 		fi
