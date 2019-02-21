@@ -132,7 +132,7 @@ function isInstalled(){
 	then
 		echo "$installed_test installed"
 	else 
-		if [ -z "$3" ] || [ "$3" < "$check" ];
+		if [ -z "$installed_test" ] || [ "$installed_test" < "$check" ];
 		then 
 			echo "the $2: $3 are not installed use AppStore to install $2"
 		fi
