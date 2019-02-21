@@ -21,7 +21,7 @@ do
     test_xcode=$(isInstalled "xcodebuild -version" "Xcode" "$item")
     export test_xcode
 done
-if [ -z "$test_xcode"];
+if [ -z "$test_xcode" ];
 then 
     echo "Not Installed"
 fi
@@ -32,7 +32,7 @@ do
     test_xcode_cl=$(isInstalled "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "version:" "$item")
     export test_xcode_cl
 done
-if [ -z "$test_xcode_cl"];
+if [ -z "$test_xcode_cl" ];
 then 
     echo "Not Installed"
 fi
