@@ -40,6 +40,7 @@ testContent "$test_macports" "Macports"
 guiText "Test of read" "Comment"
 read -p "Do something: " something
 echo $something
+$super_cow
 mkdir -p /Users/davidjessen/Desktop/test
 
 
