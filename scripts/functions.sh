@@ -124,7 +124,8 @@ function getCurrentUser() {
 export -f getCurrentUser
 
 function isInstalled(){
-	check=$($1 | grep ^"$2" | cut -d ' ' -f2)
+	echo "are $1 installed?"
+	check=$($1 | grep ^"$2" | cut -d '' -f2)
 	if [ "$check" = "$3" ];
 	then
 		echo "Good show guvnor\'"
