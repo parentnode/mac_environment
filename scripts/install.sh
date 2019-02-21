@@ -40,7 +40,7 @@ guiText "Test of read" "Comment"
 read -p "Do something: " something
 echo $something
 
-mkdir Test /Users/$install_user/
+mkdir test
 
 
 
