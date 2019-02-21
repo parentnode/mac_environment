@@ -127,10 +127,7 @@ function isInstalled(){
 	check=$($1 | grep "$2" | cut -d \. -f1)
 	if [ "$check" = "$3" ] && [ -n "$check" ] ;
 	then
-		status="$3 Installed"
-	else
-		status="$3 Not installed"
+		echo "$3 Installed"
 	fi
-	echo "$status"
 }
 export -f isInstalled
