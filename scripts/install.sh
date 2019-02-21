@@ -41,7 +41,10 @@ else
     echo "$test_xcode_cl"
 fi
 guiText "Checking for Macports" "Comment"
-isInstalled "port version" "Version:" "Version: 2"
+test_macports=$(isInstalled "port version" "Version:" "Version: 1")
+export test_macports
+
+testContent "$test_macports"
 guiText "Test of read" "Comment"
 read -p "Do something: " something
 echo $something
