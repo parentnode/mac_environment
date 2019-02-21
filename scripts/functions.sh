@@ -124,15 +124,17 @@ function getCurrentUser() {
 export -f getCurrentUser
 
 function isInstalled(){
-	if [ "$2" = "Xcode" ] || [ "$2" = "version: " ];then
+	if [ "$2" = "Xcode" ] || [ "$2" = "version:" ];then
 		check=$($1 | grep "$2" | cut -d \. -f1)
 	fi
-	installed_test=$(echo "$2$3")
-	if [ "$check" = "$installed_test" ];
+	if test "$check" = "$3" ;
 	then
-		echo "$installed_test installed"
+		echo "$3 installed"
 	else 
-		if [ -z "$installed_test" ] || [ "$installed_test" < "$check" ];
+		echo "#"
+		test_check_num=$(echo "$check" | cut -d " " -f2 )
+		test_array_num=$(echo "$3" | cut -d " " -f2)
+		if [ "$test_array_num" < "$test_check_num" ] || [ "$test_check_num" < "$test_array_num" ];
 		then 
 			echo "the $2: $3 are not installed use AppStore to install $2"
 		fi
