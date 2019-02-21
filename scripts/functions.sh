@@ -127,8 +127,10 @@ function isInstalled(){
 	check=$($1 | grep "$2" | cut -d \. -f1)
 	if test "$check" = "$3" ;
 	then
-		echo "$3 installed"
+		status="$3 Installed"
+	else
+		status="$3 Not installed"
 	fi
-	
+	echo "$3 are $status"
 }
 export -f isInstalled
