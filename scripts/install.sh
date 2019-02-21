@@ -42,7 +42,7 @@ echo $something
 
 
 
-
+sudo mkdir /Users/$install_user/Test
 
 
 
