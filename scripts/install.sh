@@ -12,7 +12,7 @@ install_user=$SUDO_USER
 
 source /srv/tools/scripts/functions.sh
 
-guiText "Installing system for $install_user"
+guiText "Installing system for $install_user" "Comment"
 
 read -p "Do something" something
 echo $something
