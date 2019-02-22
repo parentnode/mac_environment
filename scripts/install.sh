@@ -40,7 +40,7 @@ export test_macports
 testContent "$test_macports" "Macports"
 
 
-guiText "newest version" "Link" "https://github.com/parentnode/mac_environment/issues"
+#guiText "newest version" "Link" "https://github.com/parentnode/mac_environment/issues"
 guiText "Test of read" "Comment"
 read -p "So you want to father a folder give it a name: " something
 mkdir -p "/Users/$install_user/Desktop/$something"
@@ -51,7 +51,7 @@ mkdir -p "/Users/$install_user/Desktop/$something"
 
 
 
-
+guiText "ubuntu" "Link" "ubuntu-client"
 
 echo "Install complete"
 echo "--------------------------------------------------------------"
