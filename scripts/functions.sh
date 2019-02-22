@@ -119,8 +119,14 @@ guiText(){
 			echo
 			;;
 		"Exit")
-			echo "Come back soon we will miss you look below for error specified"
-			exit $1
+			echo "Come back soon we will miss you"
+			if [ !$1 = 0 ];
+			then
+				echo "look below for error specified"
+				exit $1
+			else 
+				exit $1
+			fi
 			;;
 		*)
 			echo 
