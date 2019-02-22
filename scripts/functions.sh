@@ -63,10 +63,15 @@ guiText(){
 			;;
 		"Exist")
 			echo
-			echo "$1 allready exists"
-			if [ -n "$3" ];
+			if [ -n "$3" ]; then
+				echo "$3"
+			else
+				echo "$1 exists"
+			fi
+			echo ""
+			if [ -n "$4" ];
 			then
-				echo "checking for $3"
+				echo "checking for $4"
 			fi
 			echo
 			echo
@@ -112,6 +117,10 @@ guiText(){
 			echo "Skipping Installation process for $1"
 			echo
 			echo
+			;;
+		"Exit")
+			echo "Come back soon we will miss you look below for error specified"
+			exit $1
 			;;
 		*)
 			echo 
@@ -159,3 +168,29 @@ function testContent(){
 	fi
 } 
 export -f testContent
+
+# TODO:
+function checkFile(){
+	if [ -e "$1" ];
+	then
+		guiText "$1" "Exist"
+	else 
+		guiText "$1" "Exist" "$2"
+		guiText "0" "Exit"
+	fi
+	#filename $1
+	#message $2
+}
+export -f checkFile
+
+# TODO:
+#function checkFileOrCreate(){
+	
+#}
+#export -f checkFileOrCreate
+
+# TODO:
+#function checkPath(){
+#
+#}
+#export -f checkPath
