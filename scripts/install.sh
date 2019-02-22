@@ -39,8 +39,8 @@ test_macports=$(isInstalled "port version" "Version:" "Version: 2")
 export test_macports
 testContent "$test_macports" "Macports"
 
-echo "If you know you have the newest version and it say's you don't please contact us at "
-guiText "https://github.com/parentnode/mac_environment/issues" "Link"
+
+guiText "newest version" "Link" "https://github.com/parentnode/mac_environment/issues"
 guiText "Test of read" "Comment"
 read -p "So you want to father a folder give it a name: " something
 mkdir -p "/Users/$install_user/Desktop/$something"
