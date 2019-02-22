@@ -37,9 +37,8 @@ export test_macports
 testContent "$test_macports" "Macports"
 
 guiText "Test of read" "Comment"
-read -p "Do something: " something
-echo $something
-mkdir -p "/Users/$install_user/Desktop/test"
+read -p "So you want to father a folder give it a name: " something
+mkdir -p "/Users/$install_user/Desktop/$something"
 
 
 
