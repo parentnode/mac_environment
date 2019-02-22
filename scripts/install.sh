@@ -51,7 +51,7 @@ mkdir -p "/Users/$install_user/Desktop/$something"
 
 
 
-guiText "ubuntu" "Link" "ubuntu-server"
+guiText "mac" "Link"
 
 echo "Install complete"
 echo "--------------------------------------------------------------"
