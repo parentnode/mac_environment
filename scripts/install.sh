@@ -10,7 +10,7 @@ echo ""
 
 #
 source /srv/tools/scripts/functions.sh
-sudo ls >/dev/null
+#sudo ls >/dev/null
 install_user=$(getCurrentUser)
 
 guiText "Installing system for $install_user" "Comment"
