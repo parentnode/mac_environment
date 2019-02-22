@@ -7,12 +7,25 @@ guiText(){
 		"Link")
 			echo
 			echo
-			echo "More info regarding $1"
-			echo "can be found on $3"
-			if [ -n "$4" ];
+			echo "More info regarding $1-webstack installer"
+			echo "can be found on https://github.com/parentnode/$1-environment"
+			if [ "$1" = "mac" ];
 			then
-				echo "and $4"
+				echo "and https://parentnode.dk/blog/installing-the-web-stack-on-mac-os"
 			fi
+			if [ "$1" = "windows" ];
+			then
+				echo "and https://parentnode.dk/blog/installing-web-stack-on-windows-10"
+			fi
+			if [ "$3" = "ubuntu-client" ];
+			then
+				echo "and https://parentnode.dk/blog/installing-the-web-stack-on-ubuntu"
+			fi
+			if [ "$3" = "ubuntu-server" ];
+			then
+				echo "and https://parentnode.dk/blog/setup-ubuntu-linux-production-server-and-install-the-parentn"
+			fi
+			
 			echo
 			echo
 			;;
