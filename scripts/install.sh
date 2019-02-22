@@ -14,6 +14,8 @@ source /srv/tools/scripts/functions.sh
 install_user=$(getCurrentUser)
 
 guiText "Installing system for $install_user" "Comment"
+
+# Array containing major releases of Xcode
 xcode_array=("Xcode 4" "Xcode 5" "Xcode 6" "Xcode 7" "Xcode 8" "Xcode 9" "Xcode 10")
 guiText "Checking for xcode" "Comment"
 for item in "${xcode_array[@]}"
@@ -23,6 +25,7 @@ do
 done
 testContent "$test_xcode" "Xcode"
 guiText "Checking Xcode command line tools version" "Comment"
+# Array containing major releases of Xcode
 xcode_array_cl=("version: 6" "version: 7" "version: 8" "version: 9" "version: 10")
 for item in "${xcode_array_cl[@]}"
 do
@@ -36,6 +39,8 @@ test_macports=$(isInstalled "port version" "Version:" "Version: 2")
 export test_macports
 testContent "$test_macports" "Macports"
 
+echo "If you know you have the newest version and it say's you don't please contact us at "
+guiText "https://github.com/parentnode/mac_environment/issues" "Link"
 guiText "Test of read" "Comment"
 read -p "So you want to father a folder give it a name: " something
 mkdir -p "/Users/$install_user/Desktop/$something"
