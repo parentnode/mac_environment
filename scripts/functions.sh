@@ -125,10 +125,9 @@ export -f getCurrentUser
 
 function isInstalled(){
 	check=$($1 | grep "^$2")
-	echo "$check"
 	if [[ "$check" == "$3"* ]] && [ -n "$check" ] ;
 	then
-		echo "$3 installed"
+		echo "$check installed"
 	fi
 }
 export -f isInstalled
