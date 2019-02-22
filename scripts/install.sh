@@ -23,7 +23,7 @@ do
 done
 testContent "$test_xcode" "Xcode"
 guiText "Checking Xcode command line tools version" "Comment"
-xcode_array_cl=("version: 6" "version: 7" "version: 8" "version: 9" "version: 11")
+xcode_array_cl=("version: 6" "version: 7" "version: 8" "version: 9" "version: 10")
 for item in "${xcode_array_cl[@]}"
 do
     test_xcode_cl=$(isInstalled "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "version:" "$item")
@@ -32,7 +32,7 @@ done
 testContent "$test_xcode_cl" "Xcode command line tools"
 
 guiText "Checking for Macports" "Comment"
-test_macports=$(isInstalled "port version" "Version:" "Version: 2.2")
+test_macports=$(isInstalled "port version" "Version:" "Version: 2")
 export test_macports
 testContent "$test_macports" "Macports"
 
