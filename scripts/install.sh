@@ -32,7 +32,7 @@ done
 testContent "$test_xcode_cl" "Xcode command line tools"
 
 guiText "Checking for Macports" "Comment"
-test_macports=$(isInstalled "port version" "Version:" "Version: 22")
+test_macports=$(isInstalled "port version" "Version:" "Version: 2.2")
 export test_macports
 testContent "$test_macports" "Macports"
 
