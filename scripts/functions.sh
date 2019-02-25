@@ -162,6 +162,7 @@ function isInstalled(){
 	then
 		echo "$check installed"
 	fi
+
 }
 export -f isInstalled
 
@@ -190,13 +191,27 @@ function checkFile(){
 export -f checkFile
 
 # TODO:
-#function checkFileOrCreate(){
-	
-#}
-#export -f checkFileOrCreate
+function checkFileOrCreate(){
+	destination=$1
+	source=$2
+
+	if [ ! -e "$destination" ]; then
+		guiText "$destination" "Exist" "Copying $1"
+		cp $source $destination
+	else
+		guiText "$destination" "Exist"
+	fi	
+}
+export -f checkFileOrCreate
 
 # TODO:
-#function checkPath(){
-#
-#}
-#export -f checkPath
+function checkPath(){
+	path=$1
+	if [ -f "$path" ]; then
+		guiText "$path" "Exists"
+	else
+		guiText "$path" "Exists" "Creating $path"
+		mkdir -p "$path"
+	fi
+}
+export -f checkPath
