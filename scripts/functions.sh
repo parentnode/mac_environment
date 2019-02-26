@@ -163,7 +163,7 @@ function isInstalled(){
 	for item in $2
 	do
 		# if anywhere in the output matches with one of the items in the array
-		if [ "$item" = $check ]; then 
+		if [ "$item" = "$check" ]; then 
 			echo "true"
 		else 
 			echo "false"
