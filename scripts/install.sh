@@ -21,7 +21,7 @@ xcode_array=("Xcode 4" "Xcode 5" "Xcode 6" "Xcode 7" "Xcode 8" "Xcode 9" "Xcode 
 guiText "Checking for xcode" "Comment"
 for item in "${xcode_array[@]}"
 do
-    test_xcode=$(isInstalled "xcodebuild -version" "Xcode" "$item")
+    test_xcode=$(isInstalled "xcodebuild -version" "Version" "Xcode" "$item")
     export test_xcode
 done
 testContent "$test_xcode" "Xcode"
@@ -31,13 +31,13 @@ xcode_array_cl=("version: 6" "version: 7" "version: 8" "version: 9" "version: 10
 guiText "Checking Xcode command line tools version" "Comment"
 for item in "${xcode_array_cl[@]}"
 do
-    test_xcode_cl=$(isInstalled "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "version:" "$item")
+    test_xcode_cl=$(isInstalled "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "Version" "version:" "$item")
     export test_xcode_cl
 done
 testContent "$test_xcode_cl" "Xcode command line tools"
 
 guiText "Checking for Macports" "Comment"
-test_macports=$(isInstalled "port version" "Version:" "Version: 2")
+test_macports=$(isInstalled "port version" "Version" "Version:" "Version: 2")
 export test_macports
 testContent "$test_macports" "Macports"
 
