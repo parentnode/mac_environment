@@ -112,6 +112,12 @@ guiText(){
 			echo
 			echo
 			;;
+		"Check")
+			echo
+			echo
+			echo "Checking if $1 are installed"
+			echo 
+			;;
 		"Exit")
 			echo "Come back soon we will miss you"
 			if [ !$1 = 0 ]; then
