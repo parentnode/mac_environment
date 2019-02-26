@@ -166,9 +166,9 @@ function isInstalled(){
 		check=$(echo "$command" | grep "$item")
 		# if anywhere in the output matches with one of the items in the array
 		if [ -n "$check" ]; then 
-			echo "true"
+			echo "$check"
 		else 
-			echo "false"
+			echo "$check"
 		fi
 	done
 
