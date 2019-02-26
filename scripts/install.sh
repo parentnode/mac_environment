@@ -18,7 +18,7 @@ guiText "Installing system for $install_user" "Comment"
 guiText "Checking for tools required for the installation process" "Section"
 
 # Array containing major releases of Xcode
-xcode_array=("Xcode 4" "Xcode 5" "Xcode 6" "Xcode 7" "Xcode 8" "Xcode 9" "Xcode 10")
+xcode_array=("Xcode 4" "Xcode 5" "Xcode 6" "Xcode 7" "Xcode 8" "Xcode 9" "Xcode 10" "Xcode 11")
 guiText "xcode" "Check"
 #for item in "${xcode_array[@]}"
 #do
@@ -31,7 +31,7 @@ guiText "xcode" "Check"
 #fi
 isInstalled "xcodebuild -version" $xcode_array
 # Array containing major releases of Xcode command line tools
-xcode_array_cl=("version: 6" "version: 7" "version: 8" "version: 9" "version: 10")
+xcode_array_cl=("version: 6" "version: 7" "version: 8" "version: 9" "version: 10" "version: 11")
 guiText "Xcode command line tools version" "Check"
 isInstalled "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" $xcode_array_cl
 #for item in "${xcode_array_cl[@]}"
@@ -45,7 +45,7 @@ isInstalled "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" $xcode_array_
 #fi
 
 guiText "Macports" "Check"
-macport_array=("Version: 2")
+macport_array=("Version: 2" "Version: 3")
 isInstalled "port version" $macport_array
 #check=$(isInstalled "port version" "Version: 2")
 #if [ -z "$check" ]; then
