@@ -48,7 +48,7 @@ check=$(isInstalled "port version" "Version: 2")
 if [ -z "$check" ]; then
     echo "install Macports from appstore"
 else
-    echo "Version: $check"
+    echo "$check"
 fi
 
 #guiText "Test of read" "Comment"
