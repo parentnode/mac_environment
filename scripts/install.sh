@@ -16,6 +16,7 @@ install_user=$(getCurrentUser)
 guiText "Installing system for $install_user" "Comment"
 
 guiText "Checking for tools required for the installation process" "Section"
+
 # Array containing major releases of Xcode
 xcode_array=("Xcode 4" "Xcode 5" "Xcode 6" "Xcode 7" "Xcode 8" "Xcode 9" "Xcode 10")
 guiText "xcode" "Check"
@@ -23,7 +24,7 @@ for item in "${xcode_array[@]}"
 do
     check=$(isInstalled "xcodebuild -version" "$item")
 done
- if [ -z "$check" ]; then
+if [ -z "$check" ]; then
     echo "install xcode from appstore"
 else
     echo "$check"
@@ -34,12 +35,21 @@ xcode_array_cl=("version: 6" "version: 7" "version: 8" "version: 9" "version: 10
 guiText "Xcode command line tools version" "Check"
 for item in "${xcode_array_cl[@]}"
 do
-    isInstalled "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "$item"
+    check=$(isInstalled "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "$item")
 done
+if [ -z "$check" ]; then
+    echo "install Xcode command line tools from appstore"
+else
+    echo "$check"
+fi
 
 guiText "Macports" "Check"
 isInstalled "port version" "Version: 2"
-
+if [ -z "$check" ]; then
+    echo "install Macports from appstore"
+else
+    echo "$check"
+fi
 
 #guiText "Test of read" "Comment"
 #read -p "So you want to father a folder give it a name: " something
