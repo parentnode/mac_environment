@@ -174,7 +174,7 @@ function isInstalled(){
 export -f isInstalled
 
 function testContent(){
-	if [ -z "$1" ] || [ !"$1" = "Installation undefined" ]; then
+	if [ -z "$1" ] && [ !"$1" = "Installation undefined" ]; then
     	guiText "$2 not installed install $2 with $3" "Comment"
 	else
     	guiText "$1" "Comment"
