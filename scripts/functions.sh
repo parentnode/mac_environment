@@ -86,7 +86,8 @@ guiText(){
 			;;
 		"Installed")
 			echo
-			echo "$1 Installed no need for more action at this point"
+			echo "$1 Installed"
+			echo "You don't need to install $1"
 			echo
 			;;
 		"Enable")
@@ -164,7 +165,6 @@ function testContent(){
     	guiText "$2 not installed install $2 with $3" "Comment"
 		if [ -n "$4" ]; then
 			guiText "$2" "Install"
-			echo "Install command for $4 goes here"
 			#sudo port -N install $4
 		fi
 	else
