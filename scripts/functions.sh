@@ -153,8 +153,8 @@ function isInstalled(){
 	check=$($1 | grep "$3")
 	# 3 checking major release number with the version installed.
 	
-	case $2
-		"Vers")
+	case $2 in
+		"Version")
 			if [[ "$check" == "$4"* ]] && [ -n "$check" ]; then
 				echo "$check installed"
 			fi
