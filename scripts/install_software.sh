@@ -15,16 +15,16 @@ guiText "Update macports" "Comment"
 guiText "Enable getting PID of application really easy" "Comment"
 #sudo port install pidof
 
-guiText "Installing MariaDB" "Comment"
+guiText "Checking for MariaDB" "Comment"
 test_mariadb=$(isInstalled "port installed $mariadb_version-server" "mariadb" "mariadb-10")
 #sudo port -N install mariadb-10.2-server # Question: Are we going with 10.2 in mac ?
 testContent "$test_mariadb" "MariaDB" "macports" "$mariadb_version-server"
 
-guiText "Installing PHP" "Comment"
+guiText "Checking for PHP" "Comment"
 test_php=$(isInstalled "port installed $php_version" "php" "$php_version")
 testContent "$test_php" "PHP" "macports" "$php_version"
 
-guiText "Installing Apache" "Comment"
+guiText "Checking for Apache" "Comment"
 test_apache=$(isInstalled "port installed apache2" "apache" "apache2")
 testContent "$test_apache" "Apache" "macports" "apache2"
 
