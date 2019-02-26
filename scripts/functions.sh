@@ -160,7 +160,7 @@ function isInstalled(){
 	# Run command store output in variable
 	check=$($1)
 	# Looping through the array send with the function call 
-	for item in $2
+	for item in "$2"
 	do
 		check2=$(echo $check | grep "$item")
 		# if anywhere in the output matches with one of the items in the array
