@@ -158,12 +158,13 @@ export -f getCurrentUser
 
 function isInstalled(){
 	# Run command store output in variable
-	command=$($1)
+	
 	# Looping through the array send with the function call 
 	#${xcode_array_cl[@]}
-	echo "$command"
+	#echo "$command"
 	for item in "$2"
 	do
+		command=$($1)
 		echo "Item: $item"
 		check=$(echo "$command" | grep "$item")
 		echo "check: $check"
