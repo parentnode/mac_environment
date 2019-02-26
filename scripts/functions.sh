@@ -159,8 +159,6 @@ function isInstalled(){
 	# 3 checking major release number with the version installed.
 	if [ -n "$check" ]; then
 		guiText "$1 [$check]" "Comment"
-	else 
-		echo "Install $1 from appastore"
 	fi
 
 }
