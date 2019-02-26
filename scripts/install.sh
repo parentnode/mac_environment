@@ -21,7 +21,7 @@ xcode_array=("Xcode 4" "Xcode 5" "Xcode 6" "Xcode 7" "Xcode 8" "Xcode 9" "Xcode 
 guiText "xcode" "Check"
 for item in "${xcode_array[@]}"
 do
-    check=$(isInstalled "xcodebuild -version" "$item" || echo "")
+    check=$(isInstalled "xcodebuild -version" "$item")
     if [ -z "$check" ]; then
         echo "install xcode from appstore"
     else
