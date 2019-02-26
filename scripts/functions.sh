@@ -163,9 +163,9 @@ function isInstalled(){
 	#${xcode_array_cl[@]}
 	for item in "$2"
 	do
-		check=$(echo "$command" | grep $item)
+		check=$(echo "$command" | grep "$item")
 		# if anywhere in the output matches with one of the items in the array
-		if [ -z "$check" ]; then 
+		if [ -n "$check" ]; then 
 			echo "true"
 		else 
 			echo "false"
