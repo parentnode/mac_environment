@@ -155,7 +155,8 @@ function isInstalled(){
 	if [[ "$check" == "$3"* ]] && [ -n "$check" ]; then
 		echo "$check installed"
 	fi
-	if [ "$1" ^"type" ] && [ -n "$check"]; then
+
+	if [ "$1" = ^"type" ] && [ -n "$check"]; then
 		echo "$check installed"
 	fi
 
