@@ -86,8 +86,7 @@ guiText(){
 			;;
 		"Installed")
 			echo
-			echo "Installed:"
-			echo "You don't need to install $3"
+			echo "$1 Installed no need for more action at this point"
 			echo
 			;;
 		"Enable")
@@ -154,8 +153,7 @@ function isInstalled(){
 	check=$($1 | grep $2)
 	# 3 checking major release number with the version installed.
 	if [[ "$check" == *"$3"* ]] && [ -n "$check" ]; then
-		#guiText "$check" "Comment"
-		guiText "$check" "Installed" "$2"
+		guiText "$check" "Installed"
 	fi
 
 }
