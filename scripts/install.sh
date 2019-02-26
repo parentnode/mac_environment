@@ -21,25 +21,20 @@ xcode_array=("Xcode 4" "Xcode 5" "Xcode 6" "Xcode 7" "Xcode 8" "Xcode 9" "Xcode 
 guiText "xcode" "Check"
 for item in "${xcode_array[@]}"
 do
-    test_xcode=$(isInstalled "xcodebuild -version" "Xcode" "$item")
-    export test_xcode
+    isInstalled "xcodebuild -version" "$item"
 done
-testContent "$test_xcode" "Xcode"
+
 
 # Array containing major releases of Xcode command line tools
 xcode_array_cl=("version: 6" "version: 7" "version: 8" "version: 9" "version: 10")
 guiText "Xcode command line tools version" "Check"
 for item in "${xcode_array_cl[@]}"
 do
-    test_xcode_cl=$(isInstalled "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "version:" "$item")
-    export test_xcode_cl
+    isInstalled "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "$item"
 done
-testContent "$test_xcode_cl" "Xcode command line tools"
 
 guiText "Macports" "Check"
-test_macports=$(isInstalled "port version" "Version:" "Version: 2")
-export test_macports
-testContent "$test_macports" "Macports"
+isInstalled "port version" "Version: 2"
 
 
 #guiText "Test of read" "Comment"
@@ -73,7 +68,7 @@ checkPath "~/Sites/apache"
 checkPath "~/Sites/apache/logs"
 
 # Software script
-bash /srv/tools/scripts/install_software.sh
+#bash /srv/tools/scripts/install_software.sh
 
 
 

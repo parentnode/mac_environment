@@ -157,26 +157,26 @@ function isInstalled(){
 	# testing if a version installed by providing 1: command displaying current version. 2 beginning of line we need to search for.
 	check=$($1 | grep $2)
 	# 3 checking major release number with the version installed.
-	if [[ "$check" == *"$3"* ]] && [ -n "$check" ]; then
+	if [[ "$check" == "$2" ]] && [ -n "$check" ]; then
 		guiText "$check" "Comment"
 	fi
 
 }
 export -f isInstalled
 
-function testContent(){
-	if [ -z "$1" ]; then
-    	guiText "$2 not installed install $2 with $3" "Comment"
-		if [ -n "$4" ]; then
-			guiText "$2" "Install"
-			#sudo port -N install $4
-		fi
-	else
-    	echo "$1"
-		guiText "$2" "Installed"
-	fi
-} 
-export -f testContent
+#function testContent(){
+#	if [ -z "$1" ]; then
+#    	guiText "$2 not installed install $2 with $3" "Comment"
+#		if [ -n "$4" ]; then
+#			guiText "$2" "Install"
+#			#sudo port -N install $4
+#		fi
+#	else
+#    	echo "$1"
+#		guiText "$2" "Installed"
+#	fi
+#} 
+#export -f testContent
 
 # TODO:
 function checkFile(){
