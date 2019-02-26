@@ -152,12 +152,9 @@ function isInstalled(){
 	# testing if a version installed by providing 1: command displaying current version. 2 beginning of line we need to search for.
 	check=$($1 | grep "$2")
 	# 3 checking major release number with the version installed.
-	if [ "$check" = "$3" ] && [ -n "$check"]; then
+	if [[ "$check" == "$3"* ]] || [ -n "$check" ]; then
 		echo "$check installed"
 	fi
-	#if [[ "$check" == "$3"* ]] && [ -n "$check" ]; then
-	#	echo "$check installed"
-	#fi
 
 	
 
