@@ -169,7 +169,7 @@ export -f isInstalled
 function testContent(){
 	if [ -z "$1" ];
 	then
-    	guiText "$2 not installed install $2 with AppStore" "Comment"
+    	guiText "$2 not installed install $2 with $3" "Comment"
 	else
     	guiText "$1" "Comment"
 	fi
@@ -184,7 +184,7 @@ function checkFile(){
 	else 
 		#guiText "$1" "Exist" "$2"
 		#guiText "0" "Exit"
-		guiText "$1" "Exist" "Not!"
+		guiText "$1" "Exist" "$1 Exist Not!"
 	fi
 	#filename $1
 	#message $2
