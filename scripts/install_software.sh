@@ -12,7 +12,7 @@ guiText "Enable getting PID of application really easy" "Comment"
 #sudo port install pidof
 
 guiText "Installing MariaDB" "Comment"
-test_mariadb=$(isInstalled "type -a mysql" "Type" "mariadb" ^"mariadb")
+test_mariadb=$(isInstalled "type -a mysql" "Type" "mariadb")
 testContent "$test_mariadb" "MariaDB" "macports"
 #sudo port -N install mariadb-10.2-server # Question: Are we going with 10.2 in mac ?
 
