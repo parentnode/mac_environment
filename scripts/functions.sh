@@ -9,20 +9,16 @@ guiText(){
 			echo
 			echo "More info regarding $1-webstack installer"
 			echo "can be found on https://github.com/parentnode/$1-environment"
-			if [ "$1" = "mac" ];
-			then
+			if [ "$1" = "mac" ]; then
 				echo "and https://parentnode.dk/blog/installing-the-web-stack-on-mac-os"
 			fi
-			if [ "$1" = "windows" ];
-			then
+			if [ "$1" = "windows" ]; then
 				echo "and https://parentnode.dk/blog/installing-web-stack-on-windows-10"
 			fi
-			if [ "$3" = "ubuntu-client" ];
-			then
+			if [ "$3" = "ubuntu-client" ]; then
 				echo "and https://parentnode.dk/blog/installing-the-web-stack-on-ubuntu"
 			fi
-			if [ "$3" = "ubuntu-server" ];
-			then
+			if [ "$3" = "ubuntu-server" ]; then
 				echo "and https://parentnode.dk/blog/setup-ubuntu-linux-production-server-and-install-the-parentn"
 			fi
 			
@@ -32,8 +28,7 @@ guiText(){
 		"Comment")
 			echo
 			echo "$1:"
-			if [ -n "$3" ];
-			then
+			if [ -n "$3" ]; then
 				echo "$3"
 			fi
 			echo
@@ -120,8 +115,7 @@ guiText(){
 			;;
 		"Exit")
 			echo "Come back soon we will miss you"
-			if [ !$1 = 0 ];
-			then
+			if [ !$1 = 0 ]; then
 				echo "look below for error specified"
 				exit $1
 			else 
@@ -158,8 +152,10 @@ function isInstalled(){
 	# testing if a version installed by providing 1: command displaying current version. 2 beginning of line we need to search for.
 	check=$($1 | grep "$2")
 	# 3 checking major release number with the version installed.
-	if [[ "$check" == "$3"* ]] && [ -n "$check" ] ;
-	then
+	if [[ "$check" == "$3"* ]] && [ -n "$check" ]; then
+		echo "$check installed"
+	fi
+	if [ "$1" ^"type" ] && [ -n "$check"]; then
 		echo "$check installed"
 	fi
 
@@ -167,8 +163,7 @@ function isInstalled(){
 export -f isInstalled
 
 function testContent(){
-	if [ -z "$1" ];
-	then
+	if [ -z "$1" ]; then
     	guiText "$2 not installed install $2 with $3" "Comment"
 	else
     	guiText "$1" "Comment"
@@ -178,8 +173,7 @@ export -f testContent
 
 # TODO:
 function checkFile(){
-	if [ -e "$1" ];
-	then
+	if [ -e "$1" ]; then
 		guiText "$1" "Exist"
 	else 
 		#guiText "$1" "Exist" "$2"
