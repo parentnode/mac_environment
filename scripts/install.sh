@@ -45,7 +45,7 @@ isInstalled "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" $xcode_array_
 #fi
 
 guiText "Macports" "Check"
-macport_array=("Version: 1" "Version: 2.2")
+macport_array=("Version: 1")
 isInstalled "port version" $macport_array
 #check=$(isInstalled "port version" "Version: 2")
 #if [ -z "$check" ]; then
