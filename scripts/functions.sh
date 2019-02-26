@@ -176,11 +176,6 @@ function isInstalled(){
 		else
 			echo "$check"
 		fi
-		#if [ "$check" = "$item" ]; then 
-		#	echo "True: $check"
-		#else 
-		#	echo "False: $check"
-		#fi
 	done
 
 }
