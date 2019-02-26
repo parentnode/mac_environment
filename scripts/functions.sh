@@ -185,7 +185,7 @@ function checkFile(){
 	else 
 		#guiText "$1" "Exist" "$2"
 		#guiText "0" "Exit"
-		guiText "$1" "Exist" "$1 Exist Not!"
+
 	fi
 	#filename $1
 	#message $2
