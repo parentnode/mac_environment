@@ -159,6 +159,8 @@ function isInstalled(){
 	# 3 checking major release number with the version installed.
 	if [ -n "$check" ]; then
 		guiText "$check" "Comment"
+	else
+		guiText "Install and try again" "Comment"
 	fi
 
 }
