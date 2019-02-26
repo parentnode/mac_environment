@@ -173,6 +173,8 @@ function isInstalled(){
 		## if anywhere in the output matches with one of the items in the array
 		if [ -z "$check" ]; then
 			echo "$check"
+		else
+			echo "$check"
 		fi
 		#if [ "$check" = "$item" ]; then 
 		#	echo "True: $check"
