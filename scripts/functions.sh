@@ -158,9 +158,8 @@ function isInstalled(){
 	check=$($1 | grep "$2")
 	# 3 checking major release number with the version installed.
 	if [ -n "$check" ]; then
+		echo "$2"
 		guiText "$check" "Comment"
-	else
-		guiText "Install and try again" "Comment"
 	fi
 
 }
