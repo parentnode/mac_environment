@@ -53,7 +53,7 @@ checkFile "conf/apache.conf" "Required file is missing from your configuration s
 
 #// TODO: create .bash_profile if it does not exist
 #// Has not been tested
-checkFileOrCreate "~/.bash_profile" "conf/bash_profile.start"
+checkFileOrCreate "~/.bash_profile" "/srv/tools/conf/bash_profile.start"
 
 checkPath "~/Sites"
 
