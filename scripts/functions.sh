@@ -31,7 +31,6 @@ guiText(){
 			if [ -n "$3" ]; then
 				echo "$3"
 			fi
-			echo
 			;;
 		"Section")
 			echo
