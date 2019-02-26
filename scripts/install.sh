@@ -44,7 +44,7 @@ else
 fi
 
 guiText "Macports" "Check"
-isInstalled "port version" "Version: 2"
+check=$(isInstalled "port version" "Version: 2")
 if [ -z "$check" ]; then
     echo "install Macports from appstore"
 else
