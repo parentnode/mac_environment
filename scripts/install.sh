@@ -40,7 +40,7 @@ done
 if [ -z "$check" ]; then
     echo "install Xcode command line tools from appstore"
 else
-    echo "Version: $check"
+    echo "$check"
 fi
 
 guiText "Macports" "Check"
