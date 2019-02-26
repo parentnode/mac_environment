@@ -22,10 +22,10 @@ guiText "xcode" "Check"
 for item in "${xcode_array[@]}"
 do
     check=$(isInstalled "xcodebuild -version" "$item" || echo "")
-    if [ -n "$check"]; then
-        echo "$item"
+    if [ -n "$check" ]; then
+        echo "$check"
     else
-        echo "install $item from appstore"
+        echo "install xcode from appstore"
     fi
 done
 
