@@ -161,8 +161,10 @@ function isInstalled(){
 	command=$($1)
 	# Looping through the array send with the function call 
 	#${xcode_array_cl[@]}
+	echo "$command"
 	for item in "$2"
 	do
+		$item
 		check=$(echo "$command" | grep "$item")
 		# if anywhere in the output matches with one of the items in the array
 		if [ -n "$check" ]; then 
