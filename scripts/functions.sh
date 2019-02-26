@@ -153,14 +153,18 @@ function isInstalled(){
 	check=$($1 | grep $2)
 	# 3 checking major release number with the version installed.
 	if [[ "$check" == *"$3"* ]] && [ -n "$check" ]; then
-		echo "$check installed"
+		guiText "$check" "Installed"
 	fi
+
 }
 export -f isInstalled
 
 function testContent(){
 	if [ -z "$1" ]; then
     	guiText "$2 not installed install $2 with $3" "Comment"
+		if [ -n "$4"]; then
+			guiText "$2" "Install"
+		fi
 	else
     	guiText "$1" "Comment"
 	fi
