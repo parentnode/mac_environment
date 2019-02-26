@@ -162,9 +162,9 @@ function isInstalled(){
 	# Looping through the array send with the function call 
 	#${xcode_array_cl[@]}
 	#echo "$command"
+	command=$($1)
 	for item in $2
 	do
-		command=$($1)
 		#echo "$item"
 		#echo "Item: $item"
 		check=$(echo "$command" | grep $item)
