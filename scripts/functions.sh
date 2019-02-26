@@ -209,9 +209,9 @@ export -f checkFileOrCreate
 function checkPath(){
 	path=$1
 	if [ -f "$path" ]; then
-		guiText "$path" "Exists"
+		guiText "$path" "Exist"
 	else
-		guiText "$path" "Exists" "Creating $path"
+		guiText "$path" "Exist" "Creating $path"
 		mkdir -p "$path"
 	fi
 }
