@@ -29,11 +29,11 @@ guiText "xcode" "Check"
 #else
 #    echo "Version: $check"
 #fi
-isInstalled "xcodebuild -version" "$xcode_array"
+isInstalled "xcodebuild -version" $xcode_array
 # Array containing major releases of Xcode command line tools
 xcode_array_cl=("version: 6" "version: 7" "version: 8" "version: 9" "version: 10")
 guiText "Xcode command line tools version" "Check"
-isInstalled "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "$xcode_array_cl"
+isInstalled "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" $xcode_array_cl
 #for item in "${xcode_array_cl[@]}"
 #do
 #    check=$(isInstalled "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "$item")
