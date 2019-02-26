@@ -160,8 +160,8 @@ function isInstalled(){
 			fi
 			;;
 		"Type")
-			if [ -n "$check" ]; then
-				echo "$check installed"
+			if [ -n "$1" ]; then
+				echo "$1 installed"
 			fi
 			;;
 		*)
