@@ -22,13 +22,12 @@ guiText "xcode" "Check"
 for item in "${xcode_array[@]}"
 do
     check=$(isInstalled "xcodebuild -version" "$item")
-    if [ -z "$check" ]; then
-        echo "install xcode from appstore"
-    else
-        echo "$check"
-    fi
 done
-
+ if [ -z "$check" ]; then
+    echo "install xcode from appstore"
+else
+    echo "$check"
+fi
 
 # Array containing major releases of Xcode command line tools
 xcode_array_cl=("version: 6" "version: 7" "version: 8" "version: 9" "version: 10")
