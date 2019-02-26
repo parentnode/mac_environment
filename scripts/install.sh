@@ -27,7 +27,7 @@ done
 if [ -z "$check" ]; then
     echo "install xcode from appstore"
 else
-    echo "$check"
+    echo "Version: $check"
 fi
 
 # Array containing major releases of Xcode command line tools
@@ -40,7 +40,7 @@ done
 if [ -z "$check" ]; then
     echo "install Xcode command line tools from appstore"
 else
-    echo "$check"
+    echo "Version: $check"
 fi
 
 guiText "Macports" "Check"
@@ -48,7 +48,7 @@ check=$(isInstalled "port version" "Version: 2")
 if [ -z "$check" ]; then
     echo "install Macports from appstore"
 else
-    echo "$check"
+    echo "Version: $check"
 fi
 
 #guiText "Test of read" "Comment"
