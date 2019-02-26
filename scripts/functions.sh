@@ -167,11 +167,11 @@ function isInstalled(){
 		command=$($1)
 		#echo "$item"
 		#echo "Item: $item"
-		check=$(echo "$command" | grep "$item" || echo "")
+		check=$(echo "$command" | grep "$item")
 		#echo "check: $check"
 		
 		## if anywhere in the output matches with one of the items in the array
-		if [ ! "$check" = "$item" ]; then
+		if [ ! "$item" = "$check" ]; then
 			echo "Install with AppStore"
 		else
 			echo "$check"
