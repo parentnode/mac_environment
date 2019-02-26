@@ -164,6 +164,8 @@ function testContent(){
     	guiText "$2 not installed install $2 with $3" "Comment"
 		if [ -n "$4" ]; then
 			guiText "$2" "Install"
+			echo "Install command for $4 goes here"
+			#sudo port -N install $4
 		fi
 	else
     	guiText "$1" "Comment"
