@@ -163,7 +163,7 @@ function isInstalled(){
 	# Looping through the array send with the function call 
 	#${xcode_array_cl[@]}
 	#echo "$command"
-	for item in "$2"
+	for item in $2
 	do
 		echo "$item"
 		#echo "Item: $item"
