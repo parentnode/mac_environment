@@ -168,7 +168,7 @@ function testContent(){
 			#sudo port -N install $4
 		fi
 	else
-    	guiText "$1" "Comment"
+    	echo "$1"
 	fi
 } 
 export -f testContent
