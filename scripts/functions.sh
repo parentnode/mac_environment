@@ -118,6 +118,11 @@ guiText(){
 			echo "Checking if $1 are installed"
 			echo 
 			;;
+		"Ok")
+			echo
+			echo "$1: OK"
+			echo
+			;;
 		"Exit")
 			echo "Come back soon we will miss you"
 			if [ !$1 = 0 ]; then
@@ -158,7 +163,7 @@ function isInstalled(){
 	check=$($1 | grep "$2" || echo "")
 	# 3 checking major release number with the version installed.
 	if [ -n "$check" ]; then
-		guiText "[$check]" "Comment"
+		guiText "$check" "Ok"
 	fi
 
 }
