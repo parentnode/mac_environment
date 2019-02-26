@@ -162,7 +162,7 @@ export -f isInstalled
 function testContent(){
 	if [ -z "$1" ]; then
     	guiText "$2 not installed install $2 with $3" "Comment"
-		if [ -n "$4"]; then
+		if [ -n "$4" ]; then
 			guiText "$2" "Install"
 		fi
 	else
