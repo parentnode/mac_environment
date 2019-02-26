@@ -165,7 +165,7 @@ function isInstalled(){
 	#echo "$command"
 	for item in $2
 	do
-		echo "$item"
+		echo $item
 		#echo "Item: $item"
 		#check=$(echo "$command" | grep "$item")
 		#echo "check: $check"
