@@ -21,7 +21,13 @@ test_mariadb=$(isInstalled "port installed $mariadb_version-server" "mariadb" "m
 testContent "$test_mariadb" "MariaDB" "macports" "$mariadb_version-server"
 
 guiText "Installing PHP" "Comment"
-#test_php=$(isInstalled "port installed $php_version" "php" "")
+test_php=$(isInstalled "port installed $php_version" "php" "$php_version")
+testContent "$test_php" "PHP" "macports" "$php_version"
+
+guiText "Installing Apache" "Comment"
+test_apache=$(isInstalled "port installed apache2" "apache" "apache2")
+testContent "$test_apache" "Apache" "macports" "apache2"
+
 
 
 #guiText "Installing "
