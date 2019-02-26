@@ -73,7 +73,7 @@ checkPath "~/Sites/apache"
 checkPath "~/Sites/apache/logs"
 
 # Software script
-bash /srv/tools/install_software.sh
+bash /srv/tools/scripts/install_software.sh
 
 
 
