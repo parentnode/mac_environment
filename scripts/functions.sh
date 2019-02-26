@@ -171,7 +171,7 @@ function isInstalled(){
 		#echo "check: $check"
 		
 		## if anywhere in the output matches with one of the items in the array
-		if [ -z "$check" ]; then
+		if [ ! "$check" = "$item" ]; then
 			echo "Install with AppStore"
 		else
 			echo "$check"
