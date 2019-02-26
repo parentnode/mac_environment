@@ -33,23 +33,25 @@ isInstalled "xcodebuild -version" "$xcode_array"
 # Array containing major releases of Xcode command line tools
 xcode_array_cl=("version: 6" "version: 7" "version: 8" "version: 9" "version: 10")
 guiText "Xcode command line tools version" "Check"
-for item in "${xcode_array_cl[@]}"
-do
-    check=$(isInstalled "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "$item")
-done
-if [ -z "$check" ]; then
-    echo "install Xcode command line tools from appstore"
-else
-    echo "$check"
-fi
+isInstalled "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "$xcode_array_cl"
+#for item in "${xcode_array_cl[@]}"
+#do
+#    check=$(isInstalled "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "$item")
+#done
+#if [ -z "$check" ]; then
+#    echo "install Xcode command line tools from appstore"
+#else
+#    echo "$check"
+#fi
 
 guiText "Macports" "Check"
-check=$(isInstalled "port version" "Version: 2")
-if [ -z "$check" ]; then
-    echo "install Macports from appstore"
-else
-    echo "$check"
-fi
+isInstalled "port version" "Version: 2"
+#check=$(isInstalled "port version" "Version: 2")
+#if [ -z "$check" ]; then
+#    echo "install Macports from appstore"
+#else
+#    echo "$check"
+#fi
 
 #guiText "Test of read" "Comment"
 #read -p "So you want to father a folder give it a name: " something
