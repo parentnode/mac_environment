@@ -150,19 +150,31 @@ export -f getCurrentUser
 # Newest major release at this time of writing is 10.
 function isInstalled(){
 	# testing if a version installed by providing 1: command displaying current version. 2 beginning of line we need to search for.
-	check=$($1 | grep "$2")
+	check=$($1 | grep "$3")
 	# 3 checking major release number with the version installed.
-	if [[ "$check" == "$3"* ]] || [ -n "$check" ]; then
-		echo "$check installed"
-	fi
-
+	
+	case $2
+		"Version")
+			if [[ "$check" == "$4"* ]] && [ -n "$check" ]; then
+				echo "$check installed"
+			fi
+			;;
+		"Type")
+			if [ -n "$check" ]; then
+				echo "$check installed"
+			fi
+			;;
+		*)
+			echo "Installation undefined"
+			;;
+	esac
 	
 
 }
 export -f isInstalled
 
 function testContent(){
-	if [ -z "$1" ]; then
+	if [ -z "$1" ] || [ !"$1" = "Installation undefined" ]; then
     	guiText "$2 not installed install $2 with $3" "Comment"
 	else
     	guiText "$1" "Comment"
