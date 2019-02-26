@@ -166,6 +166,7 @@ function isInstalled(){
 	do
 		echo "Item: $item"
 		check=$(echo "$command" | grep "$item")
+		echo "check: $check"
 		# if anywhere in the output matches with one of the items in the array
 		if [ "$check" = "$item" ]; then 
 			echo "True: $check"
