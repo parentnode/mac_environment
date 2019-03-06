@@ -18,41 +18,18 @@ guiText "Installing system for $install_user" "Comment"
 guiText "Checking for tools required for the installation process" "Section"
 
 # Array containing major releases of Xcode
-xcode_array=("Xcode 4" "Xcode 5" "Xcode 6" "Xcode 7" "Xcode 8" "Xcode 9" "Xcode 10" "Xcode 11")
+
 guiText "xcode" "Check"
-#for item in "${xcode_array[@]}"
-#do
-#    check=$(isInstalled "xcodebuild -version" "$item")
-#done
-#if [ -z "$check" ]; then
-#    echo "install xcode from appstore"
-#else
-#    echo "Version: $check"
-#fi
-isInstalled "xcodebuild -version" $xcode_array
-# Array containing major releases of Xcode command line tools
-xcode_array_cl=("version: 6" "version: 7" "version: 8" "version: 9" "version: 10" "version: 11")
+xcode_array=( "Xcode 4" "Xcode 5" "Xcode 6" "Xcode 7" "Xcode 8" "Xcode 9" "Xcode 10" )
+isInstalled "xcodebuild -version" "${xcode_array[@]}"
+
 guiText "Xcode command line tools version" "Check"
-isInstalled "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" $xcode_array_cl
-#for item in "${xcode_array_cl[@]}"
-#do
-#    check=$(isInstalled "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "$item")
-#done
-#if [ -z "$check" ]; then
-#    echo "install Xcode command line tools from appstore"
-#else
-#    echo "$check"
-#fi
+xcode_array_cl=( "version: 6" "version: 7" "version: 8" "version: 9" "version: 10" )
+isInstalled "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "${xcode_array_cl[@]}"
 
 guiText "Macports" "Check"
-macport_array=("Version: 1")
-isInstalled "port version" $macport_array
-#check=$(isInstalled "port version" "Version: 2")
-#if [ -z "$check" ]; then
-#    echo "install Macports from appstore"
-#else
-#    echo "$check"
-#fi
+macports_array=("Version: 2")
+isInstalled "port version" "${macports_array[@]}"
 
 #guiText "Test of read" "Comment"
 #read -p "So you want to father a folder give it a name: " something
