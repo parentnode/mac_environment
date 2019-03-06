@@ -170,6 +170,7 @@ isInstalled(){
     done
     if test "$installed" != "yes"; then
         echo "not installed"
+		exit 0
     fi
 
 
