@@ -156,27 +156,22 @@ function getCurrentUser() {
 export -f getCurrentUser
 
 
-function isInstalled(){
-	# Run command store output in variable
-	
-	# Looping through the array send with the function call 
-	#${xcode_array_cl[@]}
-	#echo "$command"
-	for item in $2
-	do
-		command=$($1)
-		#echo "$item"
-		#echo "Item: $item"
-		check=$($command | grep "$item"*)
-		#echo "check: $check"
-		
-		## if anywhere in the output matches with one of the items in the array
-		if [ ! "$item" = "$check" ]; then
-			echo "Install with AppStore"
-		else
-			echo "$check"
-		fi
-	done
+isInstalled(){
+    command=$1
+    array=("$@")
+    for ((i = 0; i < ${#array[@]}; i++))
+    do
+		check=$($command | grep "${array[$i]}" )
+        if [[ "$check" =~ ^${array[$i]}\.[0-9]* ]]; then
+            echo "$check installed"
+            installed="yes"
+            export installed
+        fi
+    done
+    if test "$installed" != "yes"; then
+        echo "not installed"
+    fi
+
 
 }
 export -f isInstalled
