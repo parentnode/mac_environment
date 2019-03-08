@@ -24,7 +24,7 @@ xcode_array=( "Xcode 4" "Xcode 5" "Xcode 6" "Xcode 7" "Xcode 8" "Xcode 9" "Xcode
 $is_ok_xcode=$( isInstalled "xcodebuild -version" "${xcode_array[@]}" )
 if [ "$is_ok_xcode" = "Not Installed" ]; then
     echo "$is_ok_xcode"
-    guiText "0" "Exit"
+    #guiText "0" "Exit"
 else
     echo "$is_ok_xcode"
 fi
@@ -34,8 +34,8 @@ xcode_array_cl=( "version: 6" "version: 7" "version: 8" "version: 9" "version: 1
 $is_ok_xcode_cl=isInstalled "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "${xcode_array_cl[@]}"
 if [ "$is_ok_xcode_cl" = "Not Installed" ]; then
     echo "$is_ok_xcode_cl"
-    command "xcode-select --install"
-    guiText "0" "Exit"
+    #command "xcode-select --install"
+    #guiText "0" "Exit"
 else
     echo "$is_ok_xcode_cl"
 fi
@@ -45,7 +45,7 @@ macports_array=("Version: 2")
 $is_ok_macports=$(isInstalled "port version" "${macports_array[@]}")
 if [ "$is_ok_macports" = "Not Installed" ]; then
     echo "$is_ok_macports"
-    guiText "0" "Exit"
+    #guiText "0" "Exit"
 else
     echo "$is_ok_macports"
 fi
