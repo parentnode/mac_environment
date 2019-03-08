@@ -20,7 +20,7 @@ guiText "Checking for tools required for the installation process" "Section"
 # Array containing major releases of Xcode
 
 guiText "xcode" "Check"
-xcode_array=( "Xcode 4" "Xcode 5" "Xcode 6" "Xcode 7" "Xcode 8" "Xcode 9" "Xcode 10.2" )
+xcode_array=( "Xcode 4" "Xcode 5" "Xcode 6" "Xcode 7" "Xcode 8" "Xcode 9" "Xcode 10" )
 is_ok_xcode=$( isInstalled "xcodebuild -version" "${xcode_array[@]}" )
 if [ "$is_ok_xcode" = "Not Installed" ]; then
     echo "$is_ok_xcode"
