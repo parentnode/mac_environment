@@ -58,7 +58,8 @@ guiText(){
 		"Exist")
 			echo
 			if [ -n "$3" ]; then
-				echo "$1 Does not exist reason:$3"
+				echo "$1 Does not exist "
+				echo "Reason: $3"
 			else
 				echo "$1 exists"
 			fi
