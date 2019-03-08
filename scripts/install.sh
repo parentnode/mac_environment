@@ -41,7 +41,7 @@ else
 fi
 
 guiText "Macports" "Check"
-macports_array=("Version: 1" "Version: 2.4.3")
+macports_array=("Version: 2")
 is_ok_macports=$(isInstalled "port version" "${macports_array[@]}")
 if [ "$is_ok_macports" = "Not Installed" ]; then
     echo "$is_ok_macports"
