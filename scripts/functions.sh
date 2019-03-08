@@ -173,7 +173,6 @@ command(){
 isInstalled(){
     command=$1
     array=("$@")
-	install_command=$3
     for ((i = 0; i < ${#array[@]}; i++))
     do
 		check=$($command | grep "${array[$i]}" )
