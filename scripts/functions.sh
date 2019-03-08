@@ -218,7 +218,7 @@ function checkFile(){
 	else 
 		#guiText "$1" "Exist" "$2"
 		#guiText "0" "Exit"
-
+		echo "Not existing"
 	fi
 	#filename $1
 	#message $2
