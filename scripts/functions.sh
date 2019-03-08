@@ -59,7 +59,7 @@ guiText(){
 			echo
 			if [ -n "$3" ]; then
 				echo "$1 Does not exist "
-				echo "Reason: $3"
+				echo "$3"
 			else
 				echo "$1 exists"
 			fi
@@ -118,6 +118,9 @@ guiText(){
 			echo
 			echo
 			echo "Checking if $1 are installed"
+			if [ -n "$3" ]; then 
+				echo "$3"
+			fi
 			echo 
 			;;
 		"Ok")
