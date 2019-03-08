@@ -21,7 +21,7 @@ guiText "Checking for tools required for the installation process" "Section"
 
 guiText "xcode" "Check"
 xcode_array=( "Xcode 4" "Xcode 5" "Xcode 6" "Xcode 7" "Xcode 8" "Xcode 9" "Xcode 10" )
-$is_ok_xcode=isInstalled "xcodebuild -version" "${xcode_array[@]}"
+$is_ok_xcode=$( isInstalled "xcodebuild -version" "${xcode_array[@]}" )
 if [ "$is_ok_xcode" "Not Installed" ]; then
     echo "$is_ok_xcode"
     guiText "0" "Exit"
@@ -31,7 +31,7 @@ fi
 
 guiText "Xcode command line tools version" "Check"
 xcode_array_cl=( "version: 6" "version: 7" "version: 8" "version: 9" "version: 10" )
-$is_ok_xcode_cl=isInstalled "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "${xcode_array_cl[@]}" "xcode-select --install"
+$is_ok_xcode_cl=$(isInstalled "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "${xcode_array_cl[@]}" "xcode-select --install")
 if [ "$is_ok_xcode_cl" = "Not Installed" ]; then
     echo "$is_ok_xcode_cl"
     command "xcode-select --install"
@@ -42,7 +42,7 @@ fi
 
 guiText "Macports" "Check"
 macports_array=("Version: 2")
-$is_ok_macports=isInstalled "port version" "${macports_array[@]}"
+$is_ok_macports=$(isInstalled "port version" "${macports_array[@]}")
 if [ "$is_ok_macports" = "Not Installed" ]; then
     echo "$is_ok_macports"
     guiText "0" "Exit"
