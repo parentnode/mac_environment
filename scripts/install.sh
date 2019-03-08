@@ -31,7 +31,7 @@ fi
 
 guiText "Xcode command line tools version" "Check"
 xcode_array_cl=( "version: 6" "version: 7" "version: 8" "version: 9" "version: 10" )
-$is_ok_xcode_cl=$(isInstalled "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "${xcode_array_cl[@]}" "xcode-select --install")
+$is_ok_xcode_cl=$(isInstalled "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "${xcode_array_cl[@]}")
 if [ "$is_ok_xcode_cl" = "Not Installed" ]; then
     echo "$is_ok_xcode_cl"
     command "xcode-select --install"
