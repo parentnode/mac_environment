@@ -126,7 +126,7 @@ guiText(){
 			;;
 		"Exit")
 			echo "Exiting"
-			exit_message="Run script again when fixed"
+			exit_message="Run script again when installed"
 			if [ !$1 = 0 ]; then
 				echo "look below for error specified"
 				echo "$exit_message"
