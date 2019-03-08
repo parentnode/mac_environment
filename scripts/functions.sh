@@ -215,9 +215,9 @@ function checkFile(){
 	if [ -e "$1" ]; then
 		guiText "$1" "Exist"
 	else 
-		#guiText "$1" "Exist" "$2"
-		#guiText "0" "Exit"
-		echo "Not existing"
+		guiText "$1" "Exist" "$2"
+		guiText "0" "Exit"
+		#echo "Not existing"
 	fi
 	#filename $1
 	#message $2
