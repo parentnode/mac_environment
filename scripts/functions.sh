@@ -72,10 +72,11 @@ guiText(){
 			;;
 		"Install")
 			echo
-			echo "Configuring installation for $1"
+			echo "Install $1"
 			if [ -n "$3" ]; then
-				echo "in $3"
+				echo "with $3"
 			fi
+			echo "Then run script again"
 			echo
 			;;
 		"Replace")
@@ -124,11 +125,14 @@ guiText(){
 			echo
 			;;
 		"Exit")
-			echo "Come back soon we will miss you"
+			echo "Exiting"
+			exit_message="Run script again when fixed"
 			if [ !$1 = 0 ]; then
 				echo "look below for error specified"
+				echo "$exit_message"
 				exit $1
 			else 
+				echo "$exit_message"
 				exit $1
 			fi
 			;;
@@ -155,10 +159,21 @@ function getCurrentUser() {
 }
 export -f getCurrentUser
 
+command(){
+	command=$1
+	if [ "$2" = "suppress" ]; then
+		cmd_output=$($command > /dev/null 2>&1 )
+	else
+		cmd_output=$($command)
+	fi
+	echo "$cmd_output"
+	
+}
 
 isInstalled(){
     command=$1
     array=("$@")
+	install_command=$3
     for ((i = 0; i < ${#array[@]}; i++))
     do
 		check=$($command | grep "${array[$i]}" )
@@ -168,10 +183,15 @@ isInstalled(){
             export installed
         fi
     done
-    if test "$installed" != "yes"; then
-        echo "not installed"
-		exit 0
-    fi
+	if test "$installed" != "yes"; then
+		echo "Not Installed"
+	fi
+	#if [ -z "$install_command" ]; then
+    #
+	#else 
+	#	install=$( command "$install_command" )
+	#	guiText "$install" "Install"
+	#fi
 
 
 }
