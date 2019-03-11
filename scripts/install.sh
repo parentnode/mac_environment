@@ -86,7 +86,9 @@ checkFileOrCreate "~/.bash_profile" "/srv/tools/conf/bash_profile.start"
 # Software script
 #bash /srv/tools/scripts/install_software.sh
 
+email_array=("[A-Za-z0-9\-\_]+@[A-Za-z0-9\-\_]+\.[a-z]{2,10}")
 
+ask "Email" "${email_array[@]}"
 
 
 
