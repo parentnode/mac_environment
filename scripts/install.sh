@@ -68,20 +68,20 @@ checkFile "$conf_path/apache.conf" "Required file is missing from your configura
 #// Has not been tested
 checkFileOrCreate "~/.bash_profile" "/srv/tools/conf/bash_profile.start"
 
-checkPath "~/Sites"
-
-sudo chown $install_user:staff ~/Sites
-
-checkPath "/srv"
-if [ -f "/srv/sites" ]; then 
-    echo "/srv/sites exitsts"
-else
-    echo "Creating symlink"
-    sudo ln -s ~/Sites /srv/sites
-fi
-
-checkPath "~/Sites/apache" 
-checkPath "~/Sites/apache/logs"
+#checkPath "~/Sites"
+#
+#sudo chown $install_user:staff ~/Sites
+#
+#checkPath "/srv"
+#if [ -f "/srv/sites" ]; then 
+#    echo "/srv/sites exists"
+#else
+#    echo "Creating symlink"
+#    sudo ln -s ~/Sites /srv/sites
+#fi
+#
+#checkPath "~/Sites/apache" 
+#checkPath "~/Sites/apache/logs"
 
 # Software script
 #bash /srv/tools/scripts/install_software.sh
