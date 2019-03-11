@@ -201,13 +201,13 @@ function isInstalled(){
 export -f isInstalled
 
 function ask(){
-    valid_answers=("$@")
+    valid_answers=("$2")
     #cmd_input=$1
 
     read -p "$1: " question
     for ((i = 0; i < ${#array[@]}; i++))
     do
-        if [[ $question =~ ^(${valid_answers[$i]})$ ]];
+        if [[ $question =~ ^("${valid_answers[$i]}")$ ]];
         then 
             echo "Valid"
         else 
