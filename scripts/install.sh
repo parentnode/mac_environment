@@ -73,7 +73,10 @@ checkPath "~/Sites"
 sudo chown $install_user:staff ~/Sites
 
 checkPath "/srv"
-if [ ! -e "/srv/sites" ]; then 
+if [ -f "/srv/sites" ]; then 
+    echo "/srv/sites exitsts"
+else
+    echo "Creating symlink"
     sudo ln -s ~/Sites /srv/sites
 fi
 
