@@ -73,7 +73,7 @@ checkPath "~/Sites"
 sudo chown $install_user:staff ~/Sites
 
 checkPath "/srv"
-if [ ! -f "/srv/sites" ]; then 
+if [ ! -e "/srv/sites" ]; then 
     sudo ln -s ~/Sites /srv/sites
 fi
 
