@@ -176,7 +176,7 @@ command(){
 
 isInstalled(){
     command=$1
-    array=("$@")
+    array=("$2")
     for ((i = 0; i < ${#array[@]}; i++))
     do
 		check=$($command | grep "${array[$i]}" )
@@ -200,19 +200,25 @@ isInstalled(){
 }
 export -f isInstalled
 
-#function testContent(){
-#	if [ -z "$1" ]; then
-#    	guiText "$2 not installed install $2 with $3" "Comment"
-#		if [ -n "$4" ]; then
-#			guiText "$2" "Install"
-#			#sudo port -N install $4
-#		fi
-#	else
-#    	echo "$1"
-#		guiText "$2" "Installed"
-#	fi
-#} 
-#export -f testContent
+ask(){
+    valid_answers=("$2")
+    #cmd_input=$1
+
+    read -p "$1: " question
+    for ((i = 0; i < ${#array[@]}; i++))
+    do
+        if [[ $question =~ ^(${valid_answers[$i]})$ ]];
+        then 
+            echo "Valid"
+        else 
+            echo "Not valid "
+            ask "$1" "${valid_answers[@]}"
+        fi
+    done
+
+
+}
+export -f ask
 
 # TODO:
 function checkFile(){
@@ -253,3 +259,4 @@ function checkPath(){
 	fi
 }
 export -f checkPath
+
