@@ -1,4 +1,4 @@
-guiText(){
+function guiText(){
 	# Automatic comment format for simple setup as a text based gui
 	# eg. guiText "Redis" "Start"
 	# $1 Name of object to process
@@ -163,7 +163,7 @@ function getCurrentUser() {
 }
 export -f getCurrentUser
 
-command(){
+function command(){
 	command=$1
 	if [ "$2" = "suppress" ]; then
 		cmd_output=$($command > /dev/null 2>&1 )
@@ -174,7 +174,7 @@ command(){
 	
 }
 
-isInstalled(){
+function isInstalled(){
     command=$1
     array=("$@")
     for ((i = 0; i < ${#array[@]}; i++))
@@ -201,7 +201,7 @@ isInstalled(){
 export -f isInstalled
 
 function ask(){
-    valid_answers=("$2")
+    valid_answers=("$@")
     #cmd_input=$1
 
     read -p "$1: " question
