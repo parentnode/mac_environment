@@ -200,8 +200,8 @@ isInstalled(){
 }
 export -f isInstalled
 
-ask(){
-    valid_answers=("$@")
+function ask(){
+    valid_answers=("$2")
     #cmd_input=$1
 
     read -p "$1: " question
