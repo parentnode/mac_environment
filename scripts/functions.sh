@@ -235,7 +235,7 @@ function checkFileOrCreate(){
 
 	if [ ! -e "$destination" ]; then
 		guiText "$destination" "Exist" "Copying $1"
-		cp $source $destination
+		sudo cp $source $destination
 	else
 		guiText "$destination" "Exist"
 	fi	
