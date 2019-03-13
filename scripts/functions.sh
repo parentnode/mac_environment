@@ -201,18 +201,23 @@ function isInstalled(){
 export -f isInstalled
 
 function ask(){
-    valid_answers=("$@")
-    #cmd_input=$1
+    valid_answers=("$2")
+    #cmd_input=$2
 
     read -p "$1: " question
-    for ((i = 0; i < ${#array[@]}; i++))
+    #if [[ "$question" =~ ^([A-Za-z0-9\.\-]+@[A-Za-z0-9\.\-]+\.[a-z]{2,10})$ ]]; then
+    #    echo "valid"
+    #else 
+    #    echo "non valid"
+    #fi
+    for ((i = 0; i < ${#valid_answers[@]}; i++))
     do
-        if [[ $question =~ ^("${valid_answers[$i]}")$ ]];
+        if [[ "$question" =~ ^(${valid_answers[$i]})$ ]];
         then 
             echo "Valid"
         else 
             echo "Not valid "
-            ask "$1" "${valid_answers[@]}"
+            ask "$1" ${valid_answers[@]}
         fi
     done
 
