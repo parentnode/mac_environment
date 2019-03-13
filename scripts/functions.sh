@@ -217,7 +217,7 @@ function ask(){
             echo "Valid"
         else 
             echo "Not valid "
-            ask "$1" ${valid_answers[@]}
+            ask "$1" "${valid_answers[@]}"
         fi
     done
 
