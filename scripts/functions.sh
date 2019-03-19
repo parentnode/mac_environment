@@ -165,41 +165,67 @@ export -f getCurrentUser
 
 function command(){
 	command=$1
-	if [ "$2" = "suppress" ]; then
-		cmd_output=$($command > /dev/null 2>&1 )
+	no_echo=$2
+	if [ "$no_echo" = "true" ]; then
+		$command > /dev/null 2>&1
 	else
-		cmd_output=$($command)
-	fi
-	echo "$cmd_output"
+		$command
+	fi	
 	
 }
+export -f command
 
 function isInstalled(){
-    command=$1
-    array=("$@")
-    for ((i = 0; i < ${#array[@]}; i++))
-    do
-		check=$($command | grep "${array[$i]}" )
-        if [[ "$check" =~ ^${array[$i]}\.[0-9]* ]]; then
-            echo "$check installed"
-            installed="yes"
-            export installed
-        fi
-    done
+	command="$1"
+	array=("$@")
+	for ((i = 0; i < ${#array[@]}; i++))
+	do
+		case $command in
+			"port installed")
+				#echo "using macports to look for ${array[$i]}"
+				port_install=$($command | grep "${array[$i]}" | sed -n "/${array[$i]}/,/(active)/p")
+				#echo "$port_install"
+				if [[ "$port_install" =~ "${array[$i]}" ]]; then
+					installed="yes"
+					echo "$port_install"
+					export installed
+				fi
+				;;
+			*)
+				check=$($command | grep "${array[$i]}" )
+				if [[ "$check" =~ ^${array[$i]}\.[0-9]* ]]; then
+					echo "$check installed"
+					installed="yes"
+					export installed
+				fi
+				;;
+
+		esac
+	done
 	if test "$installed" != "yes"; then
 		echo "Not Installed"
 	fi
-	#if [ -z "$install_command" ]; then
-    #
-	#else 
-	#	install=$( command "$install_command" )
-	#	guiText "$install" "Install"
-	#fi
 
 
 }
 export -f isInstalled
 
+function installOrNotToInstall(){
+	is_ok_install=$1
+	if [ "$is_ok_install" = "Not Installed" ]; then
+    	echo "$is_ok_install"
+    	if [ "$2" ]; then
+			#command "$2"
+			echo "$2"
+		fi
+		guiText "0" "Exit"
+		exit 0 
+	else
+   		echo "$is_ok_install"
+	fi
+
+}
+export -f installOrNotToInstall
 function ask(){
     valid_answers=("$2")
     #cmd_input=$2
@@ -260,8 +286,42 @@ function checkPath(){
 		guiText "$path" "Exist"
 	else
 		guiText "$path" "Exist" "Creating $path"
-		mkdir -p "$path"
+		command "$(mkdir -p "$path")"
 	fi
 }
 export -f checkPath
 
+function copyFile(){
+
+	source=$1
+	destination=$2
+	if [ -f "$source" ]; then
+		sudo cp "$source" $destination
+	#else
+		#copyFolder "$source" "$destination"
+	fi
+
+}
+export -f copyFile
+
+function copyFolder(){
+
+	source=$1
+	destination=$2
+	if [ -d "$source"]; then
+
+		command "cp -R "$source" "$destination""
+	else
+		echo "$source not found"
+	fi
+
+}
+export -f copyFolder
+
+function moveFile(){
+	source=$1
+	destination=$2
+	command "sudo mv "$source" "$destination""
+
+}
+export -f moveFile
