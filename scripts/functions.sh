@@ -166,12 +166,11 @@ export -f getCurrentUser
 function command(){
 	command=$1
 	no_echo=$2
-	if [ "$no_echo" = "true" ]; then
-		$command > /dev/null 2>&1
-	else
+	if [ -z "$no_echo" ]; then
 		$command
-	fi	
-	
+	else
+		$command > /dev/null 2>&1
+	fi
 }
 export -f command
 
@@ -183,18 +182,20 @@ function isInstalled(){
 		case $command in
 			"port installed")
 				#echo "using macports to look for ${array[$i]}"
-				port_install=$($command | grep "${array[$i]}" | sed -n "/${array[$i]}/,/(active)/p")
+				port_install=$($command | grep "(active)" | sed -n "/${array[$i]}/,/(active)/p")
 				#echo "$port_install"
 				if [[ "$port_install" =~ "${array[$i]}" ]]; then
 					installed="yes"
-					echo "$port_install"
 					export installed
+					message="$port_install"
+					export message
 				fi
 				;;
 			*)
 				check=$($command | grep "${array[$i]}" )
 				if [[ "$check" =~ ^${array[$i]}\.[0-9]* ]]; then
-					echo "$check installed"
+					message="$check installed"
+					export message
 					installed="yes"
 					export installed
 				fi
@@ -204,33 +205,51 @@ function isInstalled(){
 	done
 	if test "$installed" != "yes"; then
 		echo "Not Installed"
+	else
+		echo "$message"
 	fi
 
 
 }
 export -f isInstalled
 
-function installOrNotToInstall(){
-	is_ok_install=$1
-	if [ "$is_ok_install" = "Not Installed" ]; then
-    	echo "$is_ok_install"
-    	if [ "$2" ]; then
-			#command "$2"
-			echo "$2"
+function upgrade(){
+	installed=$1
+	uninstall_cmd=$2
+	install_cmd=$3
+	if [ "$installed" = "Not Installed" ]; then
+    	echo "$installed"
+    	if [ "$3" ]; then
+			command "$3"
+			#echo "$2"
 		fi
 		guiText "0" "Exit"
 		exit 0 
 	else
-   		echo "$is_ok_install"
+   		guiText "$installed" "Exist"
+		if [ "$2" ];
+		then
+			guiText "Uninstalling previous version" "Comment"
+			command "$2"
+		fi
+		if [ "$3" ];then
+			guiText "Installing a nother version" "Comment"
+			command "$3"
+		fi
 	fi
 
 }
-export -f installOrNotToInstall
+export -f upgrade
 function ask(){
     valid_answers=("$2")
     #cmd_input=$2
-
-    read -p "$1: " question
+	no_echo="$3"
+	if [ "$no_echo" = true ]; then
+		read -s -p "$1: " question
+	else
+		read -p "$1: " question
+	fi
+    
     #if [[ "$question" =~ ^([A-Za-z0-9\.\-]+@[A-Za-z0-9\.\-]+\.[a-z]{2,10})$ ]]; then
     #    echo "valid"
     #else 
@@ -240,13 +259,14 @@ function ask(){
     do
         if [[ "$question" =~ ^(${valid_answers[$i]})$ ]];
         then 
-            echo "Valid"
+            echo $question
+			echo
         else 
             echo "Not valid "
-            ask "$1" "${valid_answers[@]}"
+            ask "$1" "${valid_answers[@]}" "$no_echo"
+			echo
         fi
     done
-
 
 }
 export -f ask
@@ -282,7 +302,7 @@ export -f checkFileOrCreate
 # TODO:
 function checkPath(){
 	path=$1
-	if [ -f "$path" ]; then
+	if [ -d "$path" ]; then
 		guiText "$path" "Exist"
 	else
 		guiText "$path" "Exist" "Creating $path"
@@ -325,3 +345,29 @@ function moveFile(){
 
 }
 export -f moveFile
+
+# Setting Git credentials if needed
+gitConfigured(){
+	git_credential=$1
+	credential_configured=$(git config --global user.$git_credential || echo "")
+	if [ -z "$credential_configured" ];
+	then 
+		echo "No previous git user.$git_credential entered"
+		echo
+		read -p "Enter your new user.$git_credential: " git_new_value
+		git config --global user.$git_credential "$git_new_value"
+		echo
+	else 
+		echo "Git user.$git_credential allready set"
+	fi
+	echo ""
+}
+export -f gitConfigured
+
+replaceInFile(){
+	file=$1
+	old_value=$2
+	new_value=$3
+	sed -i "s/$old_value/$new_value/g" $1
+}
+export -f replaceInFile
