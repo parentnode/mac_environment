@@ -9,8 +9,8 @@ $username = getCurrentUser();
 // start by requesting sudo power
 enableSuperCow();
 
-print get_current_user();
-output(get_current_user());
+print $username;
+output($username);
 // check software requirements
 output("Checking Xcode version");
 $is_ok_xcode = isInstalled("xcodebuild -version", array("Xcode 4", "Xcode 5", "Xcode 6", "Xcode 7", "Xcode 8", "Xcode 9", "Xcode 10"));
