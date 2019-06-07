@@ -1,5 +1,6 @@
 <?php
 // check software requirements
+output("\nChecking software requirements");
 output("Checking Xcode version");
 $is_ok_xcode = isInstalled("xcodebuild -version", array("Xcode 4", "Xcode 5", "Xcode 6", "Xcode 7", "Xcode 8", "Xcode 9", "Xcode 10"));
 output($is_ok_xcode ? "Xcode is OK" : "Xcode check failed - update or install Xcode from AppStore");
@@ -25,4 +26,5 @@ output($is_ok_macports ? "Macports is OK" : "Macports check failed - update or i
 if(!$is_ok_macports) {
 	goodbye("Update your software as specified above");
 }
+output("\nChecking software requirements done");
 ?>

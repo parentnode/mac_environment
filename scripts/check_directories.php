@@ -29,6 +29,6 @@ if(!file_exists("/srv/sites")) {
 checkPath("~/Sites/apache");
 checkPath("~/Sites/apache/logs");
 
-
+output("\nChecking paths done");
 
 ?>
