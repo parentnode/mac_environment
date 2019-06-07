@@ -39,7 +39,7 @@ if(!$is_ok_macports) {
 	goodbye("Update your software as specified above");
 }
 
-exit(0);
+exit("check done");
 output("\nChecking paths");
 
 // check if configuration files are available
