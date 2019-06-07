@@ -14,7 +14,7 @@ print get_current_user();
 include_once("/srv/tools/scripts/pre_install_check.php"); 
 
 output("\nChecking paths");
-exit("Checking paths")
+exit;
 // check if configuration files are available
 checkFile("conf/httpd.conf", "Required file is missing from your configuration source");
 checkFile("conf/httpd-vhosts.conf", "Required file is missing from your configuration source");
