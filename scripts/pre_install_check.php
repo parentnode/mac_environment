@@ -27,5 +27,5 @@
     	goodbye("Update your software as specified above");
     }
 
-    exit("End of check")
+    exit("End of pre install check");
 ?>
