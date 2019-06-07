@@ -1,4 +1,3 @@
-#!/usr/bin/php
 <?php
 // check software requirements
 output("Checking Xcode version");
