@@ -11,6 +11,7 @@ enableSuperCow();
 
 print $username;
 output($username);
+output("");
 // check software requirements
 output("Checking Xcode version");
 $is_ok_xcode = isInstalled("xcodebuild -version", array("Xcode 4", "Xcode 5", "Xcode 6", "Xcode 7", "Xcode 8", "Xcode 9", "Xcode 10"));
