@@ -46,7 +46,7 @@ if(!file_exists("/srv/sites")) {
 checkPath("~/Sites/apache");
 checkPath("~/Sites/apache/logs");
 
-exit("Check path done")
+exit("Check path done");
 // continue with setup
 output("\nInstalling software");
 
