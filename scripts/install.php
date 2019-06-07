@@ -13,7 +13,7 @@ print $username;
 output($username);
 output("");
 
-include("pre_install_check.php")
+include("pre_install_check.php");
 
 exit("check done");
 output("\nChecking paths");
