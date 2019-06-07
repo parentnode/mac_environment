@@ -10,12 +10,12 @@ $username = getCurrentUser();
 enableSuperCow();
 
 print $username;
-output($username);
+
 output("");
 
 include("pre_install_check.php");
 
-exit("check done");
+
 output("\nChecking paths");
 
 // check if configuration files are available
@@ -46,7 +46,7 @@ if(!file_exists("/srv/sites")) {
 checkPath("~/Sites/apache");
 checkPath("~/Sites/apache/logs");
 
-
+exit("Check path done")
 // continue with setup
 output("\nInstalling software");
 
