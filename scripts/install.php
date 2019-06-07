@@ -9,7 +9,7 @@ $username = getCurrentUser();
 // start by requesting sudo power
 enableSuperCow();
 
-print get_current_user();
+print $username;
 
 // check software requirements
 output("Checking Xcode version");
