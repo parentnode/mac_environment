@@ -11,7 +11,7 @@ enableSuperCow();
 
 print get_current_user();
 
-require_once("/srv/tools/scripts/pre_install_check.php");
+<?php include("/srv/tools/scripts/pre_install_check.php"); ?>
 
 output("\nChecking paths");
 exit("Checking paths")
