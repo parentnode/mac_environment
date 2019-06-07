@@ -12,7 +12,7 @@ enableSuperCow();
 print get_current_user();
 output("test");
 
-include_once("/srv/tools/scripts/pre_install_check.php"); 
+//include_once("/srv/tools/scripts/pre_install_check.php"); 
 
 output("\nChecking paths");
 exit;
