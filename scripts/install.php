@@ -28,8 +28,6 @@ if(!$is_ok_xcode_cl) {
 	goodbye("Run the setup command again when the command line tools are installed");
 }
 
-<<<<<<< HEAD
-=======
 
 output("Checking for Macports");
 $is_ok_macports = isInstalled("port version", array("Version: 2"));
@@ -41,7 +39,6 @@ if(!$is_ok_macports) {
 }
 
 
->>>>>>> parent of b3e5093... Testing
 
 output("Checking for Macports");
 $is_ok_macports = isInstalled("port version", array("Version: 2"));
