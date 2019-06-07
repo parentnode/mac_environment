@@ -38,18 +38,6 @@ if(!$is_ok_macports) {
 	goodbye("Update your software as specified above");
 }
 
-
-
-output("Checking for Macports");
-$is_ok_macports = isInstalled("port version", array("Version: 2"));
-output($is_ok_macports ? "Macports is OK" : "Macports check failed - update or install Macports from macports.org, or restart your terminal, if you have already installed macports.");
-
-// is software available
-if(!$is_ok_macports) {
-	goodbye("Update your software as specified above");
-}
-
-
 exit(0);
 output("\nChecking paths");
 
