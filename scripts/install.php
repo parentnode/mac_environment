@@ -26,7 +26,7 @@ include("install_software.php");
 // update settings
 include("configuration.php");
 
-exit("End configuration");
+
 // restart apache
 command("sudo /opt/local/sbin/apachectl restart");
 
