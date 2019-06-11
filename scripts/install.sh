@@ -14,7 +14,7 @@ source /srv/tools/scripts/functions.sh
 guiText "Gather information required for the installation" "Section"
 
 install_user=$(getCurrentUser)
-
+export install_user
 guiText "Installing system for $install_user" "Comment"
 
 
