@@ -161,7 +161,19 @@ function getCurrentUser() {
 	#	echo $SUDO_USER
 	#fi
 	user=$(id -un)
-	echo "$user"
+	echo "id -un: $user"
+	
+	user=$(who am i)
+	echo "whoami: $user"
+	
+	user=$(logname)
+	echo "logname: $user"
+
+	user=$($SUDO_USER)
+	echo "SUDO_USER: $user"
+	
+	
+	
 }
 export -f getCurrentUser
 
