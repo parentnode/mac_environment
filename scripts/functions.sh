@@ -156,8 +156,8 @@ export -f guiText
 function getCurrentUser() {
 	user=$(whoami)
 	echo "whoami: $user"
-	user=$(logname)
-	echo "logname: $user"
+	#user=$(logname)
+	#echo "logname: $user"
 }
 export -f getCurrentUser
 
