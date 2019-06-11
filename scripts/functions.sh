@@ -155,11 +155,13 @@ export -f guiText
 
 function getCurrentUser() {
 	
-	if [ "$SUDO_USER" = "root" ];then
-		echo "$(logname)" 
-	else
-		echo $SUDO_USER
-	fi
+	#if [ "$SUDO_USER" = "root" ];then
+	#	echo "$(logname)" 
+	#else
+	#	echo $SUDO_USER
+	#fi
+	user=$(whoami)
+	echo "$user"
 }
 export -f getCurrentUser
 

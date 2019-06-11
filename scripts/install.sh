@@ -16,7 +16,7 @@ guiText "Gather information required for the installation" "Section"
 install_user=$(getCurrentUser)
 
 guiText "Installing system for $install_user" "Comment"
-
+exit
 valid_answers=("[Y n]")
 install_software=$(ask "Install software (Y/n)" "${valid_answers[@]}")
 export install_software
