@@ -22,8 +22,8 @@ valid_answers=("[Y n]")
 install_software=$(ask "Install software (Y/n)" "${valid_answers[@]}")
 export install_software
 
-bash /srv/tools/scripts/pre_install_check.sh
 exit
+bash /srv/tools/scripts/pre_install_check.sh
 guiText "Checking Required files/folders and shortcuts" "Section"
 conf_path="/srv/tools/conf"
 checkFile "$conf_path/httpd.conf" "Required file is missing from your configuration source"
