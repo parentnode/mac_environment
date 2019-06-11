@@ -169,7 +169,7 @@ function getCurrentUser() {
 	user=$(logname)
 	echo "logname: $user"
 
-	user=$($SUDO_USER)
+	user=$("$SUDO_USER")
 	echo "SUDO_USER: $user"
 	
 	
