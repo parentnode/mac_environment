@@ -163,8 +163,11 @@ function getCurrentUser() {
 	user=$(id -un)
 	echo "id -un: $user"
 	
-	user=$(who am i)
+	user=$(whoami)
 	echo "whoami: $user"
+
+	user=$(who am i)
+	echo "who am i: $user"
 	
 	user=$(logname)
 	echo "logname: $user"
