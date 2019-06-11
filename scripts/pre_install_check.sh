@@ -13,11 +13,11 @@ if [ "$mariadb_check" = "Not Installed" ]; then
     echo 
     echo "Installer will continue and install mariadb"
 else
-    if [ -e "/srv/tools/scripts/password.txt" ];then
-	    sudo rm /srv/tools/scripts/password.txt
-    fi
-    root_password_status=$(/opt/local/lib/mariadb-10.2/bin/mysql -u root mysql -e 'SHOW TABLES' &> /srv/tools/scripts/password.txt)
-    test_password=$(grep "using password: NO" /srv/tools/scripts/password.txt || echo "")
+    test=""
+    root_password_status=$(/opt/local/lib/mariadb-10.2/bin/mysql -u root mysql -e 'SHOW TABLES' &> $test)
+    test_password=$(grep "using password: NO" $test || echo "")
+    echo "$test"
+    exit
     if [ -z "$test_password" ];
     then 
         while [ "$test_password" ]
