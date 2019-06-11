@@ -16,7 +16,7 @@ guiText "Gather information required for the installation" "Section"
 install_user=$(getCurrentUser)
 export install_user
 guiText "Installing system for $install_user" "Comment"
-if [ $install_user = "root" ]; then
+if [ "$install_user" = "root" ]; then
     exit "User cannot be root!: check previous steps and try running the installer again"
 fi
 exit
