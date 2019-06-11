@@ -160,7 +160,7 @@ function getCurrentUser() {
 	#else
 	#	echo $SUDO_USER
 	#fi
-	user=$(id -un)
+	user=$(id -p)
 	echo "$user"
 }
 export -f getCurrentUser
