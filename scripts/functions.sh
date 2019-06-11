@@ -155,7 +155,7 @@ export -f guiText
 
 function getCurrentUser() {
 	user=$(id -un)
-	echo "id: $user"
+	echo "$user"
 	#user=$(logname)
 	#echo "logname: $user"
 }
