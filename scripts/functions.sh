@@ -160,7 +160,7 @@ function getCurrentUser() {
 	#else
 	#	echo $SUDO_USER
 	#fi
-	user=$( whoami )
+	user=$( who am i grep $1 )
 	echo "$user"
 }
 export -f getCurrentUser
