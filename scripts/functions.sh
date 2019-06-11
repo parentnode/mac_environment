@@ -154,32 +154,8 @@ export -f guiText
 # because the current script will typically run as root (sudo)
 
 function getCurrentUser() {
-	
-	#if [ "$SUDO_USER" = "root" ];then
-	#	echo "$(logname)" 
-	#else
-	#	echo $SUDO_USER
-	#fi
-	user=$(id -un)
-	echo "id -un: $user"
-	
-	user=$(whoami)
-	echo "whoami: $user"
-
-	user=$(who am i)
-	echo "who am i: $user"
-	
 	user=$(logname)
 	echo "logname: $user"
-
-	user=$($SUDO_USER)
-	echo "SUDO_USER: $user"
-	
-	user=$($USER)
-	echo "USER: $user"
-	
-	
-	
 }
 export -f getCurrentUser
 
