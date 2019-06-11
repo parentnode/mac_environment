@@ -19,7 +19,7 @@ guiText "Installing system for $install_user" "Comment"
 if [ $install_user = "root" ]; then
     exit "User cannot be root!: check previous steps and try running the installer again"
 fi
-
+exit
 
 valid_answers=("[Y n]")
 install_software=$(ask "Install software (Y/n)" "${valid_answers[@]}")

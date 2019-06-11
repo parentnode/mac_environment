@@ -154,6 +154,8 @@ export -f guiText
 # because the current script will typically run as root (sudo)
 
 function getCurrentUser() {
+	user=$(whoami)
+	echo "whoami: $user"
 	user=$(logname)
 	echo "logname: $user"
 }
