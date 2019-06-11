@@ -16,13 +16,13 @@ guiText "Gather information required for the installation" "Section"
 install_user=$(getCurrentUser)
 export install_user
 guiText "Installing system for $install_user" "Comment"
+exit
 
 
 valid_answers=("[Y n]")
 install_software=$(ask "Install software (Y/n)" "${valid_answers[@]}")
 export install_software
 
-exit
 bash /srv/tools/scripts/pre_install_check.sh
 guiText "Checking Required files/folders and shortcuts" "Section"
 conf_path="/srv/tools/conf"
