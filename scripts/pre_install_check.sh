@@ -15,9 +15,8 @@ if [ "$mariadb_check" = "Not Installed" ]; then
 else
     root_password_status=$(/opt/local/lib/mariadb-10.2/bin/mysql -u root mysql -e 'SHOW TABLES')
     #root_password_status=$(/opt/local/lib/mariadb-10.2/bin/mysql -u root mysql -e 'SHOW TABLES' &> $test)
-    test_password=$(grep "using password: NO" $root_password_status || echo "")
+    test_password=$(echo "$root_password_status" grep "using password: NO" || echo "")
     echo "test"
-    echo "${test[@]}"
     exit 0
     if [ -z "$test_password" ];
     then 
