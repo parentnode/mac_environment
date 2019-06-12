@@ -13,7 +13,7 @@ if [ "$mariadb_check" = "Not Installed" ]; then
     echo 
     echo "Installer will continue and install mariadb"
 else
-    root_password_status=$(/opt/local/lib/mariadb-10.2/bin/mysql -u root mysql -e 'SHOW TABLES')
+    root_password_status=$(/opt/local/lib/mariadb-10.2/bin/mysql -u root mysql -e 'SHOW TABLES' &>)
     #root_password_status=$(/opt/local/lib/mariadb-10.2/bin/mysql -u root mysql -e 'SHOW TABLES' &> $test)
     test_password=$(grep "using password: NO" $root_password_status || echo "")
     echo "test"
