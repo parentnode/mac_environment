@@ -16,7 +16,7 @@ else
     root_password_status=$(/opt/local/lib/mariadb-10.2/bin/mysql -u root mysql -e 'SHOW TABLES' 2>&1)
     #root_password_status=$(/opt/local/lib/mariadb-10.2/bin/mysql -u root mysql -e 'SHOW TABLES' &> $test)
     test_password=$(echo "$root_password_status" | grep "using password: NO" || echo "")
-    echo "test $root_password_status"
+    echo "test $test_password"
     exit 0
     if [ -z "$test_password" ];
     then 
