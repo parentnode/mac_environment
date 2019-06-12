@@ -16,13 +16,11 @@ guiText "Gather information required for the installation" "Section"
 install_user=$(getCurrentUser)
 export install_user
 if [ "$install_user" = "root" ]; then
-    echo "User cannot be root!: check previous steps and try running the installer again"
-    exit 
+    guiText "User cannot be root!: check previous steps and try running the installer again" "Exit" 
 else
     guiText "Installing system for $install_user" "Comment"
-
 fi
-exit
+
 
 valid_answers=("[Y n]")
 install_software=$(ask "Install software (Y/n)" "${valid_answers[@]}")
@@ -36,7 +34,7 @@ checkFile "$conf_path/httpd-vhosts.conf" "Required file is missing from your con
 checkFile "$conf_path/php.ini" "Required file is missing from your configuration source"
 checkFile "$conf_path/my.cnf" "Required file is missing from your configuration source"
 checkFile "$conf_path/apache.conf" "Required file is missing from your configuration source"
-
+guiText "0" "Exit"
 #// TODO: create .bash_profile if it does not exist
 #// Has not been tested
 checkFileOrCreate "/Users/$install_user/.bash_profile" "/srv/tools/conf/bash_profile.start"
