@@ -9,19 +9,7 @@ function guiText(){
 			echo
 			echo "More info regarding $1-webstack installer"
 			echo "can be found on https://github.com/parentnode/$1-environment"
-			if [ "$1" = "mac" ]; then
-				echo "and https://parentnode.dk/blog/installing-the-web-stack-on-mac-os"
-			fi
-			if [ "$1" = "windows" ]; then
-				echo "and https://parentnode.dk/blog/installing-web-stack-on-windows-10"
-			fi
-			if [ "$3" = "ubuntu-client" ]; then
-				echo "and https://parentnode.dk/blog/installing-the-web-stack-on-ubuntu"
-			fi
-			if [ "$3" = "ubuntu-server" ]; then
-				echo "and https://parentnode.dk/blog/setup-ubuntu-linux-production-server-and-install-the-parentn"
-			fi
-			
+			echo "and https://parentnode.dk/blog/installing-the-web-stack-on-mac-os"
 			echo
 			echo
 			;;
@@ -39,104 +27,13 @@ function guiText(){
 			echo
 			echo
 			;;
-		#These following commentary cases are used for installing and configuring setup
-		"Start")
-			echo
-			echo
-			echo "Starting installation process for $1"
-			echo
-			echo
-			;;
-		"Download")
-			echo
-			echo "Downloading files for the installation of $1"
-			echo "This could take some time depending on your internet connection"
-			echo "and hardware configuration"
-			echo
-			echo
-			;;
-		"Exist")
-			echo
-			if [ -n "$3" ]; then
-				echo "$1 Does not exist "
-				echo "$3"
-			else
-				echo "$1 exists"
-			fi
-			echo ""
-			if [ -n "$4" ];
-			then
-				echo "checking for $4"
-			fi
-			echo
-			echo
-			;;
-		"Install")
-			echo
-			echo "Install $1"
-			if [ -n "$3" ]; then
-				echo "with $3"
-			fi
-			echo "Then run script again"
-			echo
-			;;
-		"Replace")
-			echo
-			echo "Replacing $1 with $3"
-			echo
-			;;
-		"Installed")
-			echo
-			echo "$1 Installed no need for more action at this point"
-			echo
-			;;
-		"Enable")
-			echo
-			echo "Enabling $1"
-			echo
-			;;
-		"Disable")
-			echo
-			echo "Disabling $2"
-			echo
-			;;
-		"Done")
-			echo
-			echo
-			echo "Installation process for $1 are done"
-			echo
-			echo
-			;;
-		"Skip")
-			echo
-			echo
-			echo "Skipping Installation process for $1"
-			echo
-			echo
-			;;
-		"Check")
-			echo
-			echo
-			echo "Checking if $1 are installed"
-			if [ -n "$3" ]; then 
-				echo "$3"
-			fi
-			echo 
-			;;
-		"Ok")
-			echo
-			echo "$1: OK"
-			echo
-			;;
 		"Exit")
 			echo "Exiting"
-			exit_message="Run script again when installed"
 			if [ !$1 = 0 ]; then
-				echo "look below for error specified"
-				echo "$exit_message"
+				echo "Look below for error specified and run steps again"
 				exit $1
 			else 
-				echo "$exit_message"
+				echo "Try again later"
 				exit $1
 			fi
 			;;
@@ -222,14 +119,14 @@ function upgrade(){
 		guiText "0" "Exit"
 		exit 0 
 	else
-   		guiText "$installed" "Exist"
+   		guiText "$installed" "Comment"
 		if [ "$2" ];
 		then
 			guiText "Uninstalling previous version" "Comment"
 			command "$2"
 		fi
 		if [ "$3" ];then
-			guiText "Installing a nother version" "Comment"
+			guiText "Installing an other version" "Comment"
 			command "$3"
 		fi
 	fi
@@ -270,14 +167,11 @@ export -f ask
 # TODO:
 function checkFile(){
 	if [ -e "$1" ]; then
-		guiText "$1" "Exist"
+		guiText "$1 exist" "Comment"
 	else 
-		guiText "$1" "Exist" "$2"
+		guiText "$1 does not exist" "Comment"
 		guiText "0" "Exit"
-		#echo "Not existing"
 	fi
-	#filename $1
-	#message $2
 }
 export -f checkFile
 
@@ -287,10 +181,10 @@ function checkFileOrCreate(){
 	source=$2
 
 	if [ ! -e "$destination" ]; then
-		guiText "$destination" "Exist" "Copying $1"
+		guiText "$destination does not exist Copying $1" "Comment"
 		sudo cp $source $destination
 	else
-		guiText "$destination" "Exist"
+		guiText "$destination exist" "Comment"
 	fi	
 }
 export -f checkFileOrCreate
@@ -299,9 +193,9 @@ export -f checkFileOrCreate
 function checkPath(){
 	path=$1
 	if [ -d "$path" ]; then
-		guiText "$path" "Exist"
+		guiText "$path exist" "Comment"
 	else
-		guiText "$path" "Exist" "Creating $path"
+		guiText "$path does not exist creating $path" "Comment"
 		command "$(mkdir -p "$path")"
 	fi
 }
