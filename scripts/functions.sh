@@ -50,7 +50,7 @@ export -f guiText
 function getUsername() {
 	echo "$(logname)"
 }
-export -f getCurrentUser
+export -f getUsername
 
 function enableSuperCow(){
 	cow="$(sudo ls 2>&1)"
