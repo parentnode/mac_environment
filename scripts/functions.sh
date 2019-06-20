@@ -53,8 +53,7 @@ function getUsername() {
 export -f getUsername
 
 function enableSuperCow(){
-	cow="$(sudo ls 2>&1)"
-	echo "$cow"
+	sudo ls 2>&1
 }
 export -f enableSuperCow
 
