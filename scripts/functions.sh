@@ -53,7 +53,7 @@ export -f guiText
 function getUsername() {
 	echo "$(logname)"
 }
-export -f getCurrentUser
+export -f getUsername
 
 function command(){
 	command=$1
