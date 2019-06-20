@@ -53,7 +53,7 @@ function getUsername() {
 export -f getUsername
 
 function enableSuperCow(){
-	sudo ls > /dev/null 2>&1
+	sudo ls &>/dev/null
 }
 export -f enableSuperCow
 
