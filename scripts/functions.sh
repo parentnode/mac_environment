@@ -50,9 +50,8 @@ export -f guiText
 # Get the username of current user by looking at the folder name of the current user directory
 # because the current script will typically run as root (sudo)
 
-function getCurrentUser() {
-	user=$(logname)
-	echo "$user"
+function getUsername() {
+	echo "$(logname)"
 }
 export -f getCurrentUser
 
