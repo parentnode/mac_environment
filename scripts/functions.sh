@@ -1,3 +1,17 @@
+#!/bin/bash -e
+
+# Get username for current user, display and store for later use
+getUsername() {
+	echo "$(logname)"
+}
+export -f getUsername
+
+# Invoke sudo command
+enableSuperCow(){
+	sudo ls &>/dev/null
+}
+export -f enableSuperCow
+
 function guiText(){
 	# Automatic comment format for simple setup as a text based gui
 	# eg. guiText "Redis" "Start"
@@ -46,16 +60,6 @@ function guiText(){
 	esac
 }
 export -f guiText
-
-function getUsername() {
-	echo "$(logname)"
-}
-export -f getUsername
-
-function enableSuperCow(){
-	sudo ls &>/dev/null
-}
-export -f enableSuperCow
 
 
 function command(){
