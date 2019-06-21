@@ -1,0 +1,7 @@
+#!/bin/bash -e
+# bash <(curl -s file:///srv/sites/parentnode/mac_environment/tests/run-tests.txt)
+
+##tests
+sudo /srv/sites/parentnode/mac_environment/tests/get_username.sh
+sudo /srv/sites/parentnode/mac_environment/tests/enable_super_cow.sh
+
