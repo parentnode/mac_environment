@@ -1,4 +1,6 @@
 source /srv/sites/parentnode/mac_environment/scripts/functions.sh
-echo "Checking sudo rights"
+echo ""
+echo "enableSuperCow test"
+echo ""
+
 enableSuperCow
-echo "Check done"
