@@ -5,3 +5,4 @@
 /srv/sites/parentnode/mac_environment/tests/enable_super_cow.sh
 sudo /srv/sites/parentnode/mac_environment/tests/get_username.sh
 sudo /srv/sites/parentnode/mac_environment/tests/output_handler.sh
+sudo /srv/sites/parentnode/mac_environment/tests/ask.sh
