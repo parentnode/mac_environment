@@ -9,7 +9,7 @@ testCommand "ps -Aclw" "${apache_status[@]}"
 echo
 redis_status=("redis")
 echo "Checking Redis status: "
-testCommand "ps -Aclw" "${valid_status[@]}"
+testCommand "ps -Aclw" "${redis_status[@]}"
 echo
 echo "Checking unzip version: "
 valid_version=("^UnZip ([6\.[0-9])")
