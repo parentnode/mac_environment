@@ -103,7 +103,22 @@ ask(){
 }
 export -f ask
 
+# Check if program/service are installed
+testCommand(){
+# Usage: returns a true if a program or service are located in 
+# P1: kommando
+# P2: array of valid responses
+	valid_response=("$@")
+	for ((i = 0; i < ${#valid_response[@]}; i++))
+	do
+		command_to_test=$($1 | grep -E "${valid_response[$i]}" || echo "")
+		if [ -n "$command_to_test" ]; then
+			echo "$command_to_test" 
+		fi
+	done
 
+}
+export -f testCommand
 
 function guiText(){
 	# Automatic comment format for simple setup as a text based gui
