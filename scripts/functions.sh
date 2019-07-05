@@ -120,6 +120,13 @@ testCommand(){
 }
 export -f testCommand
 
+checkGitCredential(){
+	value=$(git config user.$1)
+	echo "$value"
+
+}
+export -f checkGitCredential
+
 function guiText(){
 	# Automatic comment format for simple setup as a text based gui
 	# eg. guiText "Redis" "Start"
