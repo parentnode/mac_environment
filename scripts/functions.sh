@@ -18,7 +18,7 @@ outputHandler(){
 	#$2 - text for output
 	#$3,4,5 are extra text when needed
 	case $1 in 
-		"Comment")
+		"comment")
 			echo
 			echo "$2"
 			if [ -n "$3" ];
@@ -39,14 +39,14 @@ outputHandler(){
 			fi
 			echo
 			;;
-		"Section")
+		"section")
 			echo
 			echo 
 			echo "{---$2---}"	
 			echo
 			echo
 			;;
-		"Exit")
+		"exit")
 			echo
 			echo "$2 -- Goodbye see you soon"
 			exit 0
@@ -113,7 +113,7 @@ testCommand(){
 	do
 		command_to_test=$($1 | grep -E "${valid_response[$i]}" || echo "")
 		if [ -n "$command_to_test" ]; then
-			echo "$command_to_test" 
+			echo "true" 
 		fi
 	done
 
@@ -126,6 +126,43 @@ checkGitCredential(){
 
 }
 export -f checkGitCredential
+
+checkMariadbPassword(){
+	mariadb_installed_array=("(active)")
+	mariadb_installed=$(testCommand "port installed mariadb-*-server" "$mariadb_installed_array")
+	if [ "$mariadb_installed" = "true" ]; then
+		mariadb_status_array=("mysql")
+		mariadb_status=$(testCommand "ps -Aclw" "${mariadb_status_array[@]}")
+		if [ "$mariadb_status" = "true" ]; then 
+    		has_password=$(/opt/local/lib/mariadb-10.2/bin/mysql -u root mysql -e 'SHOW TABLES' 2>&1 | grep "using password: NO")
+			if [ -n "$has_password" ]; then
+				password_is_set="true"
+				echo "$password_is_set"
+			else 
+				password_is_set="false"
+				echo "$password_is_set"
+			fi
+		else 
+    		echo "mariadb service not running"
+			# start service
+			echo "Starting mariadb service $(sudo port load mariadb-10.2-server)"
+			#running the function again
+			checkMariadbPassword
+		fi
+	else 
+		password_is_set="false"
+		echo "$password_is_set"
+	fi
+
+} 
+export -f checkMariadbPassword
+
+
+
+
+
+
+
 
 function guiText(){
 	# Automatic comment format for simple setup as a text based gui

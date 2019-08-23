@@ -5,15 +5,12 @@ echo "Testing testCommand"
 echo 
 apache_status=("httpd")
 echo "Checking Apache2.4 status: "
-testCommand "ps -Aclw" "${apache_status[@]}"
-echo
-redis_status=("redis")
-echo "Checking Redis status: "
-testCommand "ps -Aclw" "${redis_status[@]}"
-echo
-echo "Checking unzip version: "
-valid_version=("^UnZip ([6\.[0-9])")
-testCommand "unzip -v" "${valid_version[@]}"
+#testCommand "ps -Aclw" "${apache_status[@]}"
+if [ "$(testCommand "ps -Aclw" "${apache_status[@]}")" = "true" ]; then 
+    echo "apache running"
+else 
+    echo "apache not running"
+fi
 
 # Usage: returns a true if a program or service are located in the installed services or programs
 # P1: kommando
