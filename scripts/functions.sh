@@ -164,10 +164,10 @@ function copyFile(){
 }
 export -f copyFile
 
-function fileExist(){
-
-}
-export -f fileExist
+#function fileExist(){
+#
+#}
+#export -f fileExist
 
 function guiText(){
 	# Automatic comment format for simple setup as a text based gui
