@@ -2,4 +2,5 @@
 source /srv/sites/parentnode/mac_environment/scripts/functions.sh
 
 echo "mariadb password test"
-checkMariadbPassword
+#checkMariadbPassword
+echo "$(checkMariadbPassword)"
