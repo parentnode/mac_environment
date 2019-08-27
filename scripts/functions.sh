@@ -157,12 +157,17 @@ checkMariadbPassword(){
 } 
 export -f checkMariadbPassword
 
+function copyFile(){
+	file_source=$1 
+	file_destination=$2
+	cp "$file_source" "$file_destination"
+}
+export -f copyFile
 
+function fileExist(){
 
-
-
-
-
+}
+export -f fileExist
 
 function guiText(){
 	# Automatic comment format for simple setup as a text based gui
@@ -329,18 +334,18 @@ function checkPath(){
 }
 export -f checkPath
 
-function copyFile(){
-
-	source=$1
-	destination=$2
-	if [ -f "$source" ]; then
-		sudo cp "$source" $destination
-	#else
-		#copyFolder "$source" "$destination"
-	fi
-
-}
-export -f copyFile
+#function copyFile(){
+#
+#	source=$1
+#	destination=$2
+#	if [ -f "$source" ]; then
+#		sudo cp "$source" $destination
+#	#else
+#		#copyFolder "$source" "$destination"
+#	fi
+#
+#}
+#export -f copyFile
 
 function copyFolder(){
 
