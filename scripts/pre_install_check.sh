@@ -54,6 +54,15 @@ gitConfigured "name"
 gitConfigured "email"
 
 git config --global credential.helper cache
+#if !command("git config --global --get push.default", true)) {
+#	command("git config --global push.default simple");
+#}
+#if(!command("git config --global --get credential.helper", true)) {
+#	command("git config --global credential.helper osxkeychain");
+#}
+#if(!command("git config --global --get core.autocrlf", true)) {
+#	command("git config --global core.autocrlf input");
+#}
 command "sudo chown $install_user:staff /Users/$install_user/.gitconfig"
 
 # Array containing major releases of Xcode
