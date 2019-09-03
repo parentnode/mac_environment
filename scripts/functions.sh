@@ -164,10 +164,18 @@ function copyFile(){
 }
 export -f copyFile
 
-#function fileExist(){
-#
-#}
-#export -f fileExist
+function fileExist(){
+	file=$1
+	if [ -f "$file" ]; then 
+		echo "true"
+	else
+		echo "false" 
+	fi
+}
+export -f fileExist
+
+
+
 
 function guiText(){
 	# Automatic comment format for simple setup as a text based gui
