@@ -174,6 +174,19 @@ function fileExist(){
 }
 export -f fileExist
 
+function checkFileContent(){
+	query="$1"
+	source=$(<$2)
+	check_query=$(echo "$source" | grep "$query" || echo "")
+	if [ -n "$check_query" ]; then
+		echo "true"
+	fi 
+}
+export -f checkFileContent
+
+
+
+
 
 
 
