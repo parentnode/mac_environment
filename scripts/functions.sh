@@ -187,7 +187,7 @@ export -f checkFileContent
 function syncronizeAlias(){
 	input=($(</srv/sites/parentnode/mac_environment))
 	#key_array=()
-	echo "${input[2]}"
+	echo "Alias: ${input[2]}"
 	new_value="new text"
 	#sed -i '' "s/$old_value/$new_value/g" /srv/sites/parentnode/mac_environment/tests/syncronize_alias_test_files/output
 
