@@ -185,7 +185,8 @@ function checkFileContent(){
 export -f checkFileContent
 
 function syncronizeAlias(){
-	#input=($(</srv/sites/parentnode/mac_environment))
+	input=($(</srv/sites/parentnode/mac_environment))
+	echo "${!input[1]}"
 	#key_array=()
 	echo "Alias:"
 	#new_value="new text"
