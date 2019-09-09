@@ -184,7 +184,13 @@ function checkFileContent(){
 }
 export -f checkFileContent
 
+function syncronizeAlias(){
+	old_value="old text"
+	new_value="new text"
+	sed -i "s/$old_value/$new_value/g" /srv/sites/parentnode/mac_environment/tests/syncronize_alias_test_files/output
 
+}
+export -f syncronizeAlias
 
 
 
