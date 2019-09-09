@@ -188,7 +188,7 @@ function syncronizeAlias(){
 	input=($(</srv/sites/parentnode/mac_environment))
 	#key_array=()
 	echo "Alias:"
-	new_value="new text"
+	#new_value="new text"
 	#sed -i '' "s/$old_value/$new_value/g" /srv/sites/parentnode/mac_environment/tests/syncronize_alias_test_files/output
 
 }
