@@ -1,4 +1,6 @@
 #!/bin/bash -e
+
+# testing script locally: bash <(curl -s file:///srv/sites/parentnode/parentnode_dk/theme/www/installers/install-ubuntu-stack.txt)
 # bash <(curl -s file:///srv/sites/parentnode/mac_environment/tests/run-tests.txt)
 
 ##tests
