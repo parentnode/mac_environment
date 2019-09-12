@@ -228,6 +228,19 @@ checkFolderExistOrCreate(){
 }
 export -f checkFolderExistOrCreate
 
+
+command(){
+	if [[ $2 == true ]]; then
+        cmd=$($1 1> /dev/null)
+    else
+        cmd=$($1)
+    fi
+    echo "$cmd"
+}
+export -f command
+
+
+
 function guiText(){
 	# Automatic comment format for simple setup as a text based gui
 	# eg. guiText "Redis" "Start"
@@ -278,16 +291,16 @@ function guiText(){
 export -f guiText
 
 
-function command(){
-	command=$1
-	no_echo=$2
-	if [ -z "$no_echo" ]; then
-		$command
-	else
-		$command > /dev/null 2>&1
-	fi
-}
-export -f command
+#function command(){
+#	command=$1
+#	no_echo=$2
+#	if [ -z "$no_echo" ]; then
+#		$command
+#	else
+#		$command > /dev/null 2>&1
+#	fi
+#}
+#export -f command
 
 function isInstalled(){
 	command="$1"
