@@ -157,14 +157,14 @@ checkMariadbPassword(){
 } 
 export -f checkMariadbPassword
 
-function copyFile(){
+copyFile(){
 	file_source=$1 
 	file_destination=$2
 	cp "$file_source" "$file_destination"
 }
 export -f copyFile
 
-function fileExist(){
+fileExist(){
 	file=$1
 	if [ -f "$file" ]; then 
 		echo "true"
@@ -174,7 +174,7 @@ function fileExist(){
 }
 export -f fileExist
 
-function checkFileContent(){
+checkFileContent(){
 	query="$1"
 	source=$(<$2)
 	check_query=$(echo "$source" | grep "$query" || echo "")
@@ -184,12 +184,13 @@ function checkFileContent(){
 }
 export -f checkFileContent
 
-function trimString(){
+trimString(){
 	trim=$1
 	echo "${trim}" | sed -e 's/^[ \t]*//'
 }
 export -f trimString
-function syncronizeAlias(){
+
+syncronizeAlias(){
 	# Creates backup of default IFS
 	OLDIFS=$IFS
 	# Set IFS to seperate strings by newline not space
@@ -210,7 +211,7 @@ function syncronizeAlias(){
 }
 export -f syncronizeAlias
 
-function updateContent(){
+updateContent(){
 	sed -i '' "/$1/,/$1/d" $3 
     readdata=$( < $2)
     echo "$readdata" | sed -n "/$1/,/$1/p" >> "$3"
