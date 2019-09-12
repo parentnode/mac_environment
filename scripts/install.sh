@@ -23,7 +23,7 @@ outputHandler "comment" "Installing system for $install_user"
 
 echo "Choices"
 valid_answers=("[Y n]")
-install_software=$(ask "Install software (Y/n)" "${valid_answers[@]}")
+install_software=$(ask "Install software (Y/n)" "${valid_answers[@]}" "install_software")
 export install_software
 
 exit 0
