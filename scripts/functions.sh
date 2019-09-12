@@ -218,8 +218,10 @@ updateContent(){
 }
 export -f updateContent
 
-
-
+checkFolderExistOrCreate(){
+	echo "checkFolderExistOrCreate"
+}
+export -f checkFolderExistOrCreate
 
 function guiText(){
 	# Automatic comment format for simple setup as a text based gui
