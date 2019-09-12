@@ -16,7 +16,7 @@ outputHandler "section" "Gather information required for the installation"
 install_user=$(getUsername)
 export install_user
 
-enableSupercow
+enableSuperCow
 
 
 outputHandler "comment" "Installing system for $install_user"
