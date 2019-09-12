@@ -184,16 +184,32 @@ function checkFileContent(){
 }
 export -f checkFileContent
 
+function trimString(){
+	trim=$1
+	echo "${trim}" | sed -e 's/^[ \t]*//'
+}
+export -f trimString
 function syncronizeAlias(){
-	input=($(</srv/sites/parentnode/mac_environment/tests/syncronize_alias_test_files/input))
-	echo "${input[*]}"
-	#key_array=()
-	echo "Alias:"
-	#new_value="new text"
-	#sed -i '' "s/$old_value/$new_value/g" /srv/sites/parentnode/mac_environment/tests/syncronize_alias_test_files/output
-
+	# Creates backup of default IFS
+	OLDIFS=$IFS
+	# Set IFS to seperate strings by newline not space
+	IFS=$'\n'
+	# Default alias file
+	input="($(</srv/sites/parentnode/mac_environment/tests/syncronize_alias_test_files/input))"
+	# Alias line looks like this key: "alias sites" alias sites="cd /srv/sites"
+	# Key part of alias line: alias sites  
+	key_array=($(echo "$input" | grep "^\"alias" | cut -d \" -f2))	
+	# Value part of alias line: alias sites="cd /srv/sites" 
+	value_array=($(echo "$input" | grep "^\"alias" | cut -d \" -f3,4,5))
+	# Revert to default IFS
+	IFS=$OLDIFS
+	for ((i = 0; i < "${#key_array[@]}"; i++))
+	do
+		sed -i '' "s%${key_array[$i]}.*%$(trimString "${value_array[$i]}")%g" /srv/sites/parentnode/mac_environment/tests/syncronize_alias_test_files/output
+	done
 }
 export -f syncronizeAlias
+
 
 
 
