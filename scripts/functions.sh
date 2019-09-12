@@ -195,7 +195,7 @@ function syncronizeAlias(){
 	# Set IFS to seperate strings by newline not space
 	IFS=$'\n'
 	# Default alias file
-	input="($(</srv/sites/parentnode/mac_environment/tests/syncronize_alias_test_files/input))"
+	source="($(</srv/sites/parentnode/mac_environment/tests/syncronize_alias_test_files/source))"
 	# Alias line looks like this key: "alias sites" alias sites="cd /srv/sites"
 	# Key part of alias line: alias sites  
 	key_array=($(echo "$input" | grep "^\"alias" | cut -d \" -f2))	
@@ -205,12 +205,17 @@ function syncronizeAlias(){
 	IFS=$OLDIFS
 	for ((i = 0; i < "${#key_array[@]}"; i++))
 	do
-		sed -i '' "s%${key_array[$i]}.*%$(trimString "${value_array[$i]}")%g" /srv/sites/parentnode/mac_environment/tests/syncronize_alias_test_files/output
+		sed -i '' "s%${key_array[$i]}.*%$(trimString "${value_array[$i]}")%g" /srv/sites/parentnode/mac_environment/tests/syncronize_alias_test_files/destination
 	done
 }
 export -f syncronizeAlias
 
-
+function updateContent(){
+	sed -i '' "/$1/,/$1/d" $3 
+    readdata=$( < $2)
+    echo "$readdata" | sed -n "/$1/,/$1/p" >> "$3"
+}
+export -f updateContent
 
 
 

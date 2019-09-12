@@ -12,4 +12,5 @@
 #sudo /srv/sites/parentnode/mac_environment/tests/copy_file.sh
 #sudo /srv/sites/parentnode/mac_environment/tests/file_exist.sh
 #sudo /srv/sites/parentnode/mac_environment/tests/check_file_content.sh
-sudo /srv/sites/parentnode/mac_environment/tests/syncronize_alias.sh
+#sudo /srv/sites/parentnode/mac_environment/tests/syncronize_alias.sh
+sudo /srv/sites/parentnode/mac_environment/tests/update_content.sh
