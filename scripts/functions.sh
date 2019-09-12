@@ -219,7 +219,12 @@ updateContent(){
 export -f updateContent
 
 checkFolderExistOrCreate(){
-	echo "checkFolderExistOrCreate"
+	if [ ! -e "$1" ]; then
+		echo "Creating folder"
+		mkdir $1
+	else
+		echo "Folder Exist"
+	fi
 }
 export -f checkFolderExistOrCreate
 
