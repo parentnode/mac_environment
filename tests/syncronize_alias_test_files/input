@@ -3,7 +3,7 @@
 
 
 # Development environment tools
-"alias update_dev_env"
+#"alias update_dev_env"
 #"alias update_dev_env" alias update_dev_env="php /srv/tools/scripts/update.php"
 
 # Apache and mysql shortcuts
