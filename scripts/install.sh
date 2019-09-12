@@ -20,13 +20,13 @@ enableSuperCow
 
 
 outputHandler "comment" "Installing system for $install_user"
-exit 0
 
 
 valid_answers=("[Y n]")
 install_software=$(ask "Install software (Y/n)" "${valid_answers[@]}")
 export install_software
 
+exit 0
 bash /srv/tools/scripts/pre_install_check.sh
 guiText "0" "Exit"
 guiText "Checking Required files/folders and shortcuts" "Section"
