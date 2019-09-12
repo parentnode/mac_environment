@@ -11,15 +11,16 @@ echo ""
 #
 source /srv/tools/scripts/functions.sh
 
-guiText "Gather information required for the installation" "Section"
+outputHandler "section" "Gather information required for the installation"
 
-install_user=$(getCurrentUser)
+install_user=$(getUsername)
 export install_user
-if [ "$install_user" = "root" ]; then
-    guiText "User cannot be root!: check previous steps and try running the installer again" "Exit" 
-else
-    guiText "Installing system for $install_user" "Comment"
-fi
+
+enableSupercow
+
+
+outputHandler "comment" "Installing system for $install_user"
+exit 0
 
 
 valid_answers=("[Y n]")
