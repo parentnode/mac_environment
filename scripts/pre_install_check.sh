@@ -94,14 +94,14 @@ if [ -z $(command "git config --global --get core.autocrlf") ]; then
 	command "git config --global core.autocrlf input"
 fi
 command "sudo chown $install_user:staff /Users/$install_user/.gitconfig"
-exit 0
 
 # Array containing major releases of Xcode
 
-guiText "Checking for xcode" "Comment"
+outputHandler "comment" "Checking for xcode"
 xcode_array=( "Xcode 4" "Xcode 5" "Xcode 6" "Xcode 7" "Xcode 8" "Xcode 9" "Xcode 10" )
-upgrade "$( isInstalled "xcodebuild -version" "${xcode_array[@]}" )"
+testCommand "xcodebuild -version" "${xcode_array[@]}"
 
+exit 0
 
 guiText "Checking for Xcode command line tools version" "Comment"
 xcode_array_cl=( "version: 6" "version: 7" "version: 8" "version: 9" "version: 10" )
