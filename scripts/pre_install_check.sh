@@ -114,7 +114,6 @@ if [ $(testCommand "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "${xco
 else
     outputHandler "exit" "Install Xcode Command Line tools with app store and try again"
 fi
-exit 0
 
 
 outputHandler "comment" "Checking for Macports"
@@ -126,4 +125,5 @@ if [ $(testCommand "port version" "${macports_array[@]}") = "true" ]; then
 else
     outputHandler "exit" "Update macports and try again"
 fi
+exit 0
 
