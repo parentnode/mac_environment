@@ -99,8 +99,10 @@ command "sudo chown $install_user:staff /Users/$install_user/.gitconfig"
 
 outputHandler "comment" "Checking for xcode"
 xcode_array=( "Xcode 4" "Xcode 5" "Xcode 6" "Xcode 7" "Xcode 8" "Xcode 9" "Xcode 10" )
-testCommand "xcodebuild -version" "${xcode_array[@]}"
-
+#testCommand "xcodebuild -version" "${xcode_array[@]}"
+if [ $(testCommand "xcodebuild -version" "${xcode_array[@]}") = "true" ]; then
+    echo "Xcode installed"
+fi
 exit 0
 
 guiText "Checking for Xcode command line tools version" "Comment"
