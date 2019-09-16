@@ -29,7 +29,6 @@ if [ "$(checkMariadbPassword)" = "false" ]; then
 else
     outputHandler "comment" "Mariadb password allready set up"
 fi
-exit 0
 
 #db_response=$(command "("/opt/local/lib/mariadb-10.2/bin/mysql -u root mysql -e 'SHOW TABLES'")" "false")
 #echo "$test_password"
@@ -83,15 +82,18 @@ gitConfigured "name"
 gitConfigured "email"
 
 git config --global credential.helper cache
-#if !command("git config --global --get push.default", true)) {
-#	command("git config --global push.default simple");
-#}
-#if(!command("git config --global --get credential.helper", true)) {
-#	command("git config --global credential.helper osxkeychain");
-#}
-#if(!command("git config --global --get core.autocrlf", true)) {
-#	command("git config --global core.autocrlf input");
-#}
+if [ -z command "git config --global --get push.default" ]; then 
+	command "git config --global push.default simple"
+fi
+
+if [ -z command "git config --global --get credential.helper" ]; then 
+    command "git config --global credential.helper osxkeychain"
+fi
+
+if [ -z command "git config --global --get core.autocrlf" ]; then
+	command "git config --global core.autocrlf input"
+fi
+exit 0
 command "sudo chown $install_user:staff /Users/$install_user/.gitconfig"
 
 # Array containing major releases of Xcode
