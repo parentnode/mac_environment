@@ -74,7 +74,7 @@ ask(){
 	valid_answers=("$2")
 	
 	
-	if [ "$3" = "Password" ]; then
+	if [ "$3" = "password" ]; then
 		read -s -p "$1: "$'\n' question
 	else 
 		read -p "$1: " question 
@@ -87,13 +87,11 @@ ask(){
 			echo "$question"
         else
 			#ask "$1" "${valid_answers[@]}"
-			if [ "$3" = "Password" ];
+			if [ "$3" = "password" ];
 			then
-				ask "Invalid $3, try again" "$2" "$3"
-				
+				ask "Invalid $3, try again" "$2" "$3"	
 			else
 				ask "Invalid $3, try again" "$2" "$3"
-				
 			fi
         fi
 
