@@ -82,15 +82,15 @@ gitConfigured "name"
 gitConfigured "email"
 
 git config --global credential.helper cache
-if [ -z command "git config --global --get push.default" ]; then 
+if [ -z $(command "git config --global --get push.default") ]; then 
 	command "git config --global push.default simple"
 fi
 
-if [ -z command "git config --global --get credential.helper" ]; then 
+if [ -z $(command "git config --global --get credential.helper") ]; then 
     command "git config --global credential.helper osxkeychain"
 fi
 
-if [ -z command "git config --global --get core.autocrlf" ]; then
+if [ -z $(command "git config --global --get core.autocrlf") ]; then
 	command "git config --global core.autocrlf input"
 fi
 exit 0
