@@ -2,46 +2,74 @@ outputHandler "section" "Checking for tools required for the installation proces
 
 outputHandler "section" "Checking for existing mariadb setup"
 # MYSQL ROOT PASSWORD
+if [ "$(checkMariadbPassword)" = "false" ]; then
+    db_root_password1=$(ask "Enter mariadb password" "${password_array[@]}" "password")
+    echo
+    db_root_password2=$(ask "Verify mariadb password" "${password_array[@]}" "password")
+    echo
+    if [ "$db_root_password1" != "$db_root_password2" ]; then
+        while [ true ]
+        do 
+            echo "Passwords doesn't match"
+            echo
+            db_root_password1=$(ask "Enter mariadb password" "${password_array[@]}" "password")
+            echo
+            db_root_password2=$(ask "Verify mariadb password" "${password_array[@]}" "password")
+            echo
+            if [ "$db_root_password1" == "$db_root_password2" ]; then
+                echo "Passwords Match"
+                break
+            fi
+            export db_root_password1
+        done
+    else
+        echo "Password Match"
+        export db_root_password1
+    fi
+else
+    outputHandler "comment" "Mariadb password allready set up"
+fi
+exit 0
 
 #db_response=$(command "("/opt/local/lib/mariadb-10.2/bin/mysql -u root mysql -e 'SHOW TABLES'")" "false")
 #echo "$test_password"
-allowed_mariadb_server=("mariadb-10.2-server")
-mariadb_check=$(testCommand "port installed" "${allowed_mariadb_server[@]}")
-echo "$mariadb_check"
-exit 0
-if [ "$mariadb_check" = "Not Installed" ]; then
-    echo "$mariadb_check"
-    echo 
-    echo "Installer will continue and install mariadb"
-else
-    root_password_status=$(/opt/local/lib/mariadb-10.2/bin/mysql -u root mysql -e 'SHOW TABLES' 2>&1)
-    test_password=$(echo "$root_password_status" | grep -o "using password: YES" || echo "")
-    if [ -z "$test_password" ]; then
-        echo "$test_password"
-    fi
-    exit 0
-    if [ -z "$test_password" ];
-    then 
-        while [ "$test_password" ]
-        do
-            valid_password=("[A-Za-z0-9 \! \@ \— ]{8,30}")
-            maria_db_password=$(ask "Enter password" "${valid_password[@]}" "true" )
-            echo
-            verify_maria_db_password=$(ask "Verify password" "${valid_password[@]}" "true")
-            echo
-            if [ "$maria_db_password" != "$verify_maria_db_password" ]; then
-                echo "Password do not match"
-                echo "Try again"
-                echo
-            else
-                echo "Password match"
-                command "sudo /opt/local/lib/mariadb-10.2/bin/mysqladmin -u root password '"$maria_db_password"'" 
-            fi
-        done
-    else
-        echo "Password previously set"
-    fi
-fi
+#allowed_mariadb_server=("mariadb-10.2-server")
+
+#mariadb_check=$(testCommand "port installed" "${allowed_mariadb_server[@]}")
+#echo "$mariadb_check"
+#exit 0
+#if [[ "$mariadb_check" != "true" ]]; then
+#    echo "$mariadb_check"
+#    echo 
+#    echo "Mariadb not installed"
+#else
+#    root_password_status=$(/opt/local/lib/mariadb-10.2/bin/mysql -u root mysql -e 'SHOW TABLES' 2>&1)
+#    test_password=$(echo "$root_password_status" | grep -o "using password: YES" || echo "")
+#    if [ -z "$test_password" ]; then
+#        echo "$test_password"
+#    fi
+#    if [ -z "$test_password" ];
+#    then 
+#        while [ "$test_password" ]
+#        do
+#            valid_password=("[A-Za-z0-9 \! \@ \— ]{8,30}")
+#            maria_db_password=$(ask "Enter password" "${valid_password[@]}" "password" )
+#            echo
+#            verify_maria_db_password=$(ask "Verify password" "${valid_password[@]}" "password")
+#            echo
+#            if [ "$maria_db_password" != "$verify_maria_db_password" ]; then
+#                echo "Password do not match"
+#                echo "Try again"
+#                echo
+#            else
+#                echo "Password match"
+#                command "sudo /opt/local/lib/mariadb-10.2/bin/mysqladmin -u root password '"$maria_db_password"'" 
+#            fi
+#        done
+#    else
+#        echo "Password previously set"
+#    fi
+#fi
 
 
 # SETTING DEFAULT GIT USER
