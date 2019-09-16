@@ -93,8 +93,8 @@ fi
 if [ -z $(command "git config --global --get core.autocrlf") ]; then
 	command "git config --global core.autocrlf input"
 fi
-exit 0
 command "sudo chown $install_user:staff /Users/$install_user/.gitconfig"
+exit 0
 
 # Array containing major releases of Xcode
 
