@@ -102,12 +102,19 @@ xcode_array=( "Xcode 4" "Xcode 5" "Xcode 6" "Xcode 7" "Xcode 8" "Xcode 9" "Xcode
 #testCommand "xcodebuild -version" "${xcode_array[@]}"
 if [ $(testCommand "xcodebuild -version" "${xcode_array[@]}") = "true" ]; then
     echo "Xcode installed "
+else
+    outputHandler "exit" "Install Xcode and try again"
+fi
+
+outputHandler "comment" "Checking for Xcode command line tools version"
+xcode_array_cl=( "version: 6" "version: 7" "version: 8" "version: 9" "version: 10" )
+#upgrade "$(isInstalled "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "${xcode_array_cl[@]}")" "" "xcode-select --install"
+if [ $(testCommand "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "${xcode_array_cl[@]}") = "true" ]; then 
+    echo "Xcode Command Line tools installed"
+else
+    outputHandler "exit" "Install Xcode Command Line tools and try again"
 fi
 exit 0
-
-guiText "Checking for Xcode command line tools version" "Comment"
-xcode_array_cl=( "version: 6" "version: 7" "version: 8" "version: 9" "version: 10" )
-upgrade "$(isInstalled "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "${xcode_array_cl[@]}")" "" "xcode-select --install"
 
 
 guiText "Checking for Macports" "Comment"
