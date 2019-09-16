@@ -21,15 +21,13 @@ enableSuperCow
 
 outputHandler "comment" "Installing system for $install_user"
 
-echo "Choices"
 valid_answers=("[Y n]")
 install_software=$(ask "Install software (Y/n)" "${valid_answers[@]}" "install_software")
 export install_software
 
-exit 0
 bash /srv/tools/scripts/pre_install_check.sh
-guiText "0" "Exit"
-guiText "Checking Required files/folders and shortcuts" "Section"
+exit 0
+outputHandler "section" "Checking Required files/folders and shortcuts"
 conf_path="/srv/tools/conf"
 checkFile "$conf_path/httpd.conf" "Required file is missing from your configuration source"
 checkFile "$conf_path/httpd-vhosts.conf" "Required file is missing from your configuration source"
