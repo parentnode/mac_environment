@@ -1,13 +1,14 @@
-guiText "Checking for tools required for the installation process" "Section"
+outputHandler "section" "Checking for tools required for the installation process"
 
-guiText "Checking for existing mariadb setup" "Section"
+outputHandler "section" "Checking for existing mariadb setup"
 # MYSQL ROOT PASSWORD
 
 #db_response=$(command "("/opt/local/lib/mariadb-10.2/bin/mysql -u root mysql -e 'SHOW TABLES'")" "false")
 #echo "$test_password"
 allowed_mariadb_server=("mariadb-10.2-server")
-mariadb_check=$(isInstalled "port installed" "${allowed_mariadb_server[@]}")
-
+mariadb_check=$(testCommand "port installed" "${allowed_mariadb_server[@]}")
+echo "$mariadb_check"
+exit 0
 if [ "$mariadb_check" = "Not Installed" ]; then
     echo "$mariadb_check"
     echo 
