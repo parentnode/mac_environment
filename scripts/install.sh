@@ -54,29 +54,30 @@ outputHandler "section" "Checking Required files/folders and shortcuts"
 #
 #checkPath "/Users/$install_user/Sites/apache" 
 #checkPath "/Users/$install_user/Sites/apache/logs"
+#    
+bash /srv/tools/scripts/install_software.sh
 #
 ## Software script
 #if test "$install_software" = "Y"; then
-#    bash /srv/tools/scripts/install_software.sh
 #else
 #    guiText "Skipping software installation" "Comment"
 #fi
 
-#test placeholder replacing
-command "sudo chown $install_user:staff ~/Sites"
-
-#mysql paths
-checkPath "/opt/local/var/run/mariadb-10.2"
-checkPath "/opt/local/var/db/mariadb-10.2"
-checkPath "/opt/local/etc/mariadb-10.2"
-checkPath "/opt/local/share/mariadb-10.2"
-
-
-#Mysql preparations
-command "sudo chown -R mysql:mysql /opt/local/var/db/mariadb-10.2"
-command "sudo chown -R mysql:mysql /opt/local/var/run/mariadb-10.2"
-command "sudo chown -R mysql:mysql /opt/local/etc/mariadb-10.2"
-command "sudo chown -R mysql:mysql /opt/local/share/mariadb-10.2"
+##test placeholder replacing
+#command "sudo chown $install_user:staff ~/Sites"
+#
+##mysql paths
+#checkPath "/opt/local/var/run/mariadb-10.2"
+#checkPath "/opt/local/var/db/mariadb-10.2"
+#checkPath "/opt/local/etc/mariadb-10.2"
+#checkPath "/opt/local/share/mariadb-10.2"
+#
+#
+##Mysql preparations
+#command "sudo chown -R mysql:mysql /opt/local/var/db/mariadb-10.2"
+#command "sudo chown -R mysql:mysql /opt/local/var/run/mariadb-10.2"
+#command "sudo chown -R mysql:mysql /opt/local/etc/mariadb-10.2"
+#command "sudo chown -R mysql:mysql /opt/local/share/mariadb-10.2"
 
 
 #// set permissions
