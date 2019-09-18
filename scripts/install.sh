@@ -26,34 +26,35 @@ install_software=$(ask "Install software (Y/n)" "${valid_answers[@]}" "install_s
 export install_software
 
 bash /srv/tools/scripts/pre_install_check.sh
+bash /srv/tools/scripts/check_directories.sh
 exit 0
 outputHandler "section" "Checking Required files/folders and shortcuts"
-conf_path="/srv/tools/conf"
-checkFile "$conf_path/httpd.conf" "Required file is missing from your configuration source"
-checkFile "$conf_path/httpd-vhosts.conf" "Required file is missing from your configuration source"
-checkFile "$conf_path/php.ini" "Required file is missing from your configuration source"
-checkFile "$conf_path/my.cnf" "Required file is missing from your configuration source"
-checkFile "$conf_path/apache.conf" "Required file is missing from your configuration source"
+#conf_path="/srv/tools/conf"
+#checkFile "$conf_path/httpd.conf" "Required file is missing from your configuration source"
+#checkFile "$conf_path/httpd-vhosts.conf" "Required file is missing from your configuration source"
+#checkFile "$conf_path/php.ini" "Required file is missing from your configuration source"
+#checkFile "$conf_path/my.cnf" "Required file is missing from your configuration source"
+#checkFile "$conf_path/apache.conf" "Required file is missing from your configuration source"
 
 #// TODO: create .bash_profile if it does not exist
 #// Has not been tested
-checkFileOrCreate "/Users/$install_user/.bash_profile" "/srv/tools/conf/bash_profile.start"
-
-checkPath "/Users/$install_user/Sites"
+#checkFileOrCreate "/Users/$install_user/.bash_profile" "/srv/tools/conf/bash_profile.start"
 #
-sudo chown $install_user:staff ~/Sites
-
-checkPath "/srv"
-if [ -d "/srv/sites" ]; then 
-    echo "/srv/sites exists"
-else
-    echo "Creating symlink"
-    sudo ln -s /Users/$install_user/Sites /srv/sites
-fi
-
-checkPath "/Users/$install_user/Sites/apache" 
-checkPath "/Users/$install_user/Sites/apache/logs"
-
+#checkPath "/Users/$install_user/Sites"
+##
+#sudo chown $install_user:staff ~/Sites
+#
+#checkPath "/srv"
+#if [ -d "/srv/sites" ]; then 
+#    echo "/srv/sites exists"
+#else
+#    echo "Creating symlink"
+#    sudo ln -s /Users/$install_user/Sites /srv/sites
+#fi
+#
+#checkPath "/Users/$install_user/Sites/apache" 
+#checkPath "/Users/$install_user/Sites/apache/logs"
+#
 ## Software script
 #if test "$install_software" = "Y"; then
 #    bash /srv/tools/scripts/install_software.sh
