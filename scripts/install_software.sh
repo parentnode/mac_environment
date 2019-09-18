@@ -1,51 +1,66 @@
 #!/bin/bash -e
 
-guiText "Installing Software" "Section"
+outputHandler "section" "Installing Software"
 
-guiText "Pointing Xcode towards the Developer directory instead of Xcode application bundle" "Comment"
+outputHandler "comment" "Pointing Xcode towards the Developer directory instead of Xcode application bundle"
 command "sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer/"
 
-guiText "Update macports" "Comment"
+outputHandler "comment" "Update macports"
 command "sudo port selfupdate"
 
-guiText "Enable getting PID of application really easy" "Comment"
+outputHandler "comment" "Enable getting PID of application really easy"
 command "sudo port install pidof"
 
-guiText "Installing MariaDB" "Comment"
+outputHandler "comment" "Installing MariaDB"
 command "sudo port -N install mariadb-10.2-server"
 initial_install_array=("php72" "apache2" "mariadb-server" "pear" "php72-apache2handler")
 for ((i=0; i < ${#initial_install_array[@]}; i++))
 do 
     command "sudo port -N install ${initial_install_array[$i]}"
 done
-guiText "Installing PHP72-mysql" "Comment"
+outputHandler "comment" "Installing PHP72-mysql"
 command "sudo port -N install php72-mysql"
-guiText "Installing PHP72-openssl" "Comment"
+outputHandler "comment" "Installing PHP72-openssl"
 command "sudo port -N install php72-openssl"
-guiText "Installing PHP72-mbstring" "Comment"
+outputHandler "comment" "Installing PHP72-mbstring"
 command "sudo port -N install php72-mbstring"
-guiText "Installing PHP72-curl" "Comment"
+outputHandler "comment" "Installing PHP72-curl"
 command "sudo port -N install php72-curl"
-guiText "Installing PHP72-zip" "Comment"
+outputHandler "comment" "Installing PHP72-zip"
 command "sudo port -N install php72-zip"
-guiText "Installing PHP72-imagick" "Comment"
+outputHandler "comment" "Installing PHP72-imagick"
 command "sudo port -N install php72-imagick"
-guiText "Installing PHP72-igbinary" "Comment"
+outputHandler "comment" "Installing PHP72-igbinary"
 command "sudo port -N install php72-igbinary"
-#guiText "Installing PHP72-memcached" "Comment"
+#outputHandler "Installing PHP72-memcached"
 ##command "sudo port install php72-memcached"
-guiText "Installing PHP72-redis" "Comment"
+outputHandler "comment" "Installing PHP72-redis"
 command "sudo port -N install php72-redis"
-guiText "Set PHP php72" "Comment" 
+outputHandler "comment" "Set PHP php72" 
 command "sudo port select --set php php72"
-guiText "Loading redis" "Comment"
+outputHandler "comment" "Loading redis"
 command "sudo port load redis"
-guiText "Installing ffmpeg" "Comment"
+outputHandler "comment" "Installing ffmpeg"
 command "sudo port -N install ffmpeg +nonfree"
 #autostart apache on boot
-guiText "Load apache2" "Comment"
+outputHandler "comment" "Load apache2"
 command "sudo port load apache2"
-guiText "Software Installed" "Comment"
+outputHandler "comment" "Software Installed"
+
+#test placeholder replacing
+command "sudo chown $install_user:staff ~/Sites"
+
+#mysql paths
+checkFolderExistOrCreate "/opt/local/var/run/mariadb-10.2"
+checkFolderExistOrCreate "/opt/local/var/db/mariadb-10.2"
+checkFolderExistOrCreate "/opt/local/etc/mariadb-10.2"
+checkFolderExistOrCreate "/opt/local/share/mariadb-10.2"
 
 
-#guiText "Installing "
+#Mysql preparations
+command "sudo chown -R mysql:mysql /opt/local/var/db/mariadb-10.2"
+command "sudo chown -R mysql:mysql /opt/local/var/run/mariadb-10.2"
+command "sudo chown -R mysql:mysql /opt/local/etc/mariadb-10.2"
+command "sudo chown -R mysql:mysql /opt/local/share/mariadb-10.2"
+
+#outputHandler "Installing "
