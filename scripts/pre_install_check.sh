@@ -125,5 +125,4 @@ if [ $(testCommand "port version" "${macports_array[@]}") = "true" ]; then
 else
     outputHandler "exit" "Update macports and try again"
 fi
-exit 0
 
