@@ -80,7 +80,7 @@ fi
 
 
 # SETTING DEFAULT GIT USER
-guiText "Setting Default GIT USER" "Section"
+outputHandler "section" "Setting Default GIT USER"
 git config --global core.filemode false
 #git config --global user.name "$install_user"
 #git config --global user.email "$install_email"
