@@ -51,9 +51,9 @@ bash /srv/tools/scripts/check_directories.sh
 #checkPath "/Users/$install_user/Sites/apache/logs"
 #    
 bash /srv/tools/scripts/install_software.sh
-exit 0
 
 bash /srv/tools/scripts/setup_configurations.sh
+exit 0
 #
 ## Software script
 #if test "$install_software" = "Y"; then
