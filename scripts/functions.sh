@@ -246,7 +246,7 @@ command(){
 export -f command
 
 createOrModifyBashProfile(){
-	if [ $(fileExist "/Users/$install_user/.bash_profile") = "true" ]; then
+	if [ "$(fileExist "/Users/$install_user/.bash_profile")" = "true" ]; then
 		outputHandler "comment" ".bash_profile exists"
 		bash_profile_modify_array=("[Y n]")
 		bash_profile_modify=$(ask "Do you want to modify existing .bash_profile (Y/n) !this will override existing .bash_profile!" "${bash_profile_modify_array[@]}" "bash_profile_modify")
