@@ -109,7 +109,7 @@ outputHandler "comment" "Checking for xcode"
 xcode_array=( "Xcode 4" "Xcode 5" "Xcode 6" "Xcode 7" "Xcode 8" "Xcode 9" "Xcode 10" )
 #testCommand "xcodebuild -version" "${xcode_array[@]}"
 if [ $(testCommand "xcodebuild -version" "${xcode_array[@]}") = "true" ]; then
-    outputHandler "Xcode installed "
+    outputHandler  "comment" "Xcode installed "
 else
     outputHandler "exit" "Install Xcode with app store and try again"
 fi
