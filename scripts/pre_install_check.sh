@@ -1,8 +1,15 @@
-outputHandler "section" "Checking for tools required for the installation process"
 
+valid_answers=("[Y n]")
+install_software=$(ask "Install software (Y/n)" "${valid_answers[@]}" "install_software")
+export install_software
+
+createOrModifyBashProfile
+
+outputHandler "section" "Checking for tools required for the installation process"
 outputHandler "section" "Checking for existing mariadb setup"
 # MYSQL ROOT PASSWORD
 if [ "$(checkMariadbPassword)" = "false" ]; then
+    password_array=("[A-Za-z0-9\!\@\$]{8,30}")
     db_root_password1=$(ask "Enter mariadb password" "${password_array[@]}" "password")
     echo
     db_root_password2=$(ask "Verify mariadb password" "${password_array[@]}" "password")
@@ -12,6 +19,7 @@ if [ "$(checkMariadbPassword)" = "false" ]; then
         do 
             echo "Passwords doesn't match"
             echo
+            password_array=("[A-Za-z0-9\!\@\$]{8,30}")
             db_root_password1=$(ask "Enter mariadb password" "${password_array[@]}" "password")
             echo
             db_root_password2=$(ask "Verify mariadb password" "${password_array[@]}" "password")
@@ -120,9 +128,9 @@ outputHandler "comment" "Checking for Macports"
 macports_array=("Version: 2")
 
 #upgrade "$(isInstalled "port version" "${macports_array[@]}")"
-if [ $(testCommand "port version" "${macports_array[@]}") = "true" ]; then
-    outputHandler "comment" "Macports installed"
-else
-    outputHandler "exit" "Update macports and try again"
-fi
+#if [ $(testCommand "port version" "${macports_array[@]}") = "true" ]; then
+#    outputHandler "comment" "Macports installed"
+#else
+#    outputHandler "exit" "Update macports and try again"
+#fi
 
