@@ -53,7 +53,7 @@ bash /srv/tools/scripts/check_directories.sh
 bash /srv/tools/scripts/install_software.sh
 
 bash /srv/tools/scripts/setup_configurations.sh
-exit 0
+
 #
 ## Software script
 #if test "$install_software" = "Y"; then
