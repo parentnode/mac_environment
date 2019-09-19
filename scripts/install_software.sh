@@ -69,7 +69,7 @@ command "sudo chown -R mysql:mysql /opt/local/etc/mariadb-10.2"
 command "sudo chown -R mysql:mysql /opt/local/share/mariadb-10.2"
 
 # copy my.cnf for MySQL (to override macports settings)
-copyFile "/srv/tools/conf/my.cnf", "/opt/local/etc/mariadb-10.2/my.cnf" 
+copyFile "/srv/tools/conf/my.cnf" "/opt/local/etc/mariadb-10.2/my.cnf" 
 
 if [ "$(checkMariadbPassword)" = "false" ]; then
     echo "Installing Database"
