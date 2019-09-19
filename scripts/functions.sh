@@ -501,6 +501,6 @@ replaceInFile(){
 	file=$1
 	old_value=$2
 	new_value=$3
-	sed -i "s/$old_value/$new_value/g" $1
+	sed -i '' "s/$old_value/$new_value/g" $1
 }
 export -f replaceInFile
