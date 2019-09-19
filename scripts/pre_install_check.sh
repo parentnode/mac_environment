@@ -124,8 +124,8 @@ else
 fi
 
 
-outputHandler "comment" "Checking for Macports"
-macports_array=("Version: 2")
+#outputHandler "comment" "Checking for Macports"
+#macports_array=("Version: 2")
 
 #upgrade "$(isInstalled "port version" "${macports_array[@]}")"
 #if [ $(testCommand "port version" "${macports_array[@]}") = "true" ]; then
