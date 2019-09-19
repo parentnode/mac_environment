@@ -193,8 +193,16 @@ syncronizeAlias(){
 	OLDIFS=$IFS
 	# Set IFS to seperate strings by newline not space
 	IFS=$'\n'
-	# Default alias file
-	source="($(</srv/sites/parentnode/mac_environment/tests/syncronize_alias_test_files/source))"
+	# Source path for testing
+	#source="($(</srv/sites/parentnode/mac_environment/tests/syncronize_alias_test_files/source))"
+	
+	# Source path for script
+	source="($(</srv/tools/conf/bash_profile.default))"
+	
+	# Destination path for testing
+	#destination="/srv/sites/parentnode/mac_environment/tests/syncronize_alias_test_files/destination"
+	# Destination path for script
+	destination="/Users/$install_user/.bash_profile"
 	# Alias line looks like this key: "alias sites" alias sites="cd /srv/sites"
 	# Key part of alias line: alias sites  
 	key_array=($(echo "$input" | grep "^\"alias" | cut -d \" -f2))	
@@ -204,7 +212,7 @@ syncronizeAlias(){
 	IFS=$OLDIFS
 	for ((i = 0; i < "${#key_array[@]}"; i++))
 	do
-		sed -i '' "s%${key_array[$i]}.*%$(trimString "${value_array[$i]}")%g" /srv/sites/parentnode/mac_environment/tests/syncronize_alias_test_files/destination
+		sed -i '' "s%${key_array[$i]}.*%$(trimString "${value_array[$i]}")%g" $destination
 	done
 }
 export -f syncronizeAlias
@@ -236,6 +244,38 @@ command(){
     echo "$cmd"
 }
 export -f command
+
+createOrModifyBashProfile(){
+	if [ $(fileExist "/Users/$install_user/.bash_profile") = "true" ]; then
+		outputHandler "comment" ".bash_profile exists"
+		bash_profile_modify_array=("[Y n]")
+		bash_profile_modify=$(ask "Do you want to modify existing .bash_profile (Y/n) !this will override existing .bash_profile!" "${bash_profile_modify_array[@]}" "bash_profile_modify")
+		export bash_profile_modify
+	else
+		outputHandler "comment" "Installing .bash_profile"
+		copyFile "/srv/tools/conf/bash_profile_full.default" "/Users/$install_user/.bash_profile"
+	fi
+	if [ "$bash_profile_modify" = "Y" ]; then
+		does_parentnode_git_exist=$(checkFileContent "git_prompt ()" "/Users/$install_user/.bash_profile")
+		does_parentnode_alias_exist=$(checkFileContent "alias" "/Users/$install_user/.bash_profile")
+		if [ "$does_parentnode_git_exist" = "true" ] || [ "$does_parentnode_alias_exist" = "true" ];then 
+			updateContent "# enable_git_prompt" "/srv/tools/conf/bash_profile_full.default" "/Users/$install_user/.bash_profile"
+			updateContent "# alias" "/srv/tools/conf/bash_profile_full.default" "/Users/$install_user/.bash_profile"
+		else
+			/Users/$install_user/.bash_profile
+			sudo cp /srv/tools/conf/bash_profile_full.default /Users/$install_user/.bash_profile
+		fi
+	else
+		syncronizeAlias
+	fi
+}
+export -f createOrModifyBashProfile
+
+
+
+
+
+
 
 
 

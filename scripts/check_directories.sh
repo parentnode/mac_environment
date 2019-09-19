@@ -1,4 +1,4 @@
-echo "Checking Directories"
+outputHandler "section" "Checking Required files/folders and shortcuts"
 
 conf_path="/srv/tools/conf"
 if [ $(fileExist "$conf_path/httpd.conf") = "false" ]; then

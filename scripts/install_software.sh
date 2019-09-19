@@ -6,7 +6,7 @@ outputHandler "comment" "Pointing Xcode towards the Developer directory instead 
 command "sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer/"
 
 outputHandler "comment" "Update macports"
-command "sudo port selfupdate"
+#command "sudo port selfupdate"
 
 outputHandler "comment" "Enable getting PID of application really easy"
 command "sudo port install pidof"
@@ -38,10 +38,15 @@ outputHandler "comment" "Installing PHP72-redis"
 command "sudo port -N install php72-redis"
 outputHandler "comment" "Set PHP php72" 
 command "sudo port select --set php php72"
+
+#command "sudo port -N install redis"
+#command "sudo port -N install git"
+#command "sudo port -N install wget"
 outputHandler "comment" "Loading redis"
 command "sudo port load redis"
-outputHandler "comment" "Installing ffmpeg"
-command "sudo port -N install ffmpeg +nonfree"
+
+
+
 #autostart apache on boot
 outputHandler "comment" "Load apache2"
 command "sudo port load apache2"
@@ -63,4 +68,20 @@ command "sudo chown -R mysql:mysql /opt/local/var/run/mariadb-10.2"
 command "sudo chown -R mysql:mysql /opt/local/etc/mariadb-10.2"
 command "sudo chown -R mysql:mysql /opt/local/share/mariadb-10.2"
 
-#outputHandler "Installing "
+# copy my.cnf for MySQL (to override macports settings)
+copyFile "/srv/tools/conf/my.cnf", "/opt/local/etc/mariadb-10.2/my.cnf" 
+
+if [ "$(checkMariadbPassword)" = "false" ]; then
+    echo "Installing Database"
+    if [ $(fileExist "/opt/local/var/db/mariadb-10.2/mysql") = false ];then 
+        command "sudo -u _mysql /opt/local/lib/mariadb-10.2/bin/mysql_install_db"
+    fi
+    command "sudo port load mariadb-10.2-server"
+    
+else 
+    echo "Database allready installed"
+fi
+#outputHandler "comment" "Installing ffmpeg"
+#command "sudo port -N install ffmpeg +nonfree"
+
+echo "Software installed"
