@@ -21,14 +21,10 @@ enableSuperCow
 
 outputHandler "comment" "Installing system for $install_user"
 
-valid_answers=("[Y n]")
-install_software=$(ask "Install software (Y/n)" "${valid_answers[@]}" "install_software")
-export install_software
-
 bash /srv/tools/scripts/pre_install_check.sh
-bash /srv/tools/scripts/check_directories.sh
+
 exit 0
-outputHandler "section" "Checking Required files/folders and shortcuts"
+bash /srv/tools/scripts/check_directories.sh
 #conf_path="/srv/tools/conf"
 #checkFile "$conf_path/httpd.conf" "Required file is missing from your configuration source"
 #checkFile "$conf_path/httpd-vhosts.conf" "Required file is missing from your configuration source"
@@ -56,6 +52,8 @@ outputHandler "section" "Checking Required files/folders and shortcuts"
 #checkPath "/Users/$install_user/Sites/apache/logs"
 #    
 bash /srv/tools/scripts/install_software.sh
+
+bash /srv/tools/scripts/setup_configurations.sh
 #
 ## Software script
 #if test "$install_software" = "Y"; then
@@ -81,35 +79,35 @@ bash /srv/tools/scripts/install_software.sh
 
 
 #// set permissions
-command "sudo chown $install_user:staff ~/.gitconfig"
+#command "sudo chown $install_user:staff ~/.gitconfig"
 
 
-copyFile "/srv/tools/conf/my.cnf", "/opt/local/etc/mariadb-10.2/my.cnf" 
+#copyFile "/srv/tools/conf/my.cnf", "/opt/local/etc/mariadb-10.2/my.cnf" 
 
-copyFile "/srv/tools/conf/httpd.conf" "/opt/local/etc/apache2/httpd.conf"
+#copyFile "/srv/tools/conf/httpd.conf" "/opt/local/etc/apache2/httpd.conf"
 
-command "sudo chmod 777 /opt/local/etc/apache2/httpd.conf"
+#command "sudo chmod 777 /opt/local/etc/apache2/httpd.conf"
 
 #// update username in file to make apache run as current user (required to access vhosts in dropbox)
-replaceInFile "/opt/local/etc/apache2/httpd.conf" "###USERNAME###" $install_user
+#replaceInFile "/opt/local/etc/apache2/httpd.conf" "###USERNAME###" $install_user
 
-command "sudo chmod 644 /opt/local/etc/apache2/httpd.conf"
+#command "sudo chmod 644 /opt/local/etc/apache2/httpd.conf"
 
-copyFile "/srv/tools/conf/httpd-vhosts.conf" "/opt/local/etc/apache2/extra/httpd-vhosts.conf"
+#copyFile "/srv/tools/conf/httpd-vhosts.conf" "/opt/local/etc/apache2/extra/httpd-vhosts.conf"
 
-copyFile "/srv/tools/conf/httpd-ssl.conf" "/opt/local/etc/apache2/extra/httpd-ssl.conf"
+#copyFile "/srv/tools/conf/httpd-ssl.conf" "/opt/local/etc/apache2/extra/httpd-ssl.conf"
 
-if [ ! -e "/srv/sites/apache/apache.conf" ]; then
-    copyFile "/srv/tools/conf/apache.conf" "/srv/sites/apache/apache.conf"
-    command "sudo chown -R $install_user:staff /Users/$install_user/Sites/apache"
-fi     
+# if [ $(fileExist "/srv/sites/apache/apache.conf") = "false" ]; then
+#     copyFile "/srv/tools/conf/apache.conf" "/srv/sites/apache/apache.conf"
+#     command "sudo chown -R $install_user:staff /Users/$install_user/Sites/apache"
+# fi     
 
-copyFile "/srv/tools/conf/newsyslog-apache.conf" "/etc/newsyslog.d/apache.conf"
+# copyFile "/srv/tools/conf/newsyslog-apache.conf" "/etc/newsyslog.d/apache.conf"
 
-copyFile "/srv/tools/conf/php.ini" "/opt/local/etc/php72/php.ini"
+# copyFile "/srv/tools/conf/php.ini" "/opt/local/etc/php72/php.ini"
 #// copy php.ini.default for native configuration
 #copyFile("conf/php_ini_native.ini", "/etc/php.ini", "sudo");
-copyFile "/srv/tools/conf/php_ini_native.ini" "/etc/php.ini"
+# copyFile "/srv/tools/conf/php_ini_native.ini" "/etc/php.ini"
 
 
 #output("\nConfiguration copied");
@@ -134,7 +132,7 @@ copyFile "/srv/tools/conf/php_ini_native.ini" "/etc/php.ini"
 #ask "Email" "${email_array[@]}"
 
 
-guiText "mac" "Link"
+outputHandler "comment" "More info found at: https://parentnode.dk/blog/installing-the-web-stack-on-mac-os"
 
 echo "Install complete"
 echo "--------------------------------------------------------------"
