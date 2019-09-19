@@ -24,7 +24,6 @@ outputHandler "comment" "Installing system for $install_user"
 bash /srv/tools/scripts/pre_install_check.sh
 
 bash /srv/tools/scripts/check_directories.sh
-exit 0
 #conf_path="/srv/tools/conf"
 #checkFile "$conf_path/httpd.conf" "Required file is missing from your configuration source"
 #checkFile "$conf_path/httpd-vhosts.conf" "Required file is missing from your configuration source"
@@ -52,6 +51,7 @@ exit 0
 #checkPath "/Users/$install_user/Sites/apache/logs"
 #    
 bash /srv/tools/scripts/install_software.sh
+exit 0
 
 bash /srv/tools/scripts/setup_configurations.sh
 #
