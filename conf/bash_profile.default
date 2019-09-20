@@ -3,7 +3,7 @@
 
 
 # Development environment tools
-"alias update_dev_env"
+#"alias update_dev_env"
 #"alias update_dev_env" alias update_dev_env="php /srv/tools/scripts/update.php"
 
 # Apache and mysql shortcuts
@@ -30,9 +30,9 @@
 "alias git_status" alias git_status="php /srv/tools/scripts/git_status.php"
 
 # git dropbox/github tools - NEEDS TO BE UPDATED
-"alias git_new_dropbox" 
-"alias git_dropbox2github" 
-"alias git_github2dropbox" 
+#"alias git_new_dropbox" 
+#"alias git_dropbox2github" 
+#"alias git_github2dropbox" 
 #"alias git_new_dropbox" alias git_new_dropbox="php /srv/tools/scripts/git_new_dropbox.php"
 #"alias git_dropbox2github" alias git_dropbox2github="php /srv/tools/scripts/git_dropbox2github.php"
 #"alias git_github2dropbox" alias git_github2dropbox="php /srv/tools/scripts/git_github2dropbox.php"
