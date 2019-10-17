@@ -20,9 +20,9 @@ enableSuperCow
 
 
 outputHandler "comment" "Installing system for $install_user"
-
+echo "pre_install_chk"
 bash /srv/tools/scripts/pre_install_check.sh
-
+echo "checkdir"
 bash /srv/tools/scripts/check_directories.sh
 #conf_path="/srv/tools/conf"
 #checkFile "$conf_path/httpd.conf" "Required file is missing from your configuration source"
@@ -50,8 +50,9 @@ bash /srv/tools/scripts/check_directories.sh
 #checkPath "/Users/$install_user/Sites/apache" 
 #checkPath "/Users/$install_user/Sites/apache/logs"
 #    
+echo "SOFTWARE"
 bash /srv/tools/scripts/install_software.sh
-
+echo "setup conf"
 bash /srv/tools/scripts/setup_configurations.sh
 
 #
