@@ -74,7 +74,7 @@ if [ "$install_software" = "Y" ]; then
 
     if [ "$(checkMariadbPassword)" = "false" ]; then
         echo "Installing Database"
-        if [ $(fileExist "/opt/local/var/db/mariadb-10.2/mysql") = false ];then 
+        if [ $(fileExist "/opt/local/var/db/mariadb-10.2/mysql") = false ]; then 
             command "sudo -u _mysql /opt/local/lib/mariadb-10.2/bin/mysql_install_db"
         fi
         command "sudo port load mariadb-10.2-server"
