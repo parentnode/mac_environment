@@ -51,6 +51,8 @@ bash /srv/tools/scripts/check_directories.sh
 #checkPath "/Users/$install_user/Sites/apache/logs"
 #    
 echo "SOFTWARE"
+echo "$install_software"
+echo "$install_ffmpeg"
 bash /srv/tools/scripts/install_software.sh
 echo "setup conf"
 bash /srv/tools/scripts/setup_configurations.sh
