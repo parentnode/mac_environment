@@ -1,5 +1,6 @@
 #!/bin/bash -e
 # Skal testes om det er sådan et tjek skal se ud på mac
+echo "$install_software"
 if [ "$install_software" = "Y" ]; then
     outputHandler "section" "Installing Software"
 
@@ -87,6 +88,7 @@ else
 fi
 #outputHandler "comment" "Installing ffmpeg"
 # Skal testes om det er sådan et tjek skal se ud på mac
+echo "$install_ffmpeg"
 if [ "$install_ffmpeg" = "Y" ]; then
     outputHandler "comment" "Installing ffmpeg"
     command "sudo port -N install ffmpeg +nonfree"
