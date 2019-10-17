@@ -1,6 +1,5 @@
 #!/bin/bash -e
 # Skal testes om det er sådan et tjek skal se ud på mac
-echo "$install_software"
 if [ "$install_software" = "Y" ]; then
     outputHandler "section" "Installing Software"
 
