@@ -1,9 +1,9 @@
 
-software_valid_answers=("[Y n]")
+software_valid_answers=("[Yn]")
 install_software=$(ask "Install software (Y/n)" "${software_valid_answers[@]}" "install_software")
 export install_software
 
-ffmpeg_valid_answers=("[Y n]")
+ffmpeg_valid_answers=("[Yn]")
 install_ffmpeg=$(ask "Install FFMPEG (Y/n)" "${ffmpeg_valid_answers[@]}" "install_software")
 export install_ffmpeg
 
