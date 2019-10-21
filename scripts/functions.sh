@@ -132,7 +132,7 @@ checkMariadbPassword(){
 		mariadb_status_array=("mysql")
 		mariadb_status=$(testCommand "ps -Aclw" "${mariadb_status_array[@]}")
 		if [ "$mariadb_status" = "true" ]; then 
-    		has_password=$(/opt/local/lib/mariadb-10.2/bin/mysql -u root mysql -e 'SHOW TABLES' 2>&1 | grep "using password: NO")
+    		has_password=$(/opt/local/lib/mariadb/bin/mysql -u root mysql -e 'SHOW TABLES' 2>&1 | grep "using password: NO")
 			if [ -n "$has_password" ]; then
 				password_is_set="true"
 				echo "$password_is_set"
@@ -143,7 +143,7 @@ checkMariadbPassword(){
 		else 
     		echo "mariadb service not running"
 			# start service
-			echo "Starting mariadb service $(sudo port load mariadb-10.2-server)"
+			echo "Starting mariadb service $(sudo port load mariadb-server)"
 			#running the function again
 			checkMariadbPassword
 		fi
