@@ -6,8 +6,8 @@ if [ "$install_software" = "Y" ]; then
     outputHandler "comment" "Pointing Xcode towards the Developer directory instead of Xcode application bundle"
     command "sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer/"
 
-    outputHandler "comment" "Update macports"
-    command "sudo port selfupdate"
+    #outputHandler "comment" "Update macports"
+    #command "sudo port selfupdate"
 
     outputHandler "comment" "Enable getting PID of application really easy"
     command "sudo port install pidof"
