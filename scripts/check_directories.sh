@@ -30,7 +30,10 @@ else
     echo "Existing .bash_profile"
 fi
 #checkFileOrCreate "/Users/$install_user/.bash_profile" "/srv/tools/conf/bash_profile.start"
-checkFolderExistOrCreate "/Users/$install_user/Sites"
+#checkFolderExistOrCreate "~/Sites"
+if [ -d "~/Sites" ]; then
+    echo "found Sites"
+fi
 #
 sudo chown $install_user:staff /Users/$install_user/Sites
 
@@ -41,8 +44,13 @@ else
     echo "Creating symlink"
     sudo ln -s /Users/$install_user/Sites /srv/sites
 fi
-
-checkFolderExistOrCreate "/Users/$install_user/Sites/apache" 
-checkFolderExistOrCreate "/Users/$install_user/Sites/apache/logs"
+if [ -d "~/Sites/apache" ]; then
+    echo "found Sites Apache "
+fi
+if [ -d "~/Sites/apache/logs" ]; then
+    echo "found Sites Apache logs "
+fi
+#checkFolderExistOrCreate "/Users/$install_user/Sites/apache" 
+#checkFolderExistOrCreate "/Users/$install_user/Sites/apache/logs"
 
 echo "Checking Directories done"
