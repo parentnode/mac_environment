@@ -30,7 +30,7 @@ else
     echo "Existing .bash_profile"
 fi
 #checkFileOrCreate "/Users/$install_user/.bash_profile" "/srv/tools/conf/bash_profile.start"
-checkFolderExistOrCreate "/Users/$install_user/Sites"
+checkFolderExistOrCreate "/Users/$install_user/sites"
 #
 sudo chown $install_user:staff ~/Sites
 
@@ -42,7 +42,7 @@ else
     sudo ln -s /Users/$install_user/Sites /srv/sites
 fi
 
-checkFolderExistOrCreate "/Users/$install_user/Sites/apache" 
-checkFolderExistOrCreate "/Users/$install_user/Sites/apache/logs"
+checkFolderExistOrCreate "/Users/$install_user/sites/apache" 
+checkFolderExistOrCreate "/Users/$install_user/sites/apache/logs"
 
 echo "Checking Directories done"
