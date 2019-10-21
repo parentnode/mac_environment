@@ -15,7 +15,7 @@ copyFile "/srv/tools/conf/httpd-ssl.conf" "/opt/local/etc/apache2/extra/httpd-ss
 
 if [ $(fileExist "/srv/sites/apache/apache.conf") = "false" ]; then
     copyFile "/srv/tools/conf/apache.conf" "/srv/sites/apache/apache.conf"
-    command "sudo chown -R $install_user:staff /Users/$install_user/Sites/apache"
+    command "sudo chown -R $install_user:staff ~/Sites/apache"
 fi     
 
 copyFile "/srv/tools/conf/newsyslog-apache.conf" "/etc/newsyslog.d/apache.conf"
