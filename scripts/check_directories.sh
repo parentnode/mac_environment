@@ -39,7 +39,7 @@ if [ -d "/srv/sites" ]; then
     echo "/srv/sites exists"
 else
     echo "Creating symlink"
-    sudo ln -s /Users/$install_user/Sites /srv/sites
+    sudo ln -s ~/Sites /srv/sites
 fi
 
 checkFolderExistOrCreate "~/Sites/apache" 
