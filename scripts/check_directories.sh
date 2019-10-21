@@ -30,7 +30,7 @@ else
     echo "Existing .bash_profile"
 fi
 #checkFileOrCreate "/Users/$install_user/.bash_profile" "/srv/tools/conf/bash_profile.start"
-checkFolderExistOrCreate "/Users/$install_user/sites"
+checkFolderExistOrCreate "~/Sites"
 #
 sudo chown $install_user:staff ~/Sites
 
