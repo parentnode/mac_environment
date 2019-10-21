@@ -42,7 +42,7 @@ else
     sudo ln -s /Users/$install_user/Sites /srv/sites
 fi
 
-checkFolderExistOrCreate "/Users/$install_user/sites/apache" 
-checkFolderExistOrCreate "/Users/$install_user/sites/apache/logs"
+checkFolderExistOrCreate "~/Sites/apache" 
+checkFolderExistOrCreate "~/Sites/apache/logs"
 
 echo "Checking Directories done"
