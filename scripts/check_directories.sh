@@ -44,10 +44,10 @@ else
     echo "Creating symlink"
     sudo ln -s /Users/$install_user/Sites /srv/sites
 fi
-if [ -f "~/Sites/apache" ]; then
+if [ -e "~/Sites/apache" ]; then
     echo "found Sites Apache "
 fi
-if [ -f "~/Sites/apache/logs" ]; then
+if [ -e "~/Sites/apache/logs" ]; then
     echo "found Sites Apache logs "
 fi
 #checkFolderExistOrCreate "/Users/$install_user/Sites/apache" 
