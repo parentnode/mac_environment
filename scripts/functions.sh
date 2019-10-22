@@ -164,7 +164,7 @@ export -f copyFile
 
 fileExist(){
 	file=$1
-	if [ -f "$file" ]; then 
+	if [ -e "$file" ]; then 
 		echo "true"
 	else
 		echo "false" 
