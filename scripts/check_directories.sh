@@ -32,7 +32,6 @@ fi
 #checkFileOrCreate "/Users/$install_user/.bash_profile" "/srv/tools/conf/bash_profile.start"
 checkFolderExistOrCreate "/Users/$install_user/Sites"
 
-#
 sudo chown $install_user:staff /Users/$install_user/Sites
 
 checkFolderExistOrCreate "/srv"
