@@ -44,7 +44,7 @@ if [ "$install_software" = "Y" ]; then
     #command "sudo port -N install git"
     #command "sudo port -N install wget"
     outputHandler "comment" "Loading redis"
-    command "sudo port load redis"
+    #command "sudo port load redis"
 
 
 
