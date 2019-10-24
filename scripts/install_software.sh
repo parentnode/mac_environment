@@ -9,7 +9,7 @@ if [ "$install_software" = "Y" ]; then
     #outputHandler "comment" "Update macports"
     installed_macports=$(trimString "$(command "port version" | cut -d \: -f2)")
     echo "$installed_macports"
-    web_macports=$(trimString "$(command "curl -s https://www.macports.org | grep "Latest MacPorts" | cut -d \: -f2 | cut -d \< -f1")") 
+    web_macports=$(trimString "$(command "curl -s https://www.macports.org" | grep "Latest MacPorts" | cut -d \: -f2 | cut -d \< -f1)") 
     echo "$web_macports"
     #command "sudo port selfupdate"
 
