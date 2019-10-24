@@ -44,7 +44,7 @@ echo "Configuration copied"
 command "sudo /opt/local/share/mariadb/support-files/mysql.server start" "true"
 outputHandler "comment" "starting mariadb"
 
-
+outputHandler "comment" "setting mariadb password"
 if [ "$(checkMariadbPassword)" = "false" ]; then
     command "sudo /opt/local/lib/mariadb/bin/mysqladmin -u root password "$db_root_password1"" "true"
 else 
