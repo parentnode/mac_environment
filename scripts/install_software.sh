@@ -7,7 +7,7 @@ if [ "$install_software" = "Y" ]; then
     command "sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer/"
 
     #outputHandler "comment" "Update macports"
-    installed_macports=$(trimString "$(command "port version | cut -d \: -f2")")
+    installed_macports=$(trimString "$(command "port version") | cut -d \: -f2")
     echo "$installed_macports"
     web_macports=$(trimString "$(command "curl -s https://www.macports.org | grep "Latest MacPorts" | cut -d \: -f2 | cut -d \< -f1")") 
     echo "$web_macports"
