@@ -54,7 +54,7 @@ if [ "$install_software" = "Y" ]; then
     outputHandler "comment" "Software Installed"
 
     #test placeholder replacing
-    command "sudo chown $install_user:staff /User/$install_user/Sites"
+    command "sudo chown $install_user:staff /srv/sites"
 
     #mysql paths
     checkFolderExistOrCreate "/opt/local/var/run/mariadb"
