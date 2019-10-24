@@ -11,7 +11,7 @@ if [ "$install_software" = "Y" ]; then
     echo "$installed_macports"
     web_macports=$(trimString "$(command "curl -s https://www.macports.org" | grep "Latest MacPorts" | cut -d \: -f2 | cut -d \< -f1)") 
     echo "$web_macports"
-    if [ "$installed_macports" < "$web_macports" ]; then 
+    if [ "$installed_macports" != "$web_macports" ]; then 
         command "sudo port selfupdate"
     else
         echo "MacPorts version: ok"
