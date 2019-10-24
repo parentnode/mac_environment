@@ -7,7 +7,11 @@ if [ "$install_software" = "Y" ]; then
     command "sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer/"
 
     #outputHandler "comment" "Update macports"
-    command "sudo port selfupdate"
+    installed_macports=$(trimString "$command "port version | cut -d \: -f2"")
+    echo "$installed_macports"
+    web_macports=$(trimString "$command "curl -s https://www.macports.org | grep "Latest MacPorts" | cut -d \: -f2 | cut -d \< -f1"") 
+    echo "$web_macports"
+    #command "sudo port selfupdate"
 
     outputHandler "comment" "Enable getting PID of application really easy"
     command "sudo port install pidof"
