@@ -10,7 +10,7 @@ echo ""
 
 #
 source /srv/tools/scripts/functions.sh
-
+command "date"
 outputHandler "section" "Gather information required for the installation"
 
 install_user=$(getUsername)
@@ -135,3 +135,4 @@ outputHandler "comment" "More info found at: https://parentnode.dk/blog/installi
 echo "Install complete"
 echo "--------------------------------------------------------------"
 echo ""
+command "date"
