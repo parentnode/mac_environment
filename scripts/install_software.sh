@@ -5,15 +5,8 @@ if [ "$install_software" = "Y" ]; then
 
     outputHandler "comment" "Pointing Xcode towards the Developer directory instead of Xcode application bundle"
     command "sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer/"
-    #outputHandler "comment" "Update macports"
-    installed_macports=$(trimString "$(command "port version" | cut -d \: -f2)")
-    web_macports=$(trimString "$(command "curl -s https://www.macports.org" | grep "Latest MacPorts" | cut -d \: -f2 | cut -d \< -f1)") 
-    if [ "$installed_macports" != "$web_macports" ]; then 
-        command "sudo port selfupdate"
-    else
-        echo "MacPorts version: ok"
-    fi
-    #command "sudo port selfupdate"
+    outputHandler "comment" "Update macports"
+    command "sudo port selfupdate"
 
     outputHandler "comment" "Enable getting PID of application really easy"
     command "sudo port install pidof"
@@ -46,11 +39,11 @@ if [ "$install_software" = "Y" ]; then
     outputHandler "comment" "Set PHP php72" 
     command "sudo port select --set php php72"
 
-    #command "sudo port -N install redis"
+    command "sudo port -N install redis"
     #command "sudo port -N install git"
     #command "sudo port -N install wget"
     outputHandler "comment" "Loading redis"
-    #command "sudo port load redis"
+    command "sudo port load redis"
 
 
 
