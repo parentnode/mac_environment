@@ -8,8 +8,11 @@ install_ffmpeg=$(ask "Install FFMPEG (Y/n)" "${ffmpeg_valid_answers[@]}" "instal
 export install_ffmpeg
 
 createOrModifyBashProfile
+outputHandler "comment" "Update macports"
+command "sudo port selfupdate"
 
 outputHandler "section" "Checking for tools required for the installation process"
+
 outputHandler "section" "Checking for existing mariadb setup"
 # MYSQL ROOT PASSWORD
 if [ "$(checkMariadbPassword)" = "false" ]; then
