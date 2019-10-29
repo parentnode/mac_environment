@@ -25,7 +25,7 @@ copyFile "/srv/tools/conf/php.ini" "/opt/local/etc/php72/php.ini"
 copyFile "/srv/tools/conf/php_ini_native.ini" "/etc/php.ini"
 
 copyFIle "/srv/tools/conf/ssl/star_local.crt" "/srv/sites/apache/ssl/star_local.crt"
-copyFIle "/srv/tools/conf/ssl/star_local.key" "/srv/sites/apache/ssl/star_local.key"
+copyFIle "/srv/tools/conf/ssl/star_local.key" "/srv/sites/apache/ssl/star_local.crt"
 
 echo "Configuration copied"
 
