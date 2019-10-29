@@ -38,5 +38,5 @@ fi
 
 checkFolderExistOrCreate "/Users/$install_user/Sites/apache" 
 checkFolderExistOrCreate "/Users/$install_user/Sites/apache/logs"
-
+checkFolderExistOrCreate "/Users/$install_user/Sites/apache/ssl"
 echo "Checking Directories done"
