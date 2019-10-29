@@ -58,8 +58,8 @@ outputHandler "section" "Setting Default GIT USER"
 git config --global core.filemode false
 
 # Checks if git credential are allready set, promts for input if not
-gitConfigured "name"
-gitConfigured "email"
+checkGitCredential "name"
+checkGitCredential "email"
 
 git config --global credential.helper cache
 if [ -z $(command "git config --global --get push.default") ]; then 
