@@ -1,5 +1,4 @@
 #!/bin/bash -e
-# Skal testes om det er sådan et tjek skal se ud på mac
 if [ "$install_software" = "Y" ]; then
     outputHandler "section" "Installing Software"
 
@@ -11,8 +10,6 @@ if [ "$install_software" = "Y" ]; then
     outputHandler "comment" "Enable getting PID of application really easy"
     command "sudo port install pidof"
 
-    #outputHandler "comment" "Installing MariaDB"
-    #command "sudo port -N install mariadb-server"
     initial_install_array=("php72" "apache2" "mariadb-server" "pear" "php72-apache2handler")
     for ((i=0; i < ${#initial_install_array[@]}; i++))
     do 
@@ -84,8 +81,7 @@ if [ "$install_software" = "Y" ]; then
 else
     outputHandler "comment" "Skipping Software Installation"
 fi
-#outputHandler "comment" "Installing ffmpeg"
-# Skal testes om det er sådan et tjek skal se ud på mac
+
 if [ "$install_ffmpeg" = "Y" ]; then
     outputHandler "comment" "Installing ffmpeg"
     command "sudo port -N install ffmpeg +nonfree"
