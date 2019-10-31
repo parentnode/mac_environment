@@ -39,5 +39,5 @@ fi
 checkFolderExistOrCreate "/Users/$install_user/Sites/apache" 
 checkFolderExistOrCreate "/Users/$install_user/Sites/apache/logs"
 checkFolderExistOrCreate "/Users/$install_user/Sites/apache/ssl"
-checkFolderExistOrCreate "/Users/$install_user/Sites/parentnode
+checkFolderExistOrCreate "/Users/$install_user/Sites/parentnode"
 echo "Checking Directories done"
