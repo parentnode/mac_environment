@@ -58,8 +58,24 @@ outputHandler "section" "Setting Default GIT USER"
 git config --global core.filemode false
 
 # Checks if git credential are allready set, promts for input if not
-checkGitCredential "name"
-checkGitCredential "email"
+#checkGitCredential "name"
+#checkGitCredential "email"
+if [ -z "$(checkGitCredential "name")" ]; then
+	git_username_array=("[A-Za-z0-9[:space:]*]{2,50}")
+	git_username=$(ask "Enter git username" "${git_username_array[@]}" "gitusername")
+	export git_username
+else
+	git_username="$(checkGitCredential "name")"
+	export git_username
+fi
+if [ -z "$(checkGitCredential "email")" ]; then
+	git_email_array=("[A-Za-z0-9\.\-]+@[A-Za-z0-9\.\-]+\.[a-z]{2,10}")
+	git_email=$(ask "Enter git email" "${git_email_array[@]}" "gitemail")
+	export git_email
+else
+	git_email="$(checkGitCredential "email")"
+	export git_email
+fi
 
 git config --global credential.helper cache
 if [ -z $(command "git config --global --get push.default") ]; then 
@@ -78,7 +94,7 @@ command "sudo chown $install_user:staff /Users/$install_user/.gitconfig"
 
 # Array containing major releases of Xcode
 outputHandler "comment" "Checking for xcode"
-xcode_array=( "Xcode 4" "Xcode 5" "Xcode 6" "Xcode 7" "Xcode 8" "Xcode 9" "Xcode 10" )
+xcode_array=( "Xcode 4" "Xcode 5" "Xcode 6" "Xcode 7" "Xcode 8" "Xcode 9" "Xcode 10" "Xcode 11" )
 if [ $(testCommand "xcodebuild -version" "${xcode_array[@]}") = "true" ]; then
     outputHandler  "comment" "Xcode installed "
 else
@@ -86,7 +102,7 @@ else
 fi
 
 outputHandler "comment" "Checking for Xcode command line tools version"
-xcode_array_cl=( "version: 6" "version: 7" "version: 8" "version: 9" "version: 10" )
+xcode_array_cl=( "version: 6" "version: 7" "version: 8" "version: 9" "version: 10" "version: 11" )
 if [ $(testCommand "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "${xcode_array_cl[@]}") = "true" ]; then 
     outputHandler "comment" "Xcode Command Line tools installed"
 else
