@@ -58,24 +58,25 @@ outputHandler "section" "Setting Default GIT USER"
 git config --global core.filemode false
 
 # Checks if git credential are allready set, promts for input if not
-#checkGitCredential "name"
-#checkGitCredential "email"
+
 if [ -z "$(checkGitCredential "name")" ]; then
 	git_username_array=("[A-Za-z0-9[:space:]*]{2,50}")
 	git_username=$(ask "Enter git username" "${git_username_array[@]}" "gitusername")
-	export git_username
+	config user.name $git_username
 else
 	git_username="$(checkGitCredential "name")"
-	export git_username
+	config user.name $git_username
 fi
 if [ -z "$(checkGitCredential "email")" ]; then
 	git_email_array=("[A-Za-z0-9\.\-]+@[A-Za-z0-9\.\-]+\.[a-z]{2,10}")
 	git_email=$(ask "Enter git email" "${git_email_array[@]}" "gitemail")
-	export git_email
+	config user.email $git_email
 else
 	git_email="$(checkGitCredential "email")"
-	export git_email
+	config user.email $git_email 
 fi
+checkGitCredential "name"
+checkGitCredential "email"
 
 git config --global credential.helper cache
 if [ -z $(command "git config --global --get push.default") ]; then 
