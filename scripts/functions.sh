@@ -126,7 +126,7 @@ checkGitCredential(){
 export -f checkGitCredential
 
 checkMariadbPassword(){
-	mariadb_installed_array=("mariadb-10.[1-9]-server @10.[0-9].* (active)")
+	mariadb_installed_array=("mariadb-10.[2-9]-server \@10.[2-9].* \(active\)")
 	#mariadb_installed=$(testCommand "port installed mariadb-server" "$mariadb_installed_array")
 	mariadb_installed_specific=$(testCommand "port installed" "$mariadb_installed_array")
 	if [ "$mariadb_installed_specific" = "true" ]; then
