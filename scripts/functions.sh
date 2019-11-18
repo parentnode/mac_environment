@@ -119,7 +119,7 @@ testCommand(){
 export -f testCommand
 
 checkGitCredential(){
-	value=$(git config user.$1)
+	value=$(git config --global user.$1)
 	echo "$value"
 
 }
