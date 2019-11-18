@@ -62,18 +62,18 @@ git config --global core.filemode false
 if [ -z "$(checkGitCredential "name")" ]; then
 	git_username_array=("[A-Za-z0-9[:space:]*]{2,50}")
 	git_username=$(ask "Enter git username" "${git_username_array[@]}" "gitusername")
-	git config user.name "$git_username"
+	git config --global user.name "$git_username"
 else
 	git_username="$(checkGitCredential "name")"
-	git config user.name "$git_username"
+	git config --global user.name "$git_username"
 fi
 if [ -z "$(checkGitCredential "email")" ]; then
 	git_email_array=("[A-Za-z0-9\.\-]+@[A-Za-z0-9\.\-]+\.[a-z]{2,10}")
 	git_email=$(ask "Enter git email" "${git_email_array[@]}" "gitemail")
-	git config user.email "$git_email"
+	git config --global user.email "$git_email"
 else
 	git_email="$(checkGitCredential "email")"
-	git config user.email "$git_email" 
+	git config --global user.email "$git_email" 
 fi
 checkGitCredential "name"
 checkGitCredential "email"
