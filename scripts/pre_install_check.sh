@@ -75,8 +75,8 @@ else
 	git_email="$(checkGitCredential "email")"
 	git config --global user.email "$git_email" 
 fi
-checkGitCredential "name"
-checkGitCredential "email"
+#checkGitCredential "name"
+#checkGitCredential "email"
 
 git config --global credential.helper cache
 if [ -z $(command "git config --global --get push.default") ]; then 
