@@ -30,12 +30,12 @@ copyFile "/srv/tools/conf/ssl/star_local.key" "/srv/sites/apache/ssl/star_local.
 echo "Configuration copied"
 
 # Start database
-command "sudo /opt/local/share/mariadb/support-files/mysql.server start" "true"
+command "sudo /opt/local/share/mariadb-10.2/support-files/mysql.server start" "true"
 outputHandler "comment" "starting mariadb"
 
 outputHandler "comment" "setting mariadb password"
 if [ "$(checkMariadbPassword)" = "false" ]; then
-    command "sudo /opt/local/lib/mariadb/bin/mysqladmin -u root password "$db_root_password1"" "true"
+    command "sudo /opt/local/lib/mariadb-10.2/bin/mysqladmin -u root password "$db_root_password1"" "true"
 else 
     echo "password is sat"
 fi
