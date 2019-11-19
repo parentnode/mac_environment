@@ -53,27 +53,27 @@ if [ "$install_software" = "Y" ]; then
     command "sudo chown $install_user:staff /srv/sites"
 
     #mysql paths
-    checkFolderExistOrCreate "/opt/local/var/run/mariadb"
-    checkFolderExistOrCreate "/opt/local/var/db/mariadb"
-    checkFolderExistOrCreate "/opt/local/etc/mariadb"
-    checkFolderExistOrCreate "/opt/local/share/mariadb"
+    checkFolderExistOrCreate "/opt/local/var/run/mariadb-10.2"
+    checkFolderExistOrCreate "/opt/local/var/db/mariadb-10.2"
+    checkFolderExistOrCreate "/opt/local/etc/mariadb-10.2"
+    checkFolderExistOrCreate "/opt/local/share/mariadb-10.2"
 
 
     #Mysql preparations
-    command "sudo chown -R mysql:mysql /opt/local/var/db/mariadb"
-    command "sudo chown -R mysql:mysql /opt/local/var/run/mariadb"
-    command "sudo chown -R mysql:mysql /opt/local/etc/mariadb"
-    command "sudo chown -R mysql:mysql /opt/local/share/mariadb"
+    command "sudo chown -R mysql:mysql /opt/local/var/db/mariadb-10.2"
+    command "sudo chown -R mysql:mysql /opt/local/var/run/mariadb-10.2"
+    command "sudo chown -R mysql:mysql /opt/local/etc/mariadb-10.2"
+    command "sudo chown -R mysql:mysql /opt/local/share/mariadb-10.2"
 
     # copy my.cnf for MySQL (to override macports settings)
-    copyFile "/srv/tools/conf/my.cnf" "/opt/local/etc/mariadb/my.cnf" 
+    copyFile "/srv/tools/conf/my.cnf" "/opt/local/etc/mariadb-10.2/my.cnf" 
 
     if [ "$(checkMariadbPassword)" = "false" ]; then
         echo "Installing Database"
-        if [ $(fileExist "/opt/local/var/db/mariadb/mysql") = false ]; then 
-            command "sudo -u _mysql /opt/local/lib/mariadb/bin/mysql_install_db"
+        if [ $(fileExist "/opt/local/var/db/mariadb-10.2/mysql") = false ]; then 
+            command "sudo -u _mysql /opt/local/lib/mariadb-10.2/bin/mysql_install_db"
         fi
-        command "sudo port load mariadb-server"
+        command "sudo port load mariadb-10.2-server"
 
     else 
         echo "Database allready installed"
