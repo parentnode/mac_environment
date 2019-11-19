@@ -19,13 +19,7 @@ export install_user
 # Request sudo privileges
 enableSuperCow
 
-tester=$(sudo cat "/etc/synthethic.conf" | grep "srv")
-if [ -z "$tester" ]
-then
-	echo "fuck no"
-fi
 outputHandler "comment" "Installing system for $install_user"
-exit
 # This is where you choose what to install and informs you what you don't need
 . /srv/tools/scripts/pre_install_check.sh
 
