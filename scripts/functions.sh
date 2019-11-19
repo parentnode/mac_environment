@@ -127,13 +127,13 @@ export -f checkGitCredential
 
 checkMariadbPassword(){
 	mariadb_installed_array=("mariadb-10.[2-9]-server \@10.[2-9].* \(active\)")
-	#mariadb_installed=$(testCommand "port installed mariadb-server" "$mariadb_installed_array")
+	#mariadb_installed=$(testCommand "port installed mariadb-10.2-server" "$mariadb_installed_array")
 	mariadb_installed_specific=$(testCommand "port installed" "$mariadb_installed_array")
 	if [ "$mariadb_installed_specific" = "true" ]; then
 		mariadb_status_array=("mysql")
 		mariadb_status=$(testCommand "ps -Aclw" "${mariadb_status_array[@]}")
 		if [ "$mariadb_status" = "true" ]; then 
-    		has_password=$(/opt/local/lib/mariadb/bin/mysql -u root mysql -e 'SHOW TABLES' 2>&1 | grep "using password: NO")
+    		has_password=$(/opt/local/lib/mariadb-10.2/bin/mysql -u root mysql -e 'SHOW TABLES' 2>&1 | grep "using password: NO")
 			if [ -n "$has_password" ]; then
 				password_is_set="true"
 				echo "$password_is_set"
@@ -144,7 +144,7 @@ checkMariadbPassword(){
 		else 
     		echo "mariadb service not running"
 			# start service
-			echo "Starting mariadb service $(sudo port load mariadb-server)"
+			echo "Starting mariadb service $(sudo port load mariadb-10.2-server)"
 			#running the function again
 			checkMariadbPassword
 		fi
