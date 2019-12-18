@@ -39,3 +39,5 @@ if [ "$(checkMariadbPassword)" = "false" ]; then
 else 
     echo "password is sat"
 fi
+
+command "sudo /opt/local/sbin/apachectl restart"
