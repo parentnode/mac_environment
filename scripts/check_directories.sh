@@ -31,6 +31,15 @@ sudo chown $install_user:staff /Users/$install_user/Sites
 checkFolderExistOrCreate "/srv"
 if [ -d "/srv/sites" ]; then 
     echo "/srv/sites exists"
+    catalina='10.15.[0-9]'  
+    macos_version=$(sw_vers | grep -E "ProductVersion:" | cut -f2)
+    macos_version_catalina=$(sw_vers | grep -E "ProductVersion:\t$catalina" | cut -f2)
+    if [ "$macos_version" = "$macos_version_catalina" ]; then
+        if [ ! -d "/Users/$install_user/Sites" ]; then 
+            echo "Catalina need special treatment: Creating symlink for srv/sites"
+            sudo ln -s /srv/sites /Users/$install_user/Sites
+        fi
+    fi
 else
     echo "Creating symlink"
     sudo ln -s /Users/$install_user/Sites /srv/sites
