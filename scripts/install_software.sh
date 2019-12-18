@@ -9,8 +9,8 @@ if [ "$install_software" = "Y" ]; then
 
     outputHandler "comment" "Enable getting PID of application really easy"
     command "sudo port install pidof"
-
-    initial_install_array=("php72" "apache2" "mariadb-10.2-server" "pear" "php72-apache2handler")
+    sudo port -N install mariadb-10.2-server
+    initial_install_array=("php72" "apache2" "mariadb-server" "pear" "php72-apache2handler")
     for ((i=0; i < ${#initial_install_array[@]}; i++))
     do 
         command "sudo port -N install ${initial_install_array[$i]}"
@@ -50,7 +50,7 @@ if [ "$install_software" = "Y" ]; then
     outputHandler "comment" "Software Installed"
 
     #test placeholder replacing
-    command "sudo chown $install_user:staff /srv/sites"
+    command "sudo chown $install_user:staff ~/Sites"
 
     #mysql paths
     checkFolderExistOrCreate "/opt/local/var/run/mariadb-10.2"
