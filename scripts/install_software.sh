@@ -53,10 +53,10 @@ if [ "$install_software" = "Y" ]; then
     command "sudo chown $install_user:staff ~/Sites"
 
     #mysql paths
-    checkFolderExistOrCreate "/opt/local/var/run/mariadb-10.2"
-    checkFolderExistOrCreate "/opt/local/var/db/mariadb-10.2"
-    checkFolderExistOrCreate "/opt/local/etc/mariadb-10.2"
-    checkFolderExistOrCreate "/opt/local/share/mariadb-10.2"
+    checkFolderExistOrCreate "/opt/local/var/run/mariadb-10.2" "admin"
+    checkFolderExistOrCreate "/opt/local/var/db/mariadb-10.2" "admin"
+    checkFolderExistOrCreate "/opt/local/etc/mariadb-10.2" "admin"
+    checkFolderExistOrCreate "/opt/local/share/mariadb-10.2" "admin"
 
 
     #Mysql preparations
