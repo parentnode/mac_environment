@@ -226,9 +226,14 @@ updateContent(){
 export -f updateContent
 
 checkFolderExistOrCreate(){
+	
 	if [ ! -e "$1" ]; then
 		echo "Creating folder"
-		sudo mkdir $1
+		if [ "$2" = "sudo" ]; then
+			sudo mkdir $1
+		else
+			mkdir $1
+		fi
 	else
 		echo "Folder Exist"
 	fi
