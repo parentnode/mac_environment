@@ -39,8 +39,6 @@ if [ -d "/srv/sites" ]; then
             echo "Catalina need special treatment: Creating symlink for srv/sites"
             sudo mkdir ~/Sites
     		sudo ln -s ~/Sites /var/parentnode/sites
-        else
-            sudo ln -s ~/Sites /var/parentnode/sites
         fi
     else
             echo "you are fine"
