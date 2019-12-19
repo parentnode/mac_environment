@@ -28,30 +28,24 @@ fi
 
 #checkFolderExistOrCreate "/srv"
 outputHandler "comment" "Sites folder setup"
-if [ -d "/srv" ]; then 
-    #echo "/srv exists"
-    catalina='10.15.[0-9]'  
-    macos_version=$(sw_vers | grep -E "ProductVersion:" | cut -f2)
-    macos_version_catalina=$(sw_vers | grep -E "ProductVersion:\t$catalina" | cut -f2)
-    if [ "$macos_version" = "$macos_version_catalina" ]; then
-        checkFolderExistOrCreate "/var/parentnode/sites"
-        if [ ! -d "/Users/$install_user/Sites" ]; then 
-            echo "Catalina need special treatment: Creating symlink for srv/sites"
-    		sudo ln -s /var/parentnode/sites /Users/$install_user/Sites
-        fi
-    else
-            echo "you are fine"
+catalina='10.15.[0-9]'  
+macos_version=$(sw_vers | grep -E "ProductVersion:" | cut -f2)
+macos_version_catalina=$(sw_vers | grep -E "ProductVersion:\t$catalina" | cut -f2)
+if [ "$macos_version" = "$macos_version_catalina" ]; then
+    if [ ! -d ~/Sites ]; then 
+        checkFolderExistOrCreate "/Users/$install_user/Sites"
+        sudo ln -s ~/Sites /var/parentnode/sites
     fi
 else
     checkFolderExistOrCreate "/srv"
-    echo "Creating symlink"
     if [ ! -d "/srv/sites" ]; then
         checkFolderExistOrCreate "/Users/$install_user/Sites"
-        sudo ln -s /Users/$install_user/Sites /srv/sites
+        sudo ln -s ~/Sites /srv/sites
     else
         echo "not needed for your setup"
     fi
 fi
+
 # Change localuser group of /Users/$install_user/Sites to staff 
 sudo chown $install_user:staff /Users/$install_user/Sites
 
