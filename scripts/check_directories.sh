@@ -39,7 +39,6 @@ if [ "$macos_version" = "$macos_version_catalina" ]; then
 else
     checkFolderExistOrCreate "/srv"
     if [ ! -d "/srv/sites" ]; then
-        checkFolderExistOrCreate "/Users/$install_user/Sites"
         sudo ln -s ~/Sites /srv/sites
     else
         echo "not needed for your setup"
@@ -52,5 +51,5 @@ sudo chown $install_user:staff /Users/$install_user/Sites
 checkFolderExistOrCreate "/Users/$install_user/Sites/apache" 
 checkFolderExistOrCreate "/Users/$install_user/Sites/apache/logs"
 checkFolderExistOrCreate "/Users/$install_user/Sites/apache/ssl"
-checkFolderExistOrCreate "/Users/$install_user/Sites/parentnode"
+#checkFolderExistOrCreate "/Users/$install_user/Sites/parentnode"
 echo "Checking Directories done"
