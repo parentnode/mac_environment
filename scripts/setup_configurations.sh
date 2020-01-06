@@ -29,15 +29,21 @@ copyFile "/srv/tools/conf/ssl/star_local.key" "/srv/sites/apache/ssl/star_local.
 
 echo "Configuration copied"
 
-# Start database
-command "sudo /opt/local/share/mariadb-10.2/support-files/mysql.server start" "true"
-outputHandler "comment" "starting mariadb"
+mariadb_installed_array=("mariadb-10.[2-9]-server \@10.[2-9].* \(active\)")
+#mariadb_installed=$(testCommand "port installed mariadb-10.2-server" "$mariadb_installed_array")
+mariadb_installed_specific=$(testCommand "port installed" "$mariadb_installed_array")
+if [ "$mariadb_installed_specific" = "true" ]; then
+    outputHandler "comment" "starting mariadb"
+    # Start database
+    command "sudo /opt/local/share/mariadb-10.2/support-files/mysql.server start" "true"
 
-outputHandler "comment" "setting mariadb password"
-if [ "$(checkMariadbPassword)" = "false" ]; then
-    command "sudo /opt/local/lib/mariadb-10.2/bin/mysqladmin -u root password "$db_root_password1"" "true"
-else 
-    echo "password is sat"
+    outputHandler "comment" "setting mariadb password"
+    if [ "$(checkMariadbPassword)" = "false" ]; then
+        command "sudo /opt/local/lib/mariadb-10.2/bin/mysqladmin -u root password "$db_root_password1"" "true"
+    else 
+        echo "password is sat"
+    fi
 fi
+
 
 command "sudo /opt/local/sbin/apachectl restart"

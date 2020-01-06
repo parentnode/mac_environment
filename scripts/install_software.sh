@@ -52,31 +52,38 @@ if [ "$install_software" = "Y" ]; then
     #test placeholder replacing
     command "sudo chown $install_user:staff ~/Sites"
 
-    #mysql paths
-    checkFolderExistOrCreate "/opt/local/var/run/mariadb-10.2" "sudo"
-    checkFolderExistOrCreate "/opt/local/var/db/mariadb-10.2" "sudo"
-    checkFolderExistOrCreate "/opt/local/etc/mariadb-10.2" "sudo"
-    checkFolderExistOrCreate "/opt/local/share/mariadb-10.2" "sudo"
+    mariadb_installed_array=("mariadb-10.[2-9]-server \@10.[2-9].* \(active\)")
+	#mariadb_installed=$(testCommand "port installed mariadb-10.2-server" "$mariadb_installed_array")
+	mariadb_installed_specific=$(testCommand "port installed" "$mariadb_installed_array")
+	if [ "$mariadb_installed_specific" = "true" ]; then
+        #mysql paths
+        checkFolderExistOrCreate "/opt/local/var/run/mariadb-10.2" "sudo"
+        checkFolderExistOrCreate "/opt/local/var/db/mariadb-10.2" "sudo"
+        checkFolderExistOrCreate "/opt/local/etc/mariadb-10.2" "sudo"
+        checkFolderExistOrCreate "/opt/local/share/mariadb-10.2" "sudo"
 
 
-    #Mysql preparations
-    command "sudo chown -R mysql:mysql /opt/local/var/db/mariadb-10.2"
-    command "sudo chown -R mysql:mysql /opt/local/var/run/mariadb-10.2"
-    command "sudo chown -R mysql:mysql /opt/local/etc/mariadb-10.2"
-    command "sudo chown -R mysql:mysql /opt/local/share/mariadb-10.2"
+        #Mysql preparations
+        command "sudo chown -R mysql:mysql /opt/local/var/db/mariadb-10.2"
+        command "sudo chown -R mysql:mysql /opt/local/var/run/mariadb-10.2"
+        command "sudo chown -R mysql:mysql /opt/local/etc/mariadb-10.2"
+        command "sudo chown -R mysql:mysql /opt/local/share/mariadb-10.2"
 
-    # copy my.cnf for MySQL (to override macports settings)
-    copyFile "/srv/tools/conf/my.cnf" "/opt/local/etc/mariadb-10.2/my.cnf" 
+        # copy my.cnf for MySQL (to override macports settings)
+        copyFile "/srv/tools/conf/my.cnf" "/opt/local/etc/mariadb-10.2/my.cnf" 
 
-    if [ "$(checkMariadbPassword)" = "false" ]; then
-        echo "Installing Database"
-        if [ $(fileExist "/opt/local/var/db/mariadb-10.2/mysql") = false ]; then 
-            command "sudo -u _mysql /opt/local/lib/mariadb-10.2/bin/mysql_install_db"
+        if [ "$(checkMariadbPassword)" = "false" ]; then
+            echo "Installing Database"
+            if [ $(fileExist "/opt/local/var/db/mariadb-10.2/mysql") = false ]; then 
+                command "sudo -u _mysql /opt/local/lib/mariadb-10.2/bin/mysql_install_db"
+            fi
+            command "sudo port load mariadb-10.2-server"
+
+        else 
+            echo "Database allready installed"
         fi
-        command "sudo port load mariadb-10.2-server"
-
     else 
-        echo "Database allready installed"
+        outputHandler "comment" "Mariadb 10.2 not installed" "Please try installing Mariadb 10.2 again at a later time" "Run this install script again afterwards"
     fi
 else
     outputHandler "comment" "Skipping Software Installation"
