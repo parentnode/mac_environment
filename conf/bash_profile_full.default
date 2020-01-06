@@ -20,6 +20,18 @@ git_prompt () {
 export PS1="\[$(tput bold)\]\[$(tput setaf 5)\]\u@\h \[$(tput setaf 2)\]\W\$(git_prompt)\[$(tput sgr0)\]\[$(tput setaf 4)\] \\$"
 # enable_git_prompt
 
+# symlink
+check_for_symlink=$(ls -l /srv/sites | grep /srv/sites | cut -d '>' -f2 | cut -d ' ' -f2)
+if [ ! "$check_for_symlink" = ~/Sites ]; then
+	echo "Creating Symlink"
+	if [ ! -d ~/Sites ]; then
+		mkdir ~/Sites
+	fi
+	sudo unlink /srv/sites
+	sudo ln -s ~/Sites /srv/sites
+fi
+# symlink
+
 # alias
 # Development environment tools
 #"alias update_dev_env"
