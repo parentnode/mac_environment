@@ -264,12 +264,23 @@ createOrModifyBashProfile(){
 	if [ "$bash_profile_modify" = "Y" ]; then
 		does_parentnode_git_exist=$(checkFileContent "# enable_git_prompt" "/Users/$install_user/.bash_profile")
 		does_parentnode_alias_exist=$(checkFileContent "# alias" "/Users/$install_user/.bash_profile")
-		if [ "$does_parentnode_git_exist" = "true" ] || [ "$does_parentnode_alias_exist" = "true" ];then 
+		does_parentnode_symlink_exist=$(checkFileContent "# alias" "/Users/$install_user/.bash_profile")
+		#if [ "$does_parentnode_git_exist" = "true" ] || [ "$does_parentnode_alias_exist" = "true" ];then 
+		#	updateContent "# enable_git_prompt" "/srv/tools/conf/bash_profile_full.default" "/Users/$install_user/.bash_profile"
+		#	updateContent "# alias" "/srv/tools/conf/bash_profile_full.default" "/Users/$install_user/.bash_profile"
+		#	updateContent "# symlink" "/srv/tools/conf/bash_profile_full.default" "/Users/$install_user/.bash_profile"
+		#else
+		#	/Users/$install_user/.bash_profile
+		#	sudo cp /srv/tools/conf/bash_profile_full.default /Users/$install_user/.bash_profile
+		#fi
+		if [ "$does_parentnode_git_exist" = "true" ]; then
 			updateContent "# enable_git_prompt" "/srv/tools/conf/bash_profile_full.default" "/Users/$install_user/.bash_profile"
+		fi
+		if [ "$does_parentnode_alias_exist" = "true" ]; then
 			updateContent "# alias" "/srv/tools/conf/bash_profile_full.default" "/Users/$install_user/.bash_profile"
-		else
-			/Users/$install_user/.bash_profile
-			sudo cp /srv/tools/conf/bash_profile_full.default /Users/$install_user/.bash_profile
+		fi
+		if [ "$does_parentnode_symlink_exist" = "true" ]; then
+			updateContent "# symlink" "/srv/tools/conf/bash_profile_full.default" "/Users/$install_user/.bash_profile"
 		fi
 	else
 		syncronizeAlias
