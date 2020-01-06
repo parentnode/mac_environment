@@ -1,12 +1,12 @@
 
 # If you have no need any software you can skip installing by pressing n and then enter
 software_valid_answers=("[Yn]")
-install_software=$(ask "Install software (Y/n)" "${software_valid_answers[@]}" "install_software")
+install_software=$(ask "Install software (Y/n)" "${software_valid_answers[@]}" "install software")
 export install_software
 
 # If you have no need for ffmpeg you can skip installing by pressing n and then enter
 ffmpeg_valid_answers=("[Yn]")
-install_ffmpeg=$(ask "Install FFMPEG (Y/n)" "${ffmpeg_valid_answers[@]}" "install_software")
+install_ffmpeg=$(ask "Install FFMPEG (Y/n)" "${ffmpeg_valid_answers[@]}" "install ffmpeg")
 export install_ffmpeg
 
 # A function that creates(if none exist) or if you choose Y modifies .bash_profile 
