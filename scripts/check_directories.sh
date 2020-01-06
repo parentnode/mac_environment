@@ -25,14 +25,11 @@ else
 fi
 
 #checkFolderExistOrCreate "/Users/$install_user/Sites"
+outputHandler "comment" "Sites folder setup"
 checkFolderExistOrCreate "/Users/$install_user/Sites"
 sudo chown $install_user:staff ~/Sites
 
 #checkFolderExistOrCreate "/srv"
-outputHandler "comment" "Sites folder setup"
-if [ ! -d ~/Sites  ]; then
-    mkdir ~/Sites
-fi
 if [ ! -d /srv/sites ]; then 
         sudo ln -s ~/Sites /srv/sites
 fi
