@@ -28,7 +28,7 @@ if [ ! "$check_for_symlink" = ~/Sites ]; then
 		mkdir ~/Sites
 		sudo chown $(logname):staff ~/Sites	
 	else
-		current_user_of_sites=(ls ~/ | grep "Sites" | grep $(logname))
+		current_user_of_sites=$(ls -l ~/ | grep Sites | grep $(logname))
 		if [ -z "$current_user_of_sites" ]; then
 			sudo chown $(logname):staff ~/Sites
 		fi
