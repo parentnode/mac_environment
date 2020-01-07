@@ -10,6 +10,8 @@ if [ "$install_software" = "Y" ]; then
     outputHandler "comment" "Enable getting PID of application really easy"
     command "sudo port install pidof"
     sudo port -N install mariadb-10.2-server
+    
+    outputHandler "section" "Check Mariadb Password: $(checkMariadbPassword)"
     initial_install_array=("php72" "apache2" "mariadb-server" "pear" "php72-apache2handler")
     for ((i=0; i < ${#initial_install_array[@]}; i++))
     do 
@@ -50,8 +52,8 @@ if [ "$install_software" = "Y" ]; then
     outputHandler "comment" "Software Installed"
 
     #test placeholder replacing
-    command "sudo chown $install_user:staff ~/Sites"
-
+    #command "sudo chown $install_user:staff ~/Sites"
+    
     mariadb_installed_array=("mariadb-10.[2-9]-server \@10.[2-9].* \(active\)")
 	#mariadb_installed=$(testCommand "port installed mariadb-10.2-server" "$mariadb_installed_array")
 	mariadb_installed_specific=$(testCommand "port installed" "$mariadb_installed_array")
@@ -72,18 +74,18 @@ if [ "$install_software" = "Y" ]; then
         # copy my.cnf for MySQL (to override macports settings)
         copyFile "/srv/tools/conf/my.cnf" "/opt/local/etc/mariadb-10.2/my.cnf" 
 
-        if [ "$(checkMariadbPassword)" = "false" ]; then
-            echo "Installing Database"
-            if [ $(fileExist "/opt/local/var/db/mariadb-10.2/mysql") = false ]; then 
-                command "sudo -u _mysql /opt/local/lib/mariadb-10.2/bin/mysql_install_db"
-            fi
-            command "sudo port load mariadb-10.2-server"
-
-        else 
-            echo "Database allready installed"
-        fi
     else 
         outputHandler "comment" "Mariadb 10.2 not installed" "Please try installing Mariadb 10.2 again at a later time" "Run this install script again afterwards"
+    fi
+    if [ "$(checkMariadbPassword)" = "false" ]; then
+        echo "Installing Database"
+        if [ $(fileExist "/opt/local/var/db/mariadb-10.2/mysql") = "false" ]; then 
+            command "sudo -u _mysql /opt/local/lib/mariadb-10.2/bin/mysql_install_db"
+        fi
+        command "sudo port load mariadb-10.2-server"
+
+    else 
+        echo "Database allready installed"
     fi
 else
     outputHandler "comment" "Skipping Software Installation"
