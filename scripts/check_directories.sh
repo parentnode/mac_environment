@@ -26,11 +26,23 @@ fi
 
 #checkFolderExistOrCreate "/Users/$install_user/Sites"
 outputHandler "comment" "Sites folder setup"
-checkFolderExistOrCreate "/Users/$install_user/Sites"
-sudo chown $install_user:staff ~/Sites
+#checkFolderExistOrCreate "/Users/$install_user/Sites"
 
-#checkFolderExistOrCreate "/srv"
 if [ ! -d /srv/sites ]; then 
+    if [ ! -d ~/Sites ]; then
+        mkdir ~/Sites
+        catalina='10.15.[0-9]'
+        macos_version=$(sw_vers | grep -E "ProductVersion:" | cut -f2)
+        macos_version_catalina=$(sw_vers | grep -E "ProductVersion:\t$catalina" | cut -f2)
+        if [ "$macos_version" = "$macos_version_catalina" ]; then
+            if [ ! -d /var/parentnode ]; then
+                sudo mkdir /var/parentnode
+                sudo chown $(logname):staff /var/parentnode
+            fi
+        fi
+        sudo chown $install_user:staff ~/Sites
+    fi
+#checkFolderExistOrCreate "/srv"
         sudo ln -s ~/Sites /srv/sites
 fi
 
