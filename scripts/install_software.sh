@@ -9,9 +9,13 @@ if [ "$install_software" = "Y" ]; then
 
     outputHandler "comment" "Enable getting PID of application really easy"
     command "sudo port install pidof"
+    
+    outputHandler "section" "Check Mariadb Password: $(checkMariadbPassword)"
+
     sudo port -N install mariadb-10.2-server
     
     outputHandler "section" "Check Mariadb Password: $(checkMariadbPassword)"
+    
     initial_install_array=("php72" "apache2" "mariadb-server" "pear" "php72-apache2handler")
     for ((i=0; i < ${#initial_install_array[@]}; i++))
     do 
