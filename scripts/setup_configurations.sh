@@ -32,7 +32,7 @@ echo "Configuration copied"
 mariadb_installed_array=("mariadb-10.[2-9]-server \@10.[2-9].* \(active\)")
 #mariadb_installed=$(testCommand "port installed mariadb-10.2-server" "$mariadb_installed_array")
 mariadb_installed_specific=$(testCommand "port installed" "$mariadb_installed_array")
-if [ "$mariadb_installed_specific" = "true" ]; then
+if [ -n "$mariadb_installed_specific" ]; then
     outputHandler "comment" "starting mariadb"
     # Start database
     command "sudo /opt/local/share/mariadb-10.2/support-files/mysql.server start" "true"
