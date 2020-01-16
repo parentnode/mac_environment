@@ -4,8 +4,8 @@ if [ "$install_software" = "Y" ]; then
 
     outputHandler "comment" "Pointing Xcode towards the Developer directory instead of Xcode application bundle"
     command "sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer/"
-    outputHandler "comment" "Update macports"
-    command "sudo port selfupdate"
+    #outputHandler "comment" "Update macports"
+    #command "sudo port selfupdate"
 
     outputHandler "comment" "Enable getting PID of application really easy"
     command "sudo port install pidof"
@@ -16,7 +16,7 @@ if [ "$install_software" = "Y" ]; then
     
     outputHandler "section" "Check Mariadb Password: $(checkMariadbPassword)"
     
-    initial_install_array=("php72" "apache2" "mariadb-server" "pear" "php72-apache2handler")
+    initial_install_array=("php72" "apache2" "pear" "php72-apache2handler")
     for ((i=0; i < ${#initial_install_array[@]}; i++))
     do 
         command "sudo port -N install ${initial_install_array[$i]}"
@@ -61,7 +61,7 @@ if [ "$install_software" = "Y" ]; then
     mariadb_installed_array=("mariadb-10.[2-9]-server \@10.[2-9].* \(active\)")
 	#mariadb_installed=$(testCommand "port installed mariadb-10.2-server" "$mariadb_installed_array")
 	mariadb_installed_specific=$(testCommand "port installed" "$mariadb_installed_array")
-	if [ "$mariadb_installed_specific" = "true" ]; then
+	if [ -n "$mariadb_installed_specific" ]; then
         #mysql paths
         checkFolderExistOrCreate "/opt/local/var/run/mariadb-10.2" "sudo"
         checkFolderExistOrCreate "/opt/local/var/db/mariadb-10.2" "sudo"
@@ -77,19 +77,15 @@ if [ "$install_software" = "Y" ]; then
 
         # copy my.cnf for MySQL (to override macports settings)
         copyFile "/srv/tools/conf/my.cnf" "/opt/local/etc/mariadb-10.2/my.cnf" 
-
-    else 
-        outputHandler "comment" "Mariadb 10.2 not installed" "Please try installing Mariadb 10.2 again at a later time" "Run this install script again afterwards"
-    fi
-    if [ "$(checkMariadbPassword)" = "false" ]; then
-        echo "Installing Database"
         if [ $(fileExist "/opt/local/var/db/mariadb-10.2/mysql") = "false" ]; then 
+            echo "Installing Database"
             command "sudo -u _mysql /opt/local/lib/mariadb-10.2/bin/mysql_install_db"
+        else
+            echo "Database allready installed"
         fi
         command "sudo port load mariadb-10.2-server"
-
     else 
-        echo "Database allready installed"
+        outputHandler "comment" "Mariadb 10.2 not installed" "Please try installing Mariadb 10.2 again at a later time" "Run this install script again afterwards"
     fi
 else
     outputHandler "comment" "Skipping Software Installation"

@@ -129,7 +129,7 @@ checkMariadbPassword(){
 	mariadb_installed_array=("mariadb-10.[2-9]-server \@10.[2-9].* \(active\)")
 	#mariadb_installed=$(testCommand "port installed mariadb-10.2-server" "$mariadb_installed_array")
 	mariadb_installed_specific=$(testCommand "port installed" "$mariadb_installed_array")
-	if [ "$mariadb_installed_specific" = "true" ]; then
+	if [ -n "$mariadb_installed_specific" ]; then
 		mariadb_status_array=("mysql")
 		mariadb_status=$(testCommand "ps -Aclw" "${mariadb_status_array[@]}")
 		if [ "$mariadb_status" = "true" ]; then 
