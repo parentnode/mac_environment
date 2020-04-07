@@ -1,16 +1,7 @@
 #!/bin/bash -e
 
-echo "--------------------------------------------------------------"
-echo ""
-echo "Installing parentNode in mac"
-echo "DO NOT CLOSE UNTIL INSTALL ARE COMPLETE" 
-echo "You will see 'Install complete' message once it's done"
-echo ""
-echo ""
 
 source /srv/tools/scripts/functions.sh
-
-outputHandler "section" "Gather information required for the installation"
 
 # Current Username logged in
 install_user=$(getUsername)
@@ -18,6 +9,8 @@ export install_user
 
 # Request sudo privileges
 enableSuperCow
+outputHandler "section" "Installing parentNode in mac"
+outputHandler "comment" "DO NOT CLOSE UNTIL INSTALL ARE COMPLETE" "You will see 'Install complete' message once it's done"
 
 outputHandler "comment" "Installing system for $install_user"
 # This is where you choose what to install and informs you what you don't need
