@@ -19,7 +19,7 @@ fi
 
 if [ $(fileExist "/Users/$install_user/.bash_profile") = "false" ]; then
     echo "Creating .bash_profile"
-    copyFile "/srv/tools/conf/bash_profile_full.default" "/Users/$install_user/.bash_profile"
+    copyFile "/srv/tools/conf/dot_profile" "/Users/$install_user/.bash_profile"
 else 
     echo "Existing .bash_profile"
 fi
@@ -53,4 +53,3 @@ checkFolderExistOrCreate "/Users/$install_user/Sites/apache/logs"
 checkFolderExistOrCreate "/Users/$install_user/Sites/apache/ssl"
 #checkFolderExistOrCreate "/Users/$install_user/Sites/parentnode"
 echo "Checking Directories done"
-exit

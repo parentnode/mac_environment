@@ -20,7 +20,7 @@ git_prompt () {
 export PS1="\[$(tput bold)\]\[$(tput setaf 5)\]\u@\h \[$(tput setaf 2)\]\W\$(git_prompt)\[$(tput sgr0)\]\[$(tput setaf 4)\] \\$"
 # enable_git_prompt
 
-# symlink
+# parentnode_multi_user
 check_for_symlink=$(ls -l /srv/sites | grep /srv/sites | cut -d '>' -f2 | cut -d ' ' -f2)
 if [ ! "$check_for_symlink" = ~/Sites ]; then
 	echo "Creating Symlink"
@@ -39,9 +39,9 @@ if [ ! "$check_for_symlink" = ~/Sites ]; then
 	sudo unlink /srv/sites
 	sudo ln -s ~/Sites /srv/sites
 fi
-# symlink
+# parentnode_multi_user
 
-# alias
+# parentnode_alias
 # Development environment tools
 #"alias update_dev_env"
 #"alias update_dev_env" alias update_dev_env="php /srv/tools/scripts/update.php"
@@ -77,4 +77,4 @@ alias git_status="php /srv/tools/scripts/git_status.php"
 #alias git_dropbox2github="php /srv/tools/scripts/git_dropbox2github.php"
 #alias git_github2dropbox="php /srv/tools/scripts/git_github2dropbox.php"
 
-# alias
+# parentnode_alias
