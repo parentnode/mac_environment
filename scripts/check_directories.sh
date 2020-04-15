@@ -1,4 +1,5 @@
 outputHandler "section" "Checking Required files/folders and shortcuts"
+exit
 # Just a shorthand for readability
 conf_path="/srv/tools/conf"
 if [ $(fileExist "$conf_path/httpd.conf") = "false" ]; then
