@@ -89,7 +89,7 @@ ask(){
 			#ask "$1" "${valid_answers[@]}"
 			if [ "$3" = "password" ];
 			then
-				ask "Invalid $3, try again" "$2" "$3"	
+				ask "Invalid $3, try with specified password format" "$2" "$3"	
 			else
 				ask "Invalid $3, try again" "$2" "$3"
 			fi
