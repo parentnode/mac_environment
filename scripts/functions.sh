@@ -261,7 +261,7 @@ createOrModifyBashProfile(){
 		export bash_profile_modify
 	else
 		outputHandler "comment" "Installing .bash_profile"
-		copyFile "/srv/tools/conf/bash_profile_full.default" "/Users/$install_user/.bash_profile"
+		copyFile "$conf" "/Users/$install_user/.bash_profile"
 	fi
 	if [ "$bash_profile_modify" = "Y" ]; then
 		does_parentnode_git_exist=$(checkFileContent "# enable_git_prompt" "/Users/$install_user/.bash_profile")
@@ -282,7 +282,7 @@ createOrModifyBashProfile(){
 			deleteAndAppendSection "# alias" "$conf" "/Users/$install_user/.bash_profile"
 		fi
 		if [ "$does_parentnode_symlink_exist" = "true" ]; then
-			deleteAndAppendSection "# symlink" "/srv/tools/conf/bash_profile_full.default" "/Users/$install_user/.bash_profile"
+			deleteAndAppendSection "# symlink" "$conf" "/Users/$install_user/.bash_profile"
 		fi
 	else
 		syncronizeAlias "alias" "$conf_alias" "$HOME/.bash_profile"
