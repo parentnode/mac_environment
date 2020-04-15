@@ -18,7 +18,6 @@ if [ "$install_software" = "Y" ]; then
 	install_wkhtml=$(ask "Install WKHTMLTOPDF (Y/n)" "${install_wkhtml_array[@]}" "option wkhtml")
 	export install_wkhtml
 fi
-exit
 outputHandler "comment" "Update macports"
 # Updates the macports port tree
 command "sudo port selfupdate"
