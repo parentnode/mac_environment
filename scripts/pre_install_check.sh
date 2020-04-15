@@ -65,6 +65,7 @@ fi
 
 # A function that creates(if none exist) or if you choose Y modifies .bash_profile 
 createOrModifyBashProfile
+exit
 # MYSQL ROOT PASSWORD
 #if no mariadb installation found or can login without password checkMariadbPassword returns false 
 if [ "$install_webserver_conf" = "Y" ]; then
@@ -107,7 +108,7 @@ command "sudo chown $install_user:staff /Users/$install_user/.gitconfig"
 # Array containing major releases of Xcode
 outputHandler "comment" "Checking for xcode"
 xcode_array=( "Xcode 4" "Xcode 5" "Xcode 6" "Xcode 7" "Xcode 8" "Xcode 9" "Xcode 10" "Xcode 11" )
-if [ $(testCommand "xcodebuild -version" "${xcode_array[@]}") = "true" ]; then
+if [ $(testCommandResponse "xcodebuild -version" "${xcode_array[@]}") = "true" ]; then
     outputHandler  "comment" "Xcode installed "
 else
     outputHandler "exit" "Install Xcode with app store and try again"
@@ -115,7 +116,7 @@ fi
 
 outputHandler "comment" "Checking for Xcode command line tools version"
 xcode_array_cl=( "version: 6" "version: 7" "version: 8" "version: 9" "version: 10" "version: 11" )
-if [ $(testCommand "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "${xcode_array_cl[@]}") = "true" ]; then 
+if [ $(testCommandResponse "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "${xcode_array_cl[@]}") = "true" ]; then 
     outputHandler "comment" "Xcode Command Line tools installed"
 else
     outputHandler "exit" "Install Xcode Command Line tools with app store and try again"
@@ -125,7 +126,7 @@ fi
 outputHandler "comment" "Checking for Macports"
 macports_array=("Version: 2")
 
-if [ $(testCommand "port version" "${macports_array[@]}") = "true" ]; then
+if [ $(testCommandResponse "port version" "${macports_array[@]}") = "true" ]; then
     outputHandler "comment" "Macports installed"
 else
     outputHandler "exit" "Update macports and try again"

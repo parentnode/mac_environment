@@ -102,7 +102,7 @@ ask(){
 export -f ask
 
 # Check if program/service are installed
-testCommand(){
+testCommandResponse(){
 # Usage: returns a true if a program or service are located in 
 # P1: kommando
 # P2: array of valid responses
@@ -116,7 +116,7 @@ testCommand(){
 	done
 
 }
-export -f testCommand
+export -f testCommandResponse
 
 checkGitCredential(){
 	value=$(git config --global user.$1)
@@ -127,11 +127,11 @@ export -f checkGitCredential
 
 checkMariadbPassword(){
 	mariadb_installed_array=("mariadb-10.[2-9]-server \@10.[2-9].* \(active\)")
-	#mariadb_installed=$(testCommand "port installed mariadb-10.2-server" "$mariadb_installed_array")
-	mariadb_installed_specific=$(testCommand "port installed" "$mariadb_installed_array")
+	#mariadb_installed=$(testCommandResponse "port installed mariadb-10.2-server" "$mariadb_installed_array")
+	mariadb_installed_specific=$(testCommandResponse "port installed" "$mariadb_installed_array")
 	if [ -n "$mariadb_installed_specific" ]; then
 		mariadb_status_array=("mysql")
-		mariadb_status=$(testCommand "ps -Aclw" "${mariadb_status_array[@]}")
+		mariadb_status=$(testCommandResponse "ps -Aclw" "${mariadb_status_array[@]}")
 		if [ "$mariadb_status" = "true" ]; then 
     		has_password=$(/opt/local/lib/mariadb-10.2/bin/mysql -u root mysql -e 'SHOW TABLES' 2>&1 | grep "using password: NO")
 			if [ -n "$has_password" ]; then
@@ -198,17 +198,17 @@ syncronizeAlias(){
 	#source="($(</srv/sites/parentnode/mac_environment/tests/syncronize_alias_test_files/source))"
 	
 	# Source path for script
-	source="($(</srv/tools/conf/bash_profile.default))"
+	source=$(<$2)
 	
 	# Destination path for testing
 	#destination="/srv/sites/parentnode/mac_environment/tests/syncronize_alias_test_files/destination"
 	# Destination path for script
-	destination="/Users/$install_user/.bash_profile"
+	destination=$3
 	# Alias line looks like this key: "alias sites" alias sites="cd /srv/sites"
 	# Key part of alias line: alias sites  
-	key_array=($(echo "$input" | grep "^\"alias" | cut -d \" -f2))	
+	key_array=($(echo "$source" | grep "^\"$1" | cut -d \" -f2))	
 	# Value part of alias line: alias sites="cd /srv/sites" 
-	value_array=($(echo "$input" | grep "^\"alias" | cut -d \" -f3,4,5))
+	value_array=($(echo "$source" | grep "^\"$1" | cut -d \" -f3,4,5))
 	# Revert to default IFS
 	IFS=$OLDIFS
 	for ((i = 0; i < "${#key_array[@]}"; i++))
@@ -218,24 +218,24 @@ syncronizeAlias(){
 }
 export -f syncronizeAlias
 
-updateContent(){
+deleteAndAppendSection(){
 	sed -i '' "/$1/,/$1/d" $3 
     readdata=$( < $2)
     echo "$readdata" | sed -n "/$1/,/$1/p" >> "$3"
 }
-export -f updateContent
+export -f deleteAndAppendSection
 
 checkFolderExistOrCreate(){
 	
 	if [ ! -e "$1" ]; then
-		echo "Creating folder"
+		echo "Creating folder $1"
 		if [ "$2" = "sudo" ]; then
 			sudo mkdir $1
 		else
 			mkdir $1
 		fi
 	else
-		echo "Folder Exist"
+		echo "Folder allready exist"
 	fi
 }
 export -f checkFolderExistOrCreate
@@ -252,6 +252,8 @@ command(){
 export -f command
 
 createOrModifyBashProfile(){
+	conf="/srv/tools/conf/dot_profile"
+	conf_alias="/srv/tools/conf/dot_profile_alias"
 	if [ "$(fileExist "/Users/$install_user/.bash_profile")" = "true" ]; then
 		outputHandler "comment" ".bash_profile exists"
 		bash_profile_modify_array=("[Yn]")
@@ -266,24 +268,24 @@ createOrModifyBashProfile(){
 		does_parentnode_alias_exist=$(checkFileContent "# alias" "/Users/$install_user/.bash_profile")
 		does_parentnode_symlink_exist=$(checkFileContent "# alias" "/Users/$install_user/.bash_profile")
 		#if [ "$does_parentnode_git_exist" = "true" ] || [ "$does_parentnode_alias_exist" = "true" ];then 
-		#	updateContent "# enable_git_prompt" "/srv/tools/conf/bash_profile_full.default" "/Users/$install_user/.bash_profile"
-		#	updateContent "# alias" "/srv/tools/conf/bash_profile_full.default" "/Users/$install_user/.bash_profile"
-		#	updateContent "# symlink" "/srv/tools/conf/bash_profile_full.default" "/Users/$install_user/.bash_profile"
+		#	deleteAndAppendSection "# enable_git_prompt" "/srv/tools/conf/bash_profile_full.default" "/Users/$install_user/.bash_profile"
+		#	deleteAndAppendSection "# alias" "/srv/tools/conf/bash_profile_full.default" "/Users/$install_user/.bash_profile"
+		#	deleteAndAppendSection "# symlink" "/srv/tools/conf/bash_profile_full.default" "/Users/$install_user/.bash_profile"
 		#else
 		#	/Users/$install_user/.bash_profile
 		#	sudo cp /srv/tools/conf/bash_profile_full.default /Users/$install_user/.bash_profile
 		#fi
 		if [ "$does_parentnode_git_exist" = "true" ]; then
-			updateContent "# enable_git_prompt" "/srv/tools/conf/bash_profile_full.default" "/Users/$install_user/.bash_profile"
+			deleteAndAppendSection "# enable_git_prompt" "$conf" "/Users/$install_user/.bash_profile"
 		fi
 		if [ "$does_parentnode_alias_exist" = "true" ]; then
-			updateContent "# alias" "/srv/tools/conf/bash_profile_full.default" "/Users/$install_user/.bash_profile"
+			deleteAndAppendSection "# alias" "$conf" "/Users/$install_user/.bash_profile"
 		fi
 		if [ "$does_parentnode_symlink_exist" = "true" ]; then
-			updateContent "# symlink" "/srv/tools/conf/bash_profile_full.default" "/Users/$install_user/.bash_profile"
+			deleteAndAppendSection "# symlink" "/srv/tools/conf/bash_profile_full.default" "/Users/$install_user/.bash_profile"
 		fi
 	else
-		syncronizeAlias
+		syncronizeAlias "alias" "$conf_alias" "$HOME/.bash_profile"
 	fi
 }
 export -f createOrModifyBashProfile

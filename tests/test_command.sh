@@ -1,12 +1,12 @@
 #!/bin/bash -e
 source /srv/sites/parentnode/mac_environment/scripts/functions.sh
 # Check if program/service are installed
-echo "Testing testCommand"
+echo "Testing testCommandResponse"
 echo 
 apache_status=("httpd")
 echo "Checking Apache2.4 status: "
-#testCommand "ps -Aclw" "${apache_status[@]}"
-if [ "$(testCommand "ps -Aclw" "${apache_status[@]}")" = "true" ]; then 
+#testCommandResponse "ps -Aclw" "${apache_status[@]}"
+if [ "$(testCommandResponse "ps -Aclw" "${apache_status[@]}")" = "true" ]; then 
     echo "apache running"
 else 
     echo "apache not running"

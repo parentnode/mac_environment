@@ -46,8 +46,8 @@ if [ "$install_software" = "Y" ]; then
         command "sudo port load apache2"
         outputHandler "comment" "Software Installed"
         mariadb_installed_array=("mariadb-10.[2-9]-server \@10.[2-9].* \(active\)")
-	    #mariadb_installed=$(testCommand "port installed mariadb-10.2-server" "$mariadb_installed_array")
-	    mariadb_installed_specific=$(testCommand "port installed" "$mariadb_installed_array")
+	    #mariadb_installed=$(testCommandResponse "port installed mariadb-10.2-server" "$mariadb_installed_array")
+	    mariadb_installed_specific=$(testCommandResponse "port installed" "$mariadb_installed_array")
 	    if [ -n "$mariadb_installed_specific" ]; then
             #mysql paths
             checkFolderExistOrCreate "/opt/local/var/run/mariadb-10.2" "sudo"
