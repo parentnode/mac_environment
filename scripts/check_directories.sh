@@ -1,5 +1,4 @@
 outputHandler "section" "Checking Required files/folders and shortcuts"
-exit
 # Just a shorthand for readability
 conf_path="/srv/tools/conf"
 if [ $(fileExist "$conf_path/httpd.conf") = "false" ]; then
@@ -54,3 +53,4 @@ checkFolderExistOrCreate "/Users/$install_user/Sites/apache/logs"
 checkFolderExistOrCreate "/Users/$install_user/Sites/apache/ssl"
 #checkFolderExistOrCreate "/Users/$install_user/Sites/parentnode"
 echo "Checking Directories done"
+exit
