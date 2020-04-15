@@ -30,8 +30,8 @@ copyFile "/srv/tools/conf/ssl/star_local.key" "/srv/sites/apache/ssl/star_local.
 echo "Configuration copied"
 
 mariadb_installed_array=("mariadb-10.[2-9]-server \@10.[2-9].* \(active\)")
-#mariadb_installed=$(testCommand "port installed mariadb-10.2-server" "$mariadb_installed_array")
-mariadb_installed_specific=$(testCommand "port installed" "$mariadb_installed_array")
+#mariadb_installed=$(testCommandResponse "port installed mariadb-10.2-server" "$mariadb_installed_array")
+mariadb_installed_specific=$(testCommandResponse "port installed" "$mariadb_installed_array")
 if [ -n "$mariadb_installed_specific" ]; then
     outputHandler "comment" "starting mariadb"
     # Start database
