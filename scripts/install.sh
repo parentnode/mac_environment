@@ -14,7 +14,7 @@ outputHandler "comment" "DO NOT CLOSE UNTIL INSTALL ARE COMPLETE" "You will see 
 
 outputHandler "comment" "Installing system for $install_user"
 # This is where you choose what to install and informs you what you don't need
-exit
+
 . /srv/tools/scripts/pre_install_check.sh
 
 # This is where we make sure you have all the files and folders needed to install the script if not the script will create them
