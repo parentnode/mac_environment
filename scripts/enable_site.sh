@@ -28,6 +28,19 @@ getSiteInfo(){
 		echo "${site_array[0]}"
 	fi
 }
+setHost(){
+	server=$(echo -e "127.0.0.1\\t$1")
+	
+	sudo chmod 777 "$host_file_path"		
+	host_exist=$(cat "$host_file_path" | grep "$server" || echo "")
+	if [ -z "$host_exist" ]; then 
+		echo "Setting up $1 host"
+		echo -e "127.0.0.1\\t$1" >> "$host_file_path"
+	else 
+		echo "$1 exists"	
+	fi
+	sudo chmod 644 "$host_file_path"
+}
 
 # Parse DocumentRoot from httpd-vhosts.conf
 document_root=($(grep -E "DocumentRoot" "$PWD/apache/httpd-vhosts.conf" | sed -e "s/	DocumentRoot \"//; s/\"//"))
@@ -46,12 +59,14 @@ do
 done
 for server in $(getSiteInfo "${server_name[@]}")
 do
-	echo "$server"
+	setHost "$server"
 done
 for doc in $(getSiteInfo "${document_root[@]}")
 do
 	echo "$doc"
 done
+
+
 ## Does current location seem to fullfil requirements (is httpd-vhosts.conf found where it is expected to be found)
 #if [ -e "$PWD/apache/httpd-vhosts.conf" ] ; then
 #
