@@ -24,7 +24,7 @@ outputHandler "comment" "Installing system for $install_user"
 . /srv/tools/scripts/install_software.sh
 
 # This is were all the after installation configuration setup are completed configurations are moved to where they belong and files are edited to support the stack
-. /srv/tools/scripts/setup_configurations.sh
+. /srv/tools/scripts/post_install_setup.sh
 
 outputHandler "comment" "More info found at: https://parentnode.dk/blog/installing-the-web-stack-on-mac-os"
 
