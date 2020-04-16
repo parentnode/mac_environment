@@ -96,7 +96,3 @@ if [ "$install_software" = "Y" ]; then
 else
     outputHandler "comment" "Skipping Software Installation"
 fi
-
-
-
-echo "Software installed"
