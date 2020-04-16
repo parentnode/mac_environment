@@ -6,7 +6,11 @@ install_software=$(ask "Install software (Y/n)" "${software_valid_answers[@]}" "
 export install_software
 
 if [ "$install_software" = "Y" ]; then
-	install_webserver_conf_array=("[Yn]")
+	outputHandler "comment" "Update macports"
+    # Updates the macports port tree
+    command "sudo port selfupdate"
+    
+    install_webserver_conf_array=("[Yn]")
 	install_webserver_conf=$(ask "Install Webserver Configuration (Y/n)" "${install_webserver_conf_array[@]}" "option webserver conf")
 	export install_webserver_conf
 
@@ -18,15 +22,9 @@ if [ "$install_software" = "Y" ]; then
 	install_wkhtml=$(ask "Install WKHTMLTOPDF (Y/n)" "${install_wkhtml_array[@]}" "option wkhtml")
 	export install_wkhtml
 fi
-outputHandler "comment" "Update macports"
-# Updates the macports port tree
-command "sudo port selfupdate"
-
-outputHandler "section" "Checking for tools required for the installation process"
-
 
 # SETTING DEFAULT GIT USER
-outputHandler "section" "Setting Default GIT USER"
+outputHandler "comment" "Setting Default GIT USER"
 git config --global core.filemode false
 
 # Checks if git credential are allready set, promts for input if not
