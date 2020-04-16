@@ -1,4 +1,5 @@
 #!/bin/bash -e
+exit
 if [ "$install_software" = "Y" ]; then
     outputHandler "section" "Installing Software"
 
