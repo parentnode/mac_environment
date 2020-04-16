@@ -9,7 +9,7 @@
 "alias mysql_dump_all" alias mysql_dump_all="php /srv/tools/scripts/mysql_dump_all.php"
 "alias mysql_grant" alias mysql_grant="php /srv/tools/scripts/mysql_grant.php"
 "alias enable_site" alias enable_site="/srv/tools/scripts/enable_site.sh"
-
+"alias disable_site" alias disable_site="/srv/tools/scripts/disable_site.sh"
 
 "alias no_ds" alias no_ds="find . -name '*.DS_Store' -type f -delete"
 
