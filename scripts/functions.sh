@@ -276,13 +276,13 @@ createOrModifyBashProfile(){
 		#	sudo cp /srv/tools/conf/bash_profile_full.default /Users/$install_user/.bash_profile
 		#fi
 		if [ "$does_parentnode_git_exist" = "true" ]; then
-			deleteAndAppendSection "# enable_git_prompt" "$conf" "/Users/$install_user/.bash_profile"
+			deleteAndAppendSection "# parentnode_git_prompt" "$conf" "/Users/$install_user/.bash_profile"
 		fi
 		if [ "$does_parentnode_alias_exist" = "true" ]; then
-			deleteAndAppendSection "# alias" "$conf" "/Users/$install_user/.bash_profile"
+			deleteAndAppendSection "# # parentnode_alias" "$conf" "/Users/$install_user/.bash_profile"
 		fi
 		if [ "$does_parentnode_symlink_exist" = "true" ]; then
-			deleteAndAppendSection "# symlink" "$conf" "/Users/$install_user/.bash_profile"
+			deleteAndAppendSection "# parentnode_multi_user" "$conf" "/Users/$install_user/.bash_profile"
 		fi
 	else
 		syncronizeAlias "alias" "$conf_alias" "$HOME/.bash_profile"
