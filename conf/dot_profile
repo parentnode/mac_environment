@@ -1,4 +1,4 @@
-# enable_git_prompt
+# parentnode_git_prompt
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 
 git_prompt () {
@@ -18,7 +18,7 @@ git_prompt () {
 }
 
 export PS1="\[$(tput bold)\]\[$(tput setaf 5)\]\u@\h \[$(tput setaf 2)\]\W\$(git_prompt)\[$(tput sgr0)\]\[$(tput setaf 4)\] \\$"
-# enable_git_prompt
+# parentnode_git_prompt
 
 # parentnode_multi_user
 check_for_symlink=$(ls -l /srv/sites | grep /srv/sites | cut -d '>' -f2 | cut -d ' ' -f2)
@@ -42,7 +42,6 @@ fi
 # parentnode_multi_user
 
 # parentnode_alias
-# Development environment tools
 #"alias update_dev_env"
 #"alias update_dev_env" alias update_dev_env="php /srv/tools/scripts/update.php"
 
@@ -53,7 +52,7 @@ alias mysqld="sudo /opt/local/share/mariadb-10.2/support-files/mysql.server"
 alias mysql_dump_all="php /srv/tools/scripts/mysql_dump_all.php"
 alias mysql_grant="php /srv/tools/scripts/mysql_grant.php"
 alias enable_site="/srv/tools/scripts/enable_site.sh"
-
+alias disable_site="/srv/tools/scripts/disable_site.sh"
 alias no_ds="find . -name '*.DS_Store' -type f -delete"
 
 
