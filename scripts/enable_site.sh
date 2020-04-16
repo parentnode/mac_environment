@@ -65,18 +65,7 @@ export server_name
 # Parse ServerAlias from httpd-vhosts.conf
 server_alias=($(grep -E "ServerAlias" "$PWD/apache/httpd-vhosts.conf" | sed "s/	ServerAlias //"))
 export server_alias
-#for alias in $(getSiteInfo "${server_alias[@]}")
-#do
-#	echo "$alias"
-#done
-#for server in $(getSiteInfo "${server_name[@]}")
-#do
-#	setHost "$server"
-#done
-#for doc in $(getSiteInfo "${document_root[@]}")
-#do
-#	echo "$doc"
-#done
+
 # Does current location seem to fullfil requirements (is httpd-vhosts.conf found where it is expected to be found)
 if [ -e "$PWD/apache/httpd-vhosts.conf" ] ; then
 
@@ -121,8 +110,14 @@ if [ -e "$PWD/apache/httpd-vhosts.conf" ] ; then
 	
 	# Restart apache after modification
 	echo ""
+	# Restart apache after modification
+	echo ""
 	echo "Restarting Apache"
-	sudo service apache2 restart
+	if [ -e "/opt/local/sbin/apachectl" ]; then
+		sudo /opt/local/sbin/apachectl restart
+	elif [ -e "/opt/local/apache2/apachectl" ]; then
+		sudo /opt/local/apache2/apachectl restart
+	fi
 
 
 	echo ""
