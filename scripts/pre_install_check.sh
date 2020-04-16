@@ -65,7 +65,6 @@ fi
 
 # A function that creates(if none exist) or if you choose Y modifies .bash_profile 
 createOrModifyBashProfile
-exit
 # MYSQL ROOT PASSWORD
 #if no mariadb installation found or can login without password checkMariadbPassword returns false 
 if [ "$install_webserver_conf" = "Y" ]; then
