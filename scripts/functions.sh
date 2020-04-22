@@ -279,7 +279,7 @@ createOrModifyBashProfile(){
 			deleteAndAppendSection "# parentnode_git_prompt" "$conf" "/Users/$install_user/.bash_profile"
 		fi
 		if [ "$does_parentnode_alias_exist" = "true" ]; then
-			deleteAndAppendSection "# # parentnode_alias" "$conf" "/Users/$install_user/.bash_profile"
+			deleteAndAppendSection "# parentnode_alias" "$conf" "/Users/$install_user/.bash_profile"
 		fi
 		if [ "$does_parentnode_symlink_exist" = "true" ]; then
 			deleteAndAppendSection "# parentnode_multi_user" "$conf" "/Users/$install_user/.bash_profile"

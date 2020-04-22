@@ -9,19 +9,18 @@ if [ "$install_software" = "Y" ]; then
 	outputHandler "comment" "Update macports"
     # Updates the macports port tree
     command "sudo port selfupdate"
-    
-    install_webserver_conf_array=("[Yn]")
-	install_webserver_conf=$(ask "Install Webserver Configuration (Y/n)" "${install_webserver_conf_array[@]}" "option webserver conf")
-	export install_webserver_conf
-
-	install_ffmpeg_array=("[Yn]")
-	install_ffmpeg=$(ask "Install FFMPEG (Y/n)" "${install_ffmpeg_array[@]}" "option ffmpeg")
-	export install_ffmpeg
-
-	install_wkhtml_array=("[Yn]")
-	install_wkhtml=$(ask "Install WKHTMLTOPDF (Y/n)" "${install_wkhtml_array[@]}" "option wkhtml")
-	export install_wkhtml
 fi
+install_webserver_conf_array=("[Yn]")
+install_webserver_conf=$(ask "Install Webserver Configuration (Y/n)" "${install_webserver_conf_array[@]}" "option webserver conf")
+export install_webserver_conf
+
+install_ffmpeg_array=("[Yn]")
+install_ffmpeg=$(ask "Install FFMPEG (Y/n)" "${install_ffmpeg_array[@]}" "option ffmpeg")
+export install_ffmpeg
+
+install_wkhtml_array=("[Yn]")
+install_wkhtml=$(ask "Install WKHTMLTOPDF (Y/n)" "${install_wkhtml_array[@]}" "option wkhtml")
+export install_wkhtml
 
 # SETTING DEFAULT GIT USER
 outputHandler "comment" "Setting Default GIT USER"
