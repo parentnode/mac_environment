@@ -56,10 +56,6 @@ if [ -z $(command "git config --global --get credential.helper") ]; then
     command "git config --global credential.helper osxkeychain"
 fi
 
-if [ -z $(command "git config --global --get core.autocrlf") ]; then
-	command "git config --global core.autocrlf input"
-fi 
-
 # A function that creates(if none exist) or if you choose Y modifies .bash_profile 
 createOrModifyBashProfile
 # MYSQL ROOT PASSWORD
