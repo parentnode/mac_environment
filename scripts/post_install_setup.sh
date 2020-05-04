@@ -20,9 +20,9 @@ if [ "$install_webserver_conf" = "Y" ]; then
 
     copyFile "/srv/tools/conf/newsyslog-apache.conf" "/etc/newsyslog.d/apache.conf"
 
-    copyFile "/srv/tools/conf/php.ini" "/opt/local/etc/php72/php.ini"
+    #copyFile "/srv/tools/conf/php.ini" "/opt/local/etc/php72/php.ini"
     # Copy php.ini.default for native configuration
-    copyFile "/srv/tools/conf/php_ini_native.ini" "/etc/php.ini"
+    #copyFile "/srv/tools/conf/php_ini_native.ini" "/etc/php.ini"
 
     copyFile "/srv/tools/conf/ssl/star_local.crt" "/srv/sites/apache/ssl/star_local.crt"
     copyFile "/srv/tools/conf/ssl/star_local.key" "/srv/sites/apache/ssl/star_local.key"
