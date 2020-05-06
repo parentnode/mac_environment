@@ -14,7 +14,7 @@ if [ "$install_software" = "Y" ]; then
 
         sudo port -N install mariadb-10.2-server
 
-        outputHandler "section" "Check Mariadb Password: $(checkMariadbPassword)"
+        outputHandler "comment" "Check Mariadb Password: $(checkMariadbPassword)"
 
         initial_install_array=("php74" "apache2" "pear" "php74-apache2handler")
         for ((i=0; i < ${#initial_install_array[@]}; i++))
@@ -65,10 +65,10 @@ if [ "$install_software" = "Y" ]; then
             # copy my.cnf for MySQL (to override macports settings)
             copyFile "/srv/tools/conf/my.cnf" "/opt/local/etc/mariadb-10.2/my.cnf" 
             if [ $(fileExist "/opt/local/var/db/mariadb-10.2/mysql") = "false" ]; then 
-                echo "Installing Database"
+                outputHandler "comment" "Installing Database"
                 command "sudo -u _mysql /opt/local/lib/mariadb-10.2/bin/mysql_install_db"
             else
-                echo "Database allready installed"
+                outputHandler "comment" "Database allready installed"
             fi
             command "sudo port load mariadb-10.2-server"
         else 
@@ -89,7 +89,7 @@ if [ "$install_software" = "Y" ]; then
         command "sudo port -N install ffmpeg +nonfree"
     fi
     if [ "$install_wkhtml" = "Y" ]; then
-        outputHandler "comment installing wkhtmltopdf"
+        outputHandler "comment" "installing wkhtmltopdf"
         command "tar -xvf /srv/tools/bin/wkhtml.tar.gz -C /srv/tools/bin/"
         command "sudo rm /srv/tools/bin/wkhtml.tar.gz"
     fi
