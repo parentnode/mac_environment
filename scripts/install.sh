@@ -18,7 +18,7 @@ outputHandler "comment" "Installing system for $install_user"
 . /srv/tools/scripts/pre_install_check.sh
 
 # This is where we make sure you have all the files and folders needed to install the script if not the script will create them
-. /srv/tools/scripts/check_directories.sh
+. /srv/tools/scripts/checking_directories.sh
 
 # This is where all the software packages and update installs are happening 
 . /srv/tools/scripts/install_software.sh

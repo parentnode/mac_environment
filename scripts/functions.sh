@@ -267,23 +267,13 @@ createOrModifyBashProfile(){
 		does_parentnode_git_exist=$(checkFileContent "# parentnode_git_prompt" "/Users/$install_user/.bash_profile")
 		does_parentnode_alias_exist=$(checkFileContent "# parentnode_alias" "/Users/$install_user/.bash_profile")
 		does_parentnode_symlink_exist=$(checkFileContent "# parentnode_multi_user" "/Users/$install_user/.bash_profile")
-		#if [ "$does_parentnode_git_exist" = "true" ] || [ "$does_parentnode_alias_exist" = "true" ];then 
-		#	deleteAndAppendSection "# enable_git_prompt" "/srv/tools/conf/bash_profile_full.default" "/Users/$install_user/.bash_profile"
-		#	deleteAndAppendSection "# alias" "/srv/tools/conf/bash_profile_full.default" "/Users/$install_user/.bash_profile"
-		#	deleteAndAppendSection "# symlink" "/srv/tools/conf/bash_profile_full.default" "/Users/$install_user/.bash_profile"
-		#else
-		#	/Users/$install_user/.bash_profile
-		#	sudo cp /srv/tools/conf/bash_profile_full.default /Users/$install_user/.bash_profile
-		#fi
-		if [ "$does_parentnode_git_exist" = "true" ]; then
-			deleteAndAppendSection "# parentnode_git_prompt" "$conf" "/Users/$install_user/.bash_profile"
-		fi
+		deleteAndAppendSection "# parentnode_git_prompt" "$conf" "/Users/$install_user/.bash_profile"
 		if [ "$does_parentnode_alias_exist" = "true" ]; then
 			deleteAndAppendSection "# parentnode_alias" "$conf" "/Users/$install_user/.bash_profile"
+		else
+			syncronizeAlias "alias" "$conf_alias" "$HOME/.bash_profile"
 		fi
-		if [ "$does_parentnode_symlink_exist" = "true" ]; then
-			deleteAndAppendSection "# parentnode_multi_user" "$conf" "/Users/$install_user/.bash_profile"
-		fi
+		deleteAndAppendSection "# parentnode_multi_user" "$conf" "/Users/$install_user/.bash_profile"
 	else
 		syncronizeAlias "alias" "$conf_alias" "$HOME/.bash_profile"
 	fi
