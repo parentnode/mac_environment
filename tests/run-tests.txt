@@ -15,6 +15,6 @@
 #sudo /srv/sites/parentnode/mac_environment/tests/file_exist.sh
 #sudo /srv/sites/parentnode/mac_environment/tests/check_file_content.sh
 #sudo /srv/sites/parentnode/mac_environment/tests/syncronize_alias.sh
-sudo /srv/sites/parentnode/mac_environment/tests/delete_and_append_section.sh
+#sudo /srv/sites/parentnode/mac_environment/tests/delete_and_append_section.sh
 #sudo /srv/sites/parentnode/mac_environment/tests/check_folder_exist_or_create.sh
 #sudo /srv/sites/parentnode/mac_environment/tests/command.sh
