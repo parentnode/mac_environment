@@ -33,10 +33,12 @@ if [ "$install_webserver_conf" = "Y" ]; then
     #mariadb_installed=$(testCommandResponse "port installed mariadb-10.2-server" "$mariadb_installed_array")
     mariadb_installed_specific=$(testCommandResponse "port installed" "$mariadb_installed_array")
     if [ -n "$mariadb_installed_specific" ]; then
-        outputHandler "comment" "Starting mariadb"
+        outputHandler "comment" "Starting MariaDB"
         # Start database
-        command "sudo /opt/local/share/mariadb-10.2/support-files/mysql.server start" "true"
-
+        mariadb_started=$(sudo /opt/local/share/mariadb-10.2/support-files/mysql.server start 2>&1 | grep ".*process already exists" || echo "" )
+        if [ -n "$mariadb_started" ]; then
+            outputHandler "comment" "MariaDB already started"
+        fi
         outputHandler "comment" "setting mariadb password"
         mariadb_password=$(checkMariadbPassword 2>&1 | grep "false")
         if [ "$mariadb_password" = "false" ]; then
