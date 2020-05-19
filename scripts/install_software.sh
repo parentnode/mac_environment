@@ -87,7 +87,7 @@ if [ "$install_software" = "Y" ]; then
         command "sudo port -N install ffmpeg +nonfree"
     fi
     if [ "$install_wkhtml" = "Y" ]; then
-        outputHandler "comment" "Unpacking wkhtmltopdf $(tar -xvf /srv/tools/bin/wkhtml.tar.gz -C /srv/tools/bin/ 2>&1 )"
+        outputHandler "comment" "Unpacking wkhtmltopdf $(tar -xzvf /srv/tools/bin/wkhtml.tar.gz -C /srv/tools/bin/ 2>&1 )"
         outputHandler "comment" "Removing unneaded packages"
         command "sudo rm /srv/tools/bin/wkhtml.tar.gz" "true"
     fi
