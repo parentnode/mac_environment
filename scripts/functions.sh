@@ -206,7 +206,7 @@ syncronizeAlias(){
 	destination=$3
 	# Alias line looks like this key: "alias sites" alias sites="cd /srv/sites"
 	# Key part of alias line: alias sites  
-	key_array=($(echo "$source" | grep "^\"$1" | cut -d \" -f2))	
+	key_array=($(echo "$source" | grep "^\"$1.*\"" | cut -d \" -f2))	
 	# Value part of alias line: alias sites="cd /srv/sites" 
 	value_array=($(echo "$source" | grep "^\"$1" | cut -d \" -f3,4,5))
 	# Revert to default IFS
@@ -268,11 +268,7 @@ createOrModifyBashProfile(){
 		does_parentnode_alias_exist=$(checkFileContent "# parentnode_alias" "/Users/$install_user/.bash_profile")
 		does_parentnode_symlink_exist=$(checkFileContent "# parentnode_multi_user" "/Users/$install_user/.bash_profile")
 		deleteAndAppendSection "# parentnode_git_prompt" "$conf" "/Users/$install_user/.bash_profile"
-		if [ "$does_parentnode_alias_exist" = "true" ]; then
-			deleteAndAppendSection "# parentnode_alias" "$conf" "/Users/$install_user/.bash_profile"
-		else
-			syncronizeAlias "alias" "$conf_alias" "$HOME/.bash_profile"
-		fi
+		deleteAndAppendSection "# parentnode_alias" "$conf" "/Users/$install_user/.bash_profile"
 		deleteAndAppendSection "# parentnode_multi_user" "$conf" "/Users/$install_user/.bash_profile"
 	else
 		syncronizeAlias "alias" "$conf_alias" "$HOME/.bash_profile"

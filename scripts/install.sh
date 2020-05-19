@@ -9,10 +9,9 @@ export install_user
 
 # Request sudo privileges
 enableSuperCow
-outputHandler "section" "Installing parentNode in mac"
-outputHandler "comment" "DO NOT CLOSE UNTIL INSTALL ARE COMPLETE" "You will see 'Install complete' message once it's done"
+outputHandler "comment" "DO NOT CLOSE UNTIL INSTALL IS COMPLETE" "You will see 'Install complete' message once it's done"
 
-outputHandler "comment" "Installing system for $install_user"
+#outputHandler "comment" "Running this installer for user: $install_user"
 # This is where you choose what to install and informs you what you don't need
 
 . /srv/tools/scripts/pre_install_check.sh
@@ -26,8 +25,11 @@ outputHandler "comment" "Installing system for $install_user"
 # This is were all the after installation configuration setup are completed configurations are moved to where they belong and files are edited to support the stack
 . /srv/tools/scripts/post_install_setup.sh
 
-outputHandler "comment" "More info found at: https://parentnode.dk/blog/installing-the-web-stack-on-mac-os"
 
+echo "--------------------------------------------------------------"
 echo "Install complete"
 echo "--------------------------------------------------------------"
 echo ""
+
+outputHandler "comment" "More info found at:" "https://parentnode.dk/blog/installing-the-web-stack-on-mac-os"
+outputHandler "comment" "Restart your terminal, if you want to use " "MacOS Webstack commands"

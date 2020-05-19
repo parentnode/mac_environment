@@ -1,29 +1,55 @@
 outputHandler "section" "Checking Software Prerequisites are met"
+macos_version=$(sw_vers | grep -E "ProductVersion:" | cut -f2)
+export macos_version
+outputHandler "comment" "You are running macOS: ($macos_version)"
+# Array containing major releases of Xcode
+outputHandler "comment" "Checking for xcode"
+xcode_array=( "Xcode 4" "Xcode 5" "Xcode 6" "Xcode 7" "Xcode 8" "Xcode 9" "Xcode 10" "Xcode 11" )
+if [ $(testCommandResponse "xcodebuild -version" "${xcode_array[@]}") = "true" ]; then
+    outputHandler  "comment" "Xcode installed "
+else
+    outputHandler "exit" "Install Xcode with app store and try again"
+fi
+
+outputHandler "comment" "Checking for Xcode command line tools version"
+xcode_array_cl=( "version: 6" "version: 7" "version: 8" "version: 9" "version: 10" "version: 11" )
+if [ $(testCommandResponse "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "${xcode_array_cl[@]}") = "true" ]; then 
+    outputHandler "comment" "Xcode Command Line tools installed"
+else
+    outputHandler "exit" "Install Xcode Command Line tools with app store and try again"
+fi
+
+
+outputHandler "comment" "Checking for Macports"
+xcode_ok=$(xcodebuild -version exit 2>/dev/null || echo "")
+if [ -z "$xcode_ok" ]; then
+    outputHandler "comment" "Macports not installed"
+    open https://www.macports.org/install.php
+    outputHandler "exit" "Install macports for macOS: $macos_version then try again"
+else
+    outputHandler "comment" "Macports installed"
+    sudo port selfupdate
+fi
 
 # If you have no need any software you can skip installing by pressing n and then enter
 software_valid_answers=("[Yn]")
 install_software=$(ask "Install software (Y/n)" "${software_valid_answers[@]}" "install software")
 export install_software
 
-if [ "$install_software" = "Y" ]; then
-	outputHandler "comment" "Update macports"
-    # Updates the macports port tree
-    command "sudo port selfupdate"
-fi
 install_webserver_conf_array=("[Yn]")
 install_webserver_conf=$(ask "Install Webserver Configuration (Y/n)" "${install_webserver_conf_array[@]}" "option webserver conf")
 export install_webserver_conf
 
 install_ffmpeg_array=("[Yn]")
-install_ffmpeg=$(ask "Install FFMPEG (Y/n)" "${install_ffmpeg_array[@]}" "option ffmpeg")
+install_ffmpeg=$(ask "Install FFmpeg (Y/n)" "${install_ffmpeg_array[@]}" "option FFmpeg")
 export install_ffmpeg
 
 install_wkhtml_array=("[Yn]")
-install_wkhtml=$(ask "Install WKHTMLTOPDF (Y/n)" "${install_wkhtml_array[@]}" "option wkhtml")
+install_wkhtml=$(ask "Install wkhtmltopdf (Y/n)" "${install_wkhtml_array[@]}" "option wkhtmltopdf")
 export install_wkhtml
 
 # SETTING DEFAULT GIT USER
-outputHandler "comment" "Setting Default GIT USER"
+outputHandler "section" "Setting Default GIT USER"
 git config --global core.filemode false
 
 # Checks if git credential are allready set, promts for input if not
@@ -57,8 +83,10 @@ if [ -z $(command "git config --global --get credential.helper") ]; then
 fi
 
 # A function that creates(if none exist) or if you choose Y modifies .bash_profile 
+outputHandler "section" "Configuring .bash_profile"
 createOrModifyBashProfile
 # MYSQL ROOT PASSWORD
+outputHandler "section" "Database root Password"
 #if no mariadb installation found or can login without password checkMariadbPassword returns false 
 if [ "$install_webserver_conf" = "Y" ]; then
     if [ "$(checkMariadbPassword)" = "false" ]; then
@@ -97,29 +125,4 @@ fi
 # Change localuser group of .gitconfig to staff 
 command "sudo chown $install_user:staff /Users/$install_user/.gitconfig"
 
-# Array containing major releases of Xcode
-outputHandler "comment" "Checking for xcode"
-xcode_array=( "Xcode 4" "Xcode 5" "Xcode 6" "Xcode 7" "Xcode 8" "Xcode 9" "Xcode 10" "Xcode 11" )
-if [ $(testCommandResponse "xcodebuild -version" "${xcode_array[@]}") = "true" ]; then
-    outputHandler  "comment" "Xcode installed "
-else
-    outputHandler "exit" "Install Xcode with app store and try again"
-fi
 
-outputHandler "comment" "Checking for Xcode command line tools version"
-xcode_array_cl=( "version: 6" "version: 7" "version: 8" "version: 9" "version: 10" "version: 11" )
-if [ $(testCommandResponse "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "${xcode_array_cl[@]}") = "true" ]; then 
-    outputHandler "comment" "Xcode Command Line tools installed"
-else
-    outputHandler "exit" "Install Xcode Command Line tools with app store and try again"
-fi
-
-
-outputHandler "comment" "Checking for Macports"
-macports_array=("Version: 2")
-
-if [ $(testCommandResponse "port version" "${macports_array[@]}") = "true" ]; then
-    outputHandler "comment" "Macports installed"
-else
-    outputHandler "exit" "Update macports and try again"
-fi

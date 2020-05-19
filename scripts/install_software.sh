@@ -10,11 +10,8 @@ if [ "$install_software" = "Y" ]; then
     outputHandler "comment" "Enable getting PID of application really easy"
     command "sudo port install pidof"
     if [ "$install_webserver_conf" = "Y" ]; then
-        outputHandler "section" "Check Mariadb Password: $(checkMariadbPassword)"
-
+        outputHandler "comment" "Installing MariaDB"
         sudo port -N install mariadb-10.2-server
-
-        outputHandler "comment" "Check Mariadb Password: $(checkMariadbPassword)"
 
         initial_install_array=("php74" "apache2" "pear" "php74-apache2handler")
         for ((i=0; i < ${#initial_install_array[@]}; i++))
@@ -76,6 +73,7 @@ if [ "$install_software" = "Y" ]; then
         fi
     
     fi
+    outputHandler "comment" "Installing redis"
     command "sudo port -N install redis"
     #command "sudo port -N install git"
     #command "sudo port -N install wget"
@@ -89,10 +87,11 @@ if [ "$install_software" = "Y" ]; then
         command "sudo port -N install ffmpeg +nonfree"
     fi
     if [ "$install_wkhtml" = "Y" ]; then
-        outputHandler "comment" "installing wkhtmltopdf"
+        outputHandler "comment" "Installing wkhtmltopdf"
         command "tar -xvf /srv/tools/bin/wkhtml.tar.gz -C /srv/tools/bin/"
         command "sudo rm /srv/tools/bin/wkhtml.tar.gz"
     fi
+    #sudo port upgrade outdated
 else
     outputHandler "comment" "Skipping Software Installation"
 fi
