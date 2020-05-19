@@ -38,7 +38,8 @@ if [ "$install_webserver_conf" = "Y" ]; then
         command "sudo /opt/local/share/mariadb-10.2/support-files/mysql.server start" "true"
 
         outputHandler "comment" "setting mariadb password"
-        if [ "$(checkMariadbPassword 2>&1 | grep "false")" = "false" ]; then
+        mariadb_password=$(checkMariadbPassword 2>&1 | grep "false")
+        if [ "$mariadb_password" = "false" ]; then
             command "sudo /opt/local/lib/mariadb-10.2/bin/mysqladmin -u root password "$db_root_password1"" "true"
         else 
             echo "password is sat"
