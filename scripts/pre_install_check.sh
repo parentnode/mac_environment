@@ -91,8 +91,8 @@ outputHandler "section" "Database root Password"
 if [ "$install_webserver_conf" = "Y" ]; then
     if [ "$(checkMariadbPassword)" = "false" ]; then
         password_array=("[A-Za-z0-9\!\@\$]{8,30}")
-        outputHandler "comment" "For security measures the terminal will not display how many characters you input"
-		outputHandler "comment" "Password format: between 8 and 30 characters, non casesensitive letters, numbers and  # ! @ \$ special characters "
+        outputHandler "comment" "For security measures the terminal will not display how many characters you input"\ 
+        "Password format: between 8 and 30 characters, non casesensitive letters, numbers and  # ! @ \$ special characters"
         db_root_password1=$(ask "Enter mariadb password" "${password_array[@]}" "password")
         echo
         db_root_password2=$(ask "Confirm mariadb password" "${password_array[@]}" "password")
