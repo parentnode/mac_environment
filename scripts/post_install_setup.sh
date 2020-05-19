@@ -1,5 +1,5 @@
 if [ "$install_webserver_conf" = "Y" ]; then
-    echo "Setup Configuration"
+    outputHandler "section" "Configuring Setup"
 
     copyFile "/srv/tools/conf/httpd.conf" "/opt/local/etc/apache2/httpd.conf"
 
@@ -33,12 +33,12 @@ if [ "$install_webserver_conf" = "Y" ]; then
     #mariadb_installed=$(testCommandResponse "port installed mariadb-10.2-server" "$mariadb_installed_array")
     mariadb_installed_specific=$(testCommandResponse "port installed" "$mariadb_installed_array")
     if [ -n "$mariadb_installed_specific" ]; then
-        outputHandler "comment" "starting mariadb"
+        outputHandler "comment" "Starting mariadb"
         # Start database
         command "sudo /opt/local/share/mariadb-10.2/support-files/mysql.server start" "true"
 
         outputHandler "comment" "setting mariadb password"
-        if [ "$(checkMariadbPassword)" = "false" ]; then
+        if [ "$(checkMariadbPassword 2>&1 | grep "false")" = "false" ]; then
             command "sudo /opt/local/lib/mariadb-10.2/bin/mysqladmin -u root password "$db_root_password1"" "true"
         else 
             echo "password is sat"

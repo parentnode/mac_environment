@@ -32,7 +32,7 @@ if [ ! -d /srv/sites ]; then
     if [ ! -d ~/Sites ]; then
         mkdir ~/Sites
         catalina='10.15.[0-9]'
-        macos_version=$(sw_vers | grep -E "ProductVersion:" | cut -f2)
+        
         macos_version_catalina=$(sw_vers | grep -E "ProductVersion:\t$catalina" | cut -f2)
         if [ "$macos_version" = "$macos_version_catalina" ]; then
             if [ ! -d /var/parentnode ]; then
