@@ -87,9 +87,10 @@ if [ "$install_software" = "Y" ]; then
         command "sudo port -N install ffmpeg +nonfree"
     fi
     if [ "$install_wkhtml" = "Y" ]; then
-        outputHandler "comment" "Installing wkhtmltopdf"
-        command "tar -xvf /srv/tools/bin/wkhtml.tar.gz -C /srv/tools/bin/"
-        command "sudo rm /srv/tools/bin/wkhtml.tar.gz"
+        outputHandler "comment" "Unpacking wkhtmltopdf"
+        command "tar -xvf /srv/tools/bin/wkhtml.tar.gz -C /srv/tools/bin/" "true"
+        outputHandler "comment" "Removing unneaded packages"
+        command "sudo rm /srv/tools/bin/wkhtml.tar.gz" "true"
     fi
     #sudo port upgrade outdated
 else
