@@ -22,6 +22,7 @@
 *.ttf	binary
 *.woff	binary
 *.woff2	binary
+*.otf	binary
 
 # OTHER BINARIES
 *.exe	binary
@@ -29,6 +30,8 @@
 *.gz	binary
 *.tar	binary
 *.phar	binary
+wkhtmltoimage	binary
+wkhtmltopdf		binary
 
 # LIBRARY CONTENT
 png		binary
@@ -46,3 +49,6 @@ m4v		binary
 webm	binary
 pdf		binary
 zip		binary
+
+
+# LOCAL REPOS SPECIFIC

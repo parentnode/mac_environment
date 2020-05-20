@@ -1,0 +1,39 @@
+# DO NOT C/P FROM THIS FILE - Run install/update instead
+# FORMAT OF THIS FILE: "alias to check for" correct alias
+
+
+# Development environment tools
+#"alias update_dev_env"
+#"alias update_dev_env" alias update_dev_env="php /srv/tools/scripts/update.php"
+
+# Apache and mysql shortcuts
+"alias sites" alias sites="cd /srv/sites"
+"alias apache" alias apache="sudo /opt/local/sbin/apachectl"
+"alias mysql" alias mysql="sudo /opt/local/lib/mariadb-10.2/bin/mysql"
+"alias mysqld" alias mysqld="sudo /opt/local/share/mariadb-10.2/support-files/mysql.server"
+"alias mysql_dump_all" alias mysql_dump_all="php /srv/tools/scripts/mysql_dump_all.php"
+"alias mysql_grant" alias mysql_grant="php /srv/tools/scripts/mysql_grant.php"
+"alias enable_site" alias enable_site="/srv/tools/scripts/enable_site.sh"
+
+
+# Cleanup shortcuts
+"alias no_ds" alias no_ds="find . -name '*.DS_Store' -type f -delete"
+
+
+# zip shortcut
+"alias zipmac" alias zipmac="zip -r zip . -x \*.DS*"
+"alias zipit" alias zipit="zip -r zip . -x \*.svn* \*.git* \*.DS*"
+"alias zipitm" alias zipitm="zip -r zip . -x \*.svn* \*.git* \*.DS* \*js/lib/* \*css/lib/*"
+
+
+# git tools 
+"alias git_status" alias git_status="php /srv/tools/scripts/git_status.php"
+
+# git dropbox/github tools - NEEDS TO BE UPDATED
+"alias git_new_dropbox" 
+"alias git_dropbox2github" 
+"alias git_github2dropbox" 
+#"alias git_new_dropbox" alias git_new_dropbox="php /srv/tools/scripts/git_new_dropbox.php"
+#"alias git_dropbox2github" alias git_dropbox2github="php /srv/tools/scripts/git_dropbox2github.php"
+#"alias git_github2dropbox" alias git_github2dropbox="php /srv/tools/scripts/git_github2dropbox.php"
+
