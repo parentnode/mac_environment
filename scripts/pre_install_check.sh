@@ -31,6 +31,14 @@ else
     sudo port selfupdate
 fi
 
+apache_running=$(curl http://127.0.0.1 2>&1 | grep "<html>" || echo "")
+
+if [ -n "$apache_running" ]; then 
+    outputHandler "comment" "Stopping running instance of apache $(sudo apachectl stop)"
+fi
+
+
+outputHandler "section" "Choose what to install"
 # If you have no need any software you can skip installing by pressing n and then enter
 software_valid_answers=("[Yn]")
 install_software=$(ask "Install software (Y/n)" "${software_valid_answers[@]}" "install software")
