@@ -156,24 +156,27 @@ if(!isset($backup_device_files[$backup_device]) || !isset($backup_device_files[$
 
 
 			// only restore basic settings and fonts - no projects
+			copyFolder("~/$backup_file_name/dot_config", "~/.config/");
 
 			copyFile("~/$backup_file_name/dot_bash_profile", "~/.bash_profile");
 			copyFile("~/$backup_file_name/dot_gitconfig", "~/.gitconfig");
 			copyFile("~/$backup_file_name/dot_gitignore_global", "~/.gitignore_global");
 			copyFile("~/$backup_file_name/dot_tm_properties", "~/.tm_properties");
+			copyFile("~/$backup_file_name/dot_anyconnect", "~/.anyconnect");
 			copyFolder("~/$backup_file_name/dot_ssh/", "~/.ssh");
 
 			copyFolder("~/$backup_file_name/Library/Fonts/", "~/Library/Fonts");
+
+			copyFolder("~/$backup_file_name/Library/Application Support/Fork/", "~/Library/Application Support/Sequel Pro");
+			copyFolder("~/$backup_file_name/Library/Application Support/Sequel Pro/", "~/Library/Application Support/Fork");
 
 			copyFile("~/$backup_file_name/Library/Application Support/Sequel Pro/Data/Favorites.plist", "~/Library/Application Support/Sequel Pro/Data/Favorites.plist");
 			copyFile("~/$backup_file_name/Library/Application Support/TextMate/Global.tmProperties", "~/Library/Application Support/TextMate/Global.tmProperties");
 			copyFolder("~/$backup_file_name/Library/Application Support/TextMate/Bundles/", "~/Library/Application Support/TextMate/Bundles");
 
-			copyFolder("~/$backup_file_name/Library/Group Containers/G69SCX94XU.duck", "~/Library/Group Containers/G69SCX94XU.duck");
-
 			command("chmod -R 777 '".$backup_folder."'", true, true);
 			// delete backup folder
-			command("rm -R '".$backup_folder."'", true, true);
+			// command("rm -R '".$backup_folder."'", true, true);
 
 		}
 		else {
