@@ -3,33 +3,25 @@ macos_version=$(sw_vers | grep -E "ProductVersion:" | cut -f2)
 export macos_version
 outputHandler "comment" "You are running macOS: ($macos_version)"
 # Array containing major releases of Xcode
-outputHandler "comment" "Checking for xcode"
-xcode_array=( "Xcode 4" "Xcode 5" "Xcode 6" "Xcode 7" "Xcode 8" "Xcode 9" "Xcode 10" "Xcode 11" )
-if [ $(testCommandResponse "xcodebuild -version" "${xcode_array[@]}") = "true" ]; then
-    outputHandler  "comment" "Xcode installed "
-else
-    outputHandler "exit" "Install Xcode with app store and try again"
-fi
-
-outputHandler "comment" "Checking for Xcode command line tools version"
-xcode_array_cl=( "version: 6" "version: 7" "version: 8" "version: 9" "version: 10" "version: 11" )
-if [ $(testCommandResponse "pkgutil --pkg-info=com.apple.pkg.CLTools_Executables" "${xcode_array_cl[@]}") = "true" ]; then 
-    outputHandler "comment" "Xcode Command Line tools installed"
-else
-    outputHandler "exit" "Install Xcode Command Line tools with app store and try again"
-fi
+#outputHandler "comment" "Checking for xcode"
+#xcode_array=( "Xcode 4" "Xcode 5" "Xcode 6" "Xcode 7" "Xcode 8" "Xcode 9" "Xcode 10" "Xcode 11" )
+#if [ $(testCommandResponse "xcodebuild -version" "${xcode_array[@]}") = "true" ]; then
+#    outputHandler  "comment" "Xcode installed "
+#else
+#    outputHandler "exit" "Install Xcode with app store and try again"
+#fi
 
 
-outputHandler "comment" "Checking for Macports"
-xcode_ok=$(xcodebuild -version exit 2>/dev/null || echo "")
-if [ -z "$xcode_ok" ]; then
-    outputHandler "comment" "Macports not installed"
-    open https://www.macports.org/install.php
-    outputHandler "exit" "Install macports for macOS: $macos_version then try again"
-else
-    outputHandler "comment" "Macports installed"
-    sudo port selfupdate
-fi
+#outputHandler "comment" "Checking for Macports"
+#xcode_ok=$(xcodebuild -version exit 2>/dev/null || echo "")
+#if [ -z "$xcode_ok" ]; then
+#    outputHandler "comment" "Macports not installed"
+#    open https://www.macports.org/install.php
+#    outputHandler "exit" "Install macports for macOS: $macos_version then try again"
+#else
+#    outputHandler "comment" "Macports installed"
+#    sudo port selfupdate
+#fi
 
 apache_running=$(curl http://127.0.0.1 2>&1 | grep "<html>" || echo "")
 
