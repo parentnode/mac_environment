@@ -22,8 +22,8 @@ outputHandler "comment" "You are running macOS: ($macos_version)"
 #    outputHandler "comment" "Macports installed"
 #    sudo port selfupdate
 #fi
-outputHandler "comment" "Updating macport base and ports"
-sudo port selfupdate
+#outputHandler "comment" "Updating macport base and ports"
+#sudo port selfupdate
 
 apache_running=$(curl http://127.0.0.1 2>&1 | grep "<html>" || echo "")
 

@@ -47,7 +47,8 @@ if [ "$install_webserver_conf" = "Y" ]; then
             echo "password is sat"
         fi
     fi
-
+    
+    sudo port upgrade outdated
 
     command "sudo /opt/local/sbin/apachectl restart"
 fi
