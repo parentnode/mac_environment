@@ -36,10 +36,10 @@ check_for_symlink=$(ls -l /srv/sites | grep /srv/sites | cut -d '>' -f2 | cut -d
 if [ ! "$check_for_symlink" = ~/Sites ]; then
 	echo "Creating Symlink"
 	if [ ! -d ~/Sites ]; then
-		sudo mkdir /home/$(echo $USER)/Sites
-		sudo mkdir /home/$(echo $USER)/Sites/apache
-		sudo mkdir /home/$(echo $USER)/Sites/apache/logs
-		sudo mkdir /home/$(echo $USER)/Sites/apache/ssl
+		sudo mkdir ~/Sites
+		sudo mkdir ~/Sites/apache
+		sudo mkdir ~/Sites/apache/logs
+		sudo mkdir ~/Sites/apache/ssl
 		sudo chown -R $(logname):staff ~/Sites	
 	else
 		current_user_of_sites=$(ls -l ~/ | grep Sites | grep $(logname))
