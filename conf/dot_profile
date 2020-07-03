@@ -18,6 +18,17 @@ git_prompt () {
 }
 
 export PS1="\[$(tput bold)\]\[$(tput setaf 5)\]\u@\h \[$(tput setaf 2)\]\W\$(git_prompt)\[$(tput sgr0)\]\[$(tput setaf 4)\] \\$"
+
+read -p "git user name: " git_username
+read -p "git email: " git_email
+
+git config --global core.filemode false
+git config --global user.name "$git_username"
+git config --global user.email "$git_email" 
+if [ -z "$(git config --global --get push.default)" ]; then 
+	git config --global push.default simple
+fi
+git config --global credential.helper cache
 # parentnode_git_prompt
 
 # parentnode_multi_user
@@ -25,16 +36,19 @@ check_for_symlink=$(ls -l /srv/sites | grep /srv/sites | cut -d '>' -f2 | cut -d
 if [ ! "$check_for_symlink" = ~/Sites ]; then
 	echo "Creating Symlink"
 	if [ ! -d ~/Sites ]; then
-		mkdir ~/Sites
-		sudo chown $(logname):staff ~/Sites	
+		sudo mkdir /home/$(echo $USER)/Sites
+		sudo mkdir /home/$(echo $USER)/Sites/apache
+		sudo mkdir /home/$(echo $USER)/Sites/apache/logs
+		sudo mkdir /home/$(echo $USER)/Sites/apache/ssl
+		sudo chown -R $(logname):staff ~/Sites	
 	else
 		current_user_of_sites=$(ls -l ~/ | grep Sites | grep $(logname))
 		if [ -z "$current_user_of_sites" ]; then
-			sudo chown $(logname):staff ~/Sites
+			sudo chown -R $(logname):staff ~/Sites
 		fi
 	fi
 	if [ -d /var/parentnode ]; then 
-		sudo chown $(logname):staff /var/parentnode
+		sudo chown -R $(logname):staff /var/parentnode
 	fi
 	sudo unlink /srv/sites
 	sudo ln -s ~/Sites /srv/sites
