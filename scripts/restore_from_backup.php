@@ -1,7 +1,7 @@
 #!/usr/bin/php
 <?php
 include("functions.php");
-include("/srv/sites/parentnode/janitor/src/classes/system/filesystem.class.php");
+include("/srv/sites/parentnode/janitor/src/classes/helpers/filesystem.class.php");
 
 $FS = new FileSystem();
 
