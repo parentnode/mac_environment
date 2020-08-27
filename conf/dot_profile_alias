@@ -29,3 +29,6 @@
 #"alias git_github2dropbox" alias git_github2dropbox="php /srv/tools/scripts/git_github2dropbox.php"
 
 # parentnode_alias
+
+# adds autocomplete for symbolic links
+bind 'set mark-symlinked-directories on'
