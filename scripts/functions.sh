@@ -322,8 +322,8 @@ check_multiusersystem () {
 
 		sudo unlink /srv/sites
 		ln -s ~/Sites /srv/sites
-
-		apache restart
+		
+		sudo /opt/local/sbin/apachectl restart
 
 	fi
 
