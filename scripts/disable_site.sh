@@ -40,10 +40,12 @@ disablingApacheSite(){
 	fi
 }
 removeHost(){
+
+	sudo chmod 777 "$host_file_path"		
+
 	# "Removing hostname from /etc/hosts"
 	server=$(echo -e "127.0.0.1\\t$1")
 	#echo "$test"
-	sudo chmod 777 "$host_file_path"		
 	host_exist=$(cat "$host_file_path" | grep "$server" || echo "")
 	if [ -z "$host_exist" ]; then 
 		#setHost "$1"
@@ -52,6 +54,18 @@ removeHost(){
 		echo "Removing $1 host"
 		sudo sed -i '' "s,$server,," $host_file_path	
 	fi
+
+	server=$(echo -e "::1\\t\\t\\t$1")
+	#echo "$test"
+	host_exist=$(cat "$host_file_path" | grep "$server" || echo "")
+	if [ -z "$host_exist" ]; then 
+		#setHost "$1"
+		echo "$1 exists"
+	else 
+		echo "Removing $1 host"
+		sudo sed -i '' "s,$server,," $host_file_path	
+	fi
+
 	sudo chmod 644 "$host_file_path"
 }
 # Does current location seem to fullfil requirements (is httpd-vhosts.conf found where it is expected to be found)
