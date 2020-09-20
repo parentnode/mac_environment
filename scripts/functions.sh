@@ -2,7 +2,7 @@
 
 # Get username for current user, display and store for later use
 getUsername() {
-	echo "$(getUsername)"
+	echo "$(logname)"
 }
 export -f getUsername
 

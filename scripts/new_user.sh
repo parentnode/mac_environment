@@ -71,7 +71,7 @@ checkBashProfile
 
 
 # set bash as default terminal
-current_shell=$(echo $SHELL | grep bash)
+current_shell=$(dscl . -read ~/ UserShell | grep bash)
 if [ -z "$current_shell" ]; then
 	chsh -s /bin/bash
 fi

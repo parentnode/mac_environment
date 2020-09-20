@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 
 
 source /srv/tools/scripts/functions.sh
