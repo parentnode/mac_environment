@@ -313,16 +313,18 @@ check_multiusersystem () {
 
 		current_user_of_parentnode_folder=$(ls -l /var/ | grep parentnode$ | grep $(getUsername))
 		if [ -z "$current_user_of_parentnode_folder" ]; then
+			echo "changing"
 			sudo chown -R $(logname):staff /var/parentnode
 		fi
 
 	fi
 
-	if [ -z $(ls -l /srv/sites | grep /Users/$install_user/Sites) ]; then
+	current_srv_link_owner=$(ls -l /srv/sites | grep /Users/$(getUsername)/Sites)
+	if [ -z "$current_srv_link_owner" ]; then
 
 		sudo unlink /srv/sites
 		ln -s ~/Sites /srv/sites
-		
+
 		sudo /opt/local/sbin/apachectl restart
 
 	fi
