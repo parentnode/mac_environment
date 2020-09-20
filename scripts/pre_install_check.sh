@@ -54,40 +54,28 @@ export install_wkhtml
 # SETTING DEFAULT GIT USER
 outputHandler "section" "Setting Default GIT USER"
 git config --global core.filemode false
+git config --global credential.helper cache
 
 # Checks if git credential are allready set, promts for input if not
 
-if [ -z "$(checkGitCredential "name")" ]; then
+if [ -z "$(checkGitCredential "user.name")" ]; then
 	git_username_array=("[A-Za-z0-9[:space:]*]{2,50}")
 	git_username=$(ask "Enter git username" "${git_username_array[@]}" "gitusername")
 	git config --global user.name "$git_username"
-else
-	git_username="$(checkGitCredential "name")"
-	git config --global user.name "$git_username"
 fi
-if [ -z "$(checkGitCredential "email")" ]; then
+if [ -z "$(checkGitCredential "user.email")" ]; then
 	git_email_array=("[A-Za-z0-9\.\-]+@[A-Za-z0-9\.\-]+\.[a-z]{2,10}")
 	git_email=$(ask "Enter git email" "${git_email_array[@]}" "gitemail")
 	git config --global user.email "$git_email"
-else
-	git_email="$(checkGitCredential "email")"
-	git config --global user.email "$git_email" 
 fi
-#checkGitCredential "name"
-#checkGitCredential "email"
-
-git config --global credential.helper cache
-if [ -z $(command "git config --global --get push.default") ]; then 
+if [ -z $(checkGitCredential "push.default") ]; then 
 	command "git config --global push.default simple"
 fi
 
-if [ -z $(command "git config --global --get credential.helper") ]; then 
-    command "git config --global credential.helper osxkeychain"
-fi
 
 # A function that creates(if none exist) or if you choose Y modifies .bash_profile 
-outputHandler "section" "Configuring .bash_profile"
-createOrModifyBashProfile
+# outputHandler "section" "Configuring .bash_profile"
+# createOrModifyBashProfile
 
 # MYSQL ROOT PASSWORD
 outputHandler "section" "Database root Password"

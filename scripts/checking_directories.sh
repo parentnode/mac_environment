@@ -36,7 +36,7 @@ if [ ! -d /srv/sites ]; then
         if [ "$macos_version" = "$macos_version_catalina" ]; then
             if [ ! -d /var/parentnode ]; then
                 sudo mkdir /var/parentnode
-                sudo chown $(logname):staff /var/parentnode
+                sudo chown $(getUsername):staff /var/parentnode
             fi
         fi
         sudo chown $install_user:staff ~/Sites

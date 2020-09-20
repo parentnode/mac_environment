@@ -5,6 +5,8 @@ if [ "$install_webserver_conf" = "Y" ]; then
 
     command "sudo chmod 777 /opt/local/etc/apache2/httpd.conf"
 
+	checkBashProfile
+
     # Update username in file to make apache run as current user (required to access vhosts in dropbox)
     sed -i '' "s/###USERNAME###/$install_user/g" "/opt/local/etc/apache2/httpd.conf"
     command "sudo chmod 644 /opt/local/etc/apache2/httpd.conf"
@@ -17,6 +19,7 @@ if [ "$install_webserver_conf" = "Y" ]; then
         copyFile "/srv/tools/conf/apache.conf" "/srv/sites/apache/apache.conf"
         command "sudo chown -R $install_user:staff /Users/$install_user/Sites/apache"
     fi     
+
 
     copyFile "/srv/tools/conf/newsyslog-apache.conf" "/etc/newsyslog.d/apache.conf"
 

@@ -1,87 +1,13 @@
-# parentnode_git_prompt
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+# include PATH declaration
+source .profile
 
-git_prompt () {
-	if ! git rev-parse --git-dir > /dev/null 2>&1; then
-	  return 0
-	fi
+# include function set
+source /srv/tools/scripts/functions.sh
+# include aliases
+source /srv/tools/conf/dot_bash_aliases
 
-	git_branch=$(git branch 2>/dev/null| sed -n '/^\*/s/^\* //p')
+# Check multiuser setup
+check_multiusersystem
 
-	if git diff --quiet 2>/dev/null >&2; then
-		git_color=`tput setaf 2`
-	else
-		git_color=`tput setaf 1`
-	fi
-
-	echo " $git_color($git_branch)"
-}
 
 export PS1="\[$(tput bold)\]\[$(tput setaf 5)\]\u@\h \[$(tput setaf 2)\]\W\$(git_prompt)\[$(tput sgr0)\]\[$(tput setaf 4)\] \\$"
-
-read -p "git user name: " git_username
-read -p "git email: " git_email
-
-git config --global core.filemode false
-git config --global user.name "$git_username"
-git config --global user.email "$git_email" 
-if [ -z "$(git config --global --get push.default)" ]; then 
-	git config --global push.default simple
-fi
-git config --global credential.helper cache
-# parentnode_git_prompt
-
-# parentnode_multi_user
-check_for_symlink=$(ls -l /srv/sites | grep /srv/sites | cut -d '>' -f2 | cut -d ' ' -f2)
-if [ ! "$check_for_symlink" = ~/Sites ]; then
-	echo "Creating Symlink"
-	if [ ! -d ~/Sites ]; then
-		sudo mkdir ~/Sites
-		sudo mkdir ~/Sites/apache
-		sudo mkdir ~/Sites/apache/logs
-		sudo mkdir ~/Sites/apache/ssl
-		sudo chown -R $(logname):staff ~/Sites	
-	else
-		current_user_of_sites=$(ls -l ~/ | grep Sites | grep $(logname))
-		if [ -z "$current_user_of_sites" ]; then
-			sudo chown -R $(logname):staff ~/Sites
-		fi
-	fi
-	if [ -d /var/parentnode ]; then 
-		sudo chown -R $(logname):staff /var/parentnode
-	fi
-	sudo unlink /srv/sites
-	sudo ln -s ~/Sites /srv/sites
-fi
-# parentnode_multi_user
-
-# parentnode_alias
-#"alias update_dev_env"
-#"alias update_dev_env" alias update_dev_env="php /srv/tools/scripts/update.php"
-
-alias sites="cd /srv/sites"
-alias apache="sudo /opt/local/sbin/apachectl"
-alias mysql="sudo /opt/local/lib/mariadb-10.2/bin/mysql"
-alias mysqld="sudo /opt/local/share/mariadb-10.2/support-files/mysql.server"
-alias mysql_dump_all="php /srv/tools/scripts/mysql_dump_all.php"
-alias mysql_grant="php /srv/tools/scripts/mysql_grant.php"
-alias enable_site="/srv/tools/scripts/enable_site.sh"
-alias disable_site="/srv/tools/scripts/disable_site.sh"
-alias no_ds="find . -name '*.DS_Store' -type f -delete"
-
-
-alias zipmac="zip -r zip . -x \*.DS*"
-alias zipit="zip -r zip . -x \*.svn* \*.git* \*.DS*"
-alias zipitm="zip -r zip . -x \*.svn* \*.git* \*.DS* \*js/lib/* \*css/lib/*"
-
-alias git_status="php /srv/tools/scripts/git_status.php"
-
-
-#"alias git_new_dropbox" 
-#"alias git_dropbox2github" 
-#"alias git_github2dropbox" 
-#alias git_new_dropbox="php /srv/tools/scripts/git_new_dropbox.php"
-#alias git_dropbox2github="php /srv/tools/scripts/git_dropbox2github.php"
-#alias git_github2dropbox="php /srv/tools/scripts/git_github2dropbox.php"
-
-# parentnode_alias
