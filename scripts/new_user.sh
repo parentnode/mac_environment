@@ -47,9 +47,9 @@ if [ ! "$check_for_symlink" = ~/Sites ]; then
 		mkdir ~/Sites/apache/logs
 		mkdir ~/Sites/apache/ssl
 
-		copyFile "/srv/tools/conf/apache.conf" "/srv/sites/apache/apache.conf"
-		copyFile "/srv/tools/conf/ssl/star_local.crt" "/srv/sites/apache/ssl/star_local.crt"
-		copyFile "/srv/tools/conf/ssl/star_local.key" "/srv/sites/apache/ssl/star_local.key"
+		sudo cp "/srv/tools/conf/apache.conf" "/srv/sites/apache/apache.conf"
+		sudo cp "/srv/tools/conf/ssl/star_local.crt" "/srv/sites/apache/ssl/star_local.crt"
+		sudo cp "/srv/tools/conf/ssl/star_local.key" "/srv/sites/apache/ssl/star_local.key"
 
 		chown -R $(getUsername):staff ~/Sites	
 	fi
