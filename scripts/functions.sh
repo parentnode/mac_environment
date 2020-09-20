@@ -311,15 +311,22 @@ check_multiusersystem () {
 
 	if [ -d /var/parentnode ]; then
 
-		current_user_of_parentnode_folder=$(ls -l /var/ | grep parentnode | grep $(getUsername))
+		current_user_of_parentnode_folder=$(ls -l /var/ | grep parentnode$ | grep $(getUsername))
 		if [ -z "$current_user_of_parentnode_folder" ]; then
 			sudo chown -R $(logname):staff /var/parentnode
 		fi
 
 	fi
 
-	unlink /srv/sites
-	ln -s ~/Sites /srv/sites
+	if [ -z $(ls -l /srv/sites | grep /Users/$install_user/Sites) ]; then
+
+		sudo unlink /srv/sites
+		ln -s ~/Sites /srv/sites
+
+		apache restart
+
+	fi
+
 
 	echo ""
 	echo "System configured correctly"
