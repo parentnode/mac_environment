@@ -2,6 +2,7 @@ outputHandler "section" "Checking Software Prerequisites are met"
 macos_version=$(sw_vers | grep -E "ProductVersion:" | cut -f2)
 export macos_version
 outputHandler "comment" "You are running macOS: ($macos_version)"
+
 # Array containing major releases of Xcode
 #outputHandler "comment" "Checking for xcode"
 #xcode_array=( "Xcode 4" "Xcode 5" "Xcode 6" "Xcode 7" "Xcode 8" "Xcode 9" "Xcode 10" "Xcode 11" )
@@ -87,6 +88,7 @@ fi
 # A function that creates(if none exist) or if you choose Y modifies .bash_profile 
 outputHandler "section" "Configuring .bash_profile"
 createOrModifyBashProfile
+
 # MYSQL ROOT PASSWORD
 outputHandler "section" "Database root Password"
 #if no mariadb installation found or can login without password checkMariadbPassword returns false 

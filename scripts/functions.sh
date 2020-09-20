@@ -252,8 +252,8 @@ command(){
 export -f command
 
 createOrModifyBashProfile(){
-	conf="/srv/tools/conf/dot_profile"
-	conf_alias="/srv/tools/conf/dot_profile_alias"
+	conf="/srv/tools/conf/dot_bash_profile"
+	conf_alias="/srv/tools/conf/dot_bash_profile_alias"
 	if [ "$(fileExist "/Users/$install_user/.bash_profile")" = "true" ]; then
 		outputHandler "comment" ".bash_profile exists"
 		bash_profile_modify_array=("[Yn]")

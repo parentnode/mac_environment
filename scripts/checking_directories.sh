@@ -7,6 +7,9 @@ fi
 if [ $(fileExist "$conf_path/httpd-vhosts.conf") = "false" ]; then
     echo "Required file is missing from your configuration source"
 fi
+if [ $(fileExist "$conf_path/httpd-ssl.conf") = "false" ]; then
+    echo "Required file is missing from your configuration source"
+fi
 if [ $(fileExist "$conf_path/php.ini") = "false" ]; then
     echo "Required file is missing from your configuration source"
 fi
@@ -16,12 +19,8 @@ fi
 if [ $(fileExist "$conf_path/apache.conf") = "false" ]; then
     echo "Required file is missing from your configuration source"
 fi
-
-if [ $(fileExist "/Users/$install_user/.bash_profile") = "false" ]; then
-    echo "Creating .bash_profile"
-    copyFile "/srv/tools/conf/dot_profile" "/Users/$install_user/.bash_profile"
-else 
-    echo "Existing .bash_profile"
+if [ $(fileExist "$conf_path/dot_bash_profile") = "false" ]; then
+    echo "Required file is missing from your configuration source"
 fi
 
 #checkFolderExistOrCreate "/Users/$install_user/Sites"
