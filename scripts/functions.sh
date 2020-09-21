@@ -252,10 +252,19 @@ command(){
 export -f command
 
 checkBashProfile(){
-	conf="/srv/tools/conf/dot_bash_profile"
-	if [ "$(fileExist "/Users/$install_user/.bash_profile")" = "false" ]; then
+
+	# ALSO CHECK FOR .profile if it does not exist (contains PATH info)
+	# Only relevant for multiuser system, where secondary user did not install MacPorts and thus does not have the PATH declaration
+	if [ "$(fileExist "/Users/$(getUsername)/.profile")" = "false" ]; then
+		outputHandler "comment" "Installing .profile"
+		sudo cp "/srv/tools/conf/dot_profile" "/Users/$(getUsername)/.profile"
+		sudo chown $(getUsername):staff "/Users/$(getUsername)/.profile"
+	fi
+
+	if [ "$(fileExist "/Users/$(getUsername)/.bash_profile")" = "false" ]; then
 		outputHandler "comment" "Installing .bash_profile"
-		copyFile "$conf" "/Users/$install_user/.bash_profile"
+		sudo cp "/srv/tools/conf/dot_bash_profile" "/Users/$(getUsername)/.bash_profile"
+		sudo chown $(getUsername):staff "/Users/$(getUsername)/.bash_profile"
 	fi
 }
 export -f checkBashProfile
