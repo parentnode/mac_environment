@@ -57,7 +57,7 @@ if [ ! "$check_for_symlink" = ~/Sites ]; then
 	if [ -d /var/parentnode ]; then 
 		current_user_of_parentnode_folder=$(ls -l /var/ | grep parentnode | grep $(getUsername))
 		if [ -z "$current_user_of_parentnode_folder" ]; then
-			sudo chown -R $(logname):staff /var/parentnode
+			sudo chown -R $(getUsername):staff /var/parentnode
 		fi
 	fi
 
