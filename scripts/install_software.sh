@@ -28,6 +28,8 @@ if [ "$install_software" = "Y" ]; then
         command "sudo port -N install php74-curl"
         outputHandler "comment" "Installing PHP74-zip"
         command "sudo port -N install php74-zip"
+        outputHandler "comment" "Installing PHP74-iconv"
+        command "sudo port -N install php74-iconv"
         outputHandler "comment" "Installing PHP74-imagick"
         command "sudo port -N install php74-imagick"
         outputHandler "comment" "Installing PHP74-igbinary"
