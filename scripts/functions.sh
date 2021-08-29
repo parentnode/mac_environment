@@ -316,7 +316,7 @@ export -f git_prompt
 check_multiusersystem () {
 
 	echo ""
-	echo "Checking system configuration for current user"
+	echo "Checking WebStack configuration for current user"
 
 	if [ -d /var/parentnode ]; then
 
