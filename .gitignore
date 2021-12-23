@@ -1,5 +1,8 @@
 .DS_Store
 
+# Ignore unpacked bin
+bin/wkhtmltopdf
+
 .vscode
 *.sublime-project
 *.sublime-workspace
