@@ -37,7 +37,7 @@ function command($command, $no_echo = false, $suppress = true) {
 	if($no_echo == false) {
 		output($command);
 	}
-//	output(escapeshellcmd($command));
+	// output(escapeshellcmd($command));
 
 	if($suppress) {
 		$cmd_output = shell_exec($command." 2>&1");

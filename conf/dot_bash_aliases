@@ -8,6 +8,11 @@ alias enable_site="/srv/tools/scripts/enable_site.sh"
 alias disable_site="/srv/tools/scripts/disable_site.sh"
 alias no_ds="find . -name '*.DS_Store' -type f -delete"
 
+alias migrate_macports="/srv/tools/scripts/migrate_macports.sh"
+
+alias system_backup="/srv/tools/scripts/system_backup.php"
+alias restore_from_backup="/srv/tools/scripts/restore_from_backup.php"
+
 
 alias zipmac="zip -r zip . -x \*.DS*"
 alias zipit="zip -r zip . -x \*.svn* \*.git* \*.DS*"

@@ -37,6 +37,8 @@ else {
 }
 
 $backup_root = dirname($backup_name);
+$FS->makeDirRecursively($backup_root);
+
 output("Backup location:$backup_name\n");
 
 
@@ -65,7 +67,7 @@ output("Created Macports list\n");
 
 // MySQL
 //$output = shell_exec("php ".dirname(realpath($_SERVER["PHP_SELF"]))."/mysql_dump_all.php mysqldump 2>&1");
-$output = command("php ".dirname(realpath($_SERVER["PHP_SELF"]))."/mysql_dump_all.php mysqldump", true);
+$output = command("php ".dirname(realpath($_SERVER["PHP_SELF"]))."/mysql_dump_all.php mysqldump", true, false);
 if(preg_match("/Failed/", $output)) {
 	goodbye("Failed to connect to MySQL");
 }
