@@ -90,8 +90,10 @@ if [ "$install_software" = "Y" ]; then
     fi
     if [ "$install_wkhtml" = "Y" ]; then
         outputHandler "comment" "Unpacking wkhtmltopdf $(tar -xzvf /srv/tools/bin/wkhtml.tar.gz -C /srv/tools/bin/ 2>&1 )"
-        outputHandler "comment" "Removing unneaded packages"
-        command "sudo rm /srv/tools/bin/wkhtml.tar.gz" "true"
+
+		# CORRECTION: Do not remove packed file to avoid git diff
+        # outputHandler "comment" "Removing unneaded packages"
+        # command "sudo rm /srv/tools/bin/wkhtml.tar.gz" "true"
     fi
     #sudo port upgrade outdated
 else
