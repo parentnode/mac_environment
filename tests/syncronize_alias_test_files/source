@@ -9,8 +9,8 @@
 # Apache and mysql shortcuts
 "alias sites" alias sites="cd /srv/sites"
 "alias apache" alias apache="sudo /opt/local/sbin/apachectl"
-"alias mysql" alias mysql="sudo /opt/local/lib/mariadb-10.2/bin/mysql"
-"alias mysqld" alias mysqld="sudo /opt/local/share/mariadb-10.2/support-files/mysql.server"
+"alias mysql" alias mysql="sudo /opt/local/lib/mariadb-10.5/bin/mysql"
+"alias mysqld" alias mysqld="sudo /opt/local/share/mariadb-10.5/support-files/mysql.server"
 "alias mysql_dump_all" alias mysql_dump_all="php /srv/tools/scripts/mysql_dump_all.php"
 "alias mysql_grant" alias mysql_grant="php /srv/tools/scripts/mysql_grant.php"
 "alias enable_site" alias enable_site="/srv/tools/scripts/enable_site.sh"
