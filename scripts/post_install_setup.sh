@@ -38,14 +38,14 @@ if [ "$install_webserver_conf" = "Y" ]; then
     if [ -n "$mariadb_installed_specific" ]; then
         outputHandler "comment" "Starting MariaDB"
         # Start database
-        mariadb_started=$(sudo /opt/local/share/mariadb-10.2/support-files/mysql.server start 2>&1 | grep ".*process already exists" || echo "" )
+        mariadb_started=$(sudo /opt/local/share/mariadb-10.5/support-files/mysql.server start 2>&1 | grep ".*process already exists" || echo "" )
         if [ -n "$mariadb_started" ]; then
             outputHandler "comment" "MariaDB already started"
         fi
         outputHandler "comment" "setting mariadb password"
         mariadb_password=$(checkMariadbPassword 2>&1 | grep "false")
         if [ "$mariadb_password" = "false" ]; then
-            command "sudo /opt/local/lib/mariadb-10.2/bin/mysqladmin -u root password "$db_root_password1"" "true"
+            command "sudo /opt/local/lib/mariadb-10.5/bin/mysqladmin -u root password "$db_root_password1"" "true"
         else 
             echo "password is sat"
         fi

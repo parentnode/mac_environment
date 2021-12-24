@@ -110,6 +110,9 @@ testCommandResponse(){
 	for ((i = 0; i < ${#valid_response[@]}; i++))
 	do
 		command_to_test=$($1 | grep -E "${valid_response[$i]}" || echo "")
+
+		echo "command to test $command_to_test"
+
 		if [ -n "$command_to_test" ]; then
 			echo "true" 
 		fi
@@ -133,7 +136,7 @@ checkMariadbPassword(){
 		mariadb_status_array=("mysql")
 		mariadb_status=$(testCommandResponse "ps -Aclw" "${mariadb_status_array[@]}")
 		if [ "$mariadb_status" = "true" ]; then 
-    		has_password=$(/opt/local/lib/mariadb-10.2/bin/mysql -u root mysql -e 'SHOW TABLES' 2>&1 | grep "using password: NO")
+    		has_password=$(/opt/local/lib/mariadb-10.5/bin/mysql -u root mysql -e 'SHOW TABLES' 2>&1 | grep "using password: NO")
 			if [ -n "$has_password" ]; then
 				password_is_set="true"
 				echo "$password_is_set"
@@ -144,7 +147,7 @@ checkMariadbPassword(){
 		else 
     		echo "mariadb service not running"
 			# start service
-			echo "Starting mariadb service $(sudo port load mariadb-10.2-server)"
+			echo "Starting mariadb service $(sudo port load mariadb-10.5-server)"
 			#running the function again
 			checkMariadbPassword
 		fi
