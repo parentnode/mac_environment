@@ -1,6 +1,6 @@
 This is the source code for mac_environment.
 
-It is a install- and maintenance-tool for the full parentNode web stack development environment for Mac OS / OS X.
+It is an install-, utility- and maintenance tool for the full parentNode web stack – a web development environment for Mac OS / OS X.
 See https://parentnode.dk/blog/installing-the-web-stack-on-mac-os for further instructions.
 
 
