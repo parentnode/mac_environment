@@ -9,6 +9,7 @@ export install_user
 
 
 # On newer systems MacPorts will install path in .zprofile not in .profile
+# Path is needed to run port commands
 checkProfile
 
 

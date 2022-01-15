@@ -260,7 +260,7 @@ checkProfile(){
 	# ALSO CHECK FOR .profile if it does not exist (contains PATH info)
 	# Only relevant for multiuser system, where secondary user did not install MacPorts and thus does not have the PATH declaration
 	if [ "$(fileExist "/Users/$(getUsername)/.profile")" = "false" ]; then
-		outputHandler "comment" "Installing .profile"
+		outputHandler "comment" "Installing missing .profile with path for Macports"
 		sudo cp "/srv/tools/conf/dot_profile" "/Users/$(getUsername)/.profile"
 		sudo chown $(getUsername):staff "/Users/$(getUsername)/.profile"
 		source "/Users/$(getUsername)/.profile"
