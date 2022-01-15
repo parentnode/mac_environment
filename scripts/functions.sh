@@ -111,7 +111,8 @@ testCommandResponse(){
 	do
 		command_to_test=$($1 | grep -E "${valid_response[$i]}" || echo "")
 
-		echo "command to test $command_to_test"
+		# Script will not work with output on
+		# echo "command to test $command_to_test"
 
 		if [ -n "$command_to_test" ]; then
 			echo "true" 

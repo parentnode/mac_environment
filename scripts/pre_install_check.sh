@@ -72,10 +72,14 @@ if [ -z $(checkGitCredential "push.default") ]; then
 	command "git config --global push.default simple"
 fi
 
+# Change localuser group of .gitconfig to staff 
+command "sudo chown $install_user:staff /Users/$install_user/.gitconfig"
+
 
 # A function that creates(if none exist) or if you choose Y modifies .bash_profile 
 # outputHandler "section" "Configuring .bash_profile"
 # createOrModifyBashProfile
+
 
 # MYSQL ROOT PASSWORD
 outputHandler "section" "Database root Password"
@@ -113,7 +117,4 @@ if [ "$install_webserver_conf" = "Y" ]; then
         outputHandler "comment" "Mariadb password allready set up"
     fi
 fi
-# Change localuser group of .gitconfig to staff 
-command "sudo chown $install_user:staff /Users/$install_user/.gitconfig"
-
 
