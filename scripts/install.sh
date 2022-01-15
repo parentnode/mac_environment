@@ -7,6 +7,11 @@ source /srv/tools/scripts/functions.sh
 install_user=$(getUsername)
 export install_user
 
+
+# On newer systems MacPorts will install path in .zprofile not in .profile
+checkProfile
+
+
 # Request sudo privileges
 enableSuperCow
 outputHandler "comment" "DO NOT CLOSE UNTIL INSTALL IS COMPLETE" "You will see 'Install complete' message once it's done"
