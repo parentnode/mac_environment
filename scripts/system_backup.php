@@ -1,4 +1,4 @@
-#!/usr/bin/php
+#!/opt/local/bin/php
 <?php
 include("functions.php");
 include("/srv/sites/parentnode/janitor/src/classes/helpers/filesystem.class.php");
