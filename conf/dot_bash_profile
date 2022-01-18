@@ -10,4 +10,4 @@ source /srv/tools/conf/dot_bash_aliases
 check_multiusersystem
 
 
-export PS1="\[$(tput bold)\]\[$(tput setaf 5)\]\u@\h \[$(tput setaf 2)\]\W\$(git_prompt)\[$(tput sgr0)\]\[$(tput setaf 4)\] \\$"
+export PS1="\[$(tput bold)\]\[$(tput setaf 5)\]\u@\h \[$(tput setaf 2)\]\W\$(git_prompt)\[$(tput sgr0)\]\[$(tput setaf 4)\] \$"
