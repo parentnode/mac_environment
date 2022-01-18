@@ -1,4 +1,4 @@
-#!/usr/bin/php
+#!/opt/local/bin/php
 <?php
 
 /**
