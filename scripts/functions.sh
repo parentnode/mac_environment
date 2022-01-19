@@ -151,7 +151,6 @@ checkMariadbPassword(){
 		if [ "$mariadb_status" = "true" ]; then 
 
 			has_password=$(/opt/local/lib/mariadb-10.5/bin/mysql -u root mysql -e 'SHOW TABLES' 2>&1 | grep "Access denied")
-			echo "$has_password"
 			if [ -n "$has_password" ]; then
 				password_is_set="true"
 				echo "$password_is_set"
