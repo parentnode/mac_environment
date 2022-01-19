@@ -109,7 +109,7 @@ if [ "$install_configuration" = "Y" ]; then
 
 		# Start database
 		command "sudo /opt/local/share/mariadb-10.5/support-files/mysql.server start" "true"
-		command "sudo /opt/local/lib/mariadb-10.5/bin/mysqladmin -u root password '$db_root_password1'" "true"
+		command "sudo /opt/local/lib/mariadb-10.5/bin/mysqladmin -u root password $db_root_password1" "true"
 
 	fi
 
