@@ -6,7 +6,7 @@ if [ "$install_software" = "Y" ]; then
 
 
 	outputHandler "comment" "Installing pidof"
-	command "sudo port install pidof"
+	command "sudo port -N install pidof"
 
 	outputHandler "comment" "Installing MariaDB"
 	command "sudo port -N install mariadb-10.5-server"

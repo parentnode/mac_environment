@@ -61,7 +61,7 @@ sleep 5
 
 
 # This is were all the configuration is done
-#. $SCRIPT_DIR/install_configuration.sh
+. $SCRIPT_DIR/install_configuration.sh
 
 
 
