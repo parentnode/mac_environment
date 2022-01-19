@@ -77,7 +77,7 @@ if($user_databases) {
 
 	if(isset($argv[2]) && $argv[2] == "individual") {
 
-		$db_dump_path = getAbsolutePath("~/".$dumpname)
+		$db_dump_path = getAbsolutePath("~/".$dumpname);
 		checkPath($db_dump_path);
 
 		foreach($user_databases as $user_database) {

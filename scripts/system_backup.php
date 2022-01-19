@@ -75,7 +75,7 @@ else {
 	output("MySQL data dumped");
 	
 }
-moveFile("~/mysqldump.sql", $temp_backup."/mysqldump.sql");
+moveFile("~/mysqldump", $temp_backup."/mysqldump");
 
 // config files
 copyFile("~/.bash_profile", $temp_backup."/dot_bash_profile");
