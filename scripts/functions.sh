@@ -6,11 +6,13 @@ getUsername() {
 }
 export -f getUsername
 
+
 # Invoke sudo command
 enableSuperCow(){
 	sudo ls &>/dev/null
 }
 export -f enableSuperCow
+
 
 # Helper function for text output and format 
 outputHandler(){
@@ -40,10 +42,13 @@ outputHandler(){
 			echo
 			;;
 		"section")
-			echo
+			length=$(((70-${#2})/2))
 			echo 
-			echo "{ --- $2 --- }"	
+			echo "----------------------------------------------------------------------"
+			echo 
+			echo "$(printf "%*s%s" $length '' "$2")"
 			echo
+			echo "----------------------------------------------------------------------"
 			echo
 			;;
 		"exit")
@@ -61,6 +66,7 @@ outputHandler(){
 	esac
 }
 export -f outputHandler
+
 
 # Asking user for input based on type
 ask(){
@@ -101,6 +107,7 @@ ask(){
 }
 export -f ask
 
+
 # Check if program/service are installed
 testCommandResponse(){
 # Usage: returns a true if a program or service are located in 
@@ -122,6 +129,7 @@ testCommandResponse(){
 }
 export -f testCommandResponse
 
+
 checkGitCredential(){
 	value=$(git config --global $1)
 	echo "$value"
@@ -129,15 +137,20 @@ checkGitCredential(){
 }
 export -f checkGitCredential
 
+
 checkMariadbPassword(){
-	mariadb_installed_array=("mariadb-10.[2-9]-server \@10.[2-9].* \(active\)")
-	#mariadb_installed=$(testCommandResponse "port installed mariadb-10.2-server" "$mariadb_installed_array")
+
+	# Is MariaDB installed
+	mariadb_installed_array=("mariadb-10.5-server \@10.5.* \(active\)")
 	mariadb_installed_specific=$(testCommandResponse "port installed" "$mariadb_installed_array")
 	if [ -n "$mariadb_installed_specific" ]; then
-		mariadb_status_array=("mysql")
+
+		# Is MariaDB running
+		mariadb_status_array=("mysql|mariadb")
 		mariadb_status=$(testCommandResponse "ps -Aclw" "${mariadb_status_array[@]}")
 		if [ "$mariadb_status" = "true" ]; then 
-    		has_password=$(/opt/local/lib/mariadb-10.5/bin/mysql -u root mysql -e 'SHOW TABLES' 2>&1 | grep "using password: NO")
+
+			has_password=$(/opt/local/lib/mariadb-10.5/bin/mysql -u root mysql -e 'SHOW TABLES' 2>&1 | grep "Access denied")
 			if [ -n "$has_password" ]; then
 				password_is_set="true"
 				echo "$password_is_set"
@@ -145,20 +158,26 @@ checkMariadbPassword(){
 				password_is_set="false"
 				echo "$password_is_set"
 			fi
-		else 
-    		echo "mariadb service not running"
-			# start service
-			echo "Starting mariadb service $(sudo port load mariadb-10.5-server)"
-			#running the function again
+
+		# Not running
+		else
+
+			# Start MariaDB
+			command "sudo /opt/local/share/mariadb-10.5/support-files/mysql.server start" "true"
+
+			# Run the function again
 			checkMariadbPassword
 		fi
+
+	# Not installed
 	else 
 		password_is_set="false"
 		echo "$password_is_set"
 	fi
 
-} 
+}
 export -f checkMariadbPassword
+
 
 copyFile(){
 	file_source=$1 
@@ -166,6 +185,7 @@ copyFile(){
 	cp "$file_source" "$file_destination"
 }
 export -f copyFile
+
 
 fileExist(){
 	file=$1
@@ -177,15 +197,6 @@ fileExist(){
 }
 export -f fileExist
 
-# checkFileContent(){
-# 	query="$1"
-# 	source=$(<$2)
-# 	check_query=$(echo "$source" | grep "$query" || echo "")
-# 	if [ -n "$check_query" ]; then
-# 		echo "true"
-# 	fi
-# }
-# export -f checkFileContent
 
 trimString(){
 	trim=$1
@@ -193,41 +204,6 @@ trimString(){
 }
 export -f trimString
 
-# syncronizeAlias(){
-# 	# Creates backup of default IFS
-# 	OLDIFS=$IFS
-# 	# Set IFS to seperate strings by newline not space
-# 	IFS=$'\n'
-# 	# Source path for testing
-# 	#source="($(</srv/sites/parentnode/mac_environment/tests/syncronize_alias_test_files/source))"
-#
-# 	# Source path for script
-# 	source=$(<$2)
-#
-# 	# Destination path for testing
-# 	#destination="/srv/sites/parentnode/mac_environment/tests/syncronize_alias_test_files/destination"
-# 	# Destination path for script
-# 	destination=$3
-# 	# Alias line looks like this key: "alias sites" alias sites="cd /srv/sites"
-# 	# Key part of alias line: alias sites
-# 	key_array=($(echo "$source" | grep "^\"$1.*\"" | cut -d \" -f2))
-# 	# Value part of alias line: alias sites="cd /srv/sites"
-# 	value_array=($(echo "$source" | grep "^\"$1" | cut -d \" -f3,4,5))
-# 	# Revert to default IFS
-# 	IFS=$OLDIFS
-# 	for ((i = 0; i < "${#key_array[@]}"; i++))
-# 	do
-# 		sed -i '' "s%${key_array[$i]}.*%$(trimString "${value_array[$i]}")%g" $destination
-# 	done
-# }
-# export -f syncronizeAlias
-
-# deleteAndAppendSection(){
-# 	sed -i '' "/$1/,/$1/d" $3
-#     readdata=$( < $2)
-#     echo "$readdata" | sed -n "/$1/,/$1/p" >> "$3"
-# }
-# export -f deleteAndAppendSection
 
 checkFolderExistOrCreate(){
 	
@@ -239,7 +215,7 @@ checkFolderExistOrCreate(){
 			mkdir $1
 		fi
 	else
-		echo "Folder allready exist"
+		echo "Folder already exist ($1)"
 	fi
 }
 export -f checkFolderExistOrCreate
@@ -255,10 +231,11 @@ command(){
 }
 export -f command
 
+
 checkProfile(){
 
 	# ALSO CHECK FOR .profile if it does not exist (contains PATH info)
-	# Only relevant for multiuser system, where secondary user did not install MacPorts and thus does not have the PATH declaration
+	# ALSO relevant for multiuser system, where secondary user did not install MacPorts and thus does not have the PATH declaration
 	if [ "$(fileExist "/Users/$(getUsername)/.profile")" = "false" ]; then
 		outputHandler "comment" "Installing missing .profile with path for Macports"
 		sudo cp "/srv/tools/conf/dot_profile" "/Users/$(getUsername)/.profile"
@@ -273,7 +250,7 @@ export -f checkProfile
 checkBashProfile(){
 
 	# ALSO CHECK FOR .profile if it does not exist (contains PATH info)
-	# Only relevant for multiuser system, where secondary user did not install MacPorts and thus does not have the PATH declaration
+	# ALSO relevant for multiuser system, where secondary user did not install MacPorts and thus does not have the PATH declaration
 	if [ "$(fileExist "/Users/$(getUsername)/.profile")" = "false" ]; then
 		outputHandler "comment" "Installing .profile"
 		sudo cp "/srv/tools/conf/dot_profile" "/Users/$(getUsername)/.profile"
@@ -287,31 +264,6 @@ checkBashProfile(){
 	fi
 }
 export -f checkBashProfile
-
-# createOrModifyBashProfile(){
-# 	conf="/srv/tools/conf/dot_bash_profile"
-# 	conf_alias="/srv/tools/conf/dot_bash_profile_alias"
-# 	if [ "$(fileExist "/Users/$install_user/.bash_profile")" = "true" ]; then
-# 		outputHandler "comment" ".bash_profile exists"
-# 		bash_profile_modify_array=("[Yn]")
-# 		bash_profile_modify=$(ask "Do you want to syncronize .bash_profile aliases (Y/n)" "${bash_profile_modify_array[@]}" "bash_profile_modify")
-# 		# export bash_profile_modify
-# 	else
-# 		outputHandler "comment" "Installing .bash_profile"
-# 		copyFile "$conf" "/Users/$install_user/.bash_profile"
-# 	fi
-# 	if [ "$bash_profile_modify" = "Y" ]; then
-# #		does_parentnode_git_exist=$(checkFileContent "# parentnode_git_prompt" "/Users/$install_user/.bash_profile")
-# #		does_parentnode_alias_exist=$(checkFileContent "# parentnode_alias" "/Users/$install_user/.bash_profile")
-# #		does_parentnode_symlink_exist=$(checkFileContent "# parentnode_multi_user" "/Users/$install_user/.bash_profile")
-# #		deleteAndAppendSection "# parentnode_git_prompt" "$conf" "/Users/$install_user/.bash_profile"
-# #		deleteAndAppendSection "# parentnode_alias" "$conf" "/Users/$install_user/.bash_profile"
-# 		# deleteAndAppendSection "# parentnode_multi_user" "$conf" "/Users/$install_user/.bash_profile"
-# #	else
-# 		syncronizeAlias "alias" "$conf_alias" "$HOME/.bash_profile"
-# 	fi
-# }
-# export -f createOrModifyBashProfile
 
 
 git_prompt () {
@@ -342,7 +294,7 @@ check_multiusersystem () {
 		current_user_of_parentnode_folder=$(ls -l /var/ | grep parentnode$ | grep $(getUsername))
 		if [ -z "$current_user_of_parentnode_folder" ]; then
 			echo "changing"
-			sudo chown -R $(logname):staff /var/parentnode
+			sudo chown -R $(getUsername):staff /var/parentnode
 		fi
 
 	fi

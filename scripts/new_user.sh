@@ -2,8 +2,8 @@
 source /srv/tools/scripts/functions.sh
 
 # Current Username logged in
-install_user=$(getUsername)
-export install_user
+INSTALL_USER=$(getUsername)
+export INSTALL_USER
 
 outputHandler "section" "Setting up parentNode webstack for a new mac user"
 
