@@ -75,10 +75,30 @@ if($result_count) {
 
 if($user_databases) {
 
-	$com = "/opt/local/lib/mariadb-10.5/bin/mysqldump -uroot".($password ? " -p$password" : "")." --databases ".implode(" ", $user_databases)." > ~/".$dumpname.".sql | sed -e '$!d'";
-	command($com, true);
+	if(isset($argv[2]) && $argv[2] == "individual") {
 
-	output("MySQL dumped into: " . $dumpname . ".sql");
+		$db_dump_path = getAbsolutePath("~/".$dumpname)
+		checkPath($db_dump_path);
+
+		foreach($user_databases as $user_database) {
+
+			$com = "/opt/local/lib/mariadb-10.5/bin/mysqldump -uroot".($password ? " -p$password" : "")." --databases $user_database > ~/".$dumpname."/$user_database.sql | sed -e '$!d'";
+			command($com, true);
+
+		}
+
+		output("MySQL dumped into: " . $dumpname);
+
+	}
+	else {
+
+		$com = "/opt/local/lib/mariadb-10.5/bin/mysqldump -uroot".($password ? " -p$password" : "")." --databases ".implode(" ", $user_databases)." > ~/".$dumpname.".sql | sed -e '$!d'";
+		command($com, true);
+
+		output("MySQL dumped into: " . $dumpname . ".sql");
+
+	}
+
 }
 
 
