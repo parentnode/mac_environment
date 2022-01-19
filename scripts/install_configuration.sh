@@ -45,36 +45,36 @@ if [ "$install_configuration" = "Y" ]; then
 	outputHandler "comment" "Configuring Apache"
 
 	# Apache main configuration
-	copyFile "/srv/tools/conf/httpd.conf" "/opt/local/etc/apache2/httpd.conf"
+	copyFile "$CONF_DIR/httpd.conf" "/opt/local/etc/apache2/httpd.conf"
 
 	# Update username in file to make apache run as current user (required to access vhosts in dropbox)
 	command "sudo chmod 777 /opt/local/etc/apache2/httpd.conf"
 	sed -i '' "s/###USERNAME###/$INSTALL_USER/g" "/opt/local/etc/apache2/httpd.conf"
 	command "sudo chmod 644 /opt/local/etc/apache2/httpd.conf"
 
-	copyFile "/srv/tools/conf/httpd-vhosts.conf" "/opt/local/etc/apache2/extra/httpd-vhosts.conf"
-	copyFile "/srv/tools/conf/httpd-ssl.conf" "/opt/local/etc/apache2/extra/httpd-ssl.conf"
+	copyFile "$CONF_DIR/httpd-vhosts.conf" "/opt/local/etc/apache2/extra/httpd-vhosts.conf"
+	copyFile "$CONF_DIR/httpd-ssl.conf" "/opt/local/etc/apache2/extra/httpd-ssl.conf"
 
 	# SSL certificates for *.local
-	copyFile "/srv/tools/conf/ssl/star_local.crt" "/srv/sites/apache/ssl/star_local.crt"
-	copyFile "/srv/tools/conf/ssl/star_local.key" "/srv/sites/apache/ssl/star_local.key"
+	copyFile "$CONF_DIR/ssl/star_local.crt" "/srv/sites/apache/ssl/star_local.crt"
+	copyFile "$CONF_DIR/ssl/star_local.key" "/srv/sites/apache/ssl/star_local.key"
 
 	# Apache extension conf – copy if it does not exist
 	if [ $(fileExist "/srv/sites/apache/apache.conf") = "false" ]; then
-		copyFile "/srv/tools/conf/apache.conf" "/srv/sites/apache/apache.conf"
+		copyFile "$CONF_DIR/apache.conf" "/srv/sites/apache/apache.conf"
 		command "sudo chown -R $INSTALL_USER:staff /Users/$INSTALL_USER/Sites/apache"
 	fi
 
 	# Apache log file configuration
-	copyFile "/srv/tools/conf/newsyslog-apache.conf" "/etc/newsyslog.d/apache.conf"
+	copyFile "$CONF_DIR/newsyslog-apache.conf" "/etc/newsyslog.d/apache.conf"
 
 
 
 	# PHP
 
 	# PHP configurations
-	copyFile "/srv/tools/conf/php.ini" "/opt/local/etc/php74/php.ini"
-	copyFile "/srv/tools/conf/php_ini_native.ini" "/etc/php.ini"
+	copyFile "$CONF_DIR/php.ini" "/opt/local/etc/php74/php.ini"
+	copyFile "$CONF_DIR/php_ini_native.ini" "/etc/php.ini"
 
 
 
@@ -82,7 +82,7 @@ if [ "$install_configuration" = "Y" ]; then
 
 	# Increase max open files (Apple's default settings has caused problems for MariaDB)
 	if [ $(fileExist "/Library/LaunchDaemons/limit.maxfiles.plist") = "false" ]; then
-		copyFile "/srv/tools/conf/limit.maxfiles.plist" "/Library/LaunchDaemons/limit.maxfiles.plist"
+		copyFile "$CONF_DIR/limit.maxfiles.plist" "/Library/LaunchDaemons/limit.maxfiles.plist"
 		command "sudo chown root:staff /Library/LaunchDaemons/limit.maxfiles.plist"
 		command "sudo chmod 644 /Library/LaunchDaemons/limit.maxfiles.plist"
 		command "sudo launchctl load -w /Library/LaunchDaemons/limit.maxfiles.plist"
@@ -90,7 +90,7 @@ if [ "$install_configuration" = "Y" ]; then
 
 	# Increase max processes (Apple's default settings has caused problems for MariaDB)
 	if [ $(fileExist "/Library/LaunchDaemons/limit.maxproc.plist") = "false" ]; then
-		copyFile "/srv/tools/conf/limit.maxproc.plist" "/Library/LaunchDaemons/limit.maxproc.plist"
+		copyFile "$CONF_DIR/limit.maxproc.plist" "/Library/LaunchDaemons/limit.maxproc.plist"
 		command "sudo chown root:staff /Library/LaunchDaemons/limit.maxproc.plist"
 		command "sudo chmod 644 /Library/LaunchDaemons/limit.maxproc.plist"
 		command "sudo launchctl load -w /Library/LaunchDaemons/limit.maxproc.plist"
@@ -106,7 +106,7 @@ if [ "$install_configuration" = "Y" ]; then
 		outputHandler "comment" "Setting MariaDB root password"
 
 		# Start database
-		mariadb_started=$(sudo /opt/local/share/mariadb-10.5/support-files/mysql.server start)
+		command "sudo /opt/local/share/mariadb-10.5/support-files/mysql.server start" "true"
 		command "sudo /opt/local/lib/mariadb-10.5/bin/mysqladmin -u root password '$db_root_password1'" "true"
 
 	fi
@@ -114,10 +114,10 @@ if [ "$install_configuration" = "Y" ]; then
 
 
 	# Start Apache
-	command "sudo /opt/local/sbin/apachectl restart"
+	command "sudo /opt/local/sbin/apachectl restart" "true"
 
 	# Start MariaDB
-	command "sudo /opt/local/share/mariadb-10.5/support-files/mysql.server start"
+	command "sudo /opt/local/share/mariadb-10.5/support-files/mysql.server start" "true"
 
 
 	outputHandler "comment" "Configuration: OK"
