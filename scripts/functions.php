@@ -313,6 +313,7 @@ function moveFile($source, $destination, $sudo = "") {
 	command(($sudo ? "$sudo " : "") . "mv '$source' '$destination'");
 }
 
+
 /**
 * Check if default file content exists - to update .bash_profile
 * Connot update hosts due to permissions - don't have an easy solution yet

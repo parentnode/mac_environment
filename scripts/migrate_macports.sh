@@ -93,7 +93,7 @@ sudo port load redis
 # delete myports.txt
 rm myports.txt
 # delete requested.txt
-rm requested.txt
+mv requested.txt requested-1.txt
 # delete restore_ports.tcl
 rm restore_ports.tcl
 

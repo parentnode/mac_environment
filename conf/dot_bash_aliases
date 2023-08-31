@@ -14,7 +14,7 @@ alias system_backup="/srv/tools/scripts/system_backup.php"
 alias restore_from_backup="/srv/tools/scripts/restore_from_backup.php"
 
 
-alias zipmac="zip -r zip . -x \*.DS*"
+alias zipmac="zip -r zip . -x */.*"
 alias zipit="zip -r zip . -x \*.svn* \*.git* \*.DS*"
 alias zipitm="zip -r zip . -x \*.svn* \*.git* \*.DS* \*js/lib/* \*css/lib/*"
 

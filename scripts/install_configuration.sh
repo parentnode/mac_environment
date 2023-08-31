@@ -75,8 +75,8 @@ if [ "$install_configuration" = "Y" ]; then
 	outputHandler "comment" "Configuring PHP"
 
 	# PHP configurations
-	copyFile "$CONF_DIR/php.ini" "/opt/local/etc/php74/php.ini"
-	copyFile "$CONF_DIR/php_ini_native.ini" "/etc/php.ini"
+	copyFile "$CONF_DIR/php-74.ini" "/opt/local/etc/php74/php.ini"
+	copyFile "$CONF_DIR/php_ini_native-74.ini" "/etc/php.ini"
 
 
 
