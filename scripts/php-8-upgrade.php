@@ -4,23 +4,23 @@ include("functions.php");
 
 enableSuperCow();
 
-// command("sudo port selfupdate");
-//
-// $ports = explode("\n", command("sudo port installed requested", true));
-//
-// foreach($ports as $port) {
-//
-// 	if(strpos($port, "php74") !== false) {
-//
-// 		preg_match("/php74[^ ]*/", $port, $match);
-//
-// 		$old_port = $match[0];
-// 		// print "sudo port uninstall ".$old_port."\n";
-// 		// command("sudo port uninstall ".$old_port, true);
-//
-// 		$new_port = str_replace("php74", "php82", $old_port);
-// 		// print "sudo port install ".$new_port."\n";
-// 		command("sudo port install ".$new_port);
+command("sudo port selfupdate");
+
+$ports = explode("\n", command("sudo port installed requested", true));
+
+foreach($ports as $port) {
+
+	if(strpos($port, "php74") !== false) {
+
+		preg_match("/php74[^ ]*/", $port, $match);
+
+		$old_port = $match[0];
+		// print "sudo port uninstall ".$old_port."\n";
+		// command("sudo port uninstall ".$old_port, true);
+
+		$new_port = str_replace("php74", "php82", $old_port);
+		// print "sudo port install ".$new_port."\n";
+		command("sudo port install ".$new_port);
 //
 //
 //
@@ -32,9 +32,9 @@ enableSuperCow();
 // 		#LoadModule php7_module lib/apache2/modules/mod_php74.so
 // 		LoadModule php_module lib/apache2/modules/mod_php82.so
 // 		*/
-// 	}
-//
-// }
+	}
+
+}
 
 
 $file = getAbsolutePath("/opt/local/etc/apache2/httpd.conf");
