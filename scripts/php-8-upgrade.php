@@ -36,6 +36,8 @@ foreach($ports as $port) {
 
 }
 
+command("sudo port select --set php php82");
+
 
 $file = getAbsolutePath("/opt/local/etc/apache2/httpd.conf");
 $source_lines = file($file);
@@ -153,6 +155,7 @@ if(!$found_php_8_conf_include) {
 
 if(!file_exists("/opt/local/etc/php82/php.ini")) {
 	copyFile("conf/php-82.ini", "/opt/local/etc/php82/php.ini");
+	copyFile("conf/php-native-82.ini", "/etc/php.ini");
 }
 
 

@@ -11,8 +11,8 @@ if [ "$install_software" = "Y" ]; then
 	outputHandler "comment" "Installing MariaDB"
 	command "sudo port -N install mariadb-10.5-server"
 
-	outputHandler "comment" "Installing PHP74"
-	command "sudo port -N install php74"
+	outputHandler "comment" "Installing PHP82"
+	command "sudo port -N install php82"
 
 	outputHandler "comment" "Installing apache2"
 	command "sudo port -N install apache2"
@@ -20,43 +20,43 @@ if [ "$install_software" = "Y" ]; then
 	outputHandler "comment" "Installing pear"
 	command "sudo port -N install pear"
 
-	outputHandler "comment" "Installing php74-apache2handler"
-	command "sudo port -N install php74-apache2handler"
+	outputHandler "comment" "Installing php82-apache2handler"
+	command "sudo port -N install php82-apache2handler"
 
-	outputHandler "comment" "Installing PHP74-mysql"
-	command "sudo port -N install php74-mysql"
+	outputHandler "comment" "Installing PHP82-mysql"
+	command "sudo port -N install php82-mysql"
 
-	outputHandler "comment" "Installing PHP74-openssl"
-	command "sudo port -N install php74-openssl"
+	outputHandler "comment" "Installing PHP82-openssl"
+	command "sudo port -N install php82-openssl"
 
-	outputHandler "comment" "Installing PHP74-mbstring"
-	command "sudo port -N install php74-mbstring"
+	outputHandler "comment" "Installing PHP82-mbstring"
+	command "sudo port -N install php82-mbstring"
 
-	outputHandler "comment" "Installing PHP74-curl"
-	command "sudo port -N install php74-curl"
+	outputHandler "comment" "Installing PHP82-curl"
+	command "sudo port -N install php82-curl"
 
-	outputHandler "comment" "Installing PHP74-zip"
-	command "sudo port -N install php74-zip"
+	outputHandler "comment" "Installing PHP82-zip"
+	command "sudo port -N install php82-zip"
 
-	outputHandler "comment" "Installing PHP74-iconv"
-	command "sudo port -N install php74-iconv"
+	outputHandler "comment" "Installing PHP82-iconv"
+	command "sudo port -N install php82-iconv"
 
-	outputHandler "comment" "Installing PHP74-imagick"
-	command "sudo port -N install php74-imagick"
+	outputHandler "comment" "Installing PHP82-imagick"
+	command "sudo port -N install php82-imagick"
 
-	outputHandler "comment" "Installing PHP74-igbinary"
-	command "sudo port -N install php74-igbinary"
+	outputHandler "comment" "Installing PHP82-igbinary"
+	command "sudo port -N install php82-igbinary"
 
-	outputHandler "comment" "Installing PHP74-redis"
-	command "sudo port -N install php74-redis"
+	outputHandler "comment" "Installing PHP82-redis"
+	command "sudo port -N install php82-redis"
 
 	outputHandler "comment" "Installing redis"
 	command "sudo port -N install redis"
 
 
-	# Select PHP74 as default PHP
-	outputHandler "comment" "Set php74 as default"
-	command "sudo port select --set php php74"
+	# Select PHP82 as default PHP
+	outputHandler "comment" "Set php82 as default"
+	command "sudo port select --set php php82"
 
 	# autostart apache on reboot
 	outputHandler "comment" "Autostart apache2"
