@@ -161,8 +161,11 @@ if(!isset($backup_device_files[$backup_device]) || !isset($backup_device_files[$
 			copyFile("~/$backup_file_name/dot_bash_profile", "~/.bash_profile");
 			copyFile("~/$backup_file_name/dot_gitconfig", "~/.gitconfig");
 			copyFile("~/$backup_file_name/dot_gitignore_global", "~/.gitignore_global");
+			copyFile("~/$backup_file_name/dot_git-credentials", "~/.git-credentials");
+			copyFile("~/$backup_file_name/dot_bash_servers", "~/.bash_servers");
 			copyFile("~/$backup_file_name/dot_tm_properties", "~/.tm_properties");
-			copyFile("~/$backup_file_name/dot_anyconnect", "~/.anyconnect");
+			copyFile("~/$backup_file_name/dot_zprofile", "~/.zprofile");
+
 			copyFolder("~/$backup_file_name/dot_ssh/", "~/.ssh");
 
 			copyFolder("~/$backup_file_name/Library/Fonts/", "~/Library/Fonts");

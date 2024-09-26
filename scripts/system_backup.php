@@ -81,8 +81,10 @@ moveFile("~/mysqldump", $temp_backup."/mysqldump");
 copyFile("~/.bash_profile", $temp_backup."/dot_bash_profile");
 copyFile("~/.gitconfig", $temp_backup."/dot_gitconfig");
 copyFile("~/.gitignore_global", $temp_backup."/dot_gitignore_global");
-copyFile("~/.anyconnect", $temp_backup."/dot_anyconnect");
+copyFile("~/.git-credentials", $temp_backup."/dot_git-credentials");
+copyFile("~/.bash_servers", $temp_backup."/dot_bash_servers");
 copyFile("~/.tm_properties", $temp_backup."/dot_tm_properties");
+copyFile("~/.zprofile", $temp_backup."/dot_zprofile");
 copyFile("/etc/hosts", $temp_backup."/hosts");
 
 
