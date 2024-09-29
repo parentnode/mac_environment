@@ -85,6 +85,7 @@ copyFile("~/.git-credentials", $temp_backup."/dot_git-credentials");
 copyFile("~/.bash_servers", $temp_backup."/dot_bash_servers");
 copyFile("~/.tm_properties", $temp_backup."/dot_tm_properties");
 copyFile("~/.zprofile", $temp_backup."/dot_zprofile");
+copyFile("~/.zshrc", $temp_backup."/dot_zshrc");
 copyFile("/etc/hosts", $temp_backup."/hosts");
 
 
@@ -137,15 +138,23 @@ copyFolder("~/Library/Fonts/", $temp_backup."/Library/Fonts/");
 //copyFolder("~/Library/Application Support/Firefox/", $$temp_backup."/Library/Application Support/Firefox");
 
 // Sequel Pro
-copyFolder("~/Library/Application Support/Sequel Pro/", $temp_backup."/Library/Application Support/Sequel Pro/");
+// copyFolder("~/Library/Application Support/Sequel Pro/", $temp_backup."/Library/Application Support/Sequel Pro/");
 // SourceTree
 //copyFolder("~/Library/Application Support/SourceTree/", $$temp_backup."/Library/Application Support/SourceTree/");
+
+copyFile("~/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Preferences/com.sequel-ace.sequel-ace.plist", $temp_backup."/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Preferences/com.sequel-ace.sequel-ace.plist");
+copyFile("~/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Application\ Support/Sequel\ Ace/Data/Favorites.plist", $temp_backup."/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Application\ Support/Sequel\ Ace/Data/Favorites.plist");
+
 // Fork
 copyFolder("~/Library/Application Support/Fork/", $temp_backup."/Library/Application Support/Fork/");
+copyFolder("~/Library/Application Support/com.DanPristupov.Fork", $temp_backup."/Library/Application Support/com.DanPristupov.Fork/");
+
 // Textmake
 copyFile("~/Library/Application Support/TextMate/Global.tmProperties", $temp_backup."/Library/Application Support/TextMate/Global.tmProperties");
 copyFolder("~/Library/Application Support/TextMate/Bundles", $temp_backup."/Library/Application Support/TextMate/Bundles");
 copyFolder("~/Library/Application Support/TextMate/Session", $temp_backup."/Library/Application Support/TextMate/Session");
+
+
 // Cyberduck
 // copyFile("~/Library/Group Containers/G69SCX94XU.duck", $backup_name."/Library/Group Containers/G69SCX94XU.duck");
 

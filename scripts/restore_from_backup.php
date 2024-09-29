@@ -165,15 +165,24 @@ if(!isset($backup_device_files[$backup_device]) || !isset($backup_device_files[$
 			copyFile("~/$backup_file_name/dot_bash_servers", "~/.bash_servers");
 			copyFile("~/$backup_file_name/dot_tm_properties", "~/.tm_properties");
 			copyFile("~/$backup_file_name/dot_zprofile", "~/.zprofile");
+			copyFile("~/$backup_file_name/dot_zshrc", "~/.zshrc");
 
 			copyFolder("~/$backup_file_name/dot_ssh/", "~/.ssh");
 
 			copyFolder("~/$backup_file_name/Library/Fonts/", "~/Library/Fonts");
 
-			copyFolder("~/$backup_file_name/Library/Application Support/Fork/", "~/Library/Application Support/Sequel Pro");
-			copyFolder("~/$backup_file_name/Library/Application Support/Sequel Pro/", "~/Library/Application Support/Fork");
+			// copyFolder("~/$backup_file_name/Library/Application Support/Sequel Pro/", "~/Library/Application Support/Fork/Sequel Pro");
+			// copyFile("~/$backup_file_name/Library/Application Support/Sequel Pro/Data/Favorites.plist", "~/Library/Application Support/Sequel Pro/Data/Favorites.plist");
 
-			copyFile("~/$backup_file_name/Library/Application Support/Sequel Pro/Data/Favorites.plist", "~/Library/Application Support/Sequel Pro/Data/Favorites.plist");
+
+			copyFile("~/$backup_file_name/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Preferences/com.sequel-ace.sequel-ace.plist", "~/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Preferences/com.sequel-ace.sequel-ace.plist");
+			copyFile("~/$backup_file_name/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Application\ Support/Sequel\ Ace/Data/Favorites.plist", "~/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Application\ Support/Sequel\ Ace/Data/Favorites.plist");
+
+			// copyFolder("~/$backup_file_name/Library/Application Support/Fork/", "~/Library/Application Support/Fork");
+			copyFolder("~/$backup_file_name/Library/Application Support/com.DanPristupov.Fork/", "~/Library/Application Support/com.DanPristupov.Fork");
+
+ 
+
 			copyFile("~/$backup_file_name/Library/Application Support/TextMate/Global.tmProperties", "~/Library/Application Support/TextMate/Global.tmProperties");
 			copyFolder("~/$backup_file_name/Library/Application Support/TextMate/Bundles/", "~/Library/Application Support/TextMate/Bundles");
 
