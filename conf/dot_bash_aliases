@@ -20,4 +20,5 @@ alias zipitm="zip -r zip . -x \*.svn* \*.git* \*.DS* \*js/lib/* \*css/lib/*"
 
 alias git_status="php /srv/tools/scripts/git_status.php"
 
-bind 'set mark-symlinked-directories on'
+# Used to be needed for /srv link to work, does not seem to be needed anymore
+# bind 'set mark-symlinked-directories on'
