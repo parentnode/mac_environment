@@ -143,7 +143,7 @@ copyFolder("~/Library/Fonts/", $temp_backup."/Library/Fonts/");
 //copyFolder("~/Library/Application Support/SourceTree/", $$temp_backup."/Library/Application Support/SourceTree/");
 
 copyFile("~/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Preferences/com.sequel-ace.sequel-ace.plist", $temp_backup."/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Preferences/com.sequel-ace.sequel-ace.plist");
-copyFile("~/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Application\ Support/Sequel\ Ace/Data/Favorites.plist", $temp_backup."/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Application\ Support/Sequel\ Ace/Data/Favorites.plist");
+// copyFile("~/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Application\ Support/Sequel\ Ace/Data/Favorites.plist", $temp_backup."/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Application\ Support/Sequel\ Ace/Data/Favorites.plist");
 
 // Fork
 copyFolder("~/Library/Application Support/Fork/", $temp_backup."/Library/Application Support/Fork/");
