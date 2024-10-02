@@ -54,6 +54,8 @@ if [ "$install_configuration" = "Y" ]; then
 
 	copyFile "$CONF_DIR/httpd-vhosts.conf" "/opt/local/etc/apache2/extra/httpd-vhosts.conf"
 	copyFile "$CONF_DIR/httpd-ssl.conf" "/opt/local/etc/apache2/extra/httpd-ssl.conf"
+	copyFile "$CONF_DIR/httpd-mpm.conf" "/opt/local/etc/apache2/extra/httpd-mpm.conf"
+	copyFile "$CONF_DIR/httpd-autoindex.conf" "/opt/local/etc/apache2/extra/httpd-autoindex.conf"
 
 	# SSL certificates for *.local
 	copyFile "$CONF_DIR/ssl/star_local.crt" "/srv/sites/apache/ssl/star_local.crt"
