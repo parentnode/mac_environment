@@ -156,7 +156,7 @@ if(!isset($backup_device_files[$backup_device]) || !isset($backup_device_files[$
 
 
 			// only restore basic settings and fonts - no projects
-			copyFolder("~/$backup_file_name/dot_config", "~/.config/");
+			copyFolder("~/$backup_file_name/dot_config", "~/.config");
 
 			copyFile("~/$backup_file_name/dot_bash_profile", "~/.bash_profile");
 			copyFile("~/$backup_file_name/dot_gitconfig", "~/.gitconfig");
@@ -175,11 +175,11 @@ if(!isset($backup_device_files[$backup_device]) || !isset($backup_device_files[$
 			// copyFile("~/$backup_file_name/Library/Application Support/Sequel Pro/Data/Favorites.plist", "~/Library/Application Support/Sequel Pro/Data/Favorites.plist");
 
 
-			copyFile("~/$backup_file_name/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Preferences/com.sequel-ace.sequel-ace.plist", "~/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Preferences/com.sequel-ace.sequel-ace.plist");
+			// copyFile("~/$backup_file_name/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Preferences/com.sequel-ace.sequel-ace.plist", "~/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Preferences/com.sequel-ace.sequel-ace.plist");
 			// copyFile("~/$backup_file_name/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Application\ Support/Sequel\ Ace/Data/Favorites.plist", "~/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Application\ Support/Sequel\ Ace/Data/Favorites.plist");
 
 			// copyFolder("~/$backup_file_name/Library/Application Support/Fork/", "~/Library/Application Support/Fork");
-			copyFolder("~/$backup_file_name/Library/Application Support/com.DanPristupov.Fork/", "~/Library/Application Support/com.DanPristupov.Fork");
+			// copyFolder("~/$backup_file_name/Library/Application Support/com.DanPristupov.Fork/", "~/Library/Application Support/com.DanPristupov.Fork");
 
  
 
