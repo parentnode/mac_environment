@@ -175,8 +175,8 @@ if(!isset($backup_device_files[$backup_device]) || !isset($backup_device_files[$
 			// copyFile("~/$backup_file_name/Library/Application Support/Sequel Pro/Data/Favorites.plist", "~/Library/Application Support/Sequel Pro/Data/Favorites.plist");
 
 
-			// copyFile("~/$backup_file_name/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Preferences/com.sequel-ace.sequel-ace.plist", "~/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Preferences/com.sequel-ace.sequel-ace.plist");
-			// copyFile("~/$backup_file_name/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Application\ Support/Sequel\ Ace/Data/Favorites.plist", "~/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Application\ Support/Sequel\ Ace/Data/Favorites.plist");
+			copyFile("~/$backup_file_name/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Preferences/com.sequel-ace.sequel-ace.plist", "~/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Preferences/com.sequel-ace.sequel-ace.plist");
+			copyFile("~/$backup_file_name/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Application\ Support/Sequel\ Ace/Data/Favorites.plist", "~/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Application\ Support/Sequel\ Ace/Data/Favorites.plist");
 
 			// copyFolder("~/$backup_file_name/Library/Application Support/Fork/", "~/Library/Application Support/Fork");
 			// copyFolder("~/$backup_file_name/Library/Application Support/com.DanPristupov.Fork/", "~/Library/Application Support/com.DanPristupov.Fork");
