@@ -19,7 +19,13 @@ alias zipmac="zip -r zip . -x */.*"
 alias zipit="zip -r zip . -x \*.svn* \*.git* \*.DS*"
 alias zipitm="zip -r zip . -x \*.svn* \*.git* \*.DS* \*js/lib/* \*css/lib/*"
 
+zipfolder() {
+	zip -r $(basename "$1") "$1" -x  -x */.*
+}
+
 alias git_status="php /srv/tools/scripts/git_status.php"
+
+
 
 # Used to be needed for /srv link to work, does not seem to be needed anymore
 # bind 'set mark-symlinked-directories on'
