@@ -83,6 +83,9 @@ if [ "$install_configuration" = "Y" ]; then
 	copyFile "$CONF_DIR/php-native-82.ini" "/etc/php.ini"
 
 
+	# TODO
+	# Add PHP-FPM config
+
 
 	# SYSTEM
 

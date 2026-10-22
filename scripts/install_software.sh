@@ -11,17 +11,20 @@ if [ "$install_software" = "Y" ]; then
 	outputHandler "comment" "Installing MariaDB"
 	command "sudo port -N install mariadb-10.5-server"
 
-	outputHandler "comment" "Installing PHP82"
-	command "sudo port -N install php82"
-
 	outputHandler "comment" "Installing apache2"
-	command "sudo port -N install apache2"
+	command "sudo port -N install apache2 +eventmpm +http2"
 
 	outputHandler "comment" "Installing pear"
 	command "sudo port -N install pear"
 
-	outputHandler "comment" "Installing php82-apache2handler"
-	command "sudo port -N install php82-apache2handler"
+	# outputHandler "comment" "Installing php82-apache2handler"
+	# NOT used for PHP-FPM
+	# command "sudo port -N install php82-apache2handler"
+
+
+	outputHandler "comment" "Installing PHP82 FPM"
+	command "sudo port -N install php82-fpm"
+
 
 	outputHandler "comment" "Installing PHP82-mysql"
 	command "sudo port -N install php82-mysql"
@@ -50,17 +53,24 @@ if [ "$install_software" = "Y" ]; then
 	outputHandler "comment" "Installing PHP82-redis"
 	command "sudo port -N install php82-redis"
 
+	outputHandler "comment" "Installing FastCGI module for Apache2"
+	command "sudo port -N install mod_fcgid"
+
 	outputHandler "comment" "Installing redis"
 	command "sudo port -N install redis"
 
 
-	# Select PHP82 as default PHP
-	outputHandler "comment" "Set php82 as default"
-	command "sudo port select --set php php82"
+	# Select PHP85 as default PHP
+	outputHandler "comment" "Set php85 as default"
+	command "sudo port select --set php php85"
 
 	# autostart apache on reboot
 	outputHandler "comment" "Autostart apache2"
 	command "sudo port load apache2"
+
+	# autostart PHP-FPM on reboot
+	outputHandler "comment" "Autostart PHP-FPM"
+	command "sudo port load php85-fpm"
 
 	# autostart mariadb on reboot
 	outputHandler "comment" "Autostart redis"

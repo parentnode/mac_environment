@@ -4,39 +4,53 @@ include("functions.php");
 
 enableSuperCow();
 
-command("sudo port selfupdate");
+// command("sudo port selfupdate");
+
+$new_version = "82";
 
 $ports = explode("\n", command("sudo port installed requested", true));
 
 foreach($ports as $port) {
 
-	if(strpos($port, "php74") !== false) {
+	if(preg_match("/php([\d]*)[^ ]*/", $port, $match)) {
 
-		preg_match("/php74[^ ]*/", $port, $match);
+		print_r($match);
 
-		$old_port = $match[0];
-		// print "sudo port uninstall ".$old_port."\n";
-		// command("sudo port uninstall ".$old_port, true);
+		if(count($match) === 2) {
+			// Not already new version
+			if($match[1] !== $new_version) {
+				$old_port = $match[0];
+				$old_version = $match[1];
 
-		$new_port = str_replace("php74", "php82", $old_port);
-		// print "sudo port install ".$new_port."\n";
-		command("sudo port install ".$new_port);
-//
-//
-//
-//
-// 		// Include etc/apache2/extra/mod_php74.conf
-// 		// Include etc/apache2/extra/mod_php82.conf
-//
-// 		/*
-// 		#LoadModule php7_module lib/apache2/modules/mod_php74.so
-// 		LoadModule php_module lib/apache2/modules/mod_php82.so
-// 		*/
+				print "sudo port uninstall ".$old_port."\n";
+				command("sudo port uninstall ".$old_port, true);
+
+				$new_port = str_replace("php".$old_version, "php".$new_version, $old_port);
+				// print $old_version."\n";
+				// print $new_port."\n";
+
+				// php_mod version, install fpm variant
+				if($new_port === "php".$old_version) {
+					print "sudo port install php".$new_version."-fpm\n";
+					command("sudo port install ".$new_port);
+				}
+				// Extension module
+				else {
+					print "sudo port install ".$new_port."\n";
+					command("sudo port install ".$new_port);
+				}
+
+			}
+
+		}
+
 	}
 
 }
 
-command("sudo port select --set php php82");
+exit();
+
+command("sudo port select --set php php".$new_version);
 
 
 $file = getAbsolutePath("/opt/local/etc/apache2/httpd.conf");
@@ -60,9 +74,11 @@ foreach($source_lines as $i => $line) {
 	// found php7 module
 	if(strpos($line, "LoadModule php7_module") !== false) {
 
+		// Already commented out
 		if(preg_match("/#[ ]*LoadModule php7_module/", $line)) {
 			$updated_lines[] = $line;
 		}
+		// Not commented out, should be
 		else {
 			$updated_lines[] = "# ".$line;
 			
@@ -71,6 +87,7 @@ foreach($source_lines as $i => $line) {
 		$module_injection_point = $i;
 
 	}
+	// Found PHP8+ module
 	else if(strpos($line, "LoadModule php_module") !== false) {
 		$found_php_8_module_include = true;
 
@@ -141,7 +158,7 @@ if(!$found_php_8_module_include) {
 // Existing loadmodule not found
 if(!$found_php_8_conf_include) {
 
-	$conf = "Include etc/apache2/extra/mod_php82.conf\n";
+	$conf = "Include etc/apache2/extra/mod_php84.conf\n";
 
 	// inject in correct place in file (injection point or alternate injection point)
 	if($conf_injection_point) {
@@ -153,9 +170,9 @@ if(!$found_php_8_conf_include) {
 
 }
 
-if(!file_exists("/opt/local/etc/php82/php.ini")) {
-	copyFile("conf/php-82.ini", "/opt/local/etc/php82/php.ini");
-	copyFile("conf/php-native-82.ini", "/etc/php.ini");
+if(!file_exists("/opt/local/etc/php85/php.ini")) {
+	copyFile("conf/php-85.ini", "/opt/local/etc/php85/php.ini");
+	copyFile("conf/php-native-85.ini", "/etc/php.ini");
 }
 
 

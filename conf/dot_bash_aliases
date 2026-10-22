@@ -1,14 +1,23 @@
 alias sites="cd /srv/sites"
+
+alias update_server="/srv/tools/scripts/update_server.sh"
+alias update_tools="/srv/tools/scripts/update_tools.sh"
+
+
 alias mysql="sudo /opt/local/lib/mariadb-10.5/bin/mysql"
 alias mysqld="sudo /opt/local/share/mariadb-10.5/support-files/mysql.server"
+
 alias mysql_dump_all="php /srv/tools/scripts/mysql_dump_all.php"
-alias mysql_grant="php /srv/tools/scripts/mysql_grant.php"
-alias git_ignore_filemode="php /srv/tools/scripts/git_ignore_filemode.php"
-alias enable_site="/srv/tools/scripts/enable_site.sh"
-alias disable_site="/srv/tools/scripts/disable_site.sh"
+alias mysql_grant="php /srv/tools/scripts/maintenance/mysql_grant.php"
+alias git_ignore_filemode="php /srv/tools/scripts/maintenance/git_ignore_filemode.php"
+alias git_status="/srv/tools/scripts/maintenance/git_status.php"
+
+alias enable_site="/srv/tools/scripts/maintenance/enable_site.sh"
+alias disable_site="/srv/tools/scripts/maintenance/disable_site.sh"
+
 alias no_ds="find . -name '*.DS_Store' -type f -delete"
 
-alias migrate_macports="/srv/tools/scripts/migrate_macports.sh"
+alias migrate_macports="/srv/tools/scripts/maintenance/migrate_macports.sh"
 
 alias system_backup="/srv/tools/scripts/system_backup.php"
 alias restore_from_backup="/srv/tools/scripts/restore_from_backup.php"
@@ -35,5 +44,3 @@ alias zipitm="zip -r zip . -x \*.svn* \*.git* \*.DS* \*js/lib/* \*css/lib/*"
 zipfolder() {
 	zip -r $(basename "$1") "$1" -x  -x */.*
 }
-
-alias git_status="php /srv/tools/scripts/git_status.php"
