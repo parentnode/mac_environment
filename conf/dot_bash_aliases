@@ -1,7 +1,7 @@
 alias sites="cd /srv/sites"
 
-alias update_server="/srv/tools/scripts/update_server.sh"
-alias update_tools="/srv/tools/scripts/update_tools.sh"
+alias update_server="/srv/tools/scripts/maintenance/update_server.sh"
+alias update_tools="/srv/tools/scripts/maintenance/update_tools.sh"
 
 
 alias mysql="sudo /opt/local/lib/mariadb-10.5/bin/mysql"
