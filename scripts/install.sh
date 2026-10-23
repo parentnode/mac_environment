@@ -25,7 +25,7 @@ enableSuperCow
 
 # On newer systems MacPorts will install path in .zprofile not in .profile
 # Path is needed to run port commands
-checkProfile
+# checkProfile
 
 
 outputHandler "section" "DO NOT CLOSE UNTIL INSTALL IS COMPLETE"

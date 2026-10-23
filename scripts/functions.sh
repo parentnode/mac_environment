@@ -232,56 +232,56 @@ command(){
 export -f command
 
 
-checkProfile(){
+# checkProfile(){
+#
+# 	# ALSO CHECK FOR .profile if it does not exist (contains PATH info)
+# 	# ALSO relevant for multiuser system, where secondary user did not install MacPorts and thus does not have the PATH declaration
+# 	if [ "$(fileExist "/Users/$(getUsername)/.profile")" = "false" ]; then
+# 		outputHandler "comment" "Installing missing .profile with path for Macports"
+# 		sudo cp "/srv/tools/conf/dot_profile" "/Users/$(getUsername)/.profile"
+# 		sudo chown $(getUsername):staff "/Users/$(getUsername)/.profile"
+# 		source "/Users/$(getUsername)/.profile"
+# 	fi
+#
+# }
+# export -f checkProfile
+#
+#
+# checkBashProfile(){
+#
+# 	# ALSO CHECK FOR .profile if it does not exist (contains PATH info)
+# 	# ALSO relevant for multiuser system, where secondary user did not install MacPorts and thus does not have the PATH declaration
+# 	if [ "$(fileExist "/Users/$(getUsername)/.profile")" = "false" ]; then
+# 		outputHandler "comment" "Installing .profile"
+# 		sudo cp "/srv/tools/conf/dot_profile" "/Users/$(getUsername)/.profile"
+# 		sudo chown $(getUsername):staff "/Users/$(getUsername)/.profile"
+# 	fi
+#
+# 	if [ "$(fileExist "/Users/$(getUsername)/.bash_profile")" = "false" ]; then
+# 		outputHandler "comment" "Installing .bash_profile"
+# 		sudo cp "/srv/tools/conf/dot_bash_profile" "/Users/$(getUsername)/.bash_profile"
+# 		sudo chown $(getUsername):staff "/Users/$(getUsername)/.bash_profile"
+# 	fi
+# }
+# export -f checkBashProfile
 
-	# ALSO CHECK FOR .profile if it does not exist (contains PATH info)
-	# ALSO relevant for multiuser system, where secondary user did not install MacPorts and thus does not have the PATH declaration
-	if [ "$(fileExist "/Users/$(getUsername)/.profile")" = "false" ]; then
-		outputHandler "comment" "Installing missing .profile with path for Macports"
-		sudo cp "/srv/tools/conf/dot_profile" "/Users/$(getUsername)/.profile"
-		sudo chown $(getUsername):staff "/Users/$(getUsername)/.profile"
-		source "/Users/$(getUsername)/.profile"
-	fi
 
-}
-export -f checkProfile
-
-
-checkBashProfile(){
-
-	# ALSO CHECK FOR .profile if it does not exist (contains PATH info)
-	# ALSO relevant for multiuser system, where secondary user did not install MacPorts and thus does not have the PATH declaration
-	if [ "$(fileExist "/Users/$(getUsername)/.profile")" = "false" ]; then
-		outputHandler "comment" "Installing .profile"
-		sudo cp "/srv/tools/conf/dot_profile" "/Users/$(getUsername)/.profile"
-		sudo chown $(getUsername):staff "/Users/$(getUsername)/.profile"
-	fi
-
-	if [ "$(fileExist "/Users/$(getUsername)/.bash_profile")" = "false" ]; then
-		outputHandler "comment" "Installing .bash_profile"
-		sudo cp "/srv/tools/conf/dot_bash_profile" "/Users/$(getUsername)/.bash_profile"
-		sudo chown $(getUsername):staff "/Users/$(getUsername)/.bash_profile"
-	fi
-}
-export -f checkBashProfile
-
-
-git_prompt () {
-	if ! git rev-parse --git-dir > /dev/null 2>&1; then
-	  return 0
-	fi
-
-	git_branch=$(git branch 2>/dev/null| sed -n '/^\*/s/^\* //p')
-
-	if git diff --quiet 2>/dev/null >&2; then
-		git_color=`tput setaf 2`
-	else
-		git_color=`tput setaf 1`
-	fi
-
-	echo " $git_color($git_branch)"
-}
-export -f git_prompt
+# git_prompt () {
+# 	if ! git rev-parse --git-dir > /dev/null 2>&1; then
+# 	  return 0
+# 	fi
+#
+# 	git_branch=$(git branch 2>/dev/null| sed -n '/^\*/s/^\* //p')
+#
+# 	if git diff --quiet 2>/dev/null >&2; then
+# 		git_color=`tput setaf 2`
+# 	else
+# 		git_color=`tput setaf 1`
+# 	fi
+#
+# 	echo " $git_color($git_branch)"
+# }
+# export -f git_prompt
 
 
 check_multiusersystem () {

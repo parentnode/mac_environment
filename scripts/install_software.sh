@@ -5,6 +5,10 @@ if [ "$install_software" = "Y" ]; then
 	outputHandler "section" "Installing Software"
 
 
+	outputHandler "comment" "Installing Oh My Zsh"
+	command "sh -c $(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+
 	outputHandler "comment" "Installing pidof"
 	command "sudo port -N install pidof"
 

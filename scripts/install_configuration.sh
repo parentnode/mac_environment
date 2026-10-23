@@ -3,8 +3,19 @@ if [ "$install_configuration" = "Y" ]; then
 	outputHandler "section" "Configuring webstack"
 
 
-	# Check for .bash_profile, copy if it doesn't exist
-	checkBashProfile
+	# Check for .zshrc, create if it doesn't exist
+	# Make sure inclusion of dot_pnstack_profile is added
+	if [ $(fileExist "/Users/$INSTALL_USER/.zshrc") = "false" ]; then
+		touch "/Users/$INSTALL_USER/.zshrc"
+	fi
+
+	if ! grep -q "source /srv/tools/conf/dot_pnstack_profile" "/Users/$INSTALL_USER/.zshrc"; then
+		echo "" >> "/Users/$INSTALL_USER/.zshrc"
+		echo "# parentNode Stack extension" >> "/Users/$INSTALL_USER/.zshrc"
+		echo "source /srv/tools/conf/dot_pnstack_profile" >> "/Users/$INSTALL_USER/.zshrc"
+		echo "" >> "/Users/$INSTALL_USER/.zshrc"
+	fi
+
 
 
 

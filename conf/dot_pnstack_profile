@@ -1,0 +1,28 @@
+# DO NOT MODIFY THIS FILE – CHANGES WILL BE OVERWRITTEN ON UPDATES
+# INSTEAD PUT YOUR CUSTOMIZATIONS IN .zshrc
+
+
+# Include aliases for easy updating
+source /srv/tools/conf/dot_pnstack_aliases
+
+
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+# GIT
+if [[ ! -e "/Users/$(echo $USER)/.gitconfig" || -z  $(git config --global user.name) ]]; then
+
+	echo ""
+	echo "Your git credentials are missing"
+	echo ""
+
+	read "git_username?git user name: "
+	read "git_email?git email: "
+	git config --global core.filemode false
+	git config --global user.name "$git_username"
+	git config --global user.email "$git_email"
+	git config --global credential.helper cache
+fi

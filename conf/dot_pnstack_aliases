@@ -1,3 +1,7 @@
+# DO NOT MODIFY THIS FILE – CHANGES WILL BE OVERWRITTEN ON UPDATES
+# INSTEAD PUT YOUR CUSTOMIZATIONS IN .zshrc
+
+
 alias sites="cd /srv/sites"
 
 alias update_server="/srv/tools/scripts/maintenance/update_server.sh"
