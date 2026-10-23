@@ -23,7 +23,7 @@ outputHandler "comment" "Installing apache2 with http2 + PHP-FPM"
 # port installed | grep apache
 
 
-command "sudo port uninstall $(port installed apache2 and active | awk 'NR==2 {print $1 "@" $2}')"
+command "sudo port uninstall $(port installed apache2 and active | awk 'NR==2 {print $1 $2}')"
 # command "sudo port uninstall apache2"
 command "sudo port uninstall php82-apache2handler"
 
