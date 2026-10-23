@@ -12,9 +12,19 @@ export INSTALL_USER
 enableSuperCow
 
 
+outputHandler "comment" "Uninstall inactive ports"
+command "sudo port uninstall inactive"
+
+
 outputHandler "comment" "Installing apache2 with http2 + PHP-FPM"
 
-command "sudo port uninstall apache2"
+
+# Get installed version of apache
+# port installed | grep apache
+
+
+command "sudo port uninstall $(port installed apache2 and active | awk 'NR==2 {print $1 "@" $2}')"
+# command "sudo port uninstall apache2"
 command "sudo port uninstall php82-apache2handler"
 
 command "sudo port -N install php82-fpm"
