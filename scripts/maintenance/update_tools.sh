@@ -8,4 +8,4 @@ echo
 
 cd /srv/tools && sudo git pull
 
-source /srv/tools/conf/dot_bash_aliases
+source /srv/tools/conf/dot_pnstack_aliases
