@@ -65,8 +65,8 @@ if [ "$install_software" = "Y" ]; then
 
 
 	# Select PHP85 as default PHP
-	outputHandler "comment" "Set php85 as default"
-	command "sudo port select --set php php85"
+	outputHandler "comment" "Set php82 as default"
+	command "sudo port select --set php php82"
 
 	# autostart apache on reboot
 	outputHandler "comment" "Autostart apache2"
@@ -74,7 +74,7 @@ if [ "$install_software" = "Y" ]; then
 
 	# autostart PHP-FPM on reboot
 	outputHandler "comment" "Autostart PHP-FPM"
-	command "sudo port load php85-fpm"
+	command "sudo port load php82-fpm"
 
 	# autostart mariadb on reboot
 	outputHandler "comment" "Autostart redis"

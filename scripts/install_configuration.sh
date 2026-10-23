@@ -55,6 +55,7 @@ if [ "$install_configuration" = "Y" ]; then
 
 	outputHandler "comment" "Configuring Apache"
 
+
 	# Apache main configuration
 	copyFile "$CONF_DIR/httpd.conf" "/opt/local/etc/apache2/httpd.conf"
 
@@ -63,14 +64,20 @@ if [ "$install_configuration" = "Y" ]; then
 	sed -i '' "s/###USERNAME###/$INSTALL_USER/g" "/opt/local/etc/apache2/httpd.conf"
 	command "sudo chmod 644 /opt/local/etc/apache2/httpd.conf"
 
-	copyFile "$CONF_DIR/httpd-vhosts.conf" "/opt/local/etc/apache2/extra/httpd-vhosts.conf"
-	copyFile "$CONF_DIR/httpd-ssl.conf" "/opt/local/etc/apache2/extra/httpd-ssl.conf"
-	copyFile "$CONF_DIR/httpd-mpm.conf" "/opt/local/etc/apache2/extra/httpd-mpm.conf"
+
 	copyFile "$CONF_DIR/httpd-autoindex.conf" "/opt/local/etc/apache2/extra/httpd-autoindex.conf"
+	copyFile "$CONF_DIR/httpd-vhosts.conf" "/opt/local/etc/apache2/extra/httpd-deflate.conf"
+	copyFile "$CONF_DIR/httpd-mpm.conf" "/opt/local/etc/apache2/extra/httpd-mpm.conf"
+	copyFile "$CONF_DIR/httpd-ssl.conf" "/opt/local/etc/apache2/extra/httpd-ssl.conf"
+	copyFile "$CONF_DIR/httpd-vhosts.conf" "/opt/local/etc/apache2/extra/httpd-vhosts.conf"
+	copyFile "$CONF_DIR/httpd-autoindex.conf" "/opt/local/etc/apache2/extra/proxy-html.conf"
+
+
 
 	# SSL certificates for *.local
 	copyFile "$CONF_DIR/ssl/star_local.crt" "/srv/sites/apache/ssl/star_local.crt"
 	copyFile "$CONF_DIR/ssl/star_local.key" "/srv/sites/apache/ssl/star_local.key"
+
 
 	# Apache extension conf – copy if it does not exist
 	if [ $(fileExist "/srv/sites/apache/apache.conf") = "false" ]; then
@@ -92,6 +99,13 @@ if [ "$install_configuration" = "Y" ]; then
 	# copyFile "$CONF_DIR/php-native-74.ini" "/etc/php.ini"
 	copyFile "$CONF_DIR/php-82.ini" "/opt/local/etc/php82/php.ini"
 	copyFile "$CONF_DIR/php-native-82.ini" "/etc/php.ini"
+
+	# Copy PHP-FPM conf
+	copyFile "$CONF_DIR/php-fpm.conf" "/opt/local/etc/php82/php-fpm.conf"
+	copyFile "$CONF_DIR/php-fpm-www.conf" "/opt/local/etc/php82/php-fpm.d/www.conf"
+	sed -i '' "s/###USERNAME###/$INSTALL_USER/g" "/opt/local/etc/php82/php-fpm.d/www.conf"
+
+
 
 
 	# TODO
