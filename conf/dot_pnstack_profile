@@ -30,7 +30,7 @@ fi
 
 # Available updates
 
-if [ $(fileExist "/opt/local/var/db/mariadb-10.11") = "false" ]; then
+if [ ! -d "/opt/local/var/db/mariadb-10.11" ]; then
 
 	alias "upgrade-mariadb" "/srv/tools/scripts/maintenance/upgrade-mariadb.sh"
 	echo ""
@@ -39,7 +39,8 @@ if [ $(fileExist "/opt/local/var/db/mariadb-10.11") = "false" ]; then
 fi
 
 
-if [ -n $(port installed | grep 'php8[0-9]-fpm') ]; then
+fpm=$(port installed | grep 'php8[0-9]-fpm')
+if [ -z "$fpm" ]; then
 
 	alias "upgrade-http2-php-fpm" "/srv/tools/scripts/maintenance/upgrade-http2-php-fpm.sh"
 	echo ""
@@ -47,3 +48,4 @@ if [ -n $(port installed | grep 'php8[0-9]-fpm') ]; then
 
 fi
 
+echo ""

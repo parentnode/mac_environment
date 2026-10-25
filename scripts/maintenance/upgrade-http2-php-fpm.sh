@@ -3,6 +3,11 @@
 # Include functions
 source /srv/sites/parentnode/mac_environment/scripts/functions.sh
 
+
+CONF_DIR="/srv/tools/conf"
+export CONF_DIR
+
+
 # Current Username logged in
 INSTALL_USER=$(getUsername)
 export INSTALL_USER
