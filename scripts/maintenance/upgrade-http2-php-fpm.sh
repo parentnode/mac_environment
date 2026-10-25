@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 
 # Include functions
 TOOLS_DIR="/srv/tools"
@@ -80,7 +80,7 @@ command "sudo port load php82-fpm"
 apache restart
 
 
-inactive_status=$(testCommandResponse "port echo inactive")
+inactive_status=$(port echo inactive)
 if [ -n "$inactive_status" ]; then 
 
 	outputHandler "comment" "Uninstall inactive ports"

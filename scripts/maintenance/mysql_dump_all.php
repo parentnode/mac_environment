@@ -1,6 +1,6 @@
 #!/opt/local/bin/php
 <?php
-include("functions.php");
+include("../functions.php");
 
 // start by requesting sudo power
 //enableSuperCow();
@@ -87,15 +87,16 @@ if($user_databases) {
 		exit();
 	}
 
+	$db_dump_path = getAbsolutePath("~/".$dumpname);
+
 	output("Using mysqldump path: ".$mysqldump_path);
+	output("Dumping into: $db_dump_path");
 
 
 	if(isset($argv[2]) && $argv[2] == "individual") {
 
-		$db_dump_path = getAbsolutePath("~/".$dumpname);
+		// Check path existence
 		checkPath($db_dump_path);
-
-
 
 		foreach($user_databases as $user_database) {
 
@@ -117,6 +118,3 @@ if($user_databases) {
 	}
 
 }
-
-
-?>

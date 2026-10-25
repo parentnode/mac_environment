@@ -1,7 +1,14 @@
-#!/bin/bash -e
+#!/bin/bash
 
 # Include functions
-source /srv/sites/parentnode/mac_environment/scripts/functions.sh
+TOOLS_DIR="/srv/tools"
+
+CONF_DIR="$TOOLS_DIR/conf"
+export CONF_DIR
+
+source "$TOOLS_DIR/scripts/functions.sh"
+source "$CONF_DIR/dot_pnstack_aliases"
+
 
 # Current Username logged in
 INSTALL_USER=$(getUsername)
