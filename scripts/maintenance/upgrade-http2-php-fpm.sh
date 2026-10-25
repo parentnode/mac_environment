@@ -76,7 +76,6 @@ outputHandler "comment" "Autostart PHP-FPM"
 command "sudo port load php82-fpm"
 
 
-source 
 # restart apache
 apache restart
 
