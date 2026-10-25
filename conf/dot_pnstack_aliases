@@ -8,8 +8,8 @@ alias update_server="/srv/tools/scripts/maintenance/update_server.sh"
 alias update_tools="/srv/tools/scripts/maintenance/update_tools.sh"
 
 
-alias mysql="sudo /opt/local/lib/mariadb-10.5/bin/mysql"
-alias mysqld="sudo /opt/local/share/mariadb-10.5/support-files/mysql.server"
+# alias mysql="sudo /opt/local/lib/mariadb-10.5/bin/mysql"
+# alias mysqld="sudo /opt/local/share/mariadb-10.5/support-files/mysql.server"
 
 alias mysql_dump_all="php /srv/tools/scripts/mysql_dump_all.php"
 alias mysql_grant="php /srv/tools/scripts/maintenance/mysql_grant.php"

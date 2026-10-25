@@ -26,3 +26,24 @@ if [[ ! -e "/Users/$(echo $USER)/.gitconfig" || -z  $(git config --global user.n
 	git config --global user.email "$git_email"
 	git config --global credential.helper cache
 fi
+
+
+# Available updates
+
+if [ $(fileExist "/opt/local/var/db/mariadb-10.11") = "false" ]; then
+
+	alias "upgrade-mariadb" "/srv/tools/scripts/maintenance/upgrade-mariadb.sh"
+	echo ""
+	echo "MariaDB upgrade to 10.11 available – run upgrade-mariadb to upgrade now"
+
+fi
+
+
+if [ -n $(port installed | grep 'php8[0-9]-fpm') ]; then
+
+	alias "upgrade-http2-php-fpm" "/srv/tools/scripts/maintenance/upgrade-http2-php-fpm.sh"
+	echo ""
+	echo "PHP FPM and Apache HTTP/2 upgrade available – run upgrade-http2-php-fpm to upgrade now"
+
+fi
+

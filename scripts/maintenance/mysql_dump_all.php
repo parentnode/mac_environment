@@ -75,14 +75,31 @@ if($result_count) {
 
 if($user_databases) {
 
+
+	if(file_exists("/opt/local/var/db/mariadb-10.11") && file_exists("/usr/local/mysql/bin/mysqldump")) {
+		$mysqldump_path = "/usr/local/mysql/bin/mysqldump";
+	}
+	else if(file_exists("/opt/local/var/db/mariadb-10.5") && file_exists("/opt/local/lib/mariadb-10.5/bin/mysqldump")) {
+		$mysqldump_path = "/opt/local/lib/mariadb-10.5/bin/mysqldump";
+	}
+	else {
+		output("Correct path to mysqldump could not be determined");
+		exit();
+	}
+
+	output("Using mysqldump path: ".$mysqldump_path);
+
+
 	if(isset($argv[2]) && $argv[2] == "individual") {
 
 		$db_dump_path = getAbsolutePath("~/".$dumpname);
 		checkPath($db_dump_path);
 
+
+
 		foreach($user_databases as $user_database) {
 
-			$com = "/opt/local/lib/mariadb-10.5/bin/mysqldump -uroot".($password ? " -p$password" : "")." --databases $user_database > ~/".$dumpname."/$user_database.sql | sed -e '$!d'";
+			$com = $mysqldump_path." -uroot".($password ? " -p$password" : "")." --databases $user_database > ~/".$dumpname."/$user_database.sql | sed -e '$!d'";
 			command($com, true);
 
 		}
@@ -92,7 +109,7 @@ if($user_databases) {
 	}
 	else {
 
-		$com = "/opt/local/lib/mariadb-10.5/bin/mysqldump -uroot".($password ? " -p$password" : "")." --databases ".implode(" ", $user_databases)." > ~/".$dumpname.".sql | sed -e '$!d'";
+		$com = $mysqldump_path." -uroot".($password ? " -p$password" : "")." --databases ".implode(" ", $user_databases)." > ~/".$dumpname.".sql | sed -e '$!d'";
 		command($com, true);
 
 		output("MySQL dumped into: " . $dumpname . ".sql");
