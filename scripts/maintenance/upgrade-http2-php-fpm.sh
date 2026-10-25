@@ -43,26 +43,26 @@ command "sudo port -N install mod_fcgid"
 
 
 # Apache main configuration
-copyFile "$CONF_DIR/httpd.conf" "/opt/local/etc/apache2/httpd.conf"
+sudo cp "$CONF_DIR/httpd.conf" "/opt/local/etc/apache2/httpd.conf"
 
 # Update username in file to make apache run as current user (required to access vhosts in dropbox)
 command "sudo chmod 777 /opt/local/etc/apache2/httpd.conf"
-sed -i '' "s/###USERNAME###/$INSTALL_USER/g" "/opt/local/etc/apache2/httpd.conf"
+sudo sed -i '' "s/###USERNAME###/$INSTALL_USER/g" "/opt/local/etc/apache2/httpd.conf"
 command "sudo chmod 644 /opt/local/etc/apache2/httpd.conf"
 
 
-copyFile "$CONF_DIR/httpd-autoindex.conf" "/opt/local/etc/apache2/extra/httpd-autoindex.conf"
-copyFile "$CONF_DIR/httpd-vhosts.conf" "/opt/local/etc/apache2/extra/httpd-deflate.conf"
-copyFile "$CONF_DIR/httpd-mpm.conf" "/opt/local/etc/apache2/extra/httpd-mpm.conf"
-copyFile "$CONF_DIR/httpd-ssl.conf" "/opt/local/etc/apache2/extra/httpd-ssl.conf"
-copyFile "$CONF_DIR/httpd-vhosts.conf" "/opt/local/etc/apache2/extra/httpd-vhosts.conf"
-copyFile "$CONF_DIR/httpd-autoindex.conf" "/opt/local/etc/apache2/extra/proxy-html.conf"
+sudo cp "$CONF_DIR/httpd-autoindex.conf" "/opt/local/etc/apache2/extra/httpd-autoindex.conf"
+sudo cp "$CONF_DIR/httpd-vhosts.conf" "/opt/local/etc/apache2/extra/httpd-deflate.conf"
+sudo cp "$CONF_DIR/httpd-mpm.conf" "/opt/local/etc/apache2/extra/httpd-mpm.conf"
+sudo cp "$CONF_DIR/httpd-ssl.conf" "/opt/local/etc/apache2/extra/httpd-ssl.conf"
+sudo cp "$CONF_DIR/httpd-vhosts.conf" "/opt/local/etc/apache2/extra/httpd-vhosts.conf"
+sudo cp "$CONF_DIR/httpd-autoindex.conf" "/opt/local/etc/apache2/extra/proxy-html.conf"
 
 
 # Copy PHP-FPM conf
-copyFile "$CONF_DIR/php-fpm.conf" "/opt/local/etc/php82/php-fpm.conf"
-copyFile "$CONF_DIR/php-fpm-www.conf" "/opt/local/etc/php82/php-fpm.d/www.conf"
-sed -i '' "s/###USERNAME###/$INSTALL_USER/g" "/opt/local/etc/php82/php-fpm.d/www.conf"
+sudo cp "$CONF_DIR/php-fpm.conf" "/opt/local/etc/php82/php-fpm.conf"
+sudo cp "$CONF_DIR/php-fpm-www.conf" "/opt/local/etc/php82/php-fpm.d/www.conf"
+sudo sed -i '' "s/###USERNAME###/$INSTALL_USER/g" "/opt/local/etc/php82/php-fpm.d/www.conf"
 
 
 # autostart apache on reboot
