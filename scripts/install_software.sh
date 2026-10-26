@@ -26,6 +26,9 @@ if [ "$install_software" = "Y" ]; then
 	# command "sudo port -N install php82-apache2handler"
 
 
+	outputHandler "comment" "Installing PHP82"
+	command "sudo port -N install php82"
+
 	outputHandler "comment" "Installing PHP82 FPM"
 	command "sudo port -N install php82-fpm"
 

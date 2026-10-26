@@ -48,4 +48,15 @@ if [ -z "$fpm" ]; then
 
 fi
 
+
+php85=$(port installed | grep 'php85')
+if [ -z "$php85" ]; then
+
+	alias "upgrade-php" "/srv/tools/scripts/maintenance/upgrade-php.php"
+	echo ""
+	echo "PHP85 upgrade available – run upgrade-php to upgrade now"
+
+fi
+
+
 echo ""
