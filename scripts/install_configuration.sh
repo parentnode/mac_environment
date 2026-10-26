@@ -101,8 +101,8 @@ if [ "$install_configuration" = "Y" ]; then
 	copyFile "$CONF_DIR/php-native-82.ini" "/etc/php.ini"
 
 	# Copy PHP-FPM conf
-	copyFile "$CONF_DIR/php-fpm.conf" "/opt/local/etc/php82/php-fpm.conf"
-	copyFile "$CONF_DIR/php-fpm-www.conf" "/opt/local/etc/php82/php-fpm.d/www.conf"
+	copyFile "$CONF_DIR/php-82-fpm.conf" "/opt/local/etc/php82/php-fpm.conf"
+	copyFile "$CONF_DIR/php-82-fpm-www.conf" "/opt/local/etc/php82/php-fpm.d/www.conf"
 	sed -i '' "s/###USERNAME###/$INSTALL_USER/g" "/opt/local/etc/php82/php-fpm.d/www.conf"
 
 
@@ -140,8 +140,8 @@ if [ "$install_configuration" = "Y" ]; then
 		outputHandler "comment" "Setting MariaDB root password"
 
 		# Start database
-		command "sudo /opt/local/share/mariadb-10.5/support-files/mysql.server start" "true"
-		command "sudo /opt/local/lib/mariadb-10.5/bin/mysqladmin -u root password $db_root_password1" "true"
+		command "sudo /opt/local/share/mariadb-10.11/support-files/mysql.server start" "true"
+		command "sudo /opt/local/lib/mariadb-10.11/bin/mysqladmin -u root password $db_root_password1" "true"
 
 	fi
 
@@ -151,7 +151,7 @@ if [ "$install_configuration" = "Y" ]; then
 	command "sudo /opt/local/sbin/apachectl restart" "true"
 
 	# Start MariaDB
-	command "sudo /opt/local/share/mariadb-10.5/support-files/mysql.server start" "true"
+	command "sudo /opt/local/share/mariadb-10.11/support-files/mysql.server start" "true"
 
 
 	outputHandler "comment" "Configuration: OK"

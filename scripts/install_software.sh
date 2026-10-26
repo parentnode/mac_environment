@@ -13,7 +13,7 @@ if [ "$install_software" = "Y" ]; then
 	command "sudo port -N install pidof"
 
 	outputHandler "comment" "Installing MariaDB"
-	command "sudo port -N install mariadb-10.5-server"
+	command "sudo port -N install mariadb-10.11-server"
 
 	outputHandler "comment" "Installing apache2"
 	command "sudo port -N install apache2 +eventmpm +http2"
@@ -82,7 +82,7 @@ if [ "$install_software" = "Y" ]; then
 
 
 	# Additional check on mariadb install – due to continuous build issues
-	mariadb_installed_array=("mariadb-10.5-server \@10.5.* \(active\)")
+	mariadb_installed_array=("mariadb-10.11-server \@10.11.* \(active\)")
 	mariadb_installed_specific=$(testCommandResponse "port installed" "$mariadb_installed_array")
 	if [ -n "$mariadb_installed_specific" ]; then
 
@@ -93,42 +93,42 @@ if [ "$install_software" = "Y" ]; then
 		mariadb_status_array=("mysql|mariadb")
 		mariadb_status=$(testCommandResponse "ps -Aclw" "${mariadb_status_array[@]}")
 		if [ -n "$mariadb_status" ]; then 
-			outputHandler "comment" "Stopping running instance of MariaDB $(sudo /opt/local/share/mariadb-10.5/support-files/mysql.server stop 2>/dev/null)"
+			outputHandler "comment" "Stopping running instance of MariaDB $(sudo /opt/local/share/mariadb-10.11/support-files/mysql.server stop 2>/dev/null)"
 		fi
 
 
 		#mysql paths
-		checkFolderExistOrCreate "/opt/local/var/run/mariadb-10.5" "sudo"
-		checkFolderExistOrCreate "/opt/local/var/db/mariadb-10.5" "sudo"
-		checkFolderExistOrCreate "/opt/local/etc/mariadb-10.5" "sudo"
-		checkFolderExistOrCreate "/opt/local/share/mariadb-10.5" "sudo"
+		checkFolderExistOrCreate "/opt/local/var/run/mariadb-10.11" "sudo"
+		checkFolderExistOrCreate "/opt/local/var/db/mariadb-10.11" "sudo"
+		checkFolderExistOrCreate "/opt/local/etc/mariadb-10.11" "sudo"
+		checkFolderExistOrCreate "/opt/local/share/mariadb-10.11" "sudo"
 
 
 		#Mysql preparations
-		command "sudo chown -R mysql:mysql /opt/local/var/db/mariadb-10.5"
-		command "sudo chown -R mysql:mysql /opt/local/var/run/mariadb-10.5"
-		command "sudo chown -R mysql:mysql /opt/local/etc/mariadb-10.5"
-		command "sudo chown -R mysql:mysql /opt/local/share/mariadb-10.5"
+		command "sudo chown -R mysql:mysql /opt/local/var/db/mariadb-10.11"
+		command "sudo chown -R mysql:mysql /opt/local/var/run/mariadb-10.11"
+		command "sudo chown -R mysql:mysql /opt/local/etc/mariadb-10.11"
+		command "sudo chown -R mysql:mysql /opt/local/share/mariadb-10.11"
 
 
 		# copy my.cnf for MySQL (to override macports settings)
-		command "sudo cp $CONF_DIR/my.cnf /opt/local/etc/mariadb-10.5/my.cnf"
+		command "sudo cp $CONF_DIR/my.cnf /opt/local/etc/mariadb-10.11/my.cnf"
 
 
 		# Install tables
-		if [ $(fileExist "/opt/local/var/db/mariadb-10.5/mysql") = "false" ]; then 
+		if [ $(fileExist "/opt/local/var/db/mariadb-10.11/mysql") = "false" ]; then 
 			outputHandler "comment" "Installing Database tables"
-			command "sudo -u _mysql /opt/local/lib/mariadb-10.5/bin/mysql_install_db"
+			command "sudo -u _mysql /opt/local/lib/mariadb-10.11/bin/mysql_install_db"
 		fi
 
 
 		# autostart mariadb on reboot
 		outputHandler "comment" "Autostart mariadb"
-		command "sudo port load mariadb-10.5-server"
+		command "sudo port load mariadb-10.11-server"
 
 
 	else 
-		outputHandler "comment" "Mariadb was not installed correctly" "Please try installing Mariadb 10.5 again at a later time" "Run this install script again afterwards"
+		outputHandler "comment" "Mariadb was not installed correctly" "Please try installing Mariadb 10.11 again at a later time" "Run this install script again afterwards"
 	fi
 
 

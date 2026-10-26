@@ -27,14 +27,16 @@ alias system_backup="/srv/tools/scripts/system_backup.php"
 alias restore_from_backup="/srv/tools/scripts/restore_from_backup.php"
 
 apache() {
+	
+	php_version=$(port installed | grep -oE 'php8[0-9]-fpm' | sed 's/php//; s/-fpm//')
 	if [ "$1" = "restart" ]; then
-		sudo port reload php82-fpm
+		sudo port reload php$php_version-fpm
 		sudo /opt/local/sbin/apachectl restart
 	elif [ "$1" = "stop" ]; then
-		sudo port unload php82-fpm
+		sudo port unload php$php_version-fpm
 		sudo /opt/local/sbin/apachectl stop
 	elif [ "$1" = "start" ]; then
-		sudo port load php82-fpm
+		sudo port load php$php_version-fpm
 		sudo /opt/local/sbin/apachectl start
 	else
 		sudo /opt/local/sbin/apachectl $1

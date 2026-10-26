@@ -62,8 +62,8 @@ sudo cp "$CONF_DIR/httpd-autoindex.conf" "/opt/local/etc/apache2/extra/proxy-htm
 
 
 # Copy PHP-FPM conf
-sudo cp "$CONF_DIR/php-fpm.conf" "/opt/local/etc/php82/php-fpm.conf"
-sudo cp "$CONF_DIR/php-fpm-www.conf" "/opt/local/etc/php82/php-fpm.d/www.conf"
+sudo cp "$CONF_DIR/php-82-fpm.conf" "/opt/local/etc/php82/php-fpm.conf"
+sudo cp "$CONF_DIR/php-82-fpm-www.conf" "/opt/local/etc/php82/php-fpm.d/www.conf"
 sudo sed -i '' "s/###USERNAME###/$INSTALL_USER/g" "/opt/local/etc/php82/php-fpm.d/www.conf"
 
 

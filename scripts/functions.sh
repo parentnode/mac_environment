@@ -141,7 +141,7 @@ export -f checkGitCredential
 checkMariadbPassword(){
 
 	# Is MariaDB installed
-	mariadb_installed_array=("mariadb-10.5-server \@10.5.* \(active\)")
+	mariadb_installed_array=("mariadb-10.11-server \@10.11.* \(active\)")
 	mariadb_installed_specific=$(testCommandResponse "port installed" "$mariadb_installed_array")
 	if [ -n "$mariadb_installed_specific" ]; then
 
@@ -150,7 +150,7 @@ checkMariadbPassword(){
 		mariadb_status=$(testCommandResponse "ps -Aclw" "${mariadb_status_array[@]}")
 		if [ "$mariadb_status" = "true" ]; then 
 
-			has_password=$(/opt/local/lib/mariadb-10.5/bin/mysql -u root mysql -e 'SHOW TABLES' 2>&1 | grep "Access denied")
+			has_password=$(/opt/local/lib/mariadb-10.11/bin/mysql -u root mysql -e 'SHOW TABLES' 2>&1 | grep "Access denied")
 			if [ -n "$has_password" ]; then
 				password_is_set="true"
 				echo "$password_is_set"
@@ -163,7 +163,7 @@ checkMariadbPassword(){
 		else
 
 			# Start MariaDB
-			command "sudo /opt/local/share/mariadb-10.5/support-files/mysql.server start" "true"
+			command "sudo /opt/local/share/mariadb-10.11/support-files/mysql.server start" "true"
 
 			# Run the function again
 			checkMariadbPassword
