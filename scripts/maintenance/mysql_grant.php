@@ -1,6 +1,6 @@
 #!/opt/local/bin/php
 <?php
-include("../functions.php");
+include("/srv/tools/scripts/functions.php");
 
 // start by requesting sudo power
 enableSuperCow();
