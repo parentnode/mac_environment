@@ -25,12 +25,18 @@ if [ -n "$active_mariadb105" ]; then
 
 	sudo port unload mariadb-10.5-server
 	sudo port deactivate mariadb-10.5-server
+	sudo port deactivate mariadb-10.5
 
 fi
 
 
 sudo port install mariadb-10.11-server
 sudo port load mariadb-10.11-server
+
+# Set permissions for new DB folder
+sudo mkdir -p /opt/local/var/db/mariadb-10.11
+sudo chown _mysql:_mysql /opt/local/var/db/mariadb-10.11
+
 
 
 # Version 10.5 db exists
@@ -40,7 +46,7 @@ if [ -d "/opt/local/var/db/mariadb-10.5" ] && [ ! -f "/opt/local/var/db/mariadb-
 	sudo cp -r /opt/local/var/db/mariadb-10.5/ /opt/local/var/db/mariadb-10.11
 
 	# Upgrade DBs
-	sudo /opt/local/lib/mariadb-10.11/bin/mariadb-upgrade -u root -p
+	sudo /opt/local/lib/mariadb-10.11/bin/mariadb-upgrade -u root
 
 fi
 
