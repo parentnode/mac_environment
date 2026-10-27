@@ -27,7 +27,7 @@ alias system_backup="/srv/tools/scripts/system_backup.php"
 alias restore_from_backup="/srv/tools/scripts/restore_from_backup.php"
 
 apache() {
-	
+
 	php_version=$(port installed | grep -oE 'php8[0-9]-fpm' | sed 's/php//; s/-fpm//')
 	if [ "$1" = "restart" ]; then
 		sudo port reload php$php_version-fpm
