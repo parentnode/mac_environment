@@ -46,7 +46,7 @@ if [ -d "/opt/local/var/db/mariadb-10.5" ] && [ ! -f "/opt/local/var/db/mariadb-
 	sudo cp -r /opt/local/var/db/mariadb-10.5/ /opt/local/var/db/mariadb-10.11
 
 	# Upgrade DBs
-	sudo /opt/local/lib/mariadb-10.11/bin/mariadb-upgrade -u root
+	sudo /opt/local/lib/mariadb-10.11/bin/mariadb-upgrade -u root -p
 
 fi
 
