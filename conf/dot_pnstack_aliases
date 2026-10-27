@@ -15,6 +15,7 @@ alias mysql_dump_all="php /srv/tools/scripts/mysql_dump_all.php"
 alias mysql_grant="php /srv/tools/scripts/maintenance/mysql_grant.php"
 alias git_ignore_filemode="php /srv/tools/scripts/maintenance/git_ignore_filemode.php"
 alias git_status="/srv/tools/scripts/maintenance/git_status.php"
+alias git_acpp="git add --all && git commit -m 'auto add changes' && git pull && git push"
 
 alias enable_site="/srv/tools/scripts/maintenance/enable_site.sh"
 alias disable_site="/srv/tools/scripts/maintenance/disable_site.sh"
