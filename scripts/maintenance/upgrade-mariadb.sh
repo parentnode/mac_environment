@@ -38,6 +38,13 @@ sudo mkdir -p /opt/local/var/db/mariadb-10.11
 sudo chown _mysql:_mysql /opt/local/var/db/mariadb-10.11
 
 
+outputHandler "comment" "Configure MariaDB 10.11"
+
+sudo cp $CONF_DIR/my.cnf /opt/local/etc/mariadb-10.11/my.cnf
+sudo /opt/local/share/mariadb-10.11/support-files/mysql.server start
+sudo /opt/local/lib/mariadb-10.11/bin/mysqladmin -u root password
+
+
 
 # Version 10.5 db exists
 if [ -d "/opt/local/var/db/mariadb-10.5" ] && [ ! -f "/opt/local/var/db/mariadb-10.11/mysql" ]; then
