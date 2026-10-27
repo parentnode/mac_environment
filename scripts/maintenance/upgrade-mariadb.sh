@@ -37,10 +37,10 @@ sudo port load mariadb-10.11-server
 if [ -d "/opt/local/var/db/mariadb-10.5" ] && [ ! -f "/opt/local/var/db/mariadb-10.11/mysql" ]; then
 
 	# Copy DBs to new 10.11 location
-	sudo cp -r /opt/local/var/db/mariadb-10.5 /opt/local/var/db/mariadb-10.11
+	sudo cp -r /opt/local/var/db/mariadb-10.5/ /opt/local/var/db/mariadb-10.11
 
 	# Upgrade DBs
-	sudo /usr/local/mysql/bin/mariadb-upgrade -u root -p
+	sudo /opt/local/lib/mariadb-10.11/bin/mariadb-upgrade -u root -p
 
 fi
 
