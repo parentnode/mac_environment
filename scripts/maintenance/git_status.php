@@ -44,5 +44,3 @@ function folderIterator($path){
 }
 
 folderIterator("~/Sites");
-
-?>
