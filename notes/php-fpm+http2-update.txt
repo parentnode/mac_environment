@@ -1,0 +1,48 @@
+
+
+
+sudo port uninstall apache2
+sudo port uninstall php82-apache2handler
+
+
+sudo port install php82-fpm
+sudo port install apache2 +eventmpm +http2
+sudo port install mod_fcgid
+
+
+Add to apache conf 
+LoadModule proxy_fcgi_module lib/apache2/modules/mod_proxy_fcgi.so
+
+<IfModule fcgid_module>
+	<FilesMatch .php$>
+		SetHandler "proxy:unix:/opt/local/var/run/php82/php-fpm.sock|fcgi://localhost"
+	</FilesMatch>
+</IfModule>
+
+
+LoadModule http2_module lib/apache2/modules/mod_http2.so
+<IfModule http2_module>
+	Protocols h2 h2c http/1.1
+</IfModule>
+
+
+Remove from apache conf
+
+#LoadModule php_module lib/apache2/modules/mod_php82.so
+
+#Include etc/apache2/extra/mod_php82.conf
+
+
+
+Update /opt/local/etc/php82/php-fpm.conf og /opt/local/etc/php82/php-fpm.d/www.conf
+- set listen socket to /opt/local/var/run/php82/php-fpm.sock
+– set user and listen.user to kaestel
+– set group and listen.group to staff
+
+
+
+
+Restart php-fpm
+sudo port reload php82-fpm
+
+Should be included in the apache restart command?
